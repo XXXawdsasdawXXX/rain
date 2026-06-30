@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: HomeSpriteAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 1
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 4096
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 1
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 78ace172e079a4741956d8590b6d8fea, type: 3}
+    - {fileID: 2800000, guid: 9af51df35ed7e0347a1797460d72b0aa, type: 3}
+    - {fileID: 2800000, guid: 129b0952939eeff47bc7302167e3ff0f, type: 3}
+    - {fileID: 2800000, guid: e7dfc6286fcc44b45a4ef0b01493fa9d, type: 3}
+    - {fileID: 2800000, guid: 66b4d00254d493e43afdffd3129eed37, type: 3}
+    - {fileID: 2800000, guid: 5cc7606d67435f5448f0727d24247f34, type: 3}
+    - {fileID: 2800000, guid: 193810577906f324d9350cac7edb9008, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 66b4d00254d493e43afdffd3129eed37, type: 3}
+  - {fileID: 21300000, guid: 129b0952939eeff47bc7302167e3ff0f, type: 3}
+  - {fileID: 21300000, guid: 78ace172e079a4741956d8590b6d8fea, type: 3}
+  - {fileID: 21300000, guid: 9af51df35ed7e0347a1797460d72b0aa, type: 3}
+  - {fileID: 21300000, guid: 193810577906f324d9350cac7edb9008, type: 3}
+  - {fileID: -115663448, guid: e7dfc6286fcc44b45a4ef0b01493fa9d, type: 3}
+  - {fileID: 1458437418, guid: e7dfc6286fcc44b45a4ef0b01493fa9d, type: 3}
+  - {fileID: -2141682693, guid: e7dfc6286fcc44b45a4ef0b01493fa9d, type: 3}
+  - {fileID: -131349134, guid: e7dfc6286fcc44b45a4ef0b01493fa9d, type: 3}
+  - {fileID: 1552483365, guid: e7dfc6286fcc44b45a4ef0b01493fa9d, type: 3}
+  - {fileID: 21300000, guid: 5cc7606d67435f5448f0727d24247f34, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Room
+  - KitchenTable
+  - Background_Windows
+  - PhotoOfFamily
+  - HomeShelf
+  - Door_2
+  - Door_3
+  - Door_0
+  - Door_1
+  - Door_4
+  - Sofa
+  m_RenderDataMap: {}
+  m_Tag: HomeSpriteAtlas
+  m_IsVariant: 0

@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ToyAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 1800887515, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+  - {fileID: 138133883, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+  - {fileID: 2084475807, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+  - {fileID: 99428681, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+  - {fileID: 1044201902, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+  - {fileID: 1727495311, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+  - {fileID: -1166115203, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+  - {fileID: -2012548738, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+  - {fileID: 1943917003, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+  - {fileID: 1488415492, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+  - {fileID: 89066548, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+  - {fileID: -120530732, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+  - {fileID: 911838307, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+  - {fileID: -1155964939, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+  - {fileID: -112885308, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+  - {fileID: -963801370, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+  - {fileID: 755868504, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+  - {fileID: 1134227103, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+  - {fileID: -1582597173, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+  - {fileID: -1911559130, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+  - {fileID: 1389014134, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+  - {fileID: -508293646, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+  - {fileID: -1118675066, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+  - {fileID: 1067251193, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+  - {fileID: 2105953469, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+  - {fileID: -591008408, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+  - {fileID: -1491449161, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+  - {fileID: 450902258, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+  - {fileID: 443123187, guid: f3a32440ceecbea46a81e7894587e3f2, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Toy_Home_0
+  - Toy_Home_1
+  - Toy_Home_2
+  - Toy_Home_3
+  - Toy_Home_4
+  - Toy_Home_5
+  - Toy_Home_6
+  - Toy_Home_7
+  - Toy_Home_8
+  - Toy_Home_9
+  - Toy_Home_13
+  - Toy_Home_12
+  - Toy_Home_11
+  - Toy_Home_10
+  - Toy_Home_26
+  - Toy_Home_17
+  - Toy_Home_27
+  - Toy_Home_16
+  - Toy_Home_24
+  - Toy_Home_15
+  - Toy_Home_25
+  - Toy_Home_14
+  - Toy_Home_22
+  - Toy_Home_23
+  - Toy_Home_20
+  - Toy_Home_19
+  - Toy_Home_21
+  - Toy_Home_18
+  - Toy_Home_28
+  m_RenderDataMap: {}
+  m_Tag: ToyAtlas
+  m_IsVariant: 0

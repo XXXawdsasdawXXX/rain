@@ -1,0 +1,1895 @@
+fileFormatVersion: 2
+guid: 02247a0ddb4fa704ebe539c93d109250
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4907578441185394820
+    second: STV_Mans_0
+  - first:
+      213: -1238442140782897927
+    second: STV_Mans_1
+  - first:
+      213: -1192699210984821997
+    second: STV_Mans_2
+  - first:
+      213: -2234854608834640051
+    second: STV_Mans_3
+  - first:
+      213: 4234174599157108597
+    second: STV_Mans_4
+  - first:
+      213: 2108976143201370398
+    second: STV_Mans_5
+  - first:
+      213: 7017307272437644423
+    second: STV_Mans_6
+  - first:
+      213: -5309016906900045640
+    second: STV_Mans_7
+  - first:
+      213: 4678957390936103833
+    second: STV_Mans_8
+  - first:
+      213: 1411634027442655932
+    second: STV_Mans_9
+  - first:
+      213: 6871412449821502952
+    second: STV_Mans_10
+  - first:
+      213: 1548388102430622302
+    second: STV_Mans_11
+  - first:
+      213: 7290995105822521509
+    second: STV_Mans_12
+  - first:
+      213: 7298339227086257564
+    second: STV_Mans_13
+  - first:
+      213: -8531704261804835068
+    second: STV_Mans_14
+  - first:
+      213: -1569127942692566590
+    second: STV_Mans_15
+  - first:
+      213: 7033359755447264593
+    second: STV_Mans_16
+  - first:
+      213: -1424556474609293323
+    second: STV_Mans_17
+  - first:
+      213: -5054997349501981667
+    second: STV_Mans_18
+  - first:
+      213: 8111637519880045079
+    second: STV_Mans_19
+  - first:
+      213: 1982599852468537904
+    second: STV_Mans_20
+  - first:
+      213: 1810297328471887872
+    second: STV_Mans_21
+  - first:
+      213: -4859294152645403497
+    second: STV_Mans_22
+  - first:
+      213: -5581366939413056507
+    second: STV_Mans_23
+  - first:
+      213: -8969011468475539915
+    second: STV_Mans_24
+  - first:
+      213: 8391603550284841308
+    second: STV_Mans_25
+  - first:
+      213: 5092578137549193007
+    second: STV_Mans_26
+  - first:
+      213: -9167174486961901737
+    second: STV_Mans_27
+  - first:
+      213: 8665482753213760033
+    second: STV_Mans_28
+  - first:
+      213: 8684556892843894663
+    second: STV_Mans_29
+  - first:
+      213: -426770515308031756
+    second: STV_Mans_30
+  - first:
+      213: -8214178235207846605
+    second: STV_Mans_31
+  - first:
+      213: -9121046589384161327
+    second: STV_Mans_32
+  - first:
+      213: -7668064833402525557
+    second: STV_Mans_33
+  - first:
+      213: -8812214827140625254
+    second: STV_Mans_34
+  - first:
+      213: -408546650918523114
+    second: STV_Mans_35
+  - first:
+      213: -3168925077594799466
+    second: STV_Mans_36
+  - first:
+      213: -5465839770297283304
+    second: STV_Mans_37
+  - first:
+      213: -8635096033818627744
+    second: STV_Mans_38
+  - first:
+      213: -5682084310336277831
+    second: STV_Mans_39
+  - first:
+      213: 1581254546346293155
+    second: STV_Mans_40
+  - first:
+      213: 1373097803884936015
+    second: STV_Mans_41
+  - first:
+      213: -8138117018870571541
+    second: STV_Mans_42
+  - first:
+      213: 5342445385469058965
+    second: STV_Mans_43
+  - first:
+      213: -936410211066677620
+    second: STV_Mans_44
+  - first:
+      213: -6361799083634527374
+    second: STV_Mans_45
+  - first:
+      213: -1887234439778751454
+    second: STV_Mans_46
+  - first:
+      213: -1003228231626498417
+    second: STV_Mans_47
+  - first:
+      213: 1914749652107245017
+    second: STV_Mans_48
+  - first:
+      213: -406010923647182171
+    second: STV_Mans_49
+  - first:
+      213: 3224841439140217577
+    second: STV_Mans_50
+  - first:
+      213: -6495165634032263114
+    second: STV_Mans_51
+  - first:
+      213: 3764022406837596477
+    second: STV_Mans_52
+  - first:
+      213: -7752245058398689275
+    second: STV_Mans_53
+  - first:
+      213: -7413443442825166321
+    second: STV_Mans_54
+  - first:
+      213: -1600686876515316248
+    second: STV_Mans_55
+  - first:
+      213: -4053901175114318403
+    second: WorkMan_0
+  - first:
+      213: 6542676964339557536
+    second: WorkMan_1
+  - first:
+      213: 8048861236816186144
+    second: WorkMan_2
+  - first:
+      213: 8301111260014007854
+    second: WorkMan_3
+  - first:
+      213: 4816981328989605381
+    second: WorkMan_4
+  - first:
+      213: 812545710560575097
+    second: WorkMan_5
+  - first:
+      213: 8592963505339071676
+    second: WorkMan_6
+  - first:
+      213: -7932079392727680386
+    second: WorkMan_7
+  - first:
+      213: 7366403884637759349
+    second: WorkMan_8
+  - first:
+      213: 3112929577118060936
+    second: WorkMan_9
+  - first:
+      213: 4223081160343068200
+    second: WorkMan_10
+  - first:
+      213: 7158828417793461283
+    second: WorkMan_11
+  - first:
+      213: 463621064532201020
+    second: WorkMan_12
+  - first:
+      213: -1255876021744731547
+    second: WorkMan_13
+  - first:
+      213: -8424461376875428300
+    second: WorkMan_14
+  - first:
+      213: 8853742543256547288
+    second: WorkMan_15
+  - first:
+      213: -3902615012586772228
+    second: WorkMan_16
+  - first:
+      213: 7218823963377285099
+    second: WorkMan_17
+  - first:
+      213: -1833781465317826787
+    second: WorkMan_18
+  - first:
+      213: 3644071657928852259
+    second: WorkMan_19
+  - first:
+      213: 5105490525610217798
+    second: WorkMan_20
+  - first:
+      213: 1434393381671561861
+    second: WorkMan_21
+  - first:
+      213: 1021820928990874676
+    second: WorkMan_22
+  - first:
+      213: -7243797308609651860
+    second: WorkMan_23
+  - first:
+      213: -4473990889858163097
+    second: WorkMan_24
+  - first:
+      213: 7374703018231370292
+    second: WorkMan_25
+  - first:
+      213: 1897182704607260833
+    second: WorkMan_26
+  - first:
+      213: 472152733777176676
+    second: WorkMan_27
+  - first:
+      213: 5414701198594833364
+    second: WorkMan_28
+  - first:
+      213: -268570506903176403
+    second: WorkMan_29
+  - first:
+      213: 5117232862022848837
+    second: WorkMan_30
+  - first:
+      213: -8403010266470951787
+    second: WorkMan_31
+  - first:
+      213: -3429025728679294167
+    second: WorkMan_32
+  - first:
+      213: 5115963224151213762
+    second: WorkMan_33
+  - first:
+      213: 6355491287211953789
+    second: WorkMan_34
+  - first:
+      213: 5806721476830151436
+    second: WorkMan_35
+  - first:
+      213: -6254753223506725971
+    second: WorkMan_36
+  - first:
+      213: -3672798080118796156
+    second: WorkMan_37
+  - first:
+      213: 5471095739795601339
+    second: WorkMan_38
+  - first:
+      213: 7565061778847967014
+    second: WorkMan_39
+  - first:
+      213: 403247834770961703
+    second: WorkMan_40
+  - first:
+      213: 5734175335960973768
+    second: WorkMan_41
+  - first:
+      213: -3618958913524113777
+    second: WorkMan_42
+  - first:
+      213: -2312707924030976554
+    second: WorkMan_43
+  - first:
+      213: -445372170627382932
+    second: WorkMan_44
+  - first:
+      213: 2350510988752823850
+    second: WorkMan_45
+  - first:
+      213: -3960666857638446848
+    second: WorkMan_46
+  - first:
+      213: -6925859295646621425
+    second: WorkMan_47
+  - first:
+      213: -88099811196199275
+    second: WorkMan_48
+  - first:
+      213: -2622465152969148111
+    second: WorkMan_49
+  - first:
+      213: 7420316795663503514
+    second: WorkMan_50
+  - first:
+      213: -3592336550241954413
+    second: WorkMan_51
+  - first:
+      213: 5244398835992801169
+    second: WorkMan_52
+  - first:
+      213: -178516257367790171
+    second: WorkMan_53
+  - first:
+      213: -4033669105014091844
+    second: WorkMan_54
+  - first:
+      213: 2910131523799615342
+    second: WorkMan_55
+  - first:
+      213: -2077823460589327289
+    second: WorkMan_56
+  - first:
+      213: -1959517590529693077
+    second: WorkMan_57
+  - first:
+      213: -5791295257637623634
+    second: WorkMan_58
+  - first:
+      213: -421752859591974498
+    second: WorkMan_59
+  - first:
+      213: 777168913608266692
+    second: WorkMan_60
+  - first:
+      213: 6311559618858134332
+    second: WorkMan_61
+  - first:
+      213: -2799657725440656269
+    second: WorkMan_62
+  - first:
+      213: 452486413111388866
+    second: WorkMan_63
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: WorkMan_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 896
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbdb5c61c56adb7c0800000000000000
+      internalID: -4053901175114318403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 896
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a42793d8024cca50800000000000000
+      internalID: 6542676964339557536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_2
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 896
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02b07d276ac43bf60800000000000000
+      internalID: 8048861236816186144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 896
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e265126b5b8733370800000000000000
+      internalID: 8301111260014007854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 896
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50e4d1c4ffa59d240800000000000000
+      internalID: 4816981328989605381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_5
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 896
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97efab9c40eb64b00800000000000000
+      internalID: 812545710560575097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_6
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 896
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbc71a7d7c6504770800000000000000
+      internalID: 8592963505339071676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_7
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 896
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7a354a71d79be190800000000000000
+      internalID: -7932079392727680386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 768
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57724efdd49ba3660800000000000000
+      internalID: 7366403884637759349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_9
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 768
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 881dde615f8533b20800000000000000
+      internalID: 3112929577118060936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_10
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 768
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82e94e3c0f56b9a30800000000000000
+      internalID: 4223081160343068200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_11
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 768
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32c0d825484495360800000000000000
+      internalID: 7158828417793461283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_12
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 768
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3e84ddd6ec1f6600800000000000000
+      internalID: 463621064532201020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_13
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 768
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56a79f1896b329ee0800000000000000
+      internalID: -1255876021744731547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_14
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 768
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 436875f230d461b80800000000000000
+      internalID: -8424461376875428300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_15
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 768
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dfe1971fefceda70800000000000000
+      internalID: 8853742543256547288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 640
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf8a8afa25027d9c0800000000000000
+      internalID: -3902615012586772228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_17
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 640
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be73e21d52a6e2460800000000000000
+      internalID: 7218823963377285099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_18
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 640
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1f190c19791d86e0800000000000000
+      internalID: -1833781465317826787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_19
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 640
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3230be2add7529230800000000000000
+      internalID: 3644071657928852259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_20
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 640
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6419e1f35985ad640800000000000000
+      internalID: 5105490525610217798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_21
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 640
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58a64be4e2df7e310800000000000000
+      internalID: 1434393381671561861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_22
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 640
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43c8f8898bc3e2e00800000000000000
+      internalID: 1021820928990874676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_23
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 640
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6b14632abcd87b90800000000000000
+      internalID: -7243797308609651860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76e9ba96df039e1c0800000000000000
+      internalID: -4473990889858163097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_25
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 512
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4329ead7255385660800000000000000
+      internalID: 7374703018231370292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_26
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 512
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a0712e3e95245a10800000000000000
+      internalID: 1897182704607260833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_27
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 512
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 468a488e86c6d8600800000000000000
+      internalID: 472152733777176676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_28
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 512
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4db70234d02e42b40800000000000000
+      internalID: 5414701198594833364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_29
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 512
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2bb3e20c88d54cf0800000000000000
+      internalID: -268570506903176403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_30
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 512
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 541d3ddfc20140740800000000000000
+      internalID: 5117232862022848837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_31
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 512
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 594d9070fa2826b80800000000000000
+      internalID: -8403010266470951787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_32
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92b456c7447a960d0800000000000000
+      internalID: -3429025728679294167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_33
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 384
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c6ce73627d8ff640800000000000000
+      internalID: 5115963224151213762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_34
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 384
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7ecb5327ad333850800000000000000
+      internalID: 6355491287211953789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_35
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 384
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c03c718fa6e959050800000000000000
+      internalID: 5806721476830151436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_36
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 384
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da3f6231517a239a0800000000000000
+      internalID: -6254753223506725971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_37
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 384
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48058cefa99970dc0800000000000000
+      internalID: -3672798080118796156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_38
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 384
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb77ba6969c3deb40800000000000000
+      internalID: 5471095739795601339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_39
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 384
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6272e104b9f7cf860800000000000000
+      internalID: 7565061778847967014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_40
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 725f7fbe4cf989500800000000000000
+      internalID: 403247834770961703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_41
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 256
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c192cb4612e39f40800000000000000
+      internalID: 5734175335960973768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_42
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 256
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8e59aeca00e6cdc0800000000000000
+      internalID: -3618958913524113777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_43
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 256
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6dd07e6756c97efd0800000000000000
+      internalID: -2312707924030976554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_44
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 256
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6109e8de58b1d9f0800000000000000
+      internalID: -445372170627382932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_45
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 256
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a26a34d6a41be9020800000000000000
+      internalID: 2350510988752823850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_46
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 256
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0093ccc3a72e809c0800000000000000
+      internalID: -3960666857638446848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_47
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 256
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0165a65aa762ef90800000000000000
+      internalID: -6925859295646621425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_48
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59e1fd040b107cef0800000000000000
+      internalID: -88099811196199275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_49
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 139fe6976d12b9bd0800000000000000
+      internalID: -2622465152969148111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_50
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 128
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a905366afc24af660800000000000000
+      internalID: 7420316795663503514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_51
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 128
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3951d29c0f4752ec0800000000000000
+      internalID: -3592336550241954413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_52
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 128
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19fa2df84f8d7c840800000000000000
+      internalID: 5244398835992801169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_53
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 128
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ade5f4e868c58df0800000000000000
+      internalID: -178516257367790171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_54
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 128
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbfca2ef1578508c0800000000000000
+      internalID: -4033669105014091844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_55
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 128
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e670ebdc33dd26820800000000000000
+      internalID: 2910131523799615342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_56
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74ca99542961a23e0800000000000000
+      internalID: -2077823460589327289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_57
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6a295522256ec4e0800000000000000
+      internalID: -1959517590529693077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_58
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea8ea1395af21afa0800000000000000
+      internalID: -5791295257637623634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_59
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e91e30d3202a52af0800000000000000
+      internalID: -421752859591974498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_60
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c3d812620f09ca00800000000000000
+      internalID: 777168913608266692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_61
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3b2db4880a279750800000000000000
+      internalID: 6311559618858134332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_62
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37c7e66c12e9529d0800000000000000
+      internalID: -2799657725440656269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorkMan_63
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2cae13fcefd874600800000000000000
+      internalID: 452486413111388866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      WorkMan_0: -4053901175114318403
+      WorkMan_1: 6542676964339557536
+      WorkMan_10: 4223081160343068200
+      WorkMan_11: 7158828417793461283
+      WorkMan_12: 463621064532201020
+      WorkMan_13: -1255876021744731547
+      WorkMan_14: -8424461376875428300
+      WorkMan_15: 8853742543256547288
+      WorkMan_16: -3902615012586772228
+      WorkMan_17: 7218823963377285099
+      WorkMan_18: -1833781465317826787
+      WorkMan_19: 3644071657928852259
+      WorkMan_2: 8048861236816186144
+      WorkMan_20: 5105490525610217798
+      WorkMan_21: 1434393381671561861
+      WorkMan_22: 1021820928990874676
+      WorkMan_23: -7243797308609651860
+      WorkMan_24: -4473990889858163097
+      WorkMan_25: 7374703018231370292
+      WorkMan_26: 1897182704607260833
+      WorkMan_27: 472152733777176676
+      WorkMan_28: 5414701198594833364
+      WorkMan_29: -268570506903176403
+      WorkMan_3: 8301111260014007854
+      WorkMan_30: 5117232862022848837
+      WorkMan_31: -8403010266470951787
+      WorkMan_32: -3429025728679294167
+      WorkMan_33: 5115963224151213762
+      WorkMan_34: 6355491287211953789
+      WorkMan_35: 5806721476830151436
+      WorkMan_36: -6254753223506725971
+      WorkMan_37: -3672798080118796156
+      WorkMan_38: 5471095739795601339
+      WorkMan_39: 7565061778847967014
+      WorkMan_4: 4816981328989605381
+      WorkMan_40: 403247834770961703
+      WorkMan_41: 5734175335960973768
+      WorkMan_42: -3618958913524113777
+      WorkMan_43: -2312707924030976554
+      WorkMan_44: -445372170627382932
+      WorkMan_45: 2350510988752823850
+      WorkMan_46: -3960666857638446848
+      WorkMan_47: -6925859295646621425
+      WorkMan_48: -88099811196199275
+      WorkMan_49: -2622465152969148111
+      WorkMan_5: 812545710560575097
+      WorkMan_50: 7420316795663503514
+      WorkMan_51: -3592336550241954413
+      WorkMan_52: 5244398835992801169
+      WorkMan_53: -178516257367790171
+      WorkMan_54: -4033669105014091844
+      WorkMan_55: 2910131523799615342
+      WorkMan_56: -2077823460589327289
+      WorkMan_57: -1959517590529693077
+      WorkMan_58: -5791295257637623634
+      WorkMan_59: -421752859591974498
+      WorkMan_6: 8592963505339071676
+      WorkMan_60: 777168913608266692
+      WorkMan_61: 6311559618858134332
+      WorkMan_62: -2799657725440656269
+      WorkMan_63: 452486413111388866
+      WorkMan_7: -7932079392727680386
+      WorkMan_8: 7366403884637759349
+      WorkMan_9: 3112929577118060936
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
