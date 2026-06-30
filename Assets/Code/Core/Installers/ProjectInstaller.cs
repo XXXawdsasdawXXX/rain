@@ -1,0 +1,31 @@
+using System;
+using Core.Audio.AudioSystem;
+using Core.Input;
+using Core.Localization;
+using Core.Save;
+using Core.Scenes;
+using Core.ServiceLocator;
+using Core.Time;
+using UnityEngine;
+
+namespace Core.Installers
+{
+    [CreateAssetMenu(fileName = "Installer_Project", menuName = "Game/Installers/Project")]
+    public sealed class ProjectInstaller : Installer
+    {
+        public override Type[] GetTypes()
+        {
+            return new[]
+            {
+                typeof(SaveService),
+                typeof(UtcTime),
+                typeof(GameModel),
+                typeof(SceneService),
+                typeof(AudioService),
+                typeof(AudioGlobalVolume),
+                typeof(InputService),
+                typeof(LocalizationService),
+            };
+        }
+    }
+}

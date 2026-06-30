@@ -1,0 +1,20 @@
+﻿using System;
+using FMODUnity;
+
+namespace Core.Libraries.Audio
+{
+    [Serializable]
+    public class AudioEventLibrary : Library<string, EventReference>
+    {
+        public const string BUTTON_DOWN = "ButtonDown";
+        public const string BUTTON_UP = "ButtonUp";
+        public const string STEP = "Step";
+
+        protected override bool ThisIs(EventReference value, string key)
+        {
+            string[] path = value.Path.Split('/');
+            
+            return path[^1].Equals(key);
+        }
+    }
+}
