@@ -16,12 +16,12 @@ namespace Code.UI.Windows.MainMenu.NewGame
         public event Action AddedMadel; 
         
         private GameModel _gameModel;
-        private UtcTime _utcTime;
+        private GameTime _gameTime;
 
         public override UniTask InitializeWindow(UIWindowManager manager)
         {
             _gameModel = Container.Instance.GetService<GameModel>();
-            _utcTime = Container.Instance.GetService<UtcTime>();
+            _gameTime = Container.Instance.GetService<GameTime>();
 
             return base.InitializeWindow(manager);
         }
@@ -62,8 +62,8 @@ namespace Code.UI.Windows.MainMenu.NewGame
             _gameModel.Worlds.Add(new WorldModel
             {
                 Name = view.InputFieldGameName.Value,
-                CreateTime = _utcTime.Current,
-                ExitTime =  _utcTime.Current,
+                CreateTime = _gameTime.Current,
+                ExitTime =  _gameTime.Current,
                 SceneResources = new Dictionary<string, int>(),
             });
 

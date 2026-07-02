@@ -1,5 +1,4 @@
 ﻿using Core.Common.Interfaces;
-using Core.Save;
 using Cysharp.Threading.Tasks;
 
 namespace Core.GameLoop
@@ -14,13 +13,10 @@ namespace Core.GameLoop
         void Unsubscribe();
     }
     
-    public  interface IInitializeListener : IGameListener, IInitializable
+    public interface IInitializeListener : IGameListener
     {
-    }
-
-    public interface ILoadListener : IGameListener
-    {
-        UniTask GameLoad(GameModel model);
+        bool IsInitialized { get; set; }
+        UniTask Initialize();
     }
 
     public interface IStartListener : IGameListener

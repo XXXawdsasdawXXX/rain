@@ -1,9 +1,6 @@
 ﻿using Core.AssetManagement;
-using Core.GameLoop;
-using Core.Libraries;
 using Core.Libraries.Assets;
 using Core.Localization;
-using Core.Save;
 using Core.ServiceLocator;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -16,14 +13,10 @@ namespace Core.StateMachine.States
         public bool IsInitialized { get; set; }
 
         private readonly GameStateMachine _gameStateMachine;
-        private readonly AssetManagement.Installers _installers;
+        private readonly Installers _installers;
         private readonly Configurations _configurations;
 
-        public BootstrapState(GameStateMachine gameStateMachine)
-        {
-        }
-
-        public BootstrapState(GameStateMachine gameStateMachine, AssetManagement.Installers installers, Configurations configurations)
+        public BootstrapState(GameStateMachine gameStateMachine, Installers installers, Configurations configurations)
         {
             _gameStateMachine = gameStateMachine;
             _installers = installers;
@@ -35,10 +28,6 @@ namespace Core.StateMachine.States
             Container container = InitializeProjectContext();
 
             await container.GetService<LocalizationService>().Initialize();
-            container.GetService<SaveService>().Initialize().Forget();
-            container.GetService<GameEventDispatcher>().Initialize();
-            
-            LoadGame(container);
         }
 
         private Container InitializeProjectContext()
@@ -65,17 +54,7 @@ namespace Core.StateMachine.States
 
             return container;
         }
-
-        private static void LoadGame(Container container)
-        {
-            SaveService saveService = container.GetService<SaveService>();
-            GameModel model = container.GetService<GameModel>();
-
-            GameModel loadedModel = saveService.LoadLastGameModel();
-
-            model.CopyFrom(loadedModel);
-        }
-
+        
         public UniTask Enter()
         {
             _gameStateMachine.SwitchState(typeof(MainMenuState));

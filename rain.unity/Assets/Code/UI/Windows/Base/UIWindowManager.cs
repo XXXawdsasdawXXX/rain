@@ -8,7 +8,7 @@ using Cysharp.Threading.Tasks;
 namespace Code.UI.Windows.Base
 {
     public class UIWindowManager : Essential.Mono, IService, 
-        IInitializeListener, IStartListener, ILoadListener, ISubscriber
+        IInitializeListener, IStartListener, ISubscriber
     {
         public bool IsInitialized { get; set; }
 

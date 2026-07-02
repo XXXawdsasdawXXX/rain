@@ -8,16 +8,16 @@ using UnityEngine.Networking;
 
 namespace Core.Time
 {
-    public class UtcTime : IService, IInitializeListener, ILoadListener, IUpdateListener, IExitListener
+    public class GameTime : IService, IInitializeListener, IStartListener, IUpdateListener, IExitListener
     {
-        public bool IsInitialized { get; set; }
-        public string RuntimeListenerName => "UserTime";
-        public DateTime Current { get; private set; }
-        public event Action OnDayStarted;
-        public event Action OnNightStarted;
-
         private static readonly TimeSpan NightStart = new(22, 0, 0);
         private static readonly TimeSpan NightEnd = new(6, 0, 0);
+     
+        public bool IsInitialized { get; set; }
+        public DateTime Current { get; private set; }
+        
+        public event Action OnDayStarted;
+        public event Action OnNightStarted;
         
         private float _currentDeltaTime;
         private bool _isNight;
@@ -32,21 +32,21 @@ namespace Core.Time
             return UniTask.CompletedTask;
         }
 
-        public async UniTask GameLoad(GameModel model)
+        public async UniTask GameStart()
         {
-            await _checkUtcTime(model);
+            await _checkUtcTime(_gameModel);
         }
 
         public void GameUpdate(float deltaTime)
         {
             _updateUtcTime(deltaTime);
         }
-        
+
         public void GameExit()
         {
             _gameModel.GameExitTime = Current;
         }
-        
+
         public bool IsNightTime()
         {
             TimeSpan timeOfDay = Current.TimeOfDay;

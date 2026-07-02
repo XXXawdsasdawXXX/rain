@@ -4,48 +4,25 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using Core.Common.Extensions;
-using Core.GameLoop;
-using Core.ServiceLocator;
-using Core.ServiceLocator.MarkerInterfaces;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Core.Save
 {
-    public sealed class SaveService : IService, IInitializeListener
+    internal static class SaveService
     {
-        private static readonly string SavePath = Path.Combine(Application.persistentDataPath, "save_slots.dat");
         private static readonly string Password = _generateKey();
         //private static readonly string HmacKey = "HMAC_SECRET_KEY_123";
-
-        public bool IsInitialized { get; set; }
-        public SaveContainer ModelsContainer => _container ??= _loadContainer();
         
         private const bool _useEncryption = false;
-
-        private SaveContainer _container;
-        private SaveSettings _saveSettings;
-        private string _lastSlot = "first_slot";
-
         
-        public UniTask Initialize()
-        {
-            _saveSettings = Container.Instance.GetSO<SaveSettings>();
-
-            return UniTask.CompletedTask;
-        }
-
-        public void Save()
+        
+        public static void Save<T>(T data) where T : SavedModel
         {
             try
             {
-                string gameModelJson = Container.Instance.GetService<GameModel>().AsJson();
+                string json = data.AsJson();
 
-                ModelsContainer.Slots[_lastSlot] = gameModelJson;
-                
-                string json = ModelsContainer.AsJson();
-
-                File.WriteAllText(SavePath, json);
+                File.WriteAllText(Path.Combine(Application.persistentDataPath, $"{typeof(T).Name}.dat"), json);
             }
             catch (Exception e)
             {
@@ -53,74 +30,29 @@ namespace Core.Save
             }
         }
 
-        public GameModel LoadLastGameModel()
+        public static bool Load<T>(out T data) where T : SavedModel
         {
-            if (string.IsNullOrEmpty(ModelsContainer.LastSlot))
-            {
-                ModelsContainer.LastSlot = _lastSlot;
-            }
-            
-            return LoadGameModel(ModelsContainer.LastSlot);
-        }
-        
-        public void DeleteGameModel(string slotId)
-        {
-            if (ModelsContainer.Slots.Remove(slotId))
-            {
-                if (ModelsContainer.LastSlot == slotId)
-                {
-                    ModelsContainer.LastSlot = null;
-                }
+            data = null;
 
-                File.WriteAllText(SavePath, ModelsContainer.AsJson());
-            }
-        }
+            string path = Path.Combine(Application.persistentDataPath, $"{typeof(T).Name}.dat");
 
-        private GameModel LoadGameModel(string slotId) 
-        {
-            try
+            if (!File.Exists(path))
             {
-                if (!ModelsContainer.Slots.TryGetValue(slotId, out string slotData))
-                {
-                    GameModel newGameModel = new();
-                    
-                    newGameModel.CopyFrom(_saveSettings.DefaultModel);
-                    
-                    ModelsContainer.Slots.Add(slotId, newGameModel.AsJson());
-                    
-                    return newGameModel;
-                }
-
-                return slotData.AsData<GameModel>();
-            }
-            catch (Exception e)
-            {
-                Debug.LogError($"Load failed: {e.Source} {e.Message}");
-                return null;
-            }
-        }
-
-        private SaveContainer _loadContainer()
-        {
-            if (!File.Exists(SavePath))
-            {
-                return new SaveContainer();
+                return false;
             }
 
             try
             {
-                string json = File.ReadAllText(SavePath);
-                return json.AsData<SaveContainer>();
+                string json = File.ReadAllText(path);
+
+                data = json.AsData<T>();
+
+                return data != null;
             }
             catch
             {
-                return new SaveContainer();
+                return false;
             }
-        }
-
-        public List<string> GetSlotIds()
-        {
-            return new List<string>(ModelsContainer.Slots.Keys);
         }
 
         private static string _generateKey()
@@ -131,7 +63,7 @@ namespace Core.Save
             return Convert.ToBase64String(hash);
         }
 
-        private byte[] _encrypt(string plainText, string password)
+        private static byte[] _encrypt(string plainText, string password)
         {
             using Aes aes = Aes.Create();
             byte[] key = _deriveKey(password, aes.KeySize / 8);
@@ -148,7 +80,7 @@ namespace Core.Save
             return result;
         }
 
-        private string _decrypt(byte[] encryptedData, string password)
+        private static string _decrypt(byte[] encryptedData, string password)
         {
             using Aes aes = Aes.Create();
             byte[] key = _deriveKey(password, aes.KeySize / 8);
@@ -166,23 +98,23 @@ namespace Core.Save
             return Encoding.UTF8.GetString(plainBytes);
         }
 
-        private byte[] _deriveKey(string password, int keySize)
+        private static byte[] _deriveKey(string password, int keySize)
         {
             using Rfc2898DeriveBytes pbkdf2 =
                 new Rfc2898DeriveBytes(password, Encoding.UTF8.GetBytes("_fixed_salt_"), 10000);
             return pbkdf2.GetBytes(keySize);
         }
 
-        private byte[] _computeHmac(byte[] data, string key)
+        private static byte[] _computeHmac(byte[] data, string key)
         {
             using HMACSHA256 hmac = new HMACSHA256(Encoding.UTF8.GetBytes(key));
             return hmac.ComputeHash(data);
         }
 
-        private bool _compareBytes(byte[] a, byte[] b)
+        private static bool _compareBytes(IReadOnlyList<byte> a, IReadOnlyList<byte> b)
         {
-            if (a.Length != b.Length) return false;
-            for (int i = 0; i < a.Length; i++)
+            if (a.Count != b.Count) return false;
+            for (int i = 0; i < a.Count; i++)
             {
                 if (a[i] != b[i]) return false;
             }

@@ -8,7 +8,7 @@ using Core.ServiceLocator;
 using Core.Time;
 using UnityEngine;
 
-namespace Core.Installers
+namespace Core
 {
     [CreateAssetMenu(fileName = "Installer_Project", menuName = "Game/Installers/Project")]
     public sealed class ProjectInstaller : Installer
@@ -17,8 +17,8 @@ namespace Core.Installers
         {
             return new[]
             {
-                typeof(SaveService),
-                typeof(UtcTime),
+                typeof(SettingsSaver),
+                typeof(GameTime),
                 typeof(GameModel),
                 typeof(SceneService),
                 typeof(AudioService),
