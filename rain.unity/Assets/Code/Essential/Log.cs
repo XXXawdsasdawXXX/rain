@@ -106,7 +106,7 @@ namespace Essential
         }
 
         [Conditional("UNITY_EDITOR"), Conditional("DEBUG")]
-        public static void Error( object context, string message)
+        public static void Error(object context, string message)
         {
             if (context != null)
             {
@@ -114,6 +114,13 @@ namespace Essential
                 return;
             }
 
+            Debug.LogError(message);
+        }
+        
+        
+        [Conditional("UNITY_EDITOR"), Conditional("DEBUG")]
+        public static void Error(string message)
+        {
             Debug.LogError(message);
         }
 

@@ -1,0 +1,17 @@
+### FMOD Unity Integration ###
+
+.cache
+.user
+/FMODStudioCache.asset
+/FMODStudioCache.asset.meta
+/FMODStudioCache.meta
+.unsaved/
+
+# Log-files
+fmod.log
+fmod_editor.log
+
+# FMOD 1.10.x (Legacy)
+/Assets/FMODStudioCache.meta
+
+
