@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Core.AssetManagement;
 using Core.StateMachine.States;
 using Cysharp.Threading.Tasks;
 
@@ -11,9 +12,14 @@ namespace Core.StateMachine
 
         public GameStateMachine()
         {
+         
+        }
+
+        public GameStateMachine(AssetManagement.Installers installers, Configurations configurations)
+        {
             states = new Dictionary<Type, IState>()
             {
-                { typeof(BootstrapState), new BootstrapState(this) },
+                { typeof(BootstrapState), new BootstrapState(this, installers, configurations)},
                 { typeof(MainMenuState), new MainMenuState() },
                 { typeof(CoreGameState) , new CoreGameState()}
             };

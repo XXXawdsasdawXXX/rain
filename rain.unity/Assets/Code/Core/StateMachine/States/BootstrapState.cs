@@ -1,8 +1,7 @@
 ﻿using Core.AssetManagement;
 using Core.GameLoop;
+using Core.Libraries;
 using Core.Libraries.Assets;
-using Core.Libraries.Configs;
-using Core.Libraries.Installers;
 using Core.Localization;
 using Core.Save;
 using Core.ServiceLocator;
@@ -17,15 +16,23 @@ namespace Core.StateMachine.States
         public bool IsInitialized { get; set; }
 
         private readonly GameStateMachine _gameStateMachine;
+        private readonly AssetManagement.Installers _installers;
+        private readonly Configurations _configurations;
 
         public BootstrapState(GameStateMachine gameStateMachine)
         {
+        }
+
+        public BootstrapState(GameStateMachine gameStateMachine, AssetManagement.Installers installers, Configurations configurations)
+        {
             _gameStateMachine = gameStateMachine;
+            _installers = installers;
+            _configurations = configurations;
         }
 
         public async UniTask Initialize()
         {
-            Container container = await InitializeProjectContext();
+            Container container = InitializeProjectContext();
 
             await container.GetService<LocalizationService>().Initialize();
             container.GetService<SaveService>().Initialize().Forget();
@@ -34,15 +41,9 @@ namespace Core.StateMachine.States
             LoadGame(container);
         }
 
-        private async UniTask<Container> InitializeProjectContext()
+        private Container InitializeProjectContext()
         {
-            InstallerStorage installerStorage = await AssetProvider
-                .LoadScriptableObject<InstallerStorage>(AssetKey.INSTALLER_PROJECT_TYPES_PATH);
-            
-            ConfigurationInstaller configurationInstaller = await AssetProvider
-                .LoadScriptableObject<ConfigurationInstaller>(AssetKey.INSTALLER_CONFIGURATION_PATH);
-
-            AssetLibrary assetLibrary = configurationInstaller.Get<AssetLibrary>();
+            AssetLibrary assetLibrary = _configurations.Get<AssetLibrary>();
 
             AssetProvider.Instantiate(assetLibrary.SceneComponents.Get(AssetKey.CAMERA));
 
@@ -51,13 +52,13 @@ namespace Core.StateMachine.States
                 AssetProvider.Instantiate(assetLibrary.UICanvases.Get(AssetKey.CANVAS_PROFILER));
             }
 
-            ContextEntities projectContext = ContextBuilder.BuildContext(installerStorage.ProjectsInstaller.GetTypes());
+            ContextEntities projectContext = ContextBuilder.BuildContext(_installers.ProjectsInstaller.GetTypes());
             projectContext.Services.Add(typeof(GameStateMachine), _gameStateMachine);
             
             Container container = new(projectContext);
-            container.AddConfig(installerStorage);
+            container.AddConfig(_installers);
             
-            foreach (ScriptableObject config in configurationInstaller.Configs)
+            foreach (ScriptableObject config in _configurations.Configs)
             {
                 container.AddConfig(config);
             }

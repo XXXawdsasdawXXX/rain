@@ -89,7 +89,7 @@ namespace Code.UI.Windows.MainMenu.Game
 
         private void _continueGameAsync()
         {
-            _gameStateMachine.SwitchState(typeof(CoreGameState));
+           // _gameStateMachine.SwitchState(typeof(CoreGameState));
         }
 
         private void _updateObjectLockerState()

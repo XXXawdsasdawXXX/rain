@@ -2,7 +2,6 @@
 using Core.AssetManagement;
 using Core.GameLoop;
 using Core.Libraries.Assets;
-using Core.Libraries.Installers;
 using Core.Scenes;
 using Core.ServiceLocator;
 using Cysharp.Threading.Tasks;
@@ -14,7 +13,7 @@ namespace Core.StateMachine.States
     {
         public bool IsInitialized { get; set; }
 
-        private InstallerStorage _installerStorage;
+        private AssetManagement.Installers _installers;
         private AssetLibrary _assetLibrary;
 
         private SceneService _sceneService;
@@ -28,7 +27,7 @@ namespace Core.StateMachine.States
             _sceneService = Container.Instance.GetService<SceneService>();
             _gameEventDispatcher = Container.Instance.GetService<GameEventDispatcher>();
 
-            _installerStorage = Container.Instance.GetSO<InstallerStorage>();
+            _installers = Container.Instance.GetSO<AssetManagement.Installers>();
             _assetLibrary = Container.Instance.GetSO<AssetLibrary>();
 
             return UniTask.CompletedTask;
@@ -40,7 +39,7 @@ namespace Core.StateMachine.States
 
             _coreEntities.Add(AssetProvider.Instantiate(_assetLibrary.UICanvases.Get(AssetKey.CANVAS_CORE_GAME)));
 
-            Container.Instance.Context.BuildChildContext(_installerStorage.CoreGameInstaller.GetTypes());
+            Container.Instance.Context.BuildChildContext(_installers.CoreGameInstaller.GetTypes());
 
             await _gameEventDispatcher.Register(Container.Instance.GetGameListeners());
 
@@ -81,7 +80,7 @@ namespace Core.StateMachine.States
         {
             _gameEventDispatcher.Dispose();
 
-            Container.Instance.Context.Child.BuildChildContext(_installerStorage.GetSceneInstaller(obj)?.GetTypes());
+            Container.Instance.Context.Child.BuildChildContext(_installers.GetSceneInstaller(obj)?.GetTypes());
 
             await _gameEventDispatcher.Register(Container.Instance.GetGameListeners());
         }

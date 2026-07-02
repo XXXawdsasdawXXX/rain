@@ -4,10 +4,10 @@ using Core.Scenes;
 using Core.ServiceLocator;
 using UnityEngine;
 
-namespace Core.Libraries.Installers
+namespace Core.AssetManagement
 {
-    [CreateAssetMenu(fileName = "Storage_Installer", menuName = "Game/Library/Storage")]
-    public class InstallerStorage : ScriptableObject
+    [CreateAssetMenu(fileName = "Storage_Installer", menuName = "Game/Storage/Installers")]
+    public class Installers : ScriptableObject
     {
         [Serializable]
         private struct SceneInstaller
@@ -18,9 +18,10 @@ namespace Core.Libraries.Installers
         
         [field: SerializeField] public Installer ProjectsInstaller { get; private set; }
         [field: SerializeField] public Installer CoreGameInstaller { get; private set; }
-        [field: SerializeField] public Installer MetaGameInstaller { get; private set; }
 
+        
         [SerializeField] private SceneInstaller[] _sceneInstallers;
+        
         
         public Installer GetSceneInstaller(EScene scene)
         {

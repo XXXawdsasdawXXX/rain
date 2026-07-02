@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-namespace Core.Libraries.Configs
+namespace Core.AssetManagement
 {
     [CreateAssetMenu(fileName = "Installer_Configuration", menuName = "Game/Storage/Config")]
-    public class ConfigurationInstaller : ScriptableObject
+    public class Configurations : ScriptableObject
     {
         [field: SerializeField] public ScriptableObject[] Configs { get; private set; }
 
