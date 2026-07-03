@@ -2,7 +2,7 @@
 using Code.UI.Windows.Base;
 using Code.UI.Windows.MainMenu.Delete;
 using Code.UI.Windows.MainMenu.Hero;
-using Code.UI.Windows.MainMenu.NewGame;
+using Code.UI.Windows.MainMenu.NewWorld;
 using Core.Localization;
 using Core.Save;
 using Core.Save.Models;
@@ -13,24 +13,24 @@ using Cysharp.Threading.Tasks;
 
 namespace Code.UI.Windows.MainMenu.Game
 {
-    public class GameWindowController : UIWindowController<GameWindowView>
+    public class WorldWindowController : UIWindowController<WorldWindowView>
     {
         private GameModel _gameModel;
         private HeroWindowController _heroWindow;
         private GameStateMachine _gameStateMachine;
         private DeleteWindowController _deleteWindow;
-        private NewGameWindowController _newGameWindow;
+        private NewWorldWindowController _newWorldWindow;
         private LocalizationService _localization;
 
         
         public override UniTask InitializeWindow(UIWindowManager manager)
         {
-            _gameModel = Container.Instance.GetService<GameModel>();
+            _gameModel = Container.Instance.GetService<GamesSaver>().Current;
             _gameStateMachine = Container.Instance.GetService<GameStateMachine>();
 
             _heroWindow = manager.GetWindow<HeroWindowController>();
             _deleteWindow = manager.GetWindow<DeleteWindowController>();
-            _newGameWindow = manager.GetWindow<NewGameWindowController>();
+            _newWorldWindow = manager.GetWindow<NewWorldWindowController>();
             _localization = Container.Instance.GetService<LocalizationService>();
             
             view.WorldsRadioGroup.Initialize();
@@ -48,8 +48,9 @@ namespace Code.UI.Windows.MainMenu.Game
             if (flag)
             {
                 _heroWindow.HeroListChanged += _updateObjectLockerState;
-                _newGameWindow.AddedMadel += _updateView;
+                _newWorldWindow.ModelAdded += _updateView;
              
+                view.ButtonNew.Clicked += _openNewWorldWindow;
                 view.ButtonContinue.Clicked += _continueGame;
                 view.ButtonDelete.Clicked += _openDeleteWindow;
                 view.WorldsRadioGroup.Selected += _changeSelectedWorld;
@@ -57,12 +58,18 @@ namespace Code.UI.Windows.MainMenu.Game
             else
             {
                 _heroWindow.HeroListChanged -= _updateObjectLockerState;
-                _newGameWindow.AddedMadel -= _updateView;
-            
+                _newWorldWindow.ModelAdded -= _updateView;
+
+                view.ButtonNew.Clicked -= _openNewWorldWindow;
                 view.ButtonContinue.Clicked -= _continueGame;
                 view.ButtonDelete.Clicked -= _openDeleteWindow;
                 view.WorldsRadioGroup.Selected -= _changeSelectedWorld;
             }
+        }
+
+        private void _openNewWorldWindow()
+        {
+            windowManager.SwitchWindow<NewWorldWindowController>();
         }
 
         private void _openDeleteWindow()
@@ -90,7 +97,7 @@ namespace Code.UI.Windows.MainMenu.Game
 
         private void _continueGameAsync()
         {
-           // _gameStateMachine.SwitchState(typeof(CoreGameState));
+            _gameStateMachine.SwitchState(typeof(CoreGameState));
         }
 
         private void _updateObjectLockerState()

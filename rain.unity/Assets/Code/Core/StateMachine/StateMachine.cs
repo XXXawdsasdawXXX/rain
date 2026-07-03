@@ -13,15 +13,18 @@ namespace Core.StateMachine
         protected TState currentState;
         
         
-        public async void SwitchState(Type type)
+        public async UniTask SwitchState(Type type)
         {
             try
             {
                 if (currentState != null)
                 {
                     await currentState.Exit();
+                    Log.Info(this, $"switch state - exit from {currentState.GetType().Name}");
                 }
 
+                Log.Info(this, $"switch state - set state to {type.Name}");
+              
                 await setState(type);
             }
             catch (Exception e)
@@ -34,15 +37,18 @@ namespace Core.StateMachine
         {
             try
             {
+                Log.Info(this, $"set state  - from {currentState?.GetType().Name} to {type.Name} ");
                 currentState = states[type];
 
                 if (!currentState.IsInitialized)
                 {
+                    Log.Info(this, $"set state  - intialize {type.Name} ");
                     await currentState.Initialize();
 
                     currentState.IsInitialized = true;
                 }
             
+                Log.Info(this, $"set state  - enter {type.Name} ");
                 await states[type].Enter();
             }
             catch (Exception e)

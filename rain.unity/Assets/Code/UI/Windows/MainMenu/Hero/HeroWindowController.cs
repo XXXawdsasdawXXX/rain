@@ -18,13 +18,13 @@ namespace Code.UI.Windows.MainMenu.Hero
         private NewHeroWindowController _newHeroWindow;
         private DeleteWindowController _deleteWindow;
 
-        private GameModel _gameModel;
-        
+        private GamesSaver _gameSaver;
+
 
         public override UniTask InitializeWindow(UIWindowManager manager)
         {
-            _gameModel = Container.Instance.GetService<GameModel>();
-
+            _gameSaver = Container.Instance.GetService<GamesSaver>();
+            
             _newHeroWindow = manager.GetWindow<NewHeroWindowController>();
             _deleteWindow = manager.GetWindow<DeleteWindowController>();
 
@@ -75,12 +75,14 @@ namespace Code.UI.Windows.MainMenu.Hero
         {
             windowManager.SwitchWindow<DeleteWindowController>();
 
-            _deleteWindow.SetObserved(_gameModel.Hero.Name, () =>
+            GameModel model = _gameSaver.Current;
+            
+            _deleteWindow.SetObserved(model.Hero.Name, () =>
             {
-                _gameModel.Heroes.RemoveAt(_gameModel.LastHeroIndex.Value);
+                model.Heroes.RemoveAt(model.LastHeroIndex.Value);
 
-                int lastHeroIndex = _gameModel.Heroes.IndexOf(_gameModel.GetNearestHeroByExitTime());
-                _gameModel.LastHeroIndex.Value = lastHeroIndex >= 0 ? lastHeroIndex : 0;
+                int lastHeroIndex = model.Heroes.IndexOf(model.GetNearestHeroByExitTime());
+                model.LastHeroIndex.Value = lastHeroIndex >= 0 ? lastHeroIndex : 0;
                 
                 _updateHeroesList();
                 _updateOptionButtonsView();
@@ -90,12 +92,14 @@ namespace Code.UI.Windows.MainMenu.Hero
         private void _updateHeroesList()
         {
             view.HeroesRadioGroup.Clear();
+            
+            GameModel model = _gameSaver.Current;
 
-            if (_gameModel.Heroes != null && _gameModel.Heroes.Count > 0)
+            if (model.Heroes != null && model.Heroes.Count > 0)
             {
-                for (int i = 0; i < _gameModel.Heroes.Count; i++)
+                for (int i = 0; i < model.Heroes.Count; i++)
                 {
-                    HeroModel heroModel = _gameModel.Heroes[i];
+                    HeroModel heroModel = model.Heroes[i];
                     UIText text = view.HeroesRadioGroup.Pool.GetNext();
                     text.SetIndex(i);
                     text.SetText(heroModel.Name);
@@ -105,27 +109,31 @@ namespace Code.UI.Windows.MainMenu.Hero
                 view.HeroesRadioGroup.Pool.SortByIndex();
             }
             
-            _updateSelectedHeroView(_gameModel.LastHeroIndex.Value);
+            _updateSelectedHeroView(model.LastHeroIndex.Value);
 
             HeroListChanged?.Invoke();
         }
 
         private void _updateSelectedHeroValue(int heroIndex)
         {
-            if (_gameModel.Heroes.Count > heroIndex && heroIndex >= 0)
+            GameModel model = _gameSaver.Current;
+            
+            if (model.Heroes.Count > heroIndex && heroIndex >= 0)
             {
-                _gameModel.LastHeroIndex.Value = heroIndex;
+                model.LastHeroIndex.Value = heroIndex;
             }
         }
         
         private void _updateSelectedHeroView(int heroIndex)
         {
-            if (_gameModel.Heroes.Count > heroIndex && heroIndex >= 0)
+            GameModel model = _gameSaver.Current;
+            
+            if (model.Heroes.Count > heroIndex && heroIndex >= 0)
             {
                 view.BodyHeroView.SetActive(true);
                 view.HeroCard.SetModel(new UIHeroCardView.Model(
-                    _gameModel.Heroes[heroIndex].Name,
-                    _gameModel.Heroes[heroIndex].GameTime.ToString()));
+                    model.Heroes[heroIndex].Name,
+                    model.Heroes[heroIndex].GameTime.ToString()));
                 view.HeroesRadioGroup.Select(heroIndex);
             }
             else
@@ -136,7 +144,8 @@ namespace Code.UI.Windows.MainMenu.Hero
 
         private void _updateOptionButtonsView()
         {
-            bool isHasHero = _gameModel.Heroes.Count >= 0;
+            GameModel model = _gameSaver.Current;
+            bool isHasHero = model.Heroes.Count >= 0;
             view.ButtonDelete.SetInteractable(isHasHero);
         }
     }

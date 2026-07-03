@@ -2,6 +2,7 @@
 using System.Linq;
 using Core.Scenes;
 using Core.ServiceLocator;
+using Essential;
 using UnityEngine;
 
 namespace Core.AssetManagement
@@ -25,7 +26,13 @@ namespace Core.AssetManagement
         
         public Installer GetSceneInstaller(EScene scene)
         {
-            return _sceneInstallers.FirstOrDefault(i => i.Scene == scene).Installer;
+            Installer installer = _sceneInstallers.FirstOrDefault(i => i.Scene == scene).Installer;
+
+            if (installer == null)
+            {
+                Log.Error(this, $"GetSceneInstaller - not find installer for scene {scene}");
+            }
+            return installer;
         }
     }
 }

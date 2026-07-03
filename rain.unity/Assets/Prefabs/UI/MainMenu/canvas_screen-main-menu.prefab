@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 3734110808297296531}
   - component: {fileID: 1144845761689309654}
   m_Layer: 5
-  m_Name: grid-buttons-game
+  m_Name: grid-buttons-worlds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -392,7 +392,7 @@ GameObject:
   - component: {fileID: 7871521458400798874}
   - component: {fileID: 6062268962722184870}
   m_Layer: 5
-  m_Name: window-game
+  m_Name: window-world
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -450,24 +450,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 5212908569851948648}
   <ObjectLocker>k__BackingField: {fileID: 8898114195812431405}
-  <TextUserIP>k__BackingField: {fileID: 3063647230798498302}
+  <ButtonNew>k__BackingField: {fileID: 867966103001391950}
   <ButtonContinue>k__BackingField: {fileID: 7345825799029064869}
-  <ButtonJoin>k__BackingField: {fileID: 867966103001391950}
   <ButtonDelete>k__BackingField: {fileID: 8477316409300113945}
   <WorldsRadioGroup>k__BackingField: {fileID: 2609820155673987780}
   <Scroll>k__BackingField: {fileID: 357027755280449676}
-  _ipMessage:
-    m_TableReference:
-      m_TableCollectionName: MainMenu
-    m_TableEntryReference:
-      m_KeyId: 0
-      m_Key: ui.main_menu.ip_label
-    m_FallbackState: 0
-    m_WaitForCompletion: 0
-    m_LocalVariables: []
-  references:
-    version: 2
-    RefIds: []
 --- !u!1 &3011083957354260185
 GameObject:
   m_ObjectHideFlags: 0
@@ -1501,7 +1488,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7300833877162465139, guid: faae8345cfa6aac448261b53293e415e, type: 3}
       propertyPath: m_Name
-      value: buttonText-delete
+      value: buttonText-delete-world
       objectReference: {fileID: 0}
     - target: {fileID: 8086041027166214818, guid: faae8345cfa6aac448261b53293e415e, type: 3}
       propertyPath: m_Pivot.x
@@ -1919,7 +1906,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7300833877162465139, guid: faae8345cfa6aac448261b53293e415e, type: 3}
       propertyPath: m_Name
-      value: buttonText-continue
+      value: buttonText-continue-in world
       objectReference: {fileID: 0}
     - target: {fileID: 8086041027166214818, guid: faae8345cfa6aac448261b53293e415e, type: 3}
       propertyPath: m_Pivot.x
@@ -2140,7 +2127,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8592390817710701151, guid: faae8345cfa6aac448261b53293e415e, type: 3}
       propertyPath: m_text
-      value: new
+      value: "\u043D\u043E\u0432\u044B\u0439 \u0433\u0435\u0440\u043E\u0439"
       objectReference: {fileID: 0}
     - target: {fileID: 8592390817710701151, guid: faae8345cfa6aac448261b53293e415e, type: 3}
       propertyPath: m_fontColor32.rgba
@@ -2650,7 +2637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8592390817710701151, guid: faae8345cfa6aac448261b53293e415e, type: 3}
       propertyPath: m_text
-      value: delete
+      value: "\u0443\u0434\u0430\u043B\u0438\u0442\u044C \u0433\u0435\u0440\u043E\u044F"
       objectReference: {fileID: 0}
     - target: {fileID: 8592390817710701151, guid: faae8345cfa6aac448261b53293e415e, type: 3}
       propertyPath: m_fontColor32.rgba
@@ -2909,7 +2896,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8592390817710701151, guid: faae8345cfa6aac448261b53293e415e, type: 3}
       propertyPath: m_text
-      value: settings
+      value: "\u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
       objectReference: {fileID: 0}
     - target: {fileID: 8592390817710701151, guid: faae8345cfa6aac448261b53293e415e, type: 3}
       propertyPath: m_fontColor32.rgba
@@ -3285,7 +3272,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7330940580237409095, guid: 920774f47966b6c4bba2f42d656d1283, type: 3}
       propertyPath: m_text
-      value: hero
+      value: "\u0433\u0435\u0440\u043E\u0439"
       objectReference: {fileID: 0}
     - target: {fileID: 8042823179126906014, guid: 920774f47966b6c4bba2f42d656d1283, type: 3}
       propertyPath: _key
@@ -4504,7 +4491,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7300833877162465139, guid: faae8345cfa6aac448261b53293e415e, type: 3}
       propertyPath: m_Name
-      value: buttonText-new
+      value: buttonText-new-world
       objectReference: {fileID: 0}
     - target: {fileID: 8063824080715827347, guid: faae8345cfa6aac448261b53293e415e, type: 3}
       propertyPath: m_StringReference.m_TableEntryReference.m_KeyId

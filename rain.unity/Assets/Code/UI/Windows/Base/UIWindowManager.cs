@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Core.GameLoop;
 using Core.Save;
 using Core.Save.Models;
+using Core.ServiceLocator;
 using Core.ServiceLocator.MarkerInterfaces;
 using Cysharp.Threading.Tasks;
 
@@ -18,11 +19,13 @@ namespace Code.UI.Windows.Base
         private readonly Dictionary<Type, IWindowController> _windowControllers = new();
         
         private IWindowController _lastOpenedWindow;
+        private GamesSaver _gameSaver;
 
 
         public async UniTask Initialize()
         {
             _windows = GetComponentsInChildren<IWindowController>(true);
+            _gameSaver = Container.Instance.GetService<GamesSaver>();
             
             foreach (IWindowController windowController in _windows)
             {
@@ -46,17 +49,12 @@ namespace Code.UI.Windows.Base
         {
             foreach ((Type _, IWindowController windowController) in _windowControllers)
             {
-                windowController.StartWindow();
+                windowController.LoadWindow(_gameSaver.Current);
             }
-            
-            return UniTask.CompletedTask;
-        }
 
-        public UniTask GameLoad(GameModel model)
-        {
             foreach ((Type _, IWindowController windowController) in _windowControllers)
             {
-                windowController.LoadWindow(model);
+                windowController.StartWindow();
             }
             
             return UniTask.CompletedTask;

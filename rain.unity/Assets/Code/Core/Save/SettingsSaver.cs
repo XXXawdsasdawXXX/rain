@@ -3,7 +3,7 @@ using Core.Save.Models;
 
 namespace Core.Save
 {
-    public class SettingsSaver : Saver<SettingsSaver.Model>
+    public sealed class SettingsSaver : Saver<SettingsSaver.Model>
     {
         [Serializable]
         public class Model : SavedModel

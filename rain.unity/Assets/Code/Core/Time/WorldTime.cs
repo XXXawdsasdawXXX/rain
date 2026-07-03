@@ -9,14 +9,13 @@ using UnityEngine.Networking;
 
 namespace Core.Time
 {
-    public class GameTime : IService, IInitializeListener, IStartListener, IUpdateListener, IExitListener
+    public class WorldTime : IService, IInitializeListener, IStartListener, IUpdateListener, IExitListener
     {
         private static readonly TimeSpan NightStart = new(22, 0, 0);
         private static readonly TimeSpan NightEnd = new(6, 0, 0);
      
         public bool IsInitialized { get; set; }
         public DateTime Current { get; private set; }
-        
         public event Action OnDayStarted;
         public event Action OnNightStarted;
         
@@ -28,7 +27,7 @@ namespace Core.Time
 
         public UniTask Initialize()
         {
-            _gameModel = Container.Instance.GetService<GameModel>();
+            _gameModel = Container.Instance.GetService<GamesSaver>().Current;
         
             return UniTask.CompletedTask;
         }

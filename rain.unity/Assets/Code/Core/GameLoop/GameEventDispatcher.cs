@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Core.ServiceLocator.MarkerInterfaces;
 using Cysharp.Threading.Tasks;
+using Essential;
 using Unity.Profiling;
 
 namespace Core.GameLoop
@@ -41,13 +43,21 @@ namespace Core.GameLoop
 
         public async UniTask Register(List<IGameListener> listeners)
         {
-            _addListeners(listeners);
+            try
+            {
+                _addListeners(listeners);
 
-            await _notifyGameInitialize();
-            await _notifySubscribe();
-            await _notifyGameStart();
+                await _notifyGameInitialize();
+                await _notifySubscribe();
+                await _notifyGameStart();
 
-            _isStarted = true;
+                _isStarted = true;
+            }
+            catch (Exception e)
+            {
+                Log.Error(this, $"registration listeners error: {e}");
+                throw;
+            }
         }
 
         public void Dispose()
@@ -180,11 +190,19 @@ namespace Core.GameLoop
 
             foreach (IInitializeListener listener in _initListeners)
             {
+                if (listener == null)
+                {
+                Log.Info($"0. wtf {{listener.GetType().Name}}");
+                    continue;
+                }
+                Log.Info($"1. register listener {listener.GetType().Name}");
                 if (listener.IsInitialized)
                 {
+                Log.Info($"2. register listener {listener.GetType().Name}");
                     continue;
                 }
 
+                Log.Info($"3. start initialize {listener.GetType().Name}");
                 await listener.Initialize();
 
                 listener.IsInitialized = true;

@@ -8,21 +8,21 @@ using Core.ServiceLocator;
 using Core.Time;
 using Cysharp.Threading.Tasks;
 
-namespace Code.UI.Windows.MainMenu.NewGame
+namespace Code.UI.Windows.MainMenu.NewWorld
 {
-    public class NewGameWindowController : UIWindowController<NewGameWindowView>
+    public class NewWorldWindowController : UIWindowController<NewWorldWindowView>
     {
-        public bool IsInitialized { get; set; }
-
-        public event Action AddedMadel; 
+        public event Action ModelAdded; 
         
         private GameModel _gameModel;
-        private GameTime _gameTime;
+        private WorldTime _worldTime;
+        private GamesSaver _gameSaver;
 
         public override UniTask InitializeWindow(UIWindowManager manager)
         {
-            _gameModel = Container.Instance.GetService<GameModel>();
-            _gameTime = Container.Instance.GetService<GameTime>();
+            _gameSaver = Container.Instance.GetService<GamesSaver>();
+            _gameModel = Container.Instance.GetService<GamesSaver>().Current;
+            _worldTime = Container.Instance.GetService<WorldTime>();
 
             return base.InitializeWindow(manager);
         }
@@ -63,14 +63,16 @@ namespace Code.UI.Windows.MainMenu.NewGame
             _gameModel.Worlds.Add(new WorldModel
             {
                 Name = view.InputFieldGameName.Value,
-                CreateTime = _gameTime.Current,
-                ExitTime =  _gameTime.Current,
+                CreateTime = _worldTime.Current,
+                ExitTime =  _worldTime.Current,
                 SceneResources = new Dictionary<string, int>(),
             });
 
             _gameModel.LastWorldIndex.Value = _gameModel.Worlds.Count - 1;
             
-            AddedMadel?.Invoke();
+            _gameSaver.Save();
+            
+            ModelAdded?.Invoke();
         }
     }
 }

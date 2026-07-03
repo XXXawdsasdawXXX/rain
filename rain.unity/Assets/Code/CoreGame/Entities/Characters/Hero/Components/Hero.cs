@@ -6,6 +6,7 @@ using Code.CoreGame.Entities.Characters.Hero.Data;
 using Code.CoreGame.Entities.Select;
 using Core.GameLoop;
 using Core.Input;
+using Core.Save;
 using Core.Save.Models;
 using Core.ServiceLocator;
 using Essential;
@@ -57,7 +58,7 @@ namespace Code.CoreGame.Entities.Characters.Hero.Components
             
             InputService inputService = Container.Instance.GetService<InputService>();
             HeroSettings heroSettings = Container.Instance.GetSO<HeroSettings>();
-            GameModel gameModel = Container.Instance.GetService<GameModel>();
+            GameModel gameModel = Container.Instance.GetService<GamesSaver>().Current;
             
             Model = gameModel.Hero;
             

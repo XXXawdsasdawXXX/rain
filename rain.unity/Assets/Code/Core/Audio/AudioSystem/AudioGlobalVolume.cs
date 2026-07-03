@@ -27,6 +27,8 @@ namespace Core.Audio.AudioSystem
         
         public UniTask Initialize()
         {
+            _settingsSaver = Container.Instance.GetService<SettingsSaver>();
+            
             _musicVCA = RuntimeManager.GetVCA(MUSIC_VCA_PATH_VCA);
             _sfxVCA = RuntimeManager.GetVCA(SFX_VCA_PATH);
                         

@@ -1,5 +1,6 @@
 ﻿using Core.AssetManagement;
 using Core.AssetManagement.Libraries.Assets;
+using Core.GameLoop;
 using Core.Localization;
 using Core.ServiceLocator;
 using Cysharp.Threading.Tasks;
@@ -26,8 +27,9 @@ namespace Core.StateMachine.States
         public async UniTask Initialize()
         {
             Container container = InitializeProjectContext();
-
+            
             await container.GetService<LocalizationService>().Initialize();
+            await container.GetService<GameEventDispatcher>().Register(Container.Instance.GetGameListeners());
         }
 
         private Container InitializeProjectContext()
@@ -45,6 +47,7 @@ namespace Core.StateMachine.States
             projectContext.Services.Add(typeof(GameStateMachine), _gameStateMachine);
             
             Container container = new(projectContext);
+            
             container.AddConfig(_installers);
             
             foreach (ScriptableObject config in _configurations.Configs)
@@ -55,11 +58,9 @@ namespace Core.StateMachine.States
             return container;
         }
         
-        public UniTask Enter()
+        public async UniTask Enter()
         {
-            _gameStateMachine.SwitchState(typeof(MainMenuState));
-
-            return UniTask.CompletedTask;
+            await _gameStateMachine.SwitchState(typeof(MainMenuState));
         }
 
         public UniTask Exit()

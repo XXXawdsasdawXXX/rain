@@ -15,7 +15,7 @@ namespace Core.StateMachine
          
         }
 
-        public GameStateMachine(AssetManagement.Installers installers, Configurations configurations)
+        public GameStateMachine(Installers installers, Configurations configurations)
         {
             states = new Dictionary<Type, IState>()
             {

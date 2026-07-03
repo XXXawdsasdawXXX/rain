@@ -5,6 +5,7 @@ using Core.GameLoop;
 using Core.Scenes;
 using Core.ServiceLocator;
 using Cysharp.Threading.Tasks;
+using Essential;
 using UnityEngine;
 
 namespace Core.StateMachine.States
@@ -27,7 +28,7 @@ namespace Core.StateMachine.States
             _sceneService = Container.Instance.GetService<SceneService>();
             _gameEventDispatcher = Container.Instance.GetService<GameEventDispatcher>();
 
-            _installers = Container.Instance.GetSO<AssetManagement.Installers>();
+            _installers = Container.Instance.GetSO<Installers>();
             _assetLibrary = Container.Instance.GetSO<AssetLibrary>();
 
             return UniTask.CompletedTask;
@@ -36,14 +37,26 @@ namespace Core.StateMachine.States
         public async UniTask Enter()
         {
             await _sceneService.LoadSceneAsync(EScene.Game); //todo use player progress
-
-            _coreEntities.Add(AssetProvider.Instantiate(_assetLibrary.UICanvases.Get(AssetKey.CANVAS_CORE_GAME)));
+            
+            _createHUD();
+            
+            if (_installers.CoreGameInstaller == null)
+            {
+                Log.Error(this, $"enter -> installer for core game is null");
+                return;
+            }
 
             Container.Instance.Context.BuildChildContext(_installers.CoreGameInstaller.GetTypes());
-
             await _gameEventDispatcher.Register(Container.Instance.GetGameListeners());
 
             SubscribeToEvents(true);
+        }
+
+        private void _createHUD()
+        {
+            GameObject canvasPrefab = _assetLibrary.UICanvases.Get(AssetKey.CANVAS_CORE_GAME);
+            GameObject canvasInstance = AssetProvider.Instantiate(canvasPrefab);
+            _coreEntities.Add(canvasInstance);
         }
 
         public UniTask Exit()

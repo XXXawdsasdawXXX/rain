@@ -2,6 +2,7 @@
 using Core.Save.Models;
 using Core.ServiceLocator.MarkerInterfaces;
 using Cysharp.Threading.Tasks;
+using Essential;
 
 namespace Core.Save
 {
@@ -11,16 +12,21 @@ namespace Core.Save
         public T Current { get; protected set; }
 
 
-        public UniTask Initialize()
+        public async UniTask Initialize()
         {
-            if (!SaveService.Load(out T model))
-            {
-                model = getNewModel();
+            T save = await SaveService.Load<T>();
+            
+            if (save == null)
+            { 
+                Log.Info(this, $"new load data");
+                save = getNewModel();
             }
     
-            Current = model;
+            Current = save;
+
+            Save();
             
-            return UniTask.CompletedTask;
+            Log.Info(this, $"Load data {Current}");
         }
 
         public void GameExit()
@@ -31,6 +37,8 @@ namespace Core.Save
         public void Save()
         {
             SaveService.Save(Current);
+            
+            Log.Info(this, $"Save data {Current}");
         }
 
         protected abstract T getNewModel();

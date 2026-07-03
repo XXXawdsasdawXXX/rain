@@ -19,7 +19,9 @@ namespace Core
             return new[]
             {
                 typeof(SettingsSaver),
-                typeof(GameTime),
+                typeof(GamesSaver),
+
+                typeof(WorldTime),
                 typeof(GameModel),
                 typeof(SceneService),
                 typeof(AudioService),

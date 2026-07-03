@@ -3,6 +3,7 @@ using Code.CoreGame.Entities.Characters.Hero.Components;
 using Code.CoreGame.Harvest.Data;
 using Core.Common.Extensions;
 using Core.GameLoop;
+using Core.Save;
 using Core.Save.Models;
 using Core.ServiceLocator;
 using Core.ServiceLocator.MarkerInterfaces;
@@ -27,7 +28,7 @@ namespace Code.CoreGame.Harvest
         
         public UniTask Initialize()
         {
-            _gameModel = Container.Instance.GetService<GameModel>();
+            _gameModel = Container.Instance.GetService<GamesSaver>().Current;
 
            // _hero = _userProvider.GetHeroComponent<Hero>(); todo set hero value
             _mainer = _hero.GetCharacterComponent<Mainer>();

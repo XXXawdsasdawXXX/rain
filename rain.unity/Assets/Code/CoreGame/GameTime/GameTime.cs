@@ -1,5 +1,6 @@
 ﻿using System;
 using Core.GameLoop;
+using Core.Save;
 using Core.Save.Models;
 using Core.ServiceLocator;
 using Core.ServiceLocator.MarkerInterfaces;
@@ -23,7 +24,7 @@ namespace Code.CoreGame.GameTime
         {
             _timeScale = Container.Instance.GetSO<GameTimeSettings>().TimeScale;
 
-            _gameModel = Container.Instance.GetService<GameModel>();
+            _gameModel = Container.Instance.GetService<GamesSaver>().Current;
             
             return UniTask.CompletedTask;;
         }

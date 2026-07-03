@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Installers
   m_EditorClassIdentifier: 
   <ProjectsInstaller>k__BackingField: {fileID: 11400000, guid: f6eb1bcff18314747aafbbe2166334ef, type: 2}
-  <CoreGameInstaller>k__BackingField: {fileID: 0}
+  <CoreGameInstaller>k__BackingField: {fileID: 11400000, guid: c9ac0f8ccd2bcae4dbabc4f135a7d789, type: 2}
   _sceneInstallers: []

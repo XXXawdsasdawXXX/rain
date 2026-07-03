@@ -5,6 +5,8 @@ using System.Security.Cryptography;
 using System.Text;
 using Core.Common.Extensions;
 using Core.Save.Models;
+using Cysharp.Threading.Tasks;
+using Essential;
 using UnityEngine;
 
 namespace Core.Save
@@ -24,6 +26,7 @@ namespace Core.Save
                 string json = data.AsJson();
 
                 File.WriteAllText(Path.Combine(Application.persistentDataPath, $"{typeof(T).Name}.dat"), json);
+                Log.Info($"Save {typeof(T).Name}: {json}");
             }
             catch (Exception e)
             {
@@ -31,28 +34,24 @@ namespace Core.Save
             }
         }
 
-        public static bool Load<T>(out T data) where T : SavedModel
+        public static async UniTask<T> Load<T>() where T : SavedModel
         {
-            data = null;
-
             string path = Path.Combine(Application.persistentDataPath, $"{typeof(T).Name}.dat");
 
             if (!File.Exists(path))
             {
-                return false;
+                return null;
             }
 
             try
             {
-                string json = File.ReadAllText(path);
+                string json = await File.ReadAllTextAsync(path);
 
-                data = json.AsData<T>();
-
-                return data != null;
+                return json.AsData<T>();
             }
             catch
             {
-                return false;
+                return null;
             }
         }
 

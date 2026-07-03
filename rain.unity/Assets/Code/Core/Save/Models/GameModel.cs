@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Core.Common.Data;
-using Core.ServiceLocator.MarkerInterfaces;
 using Newtonsoft.Json;
 
 namespace Core.Save.Models
 {
     [Serializable]
-    public class GameModel : IService
+    public class GameModel : SavedModel
     {
         public DateTime GameEnterTime;
         public DateTime GameExitTime;
@@ -19,6 +18,15 @@ namespace Core.Save.Models
         public List<HeroModel> Heroes; //all players heroes 
         public List<WorldModel> Worlds;
         
+        
+        public GameModel()
+        {
+            Heroes = new List<HeroModel>();
+            Worlds = new List<WorldModel>();
+            
+            LastWorldIndex = new ReactiveProperty<int>(0);
+            LastHeroIndex = new ReactiveProperty<int>(0);
+        }
 
         [JsonIgnore]
         public WorldModel World
@@ -57,16 +65,7 @@ namespace Core.Save.Models
                 return null;
             }
         }
-        
-        public GameModel()
-        {
-            Heroes = new List<HeroModel>();
-            Worlds = new List<WorldModel>();
-            
-            LastWorldIndex = new ReactiveProperty<int>(0);
-            LastHeroIndex = new ReactiveProperty<int>(0);
-        }
-        
+
         public void CopyFrom(GameModel model)
         {
             Heroes = model?.Heroes ?? new List<HeroModel>();

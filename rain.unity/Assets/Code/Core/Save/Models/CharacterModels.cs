@@ -23,6 +23,7 @@ namespace Core.Save.Models
         
         public HeroModel()
         {
+            HeroId = Guid.NewGuid().ToString();
             Name = "name";
             Stats = new CharacterStats();
             ResourcesStorage = new Dictionary<int, int>()

@@ -5,6 +5,7 @@ using Core.Save;
 using Core.Save.Models;
 using Core.ServiceLocator;
 using Cysharp.Threading.Tasks;
+using Essential;
 
 namespace Code.UI.Windows.MainMenu.NewHero
 {
@@ -15,13 +16,16 @@ namespace Code.UI.Windows.MainMenu.NewHero
         
         private GameModel _gameModel;
         private DeleteWindowController _deleteWindow;
+        private GamesSaver _gameSaver;
 
-        
+
         public override UniTask InitializeWindow(UIWindowManager manager)
         {
-            _gameModel = Container.Instance.GetService<GameModel>();
+            _gameSaver = Container.Instance.GetService<GamesSaver>();
+            _gameModel = Container.Instance.GetService<GamesSaver>().Current;
             _deleteWindow = manager.GetWindow<DeleteWindowController>();
 
+            Log.Info(this, $"Initialize window. game model is null = {_gameModel == null}");
             return base.InitializeWindow(manager);
         }
 
@@ -56,6 +60,8 @@ namespace Code.UI.Windows.MainMenu.NewHero
                 GameTime = default,
                 ExitTime = default
             });
+            
+            _gameSaver.Save();
             
             HeroCreated?.Invoke();
         }
