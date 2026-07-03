@@ -17,18 +17,16 @@ namespace Code.CoreGame.Entities.Characters.Hero.Components
     public class Hero : Character, ISubscriber
     {
         public HeroModel Model { get; private set; }
-        
+
         [field: Header("Unity components")]
         [field: SerializeField] public Rigidbody2D Rigidbody { get; private set; }
-        
-        [field: Space]
-        
+
         [field: Header("custom components")]
-        [field: SerializeField] public CurrentMaxValue CurrentMaxValue { get; private set; }
         [field: SerializeField] public HeroColor Color { get; private set; }
         [field: SerializeField] public HeroAnimation Animation { get; private set; }
         [field: SerializeField] public SelectObject SelectObject { get; private set; }
-
+        
+        
         /*
         public override void OnStartClient()
         {
@@ -65,8 +63,8 @@ namespace Code.CoreGame.Entities.Characters.Hero.Components
             Movement movement = new(Rigidbody, inputService.Direction, heroSettings.MoveSpeed);
             Components.Add(typeof(Movement), movement);
             
-            Mainer mainer = new(Animation, CurrentMaxValue);
-            Components.Add(typeof(Mainer), mainer);
+            /*Mainer mainer = new(Animation, Model.Stats.Health);
+            Components.Add(typeof(Mainer), mainer);*/
 
             HeroSelectController selectController = new(this);
             Components.Add(typeof(HeroSelectController), selectController);
@@ -75,27 +73,29 @@ namespace Code.CoreGame.Entities.Characters.Hero.Components
                 AnimatorKey.ECharacterAnimationState.Eat and not 
                 AnimatorKey.ECharacterAnimationState.Harvest);
             
-            mainer.Condition.Add(() => inputService.Direction.Value == Vector2.zero);
+            //mainer.Condition.Add(() => inputService.Direction.Value == Vector2.zero);
 
+            /*
             foreach (KeyValuePair<Type, ICharacterComponent> characterComponent in Components)
             {
                 characterComponent.Value.Condition.Add(() => CurrentMaxValue.Current > 0);
                 characterComponent.Value.Condition.Add(() => !Model.InBattle);
             }
+            */
             
             Log.Info(this, "init");
 
-            CurrentMaxValue.SetCurrentValue(Model.Stats.Health);
+        //    CurrentMaxValue.SetCurrentValue(Model.Stats.Health);
         }
 
         public void Subscribe()
         {
-            CurrentMaxValue.Changed += _onHealthChanged;
+           // CurrentMaxValue.Changed += _onHealthChanged;
         }
 
         public void Unsubscribe()
         {   
-            CurrentMaxValue.Changed -= _onHealthChanged;
+           // CurrentMaxValue.Changed -= _onHealthChanged;
         }
 
         private void _onHealthChanged(int current)
