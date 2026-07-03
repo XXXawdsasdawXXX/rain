@@ -2,6 +2,7 @@
 using Code.UI.Windows.Base;
 using Code.UI.Windows.MainMenu.Delete;
 using Core.Save;
+using Core.Save.Models;
 using Core.ServiceLocator;
 using Cysharp.Threading.Tasks;
 
@@ -43,7 +44,15 @@ namespace Code.UI.Windows.MainMenu.NewHero
             _gameModel.Heroes.Add(new HeroModel
             {
                 Name = view.InputFieldHeroName.Value,
-                Health = 100,
+                Stats = new CharacterStats
+                {
+                    Health = 100,
+                    Armor = 0,
+                    Agility = 0,
+                    Strength = 0,
+                    Endurance = 0,
+                    Intellect = 0
+                },
                 GameTime = default,
                 ExitTime = default
             });

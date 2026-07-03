@@ -5,6 +5,7 @@ using Code.UI.Windows.MainMenu.Hero;
 using Code.UI.Windows.MainMenu.NewGame;
 using Core.Localization;
 using Core.Save;
+using Core.Save.Models;
 using Core.ServiceLocator;
 using Core.StateMachine;
 using Core.StateMachine.States;

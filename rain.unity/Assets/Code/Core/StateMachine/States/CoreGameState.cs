@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Core.AssetManagement;
+using Core.AssetManagement.Libraries.Assets;
 using Core.GameLoop;
-using Core.Libraries.Assets;
 using Core.Scenes;
 using Core.ServiceLocator;
 using Cysharp.Threading.Tasks;

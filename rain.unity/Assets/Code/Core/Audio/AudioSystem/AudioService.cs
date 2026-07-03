@@ -1,5 +1,5 @@
-﻿using Core.GameLoop;
-using Core.Libraries.Audio;
+﻿using Core.AssetManagement.Libraries.Audio;
+using Core.GameLoop;
 using Core.ServiceLocator;
 using Core.ServiceLocator.MarkerInterfaces;
 using Cysharp.Threading.Tasks;

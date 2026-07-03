@@ -5,6 +5,7 @@ using Code.UI.Windows.Base;
 using Code.UI.Windows.MainMenu.Delete;
 using Code.UI.Windows.MainMenu.NewHero;
 using Core.Save;
+using Core.Save.Models;
 using Core.ServiceLocator;
 using Cysharp.Threading.Tasks;
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Core.Libraries
+namespace Core.AssetManagement.Libraries
 {
     [Serializable]
     public abstract class Library<TKey, TType> 

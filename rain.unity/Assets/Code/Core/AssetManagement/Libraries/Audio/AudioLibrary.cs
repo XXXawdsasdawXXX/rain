@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Core.Libraries.Audio
+namespace Core.AssetManagement.Libraries.Audio
 {
     [CreateAssetMenu(fileName = "Library_Audio", menuName = "Game/Library/Audio")]
     public class AudioLibrary : ScriptableObject

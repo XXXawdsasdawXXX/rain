@@ -1,5 +1,5 @@
 ﻿using Core.AssetManagement;
-using Core.Libraries.Assets;
+using Core.AssetManagement.Libraries.Assets;
 using Core.Localization;
 using Core.ServiceLocator;
 using Cysharp.Threading.Tasks;

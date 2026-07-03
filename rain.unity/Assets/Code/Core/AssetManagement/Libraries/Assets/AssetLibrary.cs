@@ -1,7 +1,7 @@
 ﻿using TriInspector;
 using UnityEngine;
 
-namespace Core.Libraries.Assets
+namespace Core.AssetManagement.Libraries.Assets
 {
     [CreateAssetMenu(fileName = "Library_Asset", menuName = "Game/Library/Asset")]
     public class AssetLibrary : ScriptableObject

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Core.GameLoop;
 using Core.Save;
+using Core.Save.Models;
 using Core.ServiceLocator.MarkerInterfaces;
 using Cysharp.Threading.Tasks;
 

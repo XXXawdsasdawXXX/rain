@@ -5,7 +5,7 @@ using Core.Common.Data;
 using Core.ServiceLocator.MarkerInterfaces;
 using Newtonsoft.Json;
 
-namespace Core.Save
+namespace Core.Save.Models
 {
     [Serializable]
     public class GameModel : IService

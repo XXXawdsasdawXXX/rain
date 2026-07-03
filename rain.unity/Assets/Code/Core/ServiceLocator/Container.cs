@@ -18,7 +18,7 @@ namespace Core.ServiceLocator
         internal Container(ContextEntities projectContext)
         {
             Context = projectContext;
-            
+   
             Instance = this;
         }
         

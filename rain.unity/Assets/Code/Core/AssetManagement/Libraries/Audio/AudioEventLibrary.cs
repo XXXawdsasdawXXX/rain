@@ -1,7 +1,7 @@
 ﻿using System;
 using FMODUnity;
 
-namespace Core.Libraries.Audio
+namespace Core.AssetManagement.Libraries.Audio
 {
     [Serializable]
     public class AudioEventLibrary : Library<string, EventReference>

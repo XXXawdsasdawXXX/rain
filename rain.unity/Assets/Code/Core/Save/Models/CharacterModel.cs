@@ -1,30 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Core.Save
+namespace Core.Save.Models
 {
-    public class CharacterModel
-    {
-        
-    }
     [Serializable]
-    public class HeroModel
+    public class HeroModel : SavedModel
     {
         public string HeroId;
         
         public string Name;
-        public int Health;
-        public int Armor;
+
         public bool InBattle;
 
         public CharacterStats Stats;
     
         public Dictionary<int, int> ResourcesStorage = new();
 
-        public List<string> CardCollection; // все карты которые есть у игрока (id)
-        public List<string> Deck;           // собранная колода (id), макс 30
-        public string SelectedDeckId;
-        
         public TimeSpan CreateTime;
         public TimeSpan GameTime;
         public TimeSpan ExitTime;
@@ -33,8 +24,7 @@ namespace Core.Save
         public HeroModel()
         {
             Name = "name";
-            Health = 100;
-
+            Stats = new CharacterStats();
             ResourcesStorage = new Dictionary<int, int>()
             {
                 { 1, 100 }, // gold
@@ -43,19 +33,16 @@ namespace Core.Save
             };
 
             GameTime = new TimeSpan();
-            ExitTime = new TimeSpan();
-
-            Stats = new CharacterStats();
-
-            CardCollection = new List<string>();
-            Deck = new List<string>();
-            SelectedDeckId = string.Empty;
+            ExitTime = DateTime.UtcNow.TimeOfDay;
+            CreateTime = DateTime.UtcNow.TimeOfDay;
         }
     }
     
     [Serializable]
     public class CharacterStats
     {
+        public int Health;
+        public int Armor;
         public int Agility;    
         public int Strength;   
         public int Endurance;  

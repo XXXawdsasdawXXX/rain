@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Core.Libraries.Assets
+namespace Core.AssetManagement.Libraries.Assets
 {
 
     [Serializable]

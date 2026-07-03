@@ -1,0 +1,28 @@
+﻿using Core.AssetManagement.Libraries.Audio;
+using Core.Audio.AudioSystem;
+using Core.GameLoop;
+using Core.ServiceLocator;
+using Cysharp.Threading.Tasks;
+
+namespace Code.CoreGame.Entities.Characters.Hero.Components
+{
+    public class HeroAnimationEvent : Essential.Mono, IInitializeListener
+    {
+        public bool IsInitialized { get; set; }
+        
+        private AudioService _audio;
+        
+        public UniTask Initialize()
+        {
+            _audio = Container.Instance.GetService<AudioService>();
+            
+            return UniTask.CompletedTask;
+        }
+
+        private void PlayStep()
+        {
+            //_audio ??= Container.Instance.GetService<AudioService>();
+            _audio.OneShot(AudioEventLibrary.STEP, transform.position);
+        }
+    }
+}
