@@ -1,14 +1,12 @@
 ﻿using System;
-using Core.Common.Data;
-using Core.GameLoop;
-using Core.ServiceLocator.MarkerInterfaces;
+using Essential.Common.Data;
 using UnityEngine;
 using UnityEngine.Scripting;
 
 namespace Core.Input
 {
     [Preserve]
-    public sealed class InputService : IService, IUpdateListener, IExitListener
+    public sealed class InputService 
     {
         public event Action<EInputAction> ActionStarted;
         public event Action<EInputAction> ActionEnded;

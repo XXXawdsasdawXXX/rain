@@ -1,11 +1,10 @@
 ﻿using System;
-using Core.ServiceLocator.MarkerInterfaces;
 using Cysharp.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
 namespace Core.Scenes
 {
-    public class SceneService : IService
+    public class SceneService 
     {
         public event Action<EScene> SceneUnloaded;
         public event Action<EScene> SceneLoaded;

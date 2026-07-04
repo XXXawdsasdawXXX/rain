@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using Core.Common.Extensions;
-using Core.Save.Models;
 using Cysharp.Threading.Tasks;
 using Essential;
+using Essential.Common.Extensions;
 using UnityEngine;
 
 namespace Core.Save
@@ -19,7 +18,7 @@ namespace Core.Save
         private const bool _useEncryption = false;
         
         
-        public static void Save<T>(T data) where T : SavedModel
+        public static void Save<T>(T data) 
         {
             try
             {
@@ -34,13 +33,13 @@ namespace Core.Save
             }
         }
 
-        public static async UniTask<T> Load<T>() where T : SavedModel
+        public static async UniTask<T> Load<T>() 
         {
             string path = Path.Combine(Application.persistentDataPath, $"{typeof(T).Name}.dat");
 
             if (!File.Exists(path))
             {
-                return null;
+                return default;
             }
 
             try
@@ -51,7 +50,7 @@ namespace Core.Save
             }
             catch
             {
-                return null;
+                return default;
             }
         }
 

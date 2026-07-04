@@ -13,5 +13,6 @@
 
         //scene components
         public const string CAMERA = "camera";
+        public const string HERO = "hero";
     }
 }

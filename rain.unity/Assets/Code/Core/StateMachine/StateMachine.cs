@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core.ServiceLocator.MarkerInterfaces;
 using Cysharp.Threading.Tasks;
 using Essential;
 
 namespace Core.StateMachine
 {
-    public abstract class StateMachine<TState> : IService where TState : IState
+    public abstract class StateMachine<TState>   where TState : IState
     {
         protected Dictionary<Type, TState> states;
         

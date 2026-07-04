@@ -1,7 +1,4 @@
 ﻿using Core.AssetManagement.Libraries.Audio;
-using Core.GameLoop;
-using Core.ServiceLocator;
-using Core.ServiceLocator.MarkerInterfaces;
 using Cysharp.Threading.Tasks;
 using FMODUnity;
 using UnityEngine;
@@ -10,7 +7,7 @@ using UnityEngine.Scripting;
 namespace Core.Audio.AudioSystem
 {
     [Preserve]
-    public class AudioService : IService, IInitializeListener
+    public class AudioService 
     {
         public bool IsInitialized { get; set; }
    
@@ -18,7 +15,7 @@ namespace Core.Audio.AudioSystem
  
         public UniTask Initialize()
         {
-            _audioLibrary = Container.Instance.GetSO<AudioLibrary>();
+
 
             return UniTask.CompletedTask;
         }
