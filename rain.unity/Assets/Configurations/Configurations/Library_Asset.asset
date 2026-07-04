@@ -16,14 +16,9 @@ MonoBehaviour:
     _assets:
     - {fileID: 2100000, guid: 08e5af0e02e06804c9db3cda7c51ffd5, type: 2}
   <UICanvases>k__BackingField:
-    _assets:
-    - {fileID: 6790191599092600512, guid: f57d2d0891a5cb54bbf2e0514539f406, type: 3}
-    - {fileID: 3081301137537393607, guid: 87e05de4c0c40a1418996abd44ce0c85, type: 3}
-    - {fileID: 8564599453968516197, guid: 6b0f33e43f111eb4babd1e70f6321586, type: 3}
+    _assets: []
   <UIElements>k__BackingField:
-    _assets:
-    - {fileID: 6422474678841146688, guid: 9d39722c280514c4185ca2b130b7b933, type: 3}
+    _assets: []
   <SceneComponents>k__BackingField:
     _assets:
     - {fileID: 3537835706141628769, guid: 48d9e7bf9c5fc504d9e2baa4fecd7ba3, type: 3}
-    - {fileID: 1004137199316942285, guid: 21ceab23df0a0094b8c75888ea23c5d4, type: 3}

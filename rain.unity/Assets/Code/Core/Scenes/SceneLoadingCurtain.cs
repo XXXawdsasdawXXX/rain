@@ -1,25 +1,42 @@
-﻿using UnityEngine;
+﻿using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using UnityEngine;
 
 namespace Core.Scenes
 {
-    public class SceneLoadingCurtain : Essential.Mono
+    public class SceneLoadingCurtain : Essential.Mono, ISceneCurtain
     {
-        [SerializeField] private CanvasGroup _canvasGroup;
-        [SerializeField] private GameObject _object;
+        private const float ANIMATION_DURATION = 1;
         
-        private void Awake()
+        [SerializeField] private CanvasGroup _canvasGroup;
+
+        private Tween _tween;
+        
+
+        public async UniTask Show()
         {
-            DontDestroyOnLoad(gameObject);
+            _canvasGroup.alpha = 0;
+            
+            gameObject.SetActive(true);
+            
+            _tween?.Kill();
+            
+            _tween = _canvasGroup.DOFade(1, ANIMATION_DURATION);
+            
+            await _tween.ToUniTask();
         }
 
-        public void Show()
+        public async UniTask Hide()
         {
-            _object.SetActive(true);
-        }
-
-        public void Hide()
-        {
-            _object.SetActive(false);
+            _canvasGroup.alpha = 1;
+            
+            _tween?.Kill();
+            
+            _tween = _canvasGroup.DOFade(0, ANIMATION_DURATION);
+            
+            await _tween.ToUniTask();
+            
+            gameObject.SetActive(false);
         }
     }
 }

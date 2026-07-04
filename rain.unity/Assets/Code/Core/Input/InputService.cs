@@ -2,11 +2,12 @@
 using Essential.Common.Data;
 using UnityEngine;
 using UnityEngine.Scripting;
+using VContainer.Unity;
 
 namespace Core.Input
 {
     [Preserve]
-    public sealed class InputService 
+    public sealed class InputService : ITickable, IDisposable
     {
         public event Action<EInputAction> ActionStarted;
         public event Action<EInputAction> ActionEnded;
@@ -14,7 +15,7 @@ namespace Core.Input
         public ReactiveProperty<Vector2> Direction { get; } = new(Vector2.zero);
         public Vector3 MousePosition { get; private set; }
 
-
+        
         private readonly InputActionKey[] _inputActionKeys = 
         {
             new()
@@ -38,28 +39,7 @@ namespace Core.Input
                 Action = EInputAction.Esc
             }
         };
-
-        public void GameUpdate(float deltaTime)
-        {
-            Direction.Value = new Vector2(
-                UnityEngine.Input.GetAxisRaw("Horizontal"),
-                UnityEngine.Input.GetAxisRaw("Vertical"));
-
-            MousePosition = UnityEngine.Input.mousePosition;
-            
-            foreach (InputActionKey inputActionKey in _inputActionKeys)
-            {
-                if (_wasActionPressed(inputActionKey))
-                {
-                    ActionStarted?.Invoke(inputActionKey.Action);
-                }
-                
-                if (_wasActionReleased(inputActionKey))
-                {
-                    ActionEnded?.Invoke(inputActionKey.Action);
-                }
-            }
-        }
+        
 
         private static bool _wasActionPressed(InputActionKey inputActionKey)
         {
@@ -81,7 +61,29 @@ namespace Core.Input
             };
         }
 
-        public void GameExit()
+        public void Tick()
+        {
+            Direction.Value = new Vector2(
+                UnityEngine.Input.GetAxisRaw("Horizontal"),
+                UnityEngine.Input.GetAxisRaw("Vertical"));
+
+            MousePosition = UnityEngine.Input.mousePosition;
+            
+            foreach (InputActionKey inputActionKey in _inputActionKeys)
+            {
+                if (_wasActionPressed(inputActionKey))
+                {
+                    ActionStarted?.Invoke(inputActionKey.Action);
+                }
+                
+                if (_wasActionReleased(inputActionKey))
+                {
+                    ActionEnded?.Invoke(inputActionKey.Action);
+                }
+            }
+        }
+
+        public void Dispose()
         {
             Direction.Dispose();
         }

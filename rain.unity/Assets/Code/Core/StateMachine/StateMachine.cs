@@ -5,7 +5,7 @@ using Essential;
 
 namespace Core.StateMachine
 {
-    public abstract class StateMachine<TState>   where TState : IState
+    public abstract class StateMachine<TState>   where TState : State
     {
         protected Dictionary<Type, TState> states;
         
@@ -39,13 +39,7 @@ namespace Core.StateMachine
                 Log.Info(this, $"set state  - from {currentState?.GetType().Name} to {type.Name} ");
                 currentState = states[type];
 
-                if (!currentState.IsInitialized)
-                {
-                    Log.Info(this, $"set state  - intialize {type.Name} ");
-                    await currentState.Initialize();
-
-                    currentState.IsInitialized = true;
-                }
+       
             
                 Log.Info(this, $"set state  - enter {type.Name} ");
                 await states[type].Enter();

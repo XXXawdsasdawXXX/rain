@@ -1,22 +1,41 @@
-﻿using Core.AssetManagement;
+﻿using System;
+using System.Collections.Generic;
+using Core.Scenes;
+using Core.StateMachine.States;
+using Cysharp.Threading.Tasks;
+using VContainer.Unity;
 
 namespace Core.StateMachine
 {
-    public sealed class GameStateMachine : StateMachine<IState>
+    public sealed class GameStateMachine : StateMachine<State>, IStartable
     {
-        private IState _currentState;
+        private readonly ISceneCurtain _sceneCurtain;
+        
+        private State _currentState;
 
 
-        public GameStateMachine()
+        public GameStateMachine(ISceneCurtain sceneCurtain)
         {
-            /*states = new Dictionary<Type, IState>()
-            {
-                { typeof(BootstrapState), new BootstrapState(this, installers, configurations)},
-                { typeof(MainMenuState), new MainMenuState() },
-                { typeof(CoreGameState) , new CoreGameState()}
-            };
+            _sceneCurtain = sceneCurtain;
             
-            setState(typeof(BootstrapState)).Forget();*/
+            states = new Dictionary<Type, State>()
+            {
+                {typeof(MenuState), new MenuState(_onRequestTransition, _sceneCurtain)}
+            };
+        }
+
+        public void Start()
+        {
+            setState(typeof(MenuState)).Forget();
+        }
+
+        private async void _onRequestTransition(Type nextState)
+        {
+            await _currentState.Exit();
+
+            _currentState = states[nextState];
+
+            await _currentState.Enter();
         }
     }
 }
