@@ -46,48 +46,12 @@ MonoBehaviour:
     m_Localized: delete
     m_Metadata:
       m_Items: []
-  - m_Id: 1680801798
-    m_Localized: delete hero
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801799
-    m_Localized: settings
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801800
-    m_Localized: join
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801801
-    m_Localized: join to game
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801802
-    m_Localized: host
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801803
-    m_Localized: server
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801804
-    m_Localized: copy
-    m_Metadata:
-      m_Items: []
   - m_Id: 1680801805
     m_Localized: yes
     m_Metadata:
       m_Items: []
   - m_Id: 1680801806
     m_Localized: no
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801807
-    m_Localized: user ip
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801808
-    m_Localized: new hero
     m_Metadata:
       m_Items: []
   - m_Id: 1680801809
@@ -98,32 +62,8 @@ MonoBehaviour:
     m_Localized: enter text...
     m_Metadata:
       m_Items: []
-  - m_Id: 1680801811
-    m_Localized: "do you realy want \ndelete this hero?"
-    m_Metadata:
-      m_Items: []
   - m_Id: 1680801812
-    m_Localized: "Delete '{0}'?"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801813
-    m_Localized: "IP: {0}"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801814
-    m_Localized: "your ip: {0}"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801815
-    m_Localized: ip...
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801816
-    m_Localized: English
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801817
-    m_Localized: Russian
+    m_Localized: Delete '{0}'?
     m_Metadata:
       m_Items: []
   references:

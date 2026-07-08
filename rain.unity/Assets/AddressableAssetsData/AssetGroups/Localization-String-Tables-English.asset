@@ -23,18 +23,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-en
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8ba8147b40420c943bbc5348cd5caf0a
-    m_Address: CoreGame_en
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: bfb1e9eaf30043147a42a43fb24934d6
-    m_Address: Cards_en
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en
-    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 06e48da8500b97b49adf29048f38b34c, type: 2}
   m_SchemaSet:

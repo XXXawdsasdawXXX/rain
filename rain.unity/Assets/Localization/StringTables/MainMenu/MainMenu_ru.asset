@@ -19,111 +19,51 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 1651441664
-    m_Localized: игра
+    m_Localized: "\u0438\u0433\u0440\u0430"
     m_Metadata:
       m_Items: []
   - m_Id: 1680801792
-    m_Localized: герой
+    m_Localized: "\u0433\u0435\u0440\u043E\u0439"
     m_Metadata:
       m_Items: []
   - m_Id: 1680801793
-    m_Localized: продолжить
+    m_Localized: "\u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C"
     m_Metadata:
       m_Items: []
   - m_Id: 1680801794
-    m_Localized: новый
+    m_Localized: "\u043D\u043E\u0432\u044B\u0439"
     m_Metadata:
       m_Items: []
   - m_Id: 1680801795
-    m_Localized: новая игра
+    m_Localized: "\u043D\u043E\u0432\u0430\u044F \u0438\u0433\u0440\u0430"
     m_Metadata:
       m_Items: []
   - m_Id: 1680801796
-    m_Localized: создать
+    m_Localized: "\u0441\u043E\u0437\u0434\u0430\u0442\u044C"
     m_Metadata:
       m_Items: []
   - m_Id: 1680801797
-    m_Localized: удалить
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801798
-    m_Localized: удалить героя
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801799
-    m_Localized: настройки
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801800
-    m_Localized: подключиться
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801801
-    m_Localized: подключиться к игре
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801802
-    m_Localized: хост
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801803
-    m_Localized: сервер
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801804
-    m_Localized: копировать
+    m_Localized: "\u0443\u0434\u0430\u043B\u0438\u0442\u044C"
     m_Metadata:
       m_Items: []
   - m_Id: 1680801805
-    m_Localized: да
+    m_Localized: "\u0434\u0430"
     m_Metadata:
       m_Items: []
   - m_Id: 1680801806
-    m_Localized: нет
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801807
-    m_Localized: ваш ip
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801808
-    m_Localized: новый герой
+    m_Localized: "\u043D\u0435\u0442"
     m_Metadata:
       m_Items: []
   - m_Id: 1680801809
-    m_Localized: название игры..
+    m_Localized: "\u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0438\u0433\u0440\u044B.."
     m_Metadata:
       m_Items: []
   - m_Id: 1680801810
-    m_Localized: введите текст...
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801811
-    m_Localized: "вы действительно хотите\nудалить этого героя?"
+    m_Localized: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u0442\u0435\u043A\u0441\u0442..."
     m_Metadata:
       m_Items: []
   - m_Id: 1680801812
-    m_Localized: "Удалить «{0}»?"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801813
-    m_Localized: "IP: {0}"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801814
-    m_Localized: "ваш ip: {0}"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801815
-    m_Localized: ip...
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801816
-    m_Localized: English
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801817
-    m_Localized: Русский
+    m_Localized: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C \xAB{0}\xBB?"
     m_Metadata:
       m_Items: []
   references:

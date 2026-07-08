@@ -43,48 +43,12 @@ MonoBehaviour:
     m_Key: ui.main_menu.button.delete
     m_Metadata:
       m_Items: []
-  - m_Id: 1680801798
-    m_Key: ui.main_menu.button.delete_hero
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801799
-    m_Key: ui.main_menu.button.settings
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801800
-    m_Key: ui.main_menu.button.join
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801801
-    m_Key: ui.main_menu.button.join_to_game
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801802
-    m_Key: ui.main_menu.button.host
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801803
-    m_Key: ui.main_menu.button.server
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801804
-    m_Key: ui.main_menu.button.copy
-    m_Metadata:
-      m_Items: []
   - m_Id: 1680801805
     m_Key: ui.main_menu.button.yes
     m_Metadata:
       m_Items: []
   - m_Id: 1680801806
     m_Key: ui.main_menu.button.no
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801807
-    m_Key: ui.main_menu.label.user_ip
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801808
-    m_Key: ui.main_menu.label.new_hero
     m_Metadata:
       m_Items: []
   - m_Id: 1680801809
@@ -95,42 +59,18 @@ MonoBehaviour:
     m_Key: ui.main_menu.placeholder.enter_text
     m_Metadata:
       m_Items: []
-  - m_Id: 1680801811
-    m_Key: ui.main_menu.delete_hero.confirm
-    m_Metadata:
-      m_Items: []
   - m_Id: 1680801812
     m_Key: ui.main_menu.delete.confirm
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801813
-    m_Key: ui.main_menu.ip_label
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801814
-    m_Key: ui.main_menu.connection.your_ip
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801815
-    m_Key: ui.main_menu.placeholder.ip
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801816
-    m_Key: ui.common.locale.en
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1680801817
-    m_Key: ui.common.locale.ru
     m_Metadata:
       m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
-    rid: 317526009535791200
+    rid: 7038317172825784344
   references:
     version: 2
     RefIds:
-    - rid: 317526009535791200
+    - rid: 7038317172825784344
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
       data:
-        m_CustomEpoch: 1781123279731
+        m_CustomEpoch: 1783524560143

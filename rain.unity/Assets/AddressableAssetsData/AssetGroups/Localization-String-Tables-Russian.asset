@@ -17,20 +17,8 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 519973cce1c32774bb3847edb467a226
   m_SerializeEntries:
-  - m_GUID: 64cd7a27f8a275e4781103f134fb8dec
-    m_Address: CoreGame_ru
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-ru
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6ef666793b88b754eb74080c01ddc8e8
     m_Address: MainMenu_ru
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-ru
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: dede6a79ed30c0b4ab6dc756a7ef0101
-    m_Address: Cards_ru
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ru

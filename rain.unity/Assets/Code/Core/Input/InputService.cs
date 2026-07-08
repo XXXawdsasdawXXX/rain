@@ -1,5 +1,5 @@
 ﻿using System;
-using Essential.Common.Data;
+using Essential.Data;
 using UnityEngine;
 using UnityEngine.Scripting;
 using VContainer.Unity;

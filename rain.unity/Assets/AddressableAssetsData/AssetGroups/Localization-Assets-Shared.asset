@@ -22,16 +22,6 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6279e5137471426408a5c7aa76bfbf87
-    m_Address: Assets/Localization/StringTables/CoreGame/CoreGame Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9be185836fc09864aa7d1cc8bdf8a47c
-    m_Address: Assets/Localization/StringTables/Cards/Cards Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 06e48da8500b97b49adf29048f38b34c, type: 2}
   m_SchemaSet:
