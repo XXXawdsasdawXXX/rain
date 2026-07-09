@@ -15,6 +15,7 @@ namespace Code.Pathfinding
             builder.RegisterInstance(_weightTilesConfiguration).AsSelf();
             builder.RegisterInstance(_pathfindingTilemapView).AsSelf();
 
+            builder.Register<PathfindingCollisionChecker>(Lifetime.Singleton);
             builder.Register<PathfindingService>(Lifetime.Singleton).AsImplementedInterfaces();
         }
     }

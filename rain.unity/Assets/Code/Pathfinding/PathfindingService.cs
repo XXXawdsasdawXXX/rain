@@ -8,7 +8,7 @@ namespace Code.Pathfinding
     public interface IPathfindingService
     {
         bool HasActivePath { get; }
-        void FindPath(Vector3 startPosition, Vector3 endPosition);
+        void FindPath(Vector3 startPosition, Vector3 endPosition, PathfindingAgentSettings settings);
         Vector3 MoveToNextWorldPosition();
     }
 
@@ -21,30 +21,40 @@ namespace Code.Pathfinding
         private readonly List<Vector3Int> _path = new();
 
         private readonly PathfindingTilemapView _tilemap;
+        private readonly PathfindingCollisionChecker _collisionChecker;
 
+        private PathfindingAgentSettings _agentSettings;
         private Vector3Int _endCellPosition;
         private int _pathIndex;
 
         public bool HasActivePath { get; private set; }
 
-        public PathfindingService(PathfindingTilemapView tilemap)
+        public PathfindingService(PathfindingTilemapView tilemap, PathfindingCollisionChecker collisionChecker)
         {
             _tilemap = tilemap;
+            _collisionChecker = collisionChecker;
         }
 
-        public void FindPath(Vector3 startPosition, Vector3 endPosition)
+        public void FindPath(Vector3 startPosition, Vector3 endPosition, PathfindingAgentSettings settings)
         {
             _path.Clear();
             _pathIndex = 0;
             HasActivePath = false;
+            _agentSettings = settings;
 
             Vector3Int startCell = _tilemap.WordToCell(startPosition);
             _endCellPosition = _tilemap.WordToCell(endPosition);
 
-            if (!_tilemap.GetCellData(startCell).IsWalkable)
+            if (!_isWalkable(startCell))
             {
                 Log.Info(this,
                     $"[FindPath] start cell {startCell} is not walkable (baked={_tilemap.HasBakedCell(startCell)})");
+                return;
+            }
+
+            if (!_isWalkable(_endCellPosition))
+            {
+                Log.Info(this, $"[FindPath] end cell {_endCellPosition} is not walkable");
                 return;
             }
 
@@ -76,12 +86,41 @@ namespace Code.Pathfinding
                 return _tilemap.CellToWorlds(cell);
             }
 
-            Vector3Int nextCell = _path[_pathIndex++];
+            Vector3Int nextCell = _path[_pathIndex];
+
+            if (_collisionChecker.IsBlocked(nextCell, _agentSettings))
+            {
+                Vector3Int currentCell = _path[_pathIndex - 1];
+                if (!_tryRepath(currentCell))
+                {
+                    Log.Info(this, "[MoveToNextWorldPosition] blocked and repath failed");
+                    HasActivePath = false;
+                    return _tilemap.CellToWorlds(currentCell);
+                }
+
+                nextCell = _path[_pathIndex];
+            }
+
+            _pathIndex++;
             HasActivePath = _pathIndex < _path.Count;
 
             Log.Info(this, $"[MoveToNextWorldPosition] step to {nextCell}");
 
             return _tilemap.CellToWorlds(nextCell);
+        }
+
+        private bool _tryRepath(Vector3Int fromCell)
+        {
+            PathfindingNode endNode = _runAStar(fromCell);
+            if (endNode == null)
+            {
+                return false;
+            }
+
+            _reconstructPath(endNode);
+            _pathIndex = 1;
+            HasActivePath = _path.Count > 1;
+            return HasActivePath;
         }
 
         private PathfindingNode _runAStar(Vector3Int startCell)
@@ -173,13 +212,23 @@ namespace Code.Pathfinding
             {
                 Vector3Int neighbor = current + offset;
 
-                if (!_tilemap.GetCellData(neighbor).IsWalkable)
+                if (!_isWalkable(neighbor))
                 {
                     continue;
                 }
 
                 _neighborCells.Add(neighbor);
             }
+        }
+
+        private bool _isWalkable(Vector3Int cell)
+        {
+            if (!_tilemap.GetCellData(cell).IsWalkable)
+            {
+                return false;
+            }
+
+            return !_collisionChecker.IsBlocked(cell, _agentSettings);
         }
 
         private PathfindingNode _pickLowestFNode()

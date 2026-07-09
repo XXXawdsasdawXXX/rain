@@ -22,7 +22,3 @@ MonoBehaviour:
     Weight: 5
     Tiles:
     - {fileID: 11400000, guid: 6e49162a5e1cf1243a3f84b24ee4fec7, type: 2}
-  - IsWalkable: 0
-    Weight: 50
-    Tiles:
-    - {fileID: 11400000, guid: 5289640a1124661468655ac369355ffe, type: 2}
