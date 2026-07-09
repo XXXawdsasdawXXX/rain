@@ -122,7 +122,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &1202527367
+--- !u!1 &764679758
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,29 +130,67 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1202527369}
+  - component: {fileID: 764679760}
+  - component: {fileID: 764679759}
+  - component: {fileID: 764679761}
   m_Layer: 0
-  m_Name: A*
+  m_Name: scope-game
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1202527369
+--- !u!114 &764679759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764679758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7201cef4c24b40e4bfc39afd67ff8b6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentReference:
+    TypeName: Code.Game.DI.ProjectScope
+  autoRun: 1
+  autoInjectGameObjects:
+  - {fileID: 1580134832}
+  - {fileID: 1499499134}
+  _weightTilesConfiguration: {fileID: 11400000, guid: 14a52feec3ca18941b01ec2411b4feab, type: 2}
+  _pathfindingTilemapView: {fileID: 1580134836}
+--- !u!4 &764679760
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1202527367}
+  m_GameObject: {fileID: 764679758}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &764679761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764679758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65245bae51714530af5950736cfc3453, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentReference:
+    TypeName: Code.Game.DI.ProjectScope
+  autoRun: 1
+  autoInjectGameObjects: []
 --- !u!1 &1216302803
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,6 +366,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1499499136}
   - component: {fileID: 1499499135}
+  - component: {fileID: 1499499137}
   m_Layer: 0
   m_Name: man_0
   m_TagString: Untagged
@@ -373,8 +412,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1179486799
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -1044668259, guid: 6a0dd33c6e6180d4799b7688ed63fd66, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -402,6 +441,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1499499137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499499134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 921dfb54971a41968d071d5f059adf81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _character: {fileID: 1499499136}
 --- !u!1 &1577160703
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,10 +593,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1580134833}
+  - component: {fileID: 1580134836}
   - component: {fileID: 1580134835}
   - component: {fileID: 1580134834}
   m_Layer: 0
-  m_Name: Tilemap
+  m_Name: Tilemap-base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1460,11 +1513,24 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1580134836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580134832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e336415d51164ff889e0832ccaa967ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tilemap: {fileID: 1580134835}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1202527369}
+  - {fileID: 764679760}
   - {fileID: 1301584170}
   - {fileID: 1577160706}
   - {fileID: 1499499136}

@@ -6,16 +6,30 @@ using VContainer.Unity;
 
 namespace Core.Input
 {
-    [Preserve]
-    public sealed class InputService : ITickable, IDisposable
+    public interface IInputService
     {
         public event Action<EInputAction> ActionStarted;
         public event Action<EInputAction> ActionEnded;
+        public Vector3 MouseWorldPosition { get; }
+    }
 
-        public ReactiveProperty<Vector2> Direction { get; } = new(Vector2.zero);
-        public Vector3 MousePosition { get; private set; }
+    [Preserve]
+    public sealed class InputService : IInputService, ITickable, IDisposable
+    {
+        public event Action<EInputAction> ActionStarted;
+        public event Action<EInputAction> ActionEnded;
+        public Vector3 MouseWorldPosition { get; set; }
+        
+        private readonly ReactiveProperty<Vector2> _direction = new(Vector2.zero);
+
+        private readonly Camera _camera;
 
         
+        public InputService(CameraView cameraView)
+        {
+            _camera = cameraView.Camera;
+        }
+
         private readonly InputActionKey[] _inputActionKeys = 
         {
             new()
@@ -40,7 +54,6 @@ namespace Core.Input
             }
         };
         
-
         private static bool _wasActionPressed(InputActionKey inputActionKey)
         {
             return inputActionKey.Key switch
@@ -63,12 +76,12 @@ namespace Core.Input
 
         public void Tick()
         {
-            Direction.Value = new Vector2(
+            _direction.Value = new Vector2(
                 UnityEngine.Input.GetAxisRaw("Horizontal"),
                 UnityEngine.Input.GetAxisRaw("Vertical"));
 
-            MousePosition = UnityEngine.Input.mousePosition;
-            
+            _updateMousePosition();
+
             foreach (InputActionKey inputActionKey in _inputActionKeys)
             {
                 if (_wasActionPressed(inputActionKey))
@@ -83,9 +96,18 @@ namespace Core.Input
             }
         }
 
+        private void _updateMousePosition()
+        {
+            Vector3 screenPos = UnityEngine.Input.mousePosition;
+            screenPos.z = Mathf.Abs(_camera.transform.position.z);
+            Vector3 worldPoint = _camera.ScreenToWorldPoint(screenPos);
+            worldPoint.z = 0f;
+            MouseWorldPosition = worldPoint;
+        }
+
         public void Dispose()
         {
-            Direction.Dispose();
+            _direction.Dispose();
         }
     }
 }

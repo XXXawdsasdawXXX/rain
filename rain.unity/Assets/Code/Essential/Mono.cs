@@ -5,19 +5,6 @@ namespace Essential
 {
     public abstract class Mono : MonoBehaviour, IEquatable<Mono>
     {
-        public static event Action<Mono> Started;
-        public static event Action<Mono> Destroyed;
-
-        protected virtual void Start()
-        {
-            Started?.Invoke(this);
-        }
-        
-        protected virtual void OnDestroy()
-        {
-            Destroyed?.Invoke(this);
-        }
-
         public bool Equals(Mono other)
         {
             return other != null && other.gameObject.GetHashCode().Equals(GetHashCode());

@@ -12,10 +12,14 @@ namespace Code.Game.DI
 {
     public class ProjectScope : LifetimeScope
     {
+        [SerializeField] private CameraView _cameraView;
         [SerializeField] private SceneLoadingCurtain _loadingCurtain;
 
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.RegisterInstance<ISceneCurtain>(_loadingCurtain);
+            builder.RegisterInstance(_cameraView);
+            
             //save
             builder.Register<ISaveProcessor, FileSaveProcessor>(Lifetime.Singleton);
             builder.Register<SettingsSaveRepository>(Lifetime.Singleton);
@@ -25,7 +29,6 @@ namespace Code.Game.DI
             builder.Register<InputService>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<AudioService>(Lifetime.Singleton).AsImplementedInterfaces();
 
-            builder.RegisterInstance<ISceneCurtain>(_loadingCurtain);
             
             builder.RegisterEntryPoint<GameStateMachine>().AsSelf();
         }

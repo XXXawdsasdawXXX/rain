@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a92d3b912e1c407a9c2f3fb4c6c61457, type: 3}
+  m_Name: Configuration-Weight_Tiles
+  m_EditorClassIdentifier: 
+  <LockTiles>k__BackingField:
+    IsWalkable: 0
+    Weight: 100
+    Tiles:
+    - {fileID: 11400000, guid: 5289640a1124661468655ac369355ffe, type: 2}
+  <TilesData>k__BackingField:
+  - IsWalkable: 1
+    Weight: 5
+    Tiles:
+    - {fileID: 11400000, guid: 6e49162a5e1cf1243a3f84b24ee4fec7, type: 2}
+  - IsWalkable: 0
+    Weight: 50
+    Tiles:
+    - {fileID: 11400000, guid: 5289640a1124661468655ac369355ffe, type: 2}
