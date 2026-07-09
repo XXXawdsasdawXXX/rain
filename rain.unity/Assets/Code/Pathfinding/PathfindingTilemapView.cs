@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using Essential;
+using TriInspector;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using VContainer;
@@ -11,10 +13,23 @@ namespace Code.Pathfinding
     {
         [SerializeField] private Tilemap _tilemap;
 
+        [SerializeField, Group("gizmo"), GUIColor(0.75f, 0.75f, 0.3f, 0.9f)]
+        private bool _isDrawGizmo;
+        
+        [SerializeField, Group("gizmo"), GUIColor(0.75f, 0.75f, 0.3f, 0.9f)]
+        private Color _gizmoColor = new Color(1, 1, 1, 0.5f);
+
+        [SerializeField, Group("gizmo"), GUIColor(0.75f, 0.75f, 0.3f, 0.9f)]
+        private Font _font;
+        
+        [SerializeField, Group("gizmo"), GUIColor(0.75f, 0.75f, 0.3f, 0.9f)]
+        private int _fontSize = 20;
+
+        
         private WeightTilesConfiguration _weightTiles;
-
         private Dictionary<Vector3Int, TileData> _mapTiles;
-
+        
+        
         [Inject]
         public void Construct(WeightTilesConfiguration weightTiles)
         {
@@ -109,5 +124,40 @@ namespace Code.Pathfinding
 
             return _weightTiles.LockTiles;
         }
+
+
+#if UNITY_EDITOR
+        private void OnDrawGizmos()
+        {
+            if (!_isDrawGizmo || _tilemap == null)
+            {
+                return;
+            }
+            
+            BoundsInt bounds = _tilemap.cellBounds;
+            Vector3 samplePosition = _tilemap.GetCellCenterWorld(new Vector3Int(bounds.xMin, bounds.yMin, bounds.z));
+            float handleSize = Mathf.Max(HandleUtility.GetHandleSize(samplePosition), 0.0001f);
+            float cellSize = Mathf.Max(_tilemap.cellSize.x, _tilemap.cellSize.y);
+            int fontSize = Mathf.Max(1, Mathf.RoundToInt(_fontSize * cellSize / handleSize));
+
+            GUIStyle labelStyle = new()
+            {
+                alignment = TextAnchor.MiddleCenter,
+                font = _font,
+                fontSize = fontSize,
+                fontStyle = FontStyle.Italic,
+                normal = { textColor = _gizmoColor },
+            };
+
+            for (int x = bounds.xMin; x < bounds.xMax; x++)
+            {
+                for (int y = bounds.yMin; y < bounds.yMax; y++)
+                {
+                    Vector3Int cell = new(x, y, bounds.z);
+                    Handles.Label(CellToWorlds(cell), cell.ToString(), labelStyle);
+                }
+            }
+        }
+#endif
     }
 }
