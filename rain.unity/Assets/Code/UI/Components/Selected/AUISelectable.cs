@@ -13,7 +13,8 @@ namespace Code.UI.Components.Selected
         public event Action Deselected;
         public event Action Clicked;
 
-        
+        public bool IsInteractable { get; private set; }
+
         [field: Group("Selectable"), GUIColor(0.1f, 0.85f, 0.55f, 0.9f)]
         [field: SerializeField] protected GameObject body { get; private set; }
         [field: Group("Selectable"), GUIColor(0.1f, 0.85f, 0.55f, 0.9f)]
@@ -57,8 +58,11 @@ namespace Code.UI.Components.Selected
             
             IsSelected = false;
         }
-        
-        public abstract void SetInteractable(bool isInteractable);
+
+        public virtual void SetInteractable(bool isInteractable)
+        {
+            IsInteractable = isInteractable;
+        }
         
         public void OnPointerEnter(PointerEventData eventData)
         {

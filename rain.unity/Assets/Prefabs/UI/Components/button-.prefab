@@ -94,3 +94,5 @@ MonoBehaviour:
   _hasAnimation: 0
   _selectableAnimation: {fileID: 0}
   _image: {fileID: 2896643321686859966}
+  _defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  _disableColor: {r: 0.7, g: 0.7, b: 0.7, a: 0.5019608}

@@ -34,6 +34,7 @@ namespace Code.UI.Components
         public void SetLocalizationArguments(params object[] args)
         {
             _args = args;
+            _updateLocalizationText();
         }
 
         private void _onSelectedLocalChanged(Locale _)

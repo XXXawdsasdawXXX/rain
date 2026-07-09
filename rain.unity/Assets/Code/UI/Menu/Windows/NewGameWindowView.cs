@@ -15,8 +15,7 @@ namespace Code.UI.Menu
     {
         private readonly GameSaveRepository _gameSave;
 
-        public NewGameWindowController(NewGameWindowView view,
-            GameSaveRepository gameSave) : base(view)
+        public NewGameWindowController(NewGameWindowView view, GameSaveRepository gameSave) : base(view)
         {
             _gameSave = gameSave;
         }
@@ -33,6 +32,8 @@ namespace Code.UI.Menu
 
         private void _onClickedCreate()
         {
+            view.Close();
+            
             _gameSave.AddNewGame(new HeroModel(view.InputFiled_HeroName.Value), new WorldModel());
         }
     }

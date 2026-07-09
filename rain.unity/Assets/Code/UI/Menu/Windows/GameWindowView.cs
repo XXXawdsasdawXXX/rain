@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Code.Game.Save;
 using Code.Game.StateMachine;
 using Code.Game.StateMachine.States;
 using Code.UI.Components;
 using Code.UI.Components.Window;
 using UnityEngine;
-using VContainer.Unity;
 
 namespace Code.UI.Menu
 {
@@ -23,7 +23,7 @@ namespace Code.UI.Menu
         private readonly GameStateMachine _stateMachine;
         private readonly MenuNavigator _navigator;
 
-
+        
         public GameWindowController(GameWindowView view, 
             GameSaveRepository gamesSave, 
             GameStateMachine stateMachine,
@@ -39,12 +39,13 @@ namespace Code.UI.Menu
             base.Start();
             
             _updateGamesDropDown();
+            _updateButtonsState();
         }
 
         protected override void subscribe()
         {
-            _gamesSave.Changed += _updateGamesDropDown;
-            
+            _gamesSave.Changed += _updateView;
+
             view.Button_New.Clicked += _onClickedNewGame;
             view.Button_Delete.Clicked += _onClickedDeleteGame;
             view.Button_Play.Clicked += _onClickedPlay;
@@ -53,8 +54,12 @@ namespace Code.UI.Menu
 
         protected override void unSubscribe()
         {
-            view.Button_New.Clicked += _onClickedNewGame;
+            _gamesSave.Changed -= _updateView;
+
+            view.Button_New.Clicked -= _onClickedNewGame;
+            view.Button_Delete.Clicked -= _onClickedDeleteGame;
             view.Button_Play.Clicked -= _onClickedPlay;
+            view.DropDown_Games.Changed -= _onChangedSelectedGame;
         }
 
         private void _onClickedNewGame()
@@ -64,10 +69,7 @@ namespace Code.UI.Menu
 
         private void _onClickedDeleteGame()
         {
-            if (_gamesSave.Data.LastGameIndex >= 0)
-            {
-                _navigator.OpenDeleteWindow(_gamesSave.Data.LastGameIndex);
-            }
+            _navigator.OpenDeleteWindow();
         }
 
         private void _onClickedPlay()
@@ -77,9 +79,18 @@ namespace Code.UI.Menu
 
         private void _onChangedSelectedGame(int index)
         {
-            _gamesSave.SetLastGameIndexWithoutNotify(index);
+            if (view.DropDown_Games.IsInteractable)
+            {
+                _gamesSave.SetLastGameIndex(index);
+            }
         }
 
+        private void _updateView()
+        {
+            _updateButtonsState();
+            _updateGamesDropDown();
+        }
+        
         private void _updateGamesDropDown()
         {
             List<string> options = new();
@@ -90,21 +101,25 @@ namespace Code.UI.Menu
                 {
                     options.Add($"{gameModel.Hero.Name}");
                 }
-                
-                view.DropDown_Games.SetInteractable(true);
             }
             else
             {
                 options.Add("no games");
-                view.DropDown_Games.SetInteractable(false);
+                view.DropDown_Games.SetCurrentWithoutNotify(0);
                 return;
             }
 
             view.DropDown_Games.SetOptions(options);
-            if (_gamesSave.Data.LastGameIndex >= 0)
-            {
-                view.DropDown_Games.SetCurrentWithoutNotify(_gamesSave.Data.LastGameIndex);
-            }
+            view.DropDown_Games.SetCurrentWithoutNotify(Math.Max(0, _gamesSave.Data.LastGameIndex));
+            view.DropDown_Games.SetInteractable(_gamesSave.Data.LastGameIndex >= 0);
+        }
+
+        private void _updateButtonsState()
+        {
+            bool isHasSavedGames = _gamesSave.Data.Games.Count > 0;
+            
+            view.Button_Delete.SetInteractable(isHasSavedGames);
+            view.Button_Play.SetInteractable(isHasSavedGames);
         }
     }
 }

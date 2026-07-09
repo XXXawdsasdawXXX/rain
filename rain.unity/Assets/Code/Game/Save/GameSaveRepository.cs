@@ -19,14 +19,14 @@ namespace Code.Game.Save
         
         public GameSaveRepository(ISaveProcessor processor) : base(processor) { }
 
-        public bool GetLastGame(out GameModel game)
+        public bool TryGetLastGame(out GameModel game)
         {
             if (Data.LastGameIndex < 0 || Data.LastGameIndex >= Data.Games.Count)
             {
                 Data.LastGameIndex = -1;
             }
             
-            if (Data.Games.Count > 0)
+            if (Data.Games.Count > 0 && Data.LastGameIndex < 0)
             {
                 Data.LastGameIndex = _getLastGameIndex();
             }
@@ -56,7 +56,30 @@ namespace Code.Game.Save
             Changed?.Invoke();
         }
 
-        public void DeleteGame(int gameIndex)
+        public void DeleteLastGame()
+        {
+            _deleteGame(Data.LastGameIndex);
+        }
+
+        public void SetLastGameIndex(int index)
+        {
+            Data.LastGameIndex = index;
+            
+            WasChanged = true;
+            
+            Changed?.Invoke();
+        }
+
+        protected override Model createDefault()
+        {
+            return new Model
+            {
+                Games = new List<GameModel>(),
+                LastGameIndex = -1
+            };
+        }
+
+        private void _deleteGame(int gameIndex)
         {
             GameModel game = Data.Games[gameIndex];
 
@@ -82,13 +105,6 @@ namespace Code.Game.Save
             Changed?.Invoke();
         }
 
-        public void SetLastGameIndexWithoutNotify(int index)
-        {
-            Data.LastGameIndex = index;
-            
-            WasChanged = true;
-        }
-
         private int _getLastGameIndex()
         {
             TimeSpan currentTime = DateTime.UtcNow.TimeOfDay;
@@ -96,15 +112,6 @@ namespace Code.Game.Save
             return Data.Games.IndexOf(Data.Games
                 .OrderBy(w => Math.Abs((currentTime - w.ExitTime).Ticks))
                 .FirstOrDefault());
-        }
-
-        protected override Model createDefault()
-        {
-            return new Model
-            {
-                Games = new List<GameModel>(),
-                LastGameIndex = -1
-            };
         }
     }
 }

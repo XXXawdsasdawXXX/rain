@@ -15,18 +15,13 @@ namespace Code.UI.Menu
             _newGame = getView<NewGameWindowView>();
         }
 
-        public void OpenDeleteWindow(int contextGameIndex)
+        public void OpenDeleteWindow()
         {
             if (_newGame.IsOpened)
             {
                 _newGame.Close();
             }
-            
-            _deleteGame.SetNewModel(new DeleteGameWindowView.Model
-            {
-                ContextGameIndex = contextGameIndex
-            });
-            
+
             _deleteGame.Open();
         }
 

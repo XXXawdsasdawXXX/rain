@@ -9,7 +9,7 @@ namespace Code.UI.Menu
     {
         public struct Model
         {
-            public int ContextGameIndex;
+            public string ContextHeroName;
         }
 
         [field: SerializeField] public Model CurrenModel { get; private set; }
@@ -19,34 +19,56 @@ namespace Code.UI.Menu
         public void SetNewModel(Model model)
         {
             CurrenModel = model;
-            Text_Description.SetLocalizationArguments(CurrenModel.ContextGameIndex);
+            Text_Description.SetLocalizationArguments(CurrenModel.ContextHeroName);
         }
     }
 
     public sealed class DeleteGameWindowController : AUIWindowController<DeleteGameWindowView>
     {
         private readonly GameSaveRepository _gameSave;
-
-
-        public DeleteGameWindowController(DeleteGameWindowView view,
-            GameSaveRepository gameSave) : base(view)
+        
+        public DeleteGameWindowController(DeleteGameWindowView view, GameSaveRepository gameSave) : base(view)
         {
             _gameSave = gameSave;
         }
-        
+
+        public override void Start()
+        {
+            base.Start();
+            
+            _updateContext();
+        }
+
         protected override void subscribe()
         {
+            _gameSave.Changed += _updateContext;
+            
             view.Button_Delete.Clicked += _onClickedDelete;
         }
 
         protected override void unSubscribe()
         {
+            _gameSave.Changed -= _updateContext;
+            
             view.Button_Delete.Clicked -= _onClickedDelete;
         }
 
         private void _onClickedDelete()
         {
-            _gameSave.DeleteGame(view.CurrenModel.ContextGameIndex);
+            view.Close();
+          
+            _gameSave.DeleteLastGame();
+        }
+
+        private void _updateContext()
+        {
+            if (_gameSave.TryGetLastGame(out GameModel game))
+            {
+                view.SetNewModel(new DeleteGameWindowView.Model
+                {
+                    ContextHeroName = game.Hero.Name
+                });
+            }
         }
     }
 }

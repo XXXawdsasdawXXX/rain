@@ -14,12 +14,12 @@ namespace Code.UI.Components
         [field: SerializeField] public TMP_Dropdown DropDown { get; private set; }
 
         
-        public void Subscribe()
+        private void OnEnable()
         {
             DropDown.onValueChanged.AddListener(_onChanged);
         }
 
-        public void Unsubscribe()
+        private void OnDisable()
         {
             DropDown.onValueChanged.RemoveListener(_onChanged);
         }
@@ -68,6 +68,8 @@ namespace Code.UI.Components
         public override void SetInteractable(bool isInteractable)
         {
             DropDown.interactable = isInteractable;
+            
+            base.SetInteractable(isInteractable);
         }
 
         private void _onChanged(int id)

@@ -88,9 +88,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2896643321686859966, guid: dd5038582c3a25e4a957e7ec73124f71, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4507216344001493883, guid: dd5038582c3a25e4a957e7ec73124f71, type: 3}
       propertyPath: m_Name
-      value: button_text- Variant
+      value: button_text-
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
