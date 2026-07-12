@@ -5,7 +5,7 @@ using VContainer;
 
 namespace Code.Game.Characters
 {
-    public class PathMover : Essential.Mono
+    public class HeroMovement : Essential.Mono
     {
         [SerializeField] private Transform _character;
         [SerializeField] private Collider2D _collider;
@@ -16,6 +16,7 @@ namespace Code.Game.Characters
         private IInputService _input;
         private PathfindingAgentSettings _agentSettings;
 
+        
         [Inject]
         public void Construct(IPathfindingService pathfinding, IInputService input)
         {

@@ -12,7 +12,7 @@ namespace Code.Pathfinding
         Vector3 MoveToNextWorldPosition();
     }
 
-    public class PathfindingService : IPathfindingService
+    public sealed class PathfindingService : IPathfindingService
     {
         private readonly List<PathfindingNode> _openNodes = new();
         private readonly HashSet<Vector3Int> _closedCells = new();

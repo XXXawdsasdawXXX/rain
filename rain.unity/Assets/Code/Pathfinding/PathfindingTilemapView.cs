@@ -11,7 +11,7 @@ namespace Code.Pathfinding
 {
     public class PathfindingTilemapView : Essential.Mono, IStartable
     {
-        [SerializeField] private Tilemap _tilemap;
+        [SerializeField] private Tilemap _tilemapBase;
 
         [SerializeField, Group("gizmo"), GUIColor(0.75f, 0.75f, 0.3f, 0.9f)]
         private bool _isDrawGizmo;
@@ -57,12 +57,12 @@ namespace Code.Pathfinding
 
         public Vector3Int WordToCell(Vector3 worldPosition)
         {
-            return _tilemap.WorldToCell(worldPosition);
+            return _tilemapBase.WorldToCell(worldPosition);
         }
 
         public Vector3 CellToWorlds(Vector3Int cellPosition)
         {
-            return _tilemap.GetCellCenterWorld(cellPosition);
+            return _tilemapBase.GetCellCenterWorld(cellPosition);
         }
 
         public int GetTileWeight(Vector3Int cellPosition)
@@ -83,7 +83,7 @@ namespace Code.Pathfinding
         private void _bakeMapTiles()
         {
             _mapTiles = new Dictionary<Vector3Int, TileData>();
-            BoundsInt bounds = _tilemap.cellBounds;
+            BoundsInt bounds = _tilemapBase.cellBounds;
 
             for (int x = bounds.xMin; x < bounds.xMax; x++)
             {
@@ -91,12 +91,12 @@ namespace Code.Pathfinding
                 {
                     Vector3Int cell = new Vector3Int(x, y, bounds.z);
 
-                    if (!_tilemap.HasTile(cell))
+                    if (!_tilemapBase.HasTile(cell))
                     {
                         continue;
                     }
 
-                    TileBase tile = _tilemap.GetTile(cell);
+                    TileBase tile = _tilemapBase.GetTile(cell);
                     if (tile == null)
                     {
                         continue;
@@ -129,15 +129,15 @@ namespace Code.Pathfinding
 #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
-            if (!_isDrawGizmo || _tilemap == null)
+            if (!_isDrawGizmo || _tilemapBase == null)
             {
                 return;
             }
             
-            BoundsInt bounds = _tilemap.cellBounds;
-            Vector3 samplePosition = _tilemap.GetCellCenterWorld(new Vector3Int(bounds.xMin, bounds.yMin, bounds.z));
+            BoundsInt bounds = _tilemapBase.cellBounds;
+            Vector3 samplePosition = _tilemapBase.GetCellCenterWorld(new Vector3Int(bounds.xMin, bounds.yMin, bounds.z));
             float handleSize = Mathf.Max(HandleUtility.GetHandleSize(samplePosition), 0.0001f);
-            float cellSize = Mathf.Max(_tilemap.cellSize.x, _tilemap.cellSize.y);
+            float cellSize = Mathf.Max(_tilemapBase.cellSize.x, _tilemapBase.cellSize.y);
             int fontSize = Mathf.Max(1, Mathf.RoundToInt(_fontSize * cellSize / handleSize));
 
             GUIStyle labelStyle = new()

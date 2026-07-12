@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5788100120704890907c5f545ae45749, type: 3}
-  m_Name: Configurations
+  m_Script: {fileID: 11500000, guid: c19e79a5da0d4f12afd4c9aab7d3d6fa, type: 3}
+  m_Name: Library_Armory
   m_EditorClassIdentifier: 
-  <Configs>k__BackingField:
-  - {fileID: 11400000, guid: c51f7553ba57eb7499f70d937f79ec34, type: 2}
-  - {fileID: 11400000, guid: c5c47a9d9442c364c887818626fa8a87, type: 2}
+  <ArmorySetLibrary>k__BackingField:
+    _assets: []
