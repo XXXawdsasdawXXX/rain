@@ -1,50 +1,36 @@
 ﻿using TriInspector;
+using UnityEditor;
 using UnityEngine;
 
-namespace Code.Game.Characters
+namespace Code.Game.Characters.Armor
 {
     [CreateAssetMenu(fileName = "Model_ArmorSet", menuName = "Game/Model/ArmorSet")]
     public class ArmorSetModel : ScriptableObject
     {
-        [field: SerializeField] public int ID { get; private set; }
+        [field: SerializeField] public int SetIndex { get; private set; }
 
-        [field:  SerializeField] public ArmorPieceModel[] Pieces =
+        [field: SerializeField]
+        public ArmorPieceModel[] Pieces { get; private set; } = new ArmorPieceModel[]
         {
-            new(EBodyPart.Head),
-            new(EBodyPart.Torso),
-            new(EBodyPart.LegLeft),
-            new(EBodyPart.LegRight),
-            new(EBodyPart.HandLeft),
-            new(EBodyPart.HandRight),
-            new(EBodyPart.ShoulderLeft),
-            new(EBodyPart.ShoulderRight),
-            new(EBodyPart.PantsLeft),
-            new(EBodyPart.PantsRight),
+            new ArmorPieceModel(EBodyPart.Mask, new Sprite[1]),
+            new ArmorPieceModel(EBodyPart.Head, new Sprite[1]),
+            new ArmorPieceModel(EBodyPart.Torso, new Sprite[3]),// 0 - main body | 1 - left hand | 2 - right hand
+            new ArmorPieceModel(EBodyPart.Pants, new Sprite[2]),// 0 - left | 1 - right
+            new ArmorPieceModel(EBodyPart.Shoes, new Sprite[2]),// 0 - left | 1 - right
         };
 
-        public ArmorPieceModel GetPiece(EBodyPart bodyPart)
-        {
-            foreach (ArmorPieceModel piece in Pieces)
-            {
-                if (piece.MainSlot == bodyPart)
-                {
-                    return piece;
-                }
-            }
-
-            Debug.LogError($"Armor has not piece of {bodyPart}");
-
-            return null;
-        }
-
+        
 #if UNITY_EDITOR
+
         [Button]
-        public void UpdatePiecesSetID()
+        private void _updatePiecesID()
         {
-            foreach (ArmorPieceModel armorPieceModel in Pieces)
+            foreach (ArmorPieceModel pieceModel in Pieces)
             {
-                armorPieceModel.SetId(ID);
+                pieceModel.UpdateID(SetIndex);
             }
+            
+            EditorUtility.SetDirty(this);
         }
 #endif
     }

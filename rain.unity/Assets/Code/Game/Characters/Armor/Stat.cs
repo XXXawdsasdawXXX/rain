@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Code.Game.Characters
+namespace Code.Game.Characters.Armor
 {
     [Serializable]
     public class Stat

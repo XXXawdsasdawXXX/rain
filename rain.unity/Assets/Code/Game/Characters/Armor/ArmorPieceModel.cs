@@ -1,42 +1,35 @@
 ﻿using System;
+using Essential;
 using TriInspector;
 using UnityEngine;
 
-namespace Code.Game.Characters
+namespace Code.Game.Characters.Armor
 {
     [Serializable]
     public class ArmorPieceModel
     {
-        [Serializable]
-        public class CompletePiecesModel
-        {
-            [field: SerializeField] public EBodyPart Slot { get; private set; }
-            [field: SerializeField] public bool IsSkin { get; private set; }
-            [field: SerializeField, PreviewObject] public Sprite ViewSprites { get; private set; }
-            [field: SerializeField] public Vector3 Offset { get; private set; }
-            [field: SerializeField] public Vector3 RotationEuler { get; private set; }
-        }
 
-        [field: SerializeField] public int ArmorSetID { get; private set; }
-        [field: SerializeField] public EBodyPart MainSlot { get; private set; } // enum, указывающий часть тела
+        [field: SerializeField, GUIColor(0.4f, 0.8f, 0.5f, 0.9f)] public EBodyPart Part { get; private set; }
+        [field: SerializeField] public string ID { get; private set; } 
+        [field: SerializeField] public Sprite[] Views { get; private set; }
+
         [field: SerializeField] public Stat Stat { get; private set; }
 
-        [field: SerializeField] public CompletePiecesModel[] CompleteViewPieces { get; private set; }
-
-        public ArmorPieceModel(EBodyPart bodyPart)
+        public ArmorPieceModel(EBodyPart part, Sprite[] views)
         {
-            MainSlot = bodyPart;
-        }
-        
-        public ArmorPieceModel(EBodyPart bodyPart, int armorSetID)
-        {
-            MainSlot = bodyPart;
-            ArmorSetID = armorSetID;
+            Part = part;
+            Views = views;
         }
 
-        public void SetId(int armorSetID)
+
+        public void UpdateID(int setIndex)
         {
-            ArmorSetID = armorSetID;
+            ID = $"{setIndex}_{(int)Part}";
+        }                                                                                                                                                                                            
+
+        public string GetLocalizationKey()
+        {
+            return $"{Part}_{ID}";
         }
     }
 }

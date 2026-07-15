@@ -1,4 +1,4 @@
-﻿namespace Code.Game.Characters
+﻿namespace Code.Game.Characters.Armor
 {
     public enum EStatType
     {

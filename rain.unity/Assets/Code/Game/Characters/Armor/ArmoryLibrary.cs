@@ -2,7 +2,7 @@
 using Core.AssetManagement.Libraries;
 using UnityEngine;
 
-namespace Code.Game.Characters
+namespace Code.Game.Characters.Armor
 {
     [CreateAssetMenu(fileName = "Library_Armory", menuName = "Game/Library/Armory")]
     public class ArmoryLibrary : ScriptableObject
@@ -13,7 +13,7 @@ namespace Code.Game.Characters
             protected override bool ThisIs(ArmorSetModel value, int key)
             {
                 ArmorSetModel result = Get(key);
-                return result != null && result.ID == key;
+                return result != null && result.SetIndex == key;
             }
         }
 

@@ -103,7 +103,7 @@ TextureImporter:
         x: 0
         y: 0
         width: 64
-        height: 126
+        height: 128
       alignment: 9
       pivot: {x: 0.5, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -113,6 +113,27 @@ TextureImporter:
       bones: []
       spriteID: 5a696e93a99f6244db1bd467c2d635ce
       internalID: -616962250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: torso_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1042489439180c84187f4581b50d3345
+      internalID: 693934976
       vertices: []
       indices: 
       edges: []
@@ -129,6 +150,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       torso_0: -616962250
+      torso_1: 693934976
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
