@@ -9,14 +9,13 @@ namespace Code.Game.Characters.Armor
     {
         [field: SerializeField] public int SetIndex { get; private set; }
 
-        [field: SerializeField]
-        public ArmorPieceModel[] Pieces { get; private set; } = new ArmorPieceModel[]
+        [field: SerializeField] public ArmorPieceModel[] Pieces { get; private set; } = 
         {
-            new ArmorPieceModel(EBodyPart.Mask, new Sprite[1]),
-            new ArmorPieceModel(EBodyPart.Head, new Sprite[1]),
-            new ArmorPieceModel(EBodyPart.Torso, new Sprite[3]),// 0 - main body | 1 - left hand | 2 - right hand
-            new ArmorPieceModel(EBodyPart.Pants, new Sprite[2]),// 0 - left | 1 - right
-            new ArmorPieceModel(EBodyPart.Shoes, new Sprite[2]),// 0 - left | 1 - right
+            new(EBodyPart.Mask,  new Sprite[1]),
+            new(EBodyPart.Head,  new Sprite[1]),
+            new(EBodyPart.Torso, new Sprite[3]),// 0 - main body | 1 - left hand | 2 - right hand
+            new(EBodyPart.Pants, new Sprite[2]),// 0 - left | 1 - right
+            new(EBodyPart.Shoes, new Sprite[2]),// 0 - left | 1 - right
         };
 
         

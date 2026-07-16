@@ -7,7 +7,6 @@ namespace Code.Game.Characters
         [field: SerializeField] public Transform Body { get; private set; }
         [field: SerializeField] public Collider2D Collider { get; private set; }
         [field: SerializeField] public Animator Animator { get; private set; }
-        [field: Space]
         [field: SerializeField] public ArmorRender ArmorRender { get; private set; }
     }
 }

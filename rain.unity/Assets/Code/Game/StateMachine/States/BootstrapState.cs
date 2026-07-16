@@ -3,6 +3,7 @@ using System.Threading;
 using Code.Game.Save;
 using Core.Scenes;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Code.Game.StateMachine.States
@@ -26,6 +27,9 @@ namespace Code.Game.StateMachine.States
 
         public override async UniTask Enter()
         {
+            QualitySettings.vSyncCount = 0; //(0 = disabled, 1 = sync with monitor, 2 = half monitor rate)
+            Application.targetFrameRate = 60;
+            
             await SceneManager.LoadSceneAsync(EScene.Bootstrap.ToString());
             
             _cts = new CancellationTokenSource();

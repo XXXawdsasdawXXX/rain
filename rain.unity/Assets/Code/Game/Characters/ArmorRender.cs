@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Code.Game.Characters.Armor;
 using Essential;
 using TriInspector;
@@ -25,22 +23,21 @@ namespace Code.Game.Characters
     [Serializable]
     public class ArmorRender
     {
-        
         /*
-         Mask = 0,
+        Mask = 0,
         Head = 1,
         Torso = 2,
         Pants = 3,
         Shoes = 4,
         */
 
-        [SerializeField] private ArmorPieceRender[] _render = new[]
+        [SerializeField] private ArmorPieceRender[] _render = 
         {
-            new ArmorPieceRender(EBodyPart.Mask, new SpriteRenderer[1]),
-            new ArmorPieceRender(EBodyPart.Head, new SpriteRenderer[1]),
-            new ArmorPieceRender(EBodyPart.Torso, new SpriteRenderer[3]),// 0 - main body | 1 - left hand | 2 - right hand
-            new ArmorPieceRender(EBodyPart.Pants, new SpriteRenderer[2]),// 0 - left | 1 - right
-            new ArmorPieceRender(EBodyPart.Shoes, new SpriteRenderer[2]),// 0 - left | 1 - right
+            new(EBodyPart.Mask,  new SpriteRenderer[1]),
+            new(EBodyPart.Head,  new SpriteRenderer[1]),
+            new(EBodyPart.Torso, new SpriteRenderer[3]),// 0 - main body | 1 - left hand | 2 - right hand
+            new(EBodyPart.Pants, new SpriteRenderer[2]),// 0 - left | 1 - right
+            new(EBodyPart.Shoes, new SpriteRenderer[2]),// 0 - left | 1 - right
         };
 
         public void SetArmorPiece(ArmorPieceModel model)
