@@ -261,7 +261,7 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects:
   - {fileID: 1580134832}
-  - {fileID: 0}
+  - {fileID: 992942693}
   _weightTilesConfiguration: {fileID: 11400000, guid: 14a52feec3ca18941b01ec2411b4feab, type: 2}
   _pathfindingTilemapView: {fileID: 1580134836}
 --- !u!4 &764679760
@@ -307,6 +307,7 @@ GameObject:
   - component: {fileID: 992942696}
   - component: {fileID: 992942694}
   - component: {fileID: 992942697}
+  - component: {fileID: 992942698}
   m_Layer: 0
   m_Name: character
   m_TagString: Untagged
@@ -422,6 +423,24 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.14
+--- !u!114 &992942698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992942693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 921dfb54971a41968d071d5f059adf81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _character: {fileID: 992942695}
+  _collider: {fileID: 992942697}
+  _obstacleLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  _checkRadius: 0.2
 --- !u!1 &1198656602
 GameObject:
   m_ObjectHideFlags: 0
@@ -5297,7 +5316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tilemapBase: {fileID: 1580134835}
-  _isDrawGizmo: 0
+  _isDrawGizmo: 1
   _gizmoColor: {r: 1, g: 0.4575472, b: 0.009433985, a: 0.90588236}
   _font: {fileID: 12800000, guid: 9f218536734932f4b9d46b701e9c3911, type: 3}
   _fontSize: 13
