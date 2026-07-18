@@ -53,6 +53,7 @@ MonoBehaviour:
   autoInjectGameObjects: []
   _cameraView: {fileID: 9007369549573764478}
   _loadingCurtain: {fileID: 2068942984430038581}
+  _assetLibrary: {fileID: 11400000, guid: c51f7553ba57eb7499f70d937f79ec34, type: 2}
 --- !u!1 &1179588766596343043
 GameObject:
   m_ObjectHideFlags: 0

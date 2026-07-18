@@ -66,7 +66,7 @@ namespace Code.UI.Menu
             {
                 view.SetNewModel(new DeleteGameWindowView.Model
                 {
-                    ContextHeroName = game.Hero.Name
+                    ContextHeroName = game.hero.Name
                 });
             }
         }

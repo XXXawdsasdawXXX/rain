@@ -99,7 +99,7 @@ namespace Code.UI.Menu
             {
                 foreach (GameModel gameModel in _gamesSave.Data.Games)
                 {
-                    options.Add($"{gameModel.Hero.Name}");
+                    options.Add($"{gameModel.hero.Name}");
                 }
             }
             else

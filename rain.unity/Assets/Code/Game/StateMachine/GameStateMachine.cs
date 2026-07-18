@@ -4,10 +4,12 @@ using Code.Game.Save;
 using Code.Game.StateMachine.States;
 using Core.Scenes;
 using Cysharp.Threading.Tasks;
+using JetBrains.Annotations;
 using VContainer.Unity;
 
 namespace Code.Game.StateMachine
 {
+    [UsedImplicitly]
     public sealed class GameStateMachine : StateMachine<AState>, IStartable, IDisposable
     {
         public GameStateMachine(ISceneCurtain sceneCurtain, 

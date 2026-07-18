@@ -34,7 +34,7 @@ namespace Code.UI.Menu
         {
             view.Close();
             
-            _gameSave.AddNewGame(new HeroModel(view.InputFiled_HeroName.Value), new WorldModel());
+            _gameSave.AddNewGame(new CharacterModel(view.InputFiled_HeroName.Value), new WorldModel());
         }
     }
 }

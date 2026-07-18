@@ -7,7 +7,6 @@ namespace Core.Save
     public abstract class ASaveRepository<T>
     {
         public T Data { get; private set; }
-        
         public bool WasChanged { get; protected set; }
         
         private readonly ISaveProcessor _processor;

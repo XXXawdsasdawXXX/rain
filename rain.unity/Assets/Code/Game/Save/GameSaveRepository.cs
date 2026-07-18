@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Core.Save;
+using JetBrains.Annotations;
 
 namespace Code.Game.Save
 {
+    [UsedImplicitly]
     public sealed class GameSaveRepository : ASaveRepository<GameSaveRepository.Model>
     {
         [Serializable]
@@ -15,9 +17,12 @@ namespace Code.Game.Save
         }
 
         public event Action Changed;
-        
-        
-        public GameSaveRepository(ISaveProcessor processor) : base(processor) { }
+
+
+        public GameSaveRepository(ISaveProcessor processor) : base(processor)
+        {
+            
+        }
 
         public bool TryGetLastGame(out GameModel game)
         {
@@ -38,12 +43,17 @@ namespace Code.Game.Save
             return game != null;
         }
 
-        public void AddNewGame(HeroModel heroModel, WorldModel worldModel)
+        public GameModel GetCurrentGame()
+        {
+            return Data.Games[Data.LastGameIndex];
+        }
+        
+        public void AddNewGame(CharacterModel characterModel, WorldModel worldModel)
         {
             GameModel newGame = new()
             {
                 ID = Guid.NewGuid().ToString(),
-                Hero = heroModel,
+                hero = characterModel,
                 World = worldModel,
                 GameTime = TimeSpan.Zero,
             };
