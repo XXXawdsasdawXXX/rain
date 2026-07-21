@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ArmorySetLibrary>k__BackingField:
     _assets:
+    - {fileID: 11400000, guid: da5207a0d8fdc3a998f80d7b9737fabf, type: 2}
     - {fileID: 11400000, guid: 585e51cda26921b4abf13167bf697fc6, type: 2}
     - {fileID: 11400000, guid: 389a02de07948c34ea7c24f480413b60, type: 2}
+    - {fileID: 11400000, guid: 5bf9e468b88a994f5b8e96d3cd3dbd7d, type: 2}
