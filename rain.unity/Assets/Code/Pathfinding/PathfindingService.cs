@@ -7,9 +7,7 @@ namespace Code.Pathfinding
 {
     public interface IPathfindingService
     {
-        bool HasActivePath { get; }
-        void FindPath(Vector3 startPosition, Vector3 endPosition, PathfindingAgentSettings settings);
-        Vector3 MoveToNextWorldPosition();
+        IReadOnlyList<Vector3> FindPath(Vector3 startPosition, Vector3 endPosition, PathfindingAgentSettings settings);
     }
 
     public sealed class PathfindingService : IPathfindingService
@@ -21,25 +19,21 @@ namespace Code.Pathfinding
         private readonly List<Vector3Int> _path = new();
 
         private readonly PathfindingTilemapView _tilemap;
-        private readonly PathfindingCollisionChecker _collisionChecker;
 
         private PathfindingAgentSettings _agentSettings;
         private Vector3Int _endCellPosition;
-        private int _pathIndex;
 
-        public bool HasActivePath { get; private set; }
 
-        public PathfindingService(PathfindingTilemapView tilemap, PathfindingCollisionChecker collisionChecker)
+        public PathfindingService(PathfindingTilemapView tilemap)
         {
             _tilemap = tilemap;
-            _collisionChecker = collisionChecker;
         }
 
-        public void FindPath(Vector3 startPosition, Vector3 endPosition, PathfindingAgentSettings settings)
+        public IReadOnlyList<Vector3> FindPath(Vector3 startPosition, Vector3 endPosition, PathfindingAgentSettings settings)
         {
+            List<Vector3> path = new();
+            
             _path.Clear();
-            _pathIndex = 0;
-            HasActivePath = false;
             _agentSettings = settings;
 
             Vector3Int startCell = _tilemap.WordToCell(startPosition);
@@ -49,79 +43,40 @@ namespace Code.Pathfinding
             {
                 Log.Info(this,
                     $"[FindPath] start cell {startCell} is not walkable (baked={_tilemap.HasBakedCell(startCell)})");
-                return;
+                return path;
             }
 
             if (!_isWalkable(_endCellPosition))
             {
                 Log.Info(this, $"[FindPath] end cell {_endCellPosition} is not walkable");
-                return;
+                return path;
             }
 
             if (startCell == _endCellPosition)
             {
-                return;
+                return path;
             }
 
             PathfindingNode endNode = _runAStar(startCell);
             if (endNode == null)
             {
                 Log.Info(this, $"[FindPath] no path from {startCell} to {_endCellPosition}");
-                return;
+                return path;
             }
 
             _reconstructPath(endNode);
-            _pathIndex = 1;
-            HasActivePath = _path.Count > 1;
+
+            for (int i = 0; i < _path.Count; i++)
+            {
+                Vector3Int cell = _path[i];
+                path.Add(_tilemap.CellToWorlds(cell));
+            }
 
             Log.Info(this, $"[FindPath] start={startCell}, end={_endCellPosition}, steps={_path.Count - 1}");
+            
+            return path;
         }
 
-        public Vector3 MoveToNextWorldPosition()
-        {
-            if (!HasActivePath || _pathIndex >= _path.Count)
-            {
-                HasActivePath = false;
-                Vector3Int cell = _path.Count > 0 ? _path[^1] : Vector3Int.zero;
-                return _tilemap.CellToWorlds(cell);
-            }
-
-            Vector3Int nextCell = _path[_pathIndex];
-
-            if (_collisionChecker.IsBlocked(nextCell, _agentSettings))
-            {
-                Vector3Int currentCell = _path[_pathIndex - 1];
-                if (!_tryRepath(currentCell))
-                {
-                    Log.Info(this, "[MoveToNextWorldPosition] blocked and repath failed");
-                    HasActivePath = false;
-                    return _tilemap.CellToWorlds(currentCell);
-                }
-
-                nextCell = _path[_pathIndex];
-            }
-
-            _pathIndex++;
-            HasActivePath = _pathIndex < _path.Count;
-
-            Log.Info(this, $"[MoveToNextWorldPosition] step to {nextCell}");
-
-            return _tilemap.CellToWorlds(nextCell);
-        }
-
-        private bool _tryRepath(Vector3Int fromCell)
-        {
-            PathfindingNode endNode = _runAStar(fromCell);
-            if (endNode == null)
-            {
-                return false;
-            }
-
-            _reconstructPath(endNode);
-            _pathIndex = 1;
-            HasActivePath = _path.Count > 1;
-            return HasActivePath;
-        }
 
         private PathfindingNode _runAStar(Vector3Int startCell)
         {
@@ -228,7 +183,7 @@ namespace Code.Pathfinding
                 return false;
             }
 
-            return !_collisionChecker.IsBlocked(cell, _agentSettings);
+            return !PathfindingCollisionChecker.IsBlocked(_tilemap.CellToWorlds(cell), _agentSettings);
         }
 
         private PathfindingNode _pickLowestFNode()

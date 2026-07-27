@@ -24,7 +24,6 @@ namespace Code.Pathfinding
         
         [SerializeField, Group("gizmo"), GUIColor(0.75f, 0.75f, 0.3f, 0.9f)]
         private int _fontSize = 20;
-
         
         private WeightTilesConfiguration _weightTiles;
         private Dictionary<Vector3Int, TileData> _mapTiles;

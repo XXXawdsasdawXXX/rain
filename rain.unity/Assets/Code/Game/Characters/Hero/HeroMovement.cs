@@ -1,4 +1,5 @@
-﻿using Code.Pathfinding;
+﻿using System.Collections.Generic;
+using Code.Pathfinding;
 using Core.Input;
 using UnityEngine;
 using VContainer;
@@ -12,19 +13,14 @@ namespace Code.Game.Characters
         [SerializeField] private LayerMask _obstacleLayers;
         [SerializeField] private float _checkRadius = 0.4f;
 
-        private IPathfindingService _pathfinding;
         private IInputService _input;
         private PathfindingAgentSettings _agentSettings;
+        private IPathfindingFollower _follower;
+        private IPathfindingService _pathfinding;
 
         
         [Inject]
         public void Construct(IPathfindingService pathfinding, IInputService input)
-        {
-            _pathfinding = pathfinding;
-            _input = input;
-        }
-
-        private void Awake()
         {
             _agentSettings = new PathfindingAgentSettings
             {
@@ -32,7 +28,13 @@ namespace Code.Game.Characters
                 CheckRadius = _checkRadius,
                 IgnoreCollider = _collider
             };
+            
+            _follower = new CharacterPathfindingFollower();
+            _input = input;
+
+            _pathfinding = pathfinding;
         }
+        
 
         private void OnEnable()
         {
@@ -54,17 +56,24 @@ namespace Code.Game.Characters
             }
 
             _agentSettings.IgnoreCollider = _collider;
-            _pathfinding.FindPath(_character.position, _input.MouseWorldPosition, _agentSettings);
+            
+            IReadOnlyList<Vector3> path = _pathfinding.FindPath(
+                _character.position, _input.MouseWorldPosition, _agentSettings);
+
+            _follower.SetPath(path);
         }
 
         private void _onInputActionEnded(EInputAction action)
         {
-            if (action != EInputAction.RightClick || !_pathfinding.HasActivePath)
+            if (action != EInputAction.RightClick || !_follower.HasActivePath)
             {
                 return;
             }
 
-            _character.position = _pathfinding.MoveToNextWorldPosition();
+            if (_follower.TryMoveToNextWorldPosition(out Vector3 nextPosition))
+            {
+                _character.position = nextPosition;
+            }
         }
     }
 }
