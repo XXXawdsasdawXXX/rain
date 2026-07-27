@@ -1,15 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Essential;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Code.Pathfinding
 {
-    public interface IPathfindingService
-    {
-        IReadOnlyList<Vector3> FindPath(Vector3 startPosition, Vector3 endPosition, PathfindingAgentSettings settings);
-    }
-
+    [UsedImplicitly]
     public sealed class PathfindingService : IPathfindingService
     {
         private readonly List<PathfindingNode> _openNodes = new();

@@ -430,7 +430,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5588287757438198222}
   - component: {fileID: 371985114003227768}
-  - component: {fileID: 2628175363383638017}
   - component: {fileID: 3817094973670576068}
   - component: {fileID: 8518759391917154942}
   m_Layer: 0
@@ -492,24 +491,6 @@ MonoBehaviour:
       <Renderers>k__BackingField:
       - {fileID: 488239330013656767}
       - {fileID: 259896909370618030}
---- !u!114 &2628175363383638017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8930722308704548390}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 921dfb54971a41968d071d5f059adf81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _character: {fileID: 5588287757438198222}
-  _collider: {fileID: 8518759391917154942}
-  _obstacleLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  _checkRadius: 0.2
 --- !u!95 &3817094973670576068
 Animator:
   serializedVersion: 5

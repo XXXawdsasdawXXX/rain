@@ -7,6 +7,6 @@ namespace Code.Pathfinding
     {
         bool HasActivePath { get; }
         bool TryMoveToNextWorldPosition(out Vector3 nextPosition);
-        void SetPath(IReadOnlyList<Vector3> path);
+        void SetPath(Vector3 start, Vector3 end);
     }
 }
