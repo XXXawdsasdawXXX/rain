@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using Code.UI.Components.Window;
+using JetBrains.Annotations;
 
 namespace Code.UI.Menu
 {
+    [UsedImplicitly]
     public class MenuNavigator : AUIWindowNavigator
     {
         private readonly DeleteGameWindowView _deleteGame;

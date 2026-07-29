@@ -31,6 +31,11 @@ namespace Code.UI.Components
             }
         }
 
+        public void SetText(string text)
+        {
+            _text.SetText(text);
+        }
+
         public void SetLocalizationArguments(params object[] args)
         {
             _args = args;

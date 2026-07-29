@@ -11,14 +11,14 @@ using VContainer.Unity;
 namespace Code.Game.Factories
 {
     [UsedImplicitly]
-    public sealed class HeroFactory : IHeroFactory
+    public sealed class CharacterFactory : ICharacterFactory
     {
         private readonly IObjectResolver _resolver;
         private readonly AssetLibrary _assetLibrary;
         private readonly IPlayerPartyProvider _playerPartyProvider;
 
 
-        public HeroFactory(IObjectResolver resolver, AssetLibrary assetLibrary, IPlayerPartyProvider playerPartyProvider)
+        public CharacterFactory(IObjectResolver resolver, AssetLibrary assetLibrary, IPlayerPartyProvider playerPartyProvider)
         {
             _resolver = resolver;
             _assetLibrary = assetLibrary;
@@ -27,7 +27,9 @@ namespace Code.Game.Factories
 
         public CharacterView SpawnHero(CharacterModel model)
         {
-            CharacterView heroPrefab = _assetLibrary.SceneComponents.Get(AssetsKey.CHARACTER).GetComponent<CharacterView>();
+            CharacterView heroPrefab = _assetLibrary.SceneComponents
+                .Get(AssetsKey.CHARACTER)
+                .GetComponent<CharacterView>();
             
             CharacterView heroInstance = _resolver.Instantiate(
                 heroPrefab, 
@@ -36,9 +38,25 @@ namespace Code.Game.Factories
             
             heroInstance.SetModel(model);
             
-            _playerPartyProvider.AddCharacter(heroInstance);
+            _playerPartyProvider.AddHero(heroInstance);
             
             return heroInstance;
+        }
+
+        public CharacterView SpawnNpc(CharacterModel model)
+        {
+            CharacterView npcPrefab = _assetLibrary.SceneComponents
+                .Get(AssetsKey.CHARACTER)
+                .GetComponent<CharacterView>();
+            
+            CharacterView npcInstance = _resolver.Instantiate(
+                npcPrefab, 
+                model.Position.AsVector3(), 
+                Quaternion.identity);
+            
+            npcInstance.SetModel(model);
+            
+            return npcInstance;
         }
     }
 }

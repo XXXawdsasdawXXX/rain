@@ -3,8 +3,9 @@ using Code.Game.Save;
 
 namespace Code.Game.Factories
 {
-    public interface IHeroFactory
+    public interface ICharacterFactory
     {
         CharacterView SpawnHero(CharacterModel model);
+        CharacterView SpawnNpc(CharacterModel model);
     }
 }

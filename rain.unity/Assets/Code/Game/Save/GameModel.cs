@@ -1,7 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using Essential;
-using Essential.Data;
-using UnityEngine.Serialization;
 
 namespace Code.Game.Save
 {
@@ -9,7 +8,8 @@ namespace Code.Game.Save
     public class GameModel
     {
         public string ID;
-        public CharacterModel hero;
+        public List<CharacterModel> Heroes;
+        public List<CharacterModel> Npc;
         public WorldModel World;
         public TimeSpan GameTime;
         public TimeSpan EnterTime;
@@ -19,12 +19,14 @@ namespace Code.Game.Save
     [Serializable]
     public class CharacterModel
     {
+        public string ID;
         public string Name;
         public int Health;
         public Position Position;
 
         public CharacterModel(string name)
         {
+            ID = Guid.NewGuid().ToString(); 
             Name = name;
             Health = 100;
             Position = new Position();

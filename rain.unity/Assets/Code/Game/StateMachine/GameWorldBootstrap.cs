@@ -1,4 +1,4 @@
-using Code.Game.Characters;
+using System.Collections.Generic;
 using Code.Game.Factories;
 using Code.Game.Save;
 using JetBrains.Annotations;
@@ -10,27 +10,39 @@ namespace Code.Game.StateMachine
     public sealed class GameWorldBootstrap : IStartable
     {
         private readonly GameSaveRepository _gameSave;
-        private readonly IHeroFactory _heroFactory;
-        private readonly IHeroProvider _heroProvider;
+        private readonly ICharacterFactory _characterFactory;
 
         
-        public GameWorldBootstrap(GameSaveRepository gameSave, IHeroFactory heroFactory, IHeroProvider heroProvider)
+        public GameWorldBootstrap(GameSaveRepository gameSave, ICharacterFactory characterFactory)
         {
             _gameSave = gameSave;
-            _heroFactory = heroFactory;
-            _heroProvider = heroProvider;
+            _characterFactory = characterFactory;
         }
         
         public void Start()
         {
             _createHero();
+            _createNpc();
         }
 
         private void _createHero()
         {
-            CharacterModel heroModel = _gameSave.GetCurrentGame().hero;
-            CharacterView heroInstance = _heroFactory.SpawnHero(heroModel);
-            _heroProvider.Set(heroInstance);
+            List<CharacterModel> heroes = _gameSave.GetCurrentGame().Heroes;
+
+            foreach (CharacterModel characterModel in heroes)
+            {
+                _characterFactory.SpawnHero(characterModel);
+            }
+        }
+
+        private void _createNpc()
+        {
+            List<CharacterModel> npc = _gameSave.GetCurrentGame().Npc;
+
+            foreach (CharacterModel characterModel in npc)
+            {
+                _characterFactory.SpawnNpc(characterModel);
+            }
         }
     }
 }

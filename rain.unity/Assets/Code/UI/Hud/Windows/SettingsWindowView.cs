@@ -1,6 +1,7 @@
 using Code.Game.Save;
 using Code.UI.Components;
 using Code.UI.Components.Window;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Code.UI.Menu
@@ -11,6 +12,7 @@ namespace Code.UI.Menu
         [field: SerializeField] public UISlider Slider_Music { get; private set; }
     }
     
+    [UsedImplicitly]
     public sealed class SettingsWindowController : AUIWindowController<SettingsWindowView>
     {
         private readonly SettingsSaveRepository _settingsSave;

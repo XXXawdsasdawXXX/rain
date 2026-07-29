@@ -53,7 +53,8 @@ namespace Code.Game.Save
             GameModel newGame = new()
             {
                 ID = Guid.NewGuid().ToString(),
-                hero = characterModel,
+                Heroes = new List<CharacterModel> { characterModel },
+                Npc = new List<CharacterModel>(),
                 World = worldModel,
                 GameTime = TimeSpan.Zero,
             };

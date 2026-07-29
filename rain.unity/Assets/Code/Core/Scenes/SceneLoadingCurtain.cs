@@ -11,24 +11,23 @@ namespace Core.Scenes
         [SerializeField] private CanvasGroup _canvasGroup;
 
         private Tween _tween;
-        
+        private bool _isShowing;
 
+        
         public async UniTask Show()
         {
-            if (_canvasGroup == null)
+            if (_canvasGroup == null || _isShowing)
             {
                 return;
             }
-            
+
+            _isShowing = true;
             _canvasGroup.alpha = 0;
-            
             gameObject.SetActive(true);
             
             _tween?.Kill();
-            
             _tween = _canvasGroup.DOFade(1, ANIMATION_DURATION)
                 .SetLink(_canvasGroup.gameObject, LinkBehaviour.KillOnDisable);
-            
             await _tween.ToUniTask();
         }
 
@@ -37,22 +36,23 @@ namespace Core.Scenes
             _canvasGroup.alpha = 1;
             
             gameObject.SetActive(true);
+            
+            _isShowing = true;
         }
 
         public async UniTask Hide()
         {
-            if (_canvasGroup == null)
+            if (_canvasGroup == null || !_isShowing)
             {
                 return;
             }
-            
+
+            _isShowing = false;
             _canvasGroup.alpha = 1;
             
             _tween?.Kill();
-            
             _tween = _canvasGroup.DOFade(0, ANIMATION_DURATION)
                 .SetLink(_canvasGroup.gameObject, LinkBehaviour.KillOnDisable);
-            
             await _tween.ToUniTask();
             
             gameObject.SetActive(false);

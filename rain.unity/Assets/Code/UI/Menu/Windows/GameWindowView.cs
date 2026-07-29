@@ -5,6 +5,7 @@ using Code.Game.StateMachine;
 using Code.Game.StateMachine.States;
 using Code.UI.Components;
 using Code.UI.Components.Window;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Code.UI.Menu
@@ -17,6 +18,7 @@ namespace Code.UI.Menu
         [field: SerializeField] public UIDropDown DropDown_Games { get; private set; }
     }
 
+    [UsedImplicitly]
     public sealed class GameWindowController : AUIWindowController<GameWindowView>
     {
         private readonly GameSaveRepository _gamesSave;
@@ -99,7 +101,7 @@ namespace Code.UI.Menu
             {
                 foreach (GameModel gameModel in _gamesSave.Data.Games)
                 {
-                    options.Add($"{gameModel.hero.Name}");
+                    options.Add($"{gameModel.Heroes[0].Name}");
                 }
             }
             else

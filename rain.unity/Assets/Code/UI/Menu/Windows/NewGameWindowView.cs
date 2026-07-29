@@ -1,6 +1,7 @@
 ﻿using Code.Game.Save;
 using Code.UI.Components;
 using Code.UI.Components.Window;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Code.UI.Menu
@@ -11,6 +12,7 @@ namespace Code.UI.Menu
         [field: SerializeField] public UIButton Button_Create { get; private set; }
     }
 
+    [UsedImplicitly]
     public sealed class NewGameWindowController : AUIWindowController<NewGameWindowView>
     {
         private readonly GameSaveRepository _gameSave;

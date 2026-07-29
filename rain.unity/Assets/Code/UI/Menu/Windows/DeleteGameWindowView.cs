@@ -1,6 +1,7 @@
 ﻿using Code.Game.Save;
 using Code.UI.Components;
 using Code.UI.Components.Window;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Code.UI.Menu
@@ -23,6 +24,7 @@ namespace Code.UI.Menu
         }
     }
 
+    [UsedImplicitly]
     public sealed class DeleteGameWindowController : AUIWindowController<DeleteGameWindowView>
     {
         private readonly GameSaveRepository _gameSave;
@@ -66,7 +68,7 @@ namespace Code.UI.Menu
             {
                 view.SetNewModel(new DeleteGameWindowView.Model
                 {
-                    ContextHeroName = game.hero.Name
+                    ContextHeroName = game.Heroes[0].Name
                 });
             }
         }

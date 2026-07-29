@@ -25,8 +25,7 @@ namespace Code.Game.DI
             builder.Register<PlayerPartyMovement>(Lifetime.Singleton).AsImplementedInterfaces();
 
             //hero
-            builder.Register<IHeroFactory, HeroFactory>(Lifetime.Singleton);
-            builder.Register<IHeroProvider, HeroProvider>(Lifetime.Singleton);
+            builder.Register<ICharacterFactory, CharacterFactory>(Lifetime.Singleton);
             
             //entry point
             builder.RegisterEntryPoint<GameWorldBootstrap>();
