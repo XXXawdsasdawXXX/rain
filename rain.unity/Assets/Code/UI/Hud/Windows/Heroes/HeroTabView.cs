@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Code.UI.Hud.Windows
 {
-    public class HeroTabView : UIButton, IPoolEntity
+    public class HeroTabView : UIRadioButton
     {
         public CharacterModel Model { get; private set; }
         
@@ -20,15 +20,7 @@ namespace Code.UI.Hud.Windows
             _textHeroName.SetText(model.Name);
         }
 
-        public void Enable()
-        {
-            gameObject.SetActive(true);
-        }
-
-        public void Disable()
-        {
-            gameObject.SetActive(false);
-        }
+     
 
         /*public void Select()
         {

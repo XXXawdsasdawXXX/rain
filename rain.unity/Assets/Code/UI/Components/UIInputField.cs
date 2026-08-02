@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Code.UI.Components
 {
-    public class UIInputField : AUISelectable
+    public class UIInputField : AUIComponent
     {
         public event Action<string> Changed;
    

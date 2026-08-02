@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Code.UI.Components
 {
-    public class UIDropDown : AUISelectable
+    public class UIDropDown : AUIComponent
     {
         public event Action<int> Changed;
         

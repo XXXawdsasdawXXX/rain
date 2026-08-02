@@ -36,7 +36,7 @@ namespace Code.Game.Characters
             
             _playerPartyProvider.CharacterAdded += _onCharacterAdded;
 
-            foreach (CharacterView characterView in _playerPartyProvider.Characters)
+            foreach (CharacterView characterView in _playerPartyProvider.Heroes)
             {
                 _followers.Add(characterView, new CharacterPathfindingFollower(_pathfinding, characterView.AgentSettings));
             }
@@ -70,7 +70,7 @@ namespace Code.Game.Characters
                 return;
             }
 
-            foreach (CharacterView character in _playerPartyProvider.Characters)
+            foreach (CharacterView character in _playerPartyProvider.Heroes)
             {
                 IPathfindingFollower follower = _followers[character];
              

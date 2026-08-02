@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Code.UI.Components
 {
-    public class UISlider : AUISelectable
+    public class UISlider : AUIComponent
     {
         public event Action<float> Changed;
 

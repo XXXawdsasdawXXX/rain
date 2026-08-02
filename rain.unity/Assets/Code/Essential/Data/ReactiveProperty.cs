@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Essential.Data
 {
+    [Serializable]
     public class ReactiveProperty<T>
     {
         public T Value
@@ -22,6 +23,7 @@ namespace Essential.Data
         
         private T _value;
 
+        
         public ReactiveProperty(T value)
         {
             _value = value;
@@ -42,6 +44,15 @@ namespace Essential.Data
             _changed = null;
             _value = default;
         }
+
+        public void ClearSubscription()
+        {
+            _changed = null;
+        }
+
+        public void SetValueWithoutNotify(T value)
+        {
+            _value = value;
+        }
     }
-    
 }

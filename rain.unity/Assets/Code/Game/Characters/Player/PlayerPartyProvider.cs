@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Essential;
 using JetBrains.Annotations;
 
@@ -10,39 +11,41 @@ namespace Code.Game.Characters.Hero
     {
         public event Action<CharacterView> CharacterAdded;
         public event Action<CharacterView> CharacterSelected;
-        public List<CharacterView> Characters { get; } = new();
+        public List<CharacterView> Heroes { get; } = new();
         public List<CharacterView> SelectedCharacters { get; } = new List<CharacterView>();
         public CharacterView CurrentCharacter { get; }
 
 
         public void AddHero(CharacterView characterView)
         {
-            if (Characters.Contains(characterView))
+            if (Heroes.Exists(c => c.Model.ID == characterView.Model.ID))
             {
                 Log.Error(this, "Character already exist into collection");
                 return;
             }
             
-            Characters.Add(characterView);
+            Heroes.Add(characterView);
             
             CharacterAdded?.Invoke(characterView);
 
-            if (Characters.Count == 1)
+            if (Heroes.Count == 1)
             {
-                AddSelectCharacter(characterView);
+                SetSelectedCharacter(characterView);
             }
         }
 
-        public void AddSelectCharacter(CharacterView selectCharacter)
+        public void SetSelectedCharacter(CharacterView selectCharacter)
         {
             if (SelectedCharacters.Contains(selectCharacter))
             {
                 return;
             }
+         
+            SelectedCharacters.Clear();
             
             SelectedCharacters.Add(selectCharacter);
             
-            CharacterSelected.Invoke(selectCharacter);
+            CharacterSelected?.Invoke(selectCharacter);
         }
 
         public void ClearSelectedCharacter()

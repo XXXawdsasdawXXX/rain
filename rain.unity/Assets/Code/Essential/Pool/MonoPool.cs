@@ -1,7 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TriInspector;
 using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace Essential
 {
@@ -13,6 +18,7 @@ namespace Essential
         [SerializeField] private List<T> _all = new();
         [SerializeField] private List<T> _enabled = new();
 
+        
         public T GetNext()
         {
             T entity = GetDisabledEntity() ?? AddNewEntity();
@@ -33,12 +39,12 @@ namespace Essential
             return entity;
         }
 
-        public IEnumerable<T> GetAll()
+        public List<T> GetAll()
         {
             return _all;
         }
 
-        public IEnumerable<T> GetAllEnabled()
+        public List<T> GetAllEnabled()
         {
             return _enabled;
         }
@@ -64,5 +70,16 @@ namespace Essential
         {
             return _all[tabIndex];
         }
+        
+#if UNITY_EDITOR
+        [Button]
+        private void _findButtonsInChildren()
+        {
+            _all = _root.GetComponentsInChildren<T>().ToList();
+            _enabled = _all.Where(t => t.gameObject.activeInHierarchy).ToList();
+            
+            EditorUtility.SetDirty(_root);
+        }
+#endif
     }
 }

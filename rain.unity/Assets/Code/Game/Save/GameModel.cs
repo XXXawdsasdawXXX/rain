@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Code.Game.Characters.Armor;
 using Essential;
 
 namespace Code.Game.Save
@@ -23,6 +25,7 @@ namespace Code.Game.Save
         public string Name;
         public int Health;
         public Position Position;
+        public Dictionary<EBodyPart, string> Armor;
 
         public CharacterModel(string name)
         {
@@ -30,6 +33,14 @@ namespace Code.Game.Save
             Name = name;
             Health = 100;
             Position = new Position();
+            Armor = new Dictionary<EBodyPart, string>();
+
+            EBodyPart[] bodyParts = Enum.GetValues(typeof(EBodyPart)).Cast<EBodyPart>().ToArray();
+            
+            foreach (EBodyPart t in bodyParts)
+            {
+                Armor.Add(t, string.Empty);
+            }
         }
     }
 

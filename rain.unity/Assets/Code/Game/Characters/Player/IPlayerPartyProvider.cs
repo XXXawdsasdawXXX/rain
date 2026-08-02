@@ -7,12 +7,12 @@ namespace Code.Game.Characters.Hero
     {
         event Action<CharacterView> CharacterAdded;
         event Action<CharacterView> CharacterSelected;
-        List<CharacterView> Characters { get; }
+        List<CharacterView> Heroes { get; }
         List<CharacterView> SelectedCharacters { get; }
         CharacterView CurrentCharacter { get; }
         
         void AddHero(CharacterView characterView);
-        void AddSelectCharacter(CharacterView selectCharacter);
+        void SetSelectedCharacter(CharacterView selectCharacter);
         void ClearSelectedCharacter();
     }
 }

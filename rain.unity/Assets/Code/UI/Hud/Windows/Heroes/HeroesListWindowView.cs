@@ -1,4 +1,3 @@
-using System.Linq;
 using Code.Game.Characters;
 using Code.Game.Characters.Hero;
 using Code.UI.Components.Window;
@@ -10,8 +9,7 @@ namespace Code.UI.Hud.Windows
 {
     public class HeroesListWindowView : AUIWindowView
     {
-        [field: SerializeField] public MonoPool<HeroTabView> HeroesTab { get; private set; }
-        
+        [field: SerializeField] public UIRadioGroup RadioGroupHeroes { get; private set; }
     }
 
     [UsedImplicitly]
@@ -29,7 +27,7 @@ namespace Code.UI.Hud.Windows
         {
             base.Start();
 
-            foreach (CharacterView partyCharacter in _playerParty.Characters)
+            foreach (CharacterView partyCharacter in _playerParty.Heroes)
             {
                 _addHeroTab(partyCharacter);
             }
@@ -44,35 +42,51 @@ namespace Code.UI.Hud.Windows
         {
             _playerParty.CharacterAdded += _addHeroTab;
             _playerParty.CharacterSelected += _selectHero;
+
+            view.RadioGroupHeroes.Checked += _onChangeSelectedHeroes;
         }
 
         protected override void unSubscribe()
         {
             _playerParty.CharacterAdded -= _addHeroTab;
             _playerParty.CharacterSelected -= _selectHero;
+            
+            view.RadioGroupHeroes.Checked -= _onChangeSelectedHeroes;
         }
 
         private void _addHeroTab(CharacterView characterView)
         {
-            HeroTabView tab = view.HeroesTab.GetNext();
+            HeroTabView tab = view.RadioGroupHeroes.AddRadioButton<HeroTabView>();
+           
+            if (tab == null)
+            {
+                Log.Error(this, $"[_addHeroTab] can`t find component 'hero tab view'");
+                return;
+            }
+            
             tab.SetCharacterModel(characterView.Model);
         }
 
+        //where player party change selected heroes from world
         private void _selectHero(CharacterView characterView)
         {
-            foreach (HeroTabView tab in view.HeroesTab.GetAllEnabled())
-            {
-                tab.Deselect();
-            }
-
             if (characterView == null)
             {
                 return;
             }
+
+            view.RadioGroupHeroes.SetCheckedWithoutNotify(_playerParty.Heroes.IndexOf(characterView));
+        }
+
+        //where change selected hero from ui
+        private void _onChangeSelectedHeroes(int heroIndex)
+        {
+            if (heroIndex >= _playerParty.Heroes.Count)
+            {
+                Log.Error(this, $"[_onChangeSelectedHeroes] hero index >= heroes count");
+            }
             
-            view.HeroesTab.GetAllEnabled()
-                ?.FirstOrDefault(t => t.Model.ID == characterView.Model.ID)
-                ?.Select();
+            _playerParty.SetSelectedCharacter(_playerParty.Heroes[heroIndex]);
         }
     }
 }

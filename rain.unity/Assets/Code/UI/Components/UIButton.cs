@@ -1,11 +1,12 @@
-﻿using Code.UI.Components.Selected;
+﻿using System;
+using Code.UI.Components.Selected;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Code.UI.Components
 {
-    public class UIButton : AUISelectable
+    public class UIButton : AUIComponent
     {
         [SerializeField] private Image _image;
         [SerializeField] private Color _defaultColor = Color.white;

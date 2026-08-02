@@ -6,13 +6,11 @@ using UnityEngine.EventSystems;
 
 namespace Code.UI.Components.Selected
 {
-    public abstract class AUISelectable : Essential.Mono, 
-        IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
+    public abstract class AUIComponent : Essential.Mono, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
     {
         public event Action Selected;
         public event Action Deselected;
         public event Action Clicked;
-
         public bool IsInteractable { get; private set; }
 
         [field: Group("Selectable"), GUIColor(0.1f, 0.85f, 0.55f, 0.9f)]
@@ -29,7 +27,6 @@ namespace Code.UI.Components.Selected
         
         [field: Group("Selectable"), GUIColor(0.1f, 0.85f, 0.55f, 0.9f), ShowIf(nameof(_hasAnimation))]
         [SerializeField, CanBeNull] private UISelectableAnimation _selectableAnimation;
-        
         
         
         public void Dispose()
