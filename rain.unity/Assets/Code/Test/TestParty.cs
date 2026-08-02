@@ -8,7 +8,7 @@ namespace Code.Test
 {
     public class TestParty : MonoBehaviour
     {
-        [SerializeField] private CharacterModel _characterModel;
+        [SerializeField] private string _heroName;
         private ICharacterFactory _characterFactory;
 
 
@@ -21,7 +21,7 @@ namespace Code.Test
         [Button]
         private void _addCharacter()
         {
-            _characterFactory.SpawnHero(_characterModel);
+            _characterFactory.SpawnHero(new CharacterModel(_heroName));
         }
     }
 }

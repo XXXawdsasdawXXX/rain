@@ -6,7 +6,7 @@ using TriInspector;
 using UnityEditor;
 using UnityEngine;
 
-namespace Code.UI
+namespace Code.UI.Components
 {
     public class UIRadioGroup : Essential.Mono
     {

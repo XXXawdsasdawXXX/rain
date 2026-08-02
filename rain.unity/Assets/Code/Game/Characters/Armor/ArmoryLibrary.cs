@@ -12,11 +12,10 @@ namespace Code.Game.Characters.Armor
         {
             protected override bool ThisIs(ArmorSetModel value, int key)
             {
-                ArmorSetModel result = Get(key);
-                return result != null && result.SetIndex == key;
+                return value.SetIndex == key;
             }
         }
 
-        [field: SerializeField] public SetLibrary ArmorySetLibrary { get; private set; }
+        [field: SerializeField] public SetLibrary Armory { get; private set; }
     }
 }

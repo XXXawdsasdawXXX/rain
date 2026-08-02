@@ -1,6 +1,4 @@
-﻿using System;
-using Code.UI.Components.Selected;
-using DG.Tweening;
+﻿using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 

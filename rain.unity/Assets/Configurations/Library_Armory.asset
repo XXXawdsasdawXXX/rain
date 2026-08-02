@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c19e79a5da0d4f12afd4c9aab7d3d6fa, type: 3}
   m_Name: Library_Armory
   m_EditorClassIdentifier: 
-  <ArmorySetLibrary>k__BackingField:
+  <Armory>k__BackingField:
     _assets:
     - {fileID: 11400000, guid: da5207a0d8fdc3a998f80d7b9737fabf, type: 2}
     - {fileID: 11400000, guid: 585e51cda26921b4abf13167bf697fc6, type: 2}

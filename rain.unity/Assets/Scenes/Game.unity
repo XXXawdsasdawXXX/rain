@@ -399,6 +399,7 @@ MonoBehaviour:
   - {fileID: 1580134832}
   _weightTilesConfiguration: {fileID: 11400000, guid: 14a52feec3ca18941b01ec2411b4feab, type: 2}
   _pathfindingTilemapView: {fileID: 1580134836}
+  _armoryLibrary: {fileID: 11400000, guid: d5812ef9ca70e9f468402226e1850c0c, type: 2}
 --- !u!114 &764679762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -675,10 +676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eb021dd8047b5868a7da5843ac675bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterModel:
-    ID: 
-    Name: 
-    Health: 0
+  _heroName: 
 --- !u!1 &1577160703
 GameObject:
   m_ObjectHideFlags: 0
@@ -5797,9 +5795,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 764679760}
     m_Modifications:
+    - target: {fileID: 97272341115763911, guid: a0d378a865bee9a059003e0a3aa8d5ef, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3423252334038187560, guid: a0d378a865bee9a059003e0a3aa8d5ef, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3423252334038187560, guid: a0d378a865bee9a059003e0a3aa8d5ef, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3423252334038187560, guid: a0d378a865bee9a059003e0a3aa8d5ef, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 140
+      objectReference: {fileID: 0}
+    - target: {fileID: 3423252334038187560, guid: a0d378a865bee9a059003e0a3aa8d5ef, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3423252334038187560, guid: a0d378a865bee9a059003e0a3aa8d5ef, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619011912412805383, guid: a0d378a865bee9a059003e0a3aa8d5ef, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 140
+      objectReference: {fileID: 0}
     - target: {fileID: 5002694503133673007, guid: a0d378a865bee9a059003e0a3aa8d5ef, type: 3}
       propertyPath: m_Name
       value: canvas_screen-hud
+      objectReference: {fileID: 0}
+    - target: {fileID: 7732141736475663340, guid: a0d378a865bee9a059003e0a3aa8d5ef, type: 3}
+      propertyPath: m_ChildScaleWidth
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8892641647901053286, guid: a0d378a865bee9a059003e0a3aa8d5ef, type: 3}
       propertyPath: m_Pivot.x
@@ -5882,7 +5912,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3581179466444897470, guid: a0d378a865bee9a059003e0a3aa8d5ef, type: 3}
+    - {fileID: 8314618927672669049, guid: a0d378a865bee9a059003e0a3aa8d5ef, type: 3}
+    - {fileID: 7239857062490619074, guid: a0d378a865bee9a059003e0a3aa8d5ef, type: 3}
+    - {fileID: 5287656181716675134, guid: a0d378a865bee9a059003e0a3aa8d5ef, type: 3}
+    - {fileID: 97272341115763911, guid: a0d378a865bee9a059003e0a3aa8d5ef, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0d378a865bee9a059003e0a3aa8d5ef, type: 3}

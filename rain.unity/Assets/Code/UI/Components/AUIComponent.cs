@@ -4,12 +4,12 @@ using TriInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Code.UI.Components.Selected
+namespace Code.UI.Components
 {
     public abstract class AUIComponent : Essential.Mono, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
     {
-        public event Action Selected;
-        public event Action Deselected;
+        public event Action Hover;
+        public event Action UnHover;
         public event Action Clicked;
         public bool IsInteractable { get; private set; }
 
@@ -19,41 +19,41 @@ namespace Code.UI.Components.Selected
         [field: SerializeField] public bool AutoSelect { get; private set; }
       
         [field: Group("Selectable"), GUIColor(0.1f, 0.85f, 0.55f, 0.9f)]
-        [field: SerializeField] public bool IsSelected { get; private set; }
+        [field: SerializeField] public bool IsHovered { get; private set; }
         
         [Group("Selectable")] 
         [SerializeField, GUIColor(0.1f, 0.85f, 0.55f, 0.9f)]
         private bool _hasAnimation;
         
         [field: Group("Selectable"), GUIColor(0.1f, 0.85f, 0.55f, 0.9f), ShowIf(nameof(_hasAnimation))]
-        [SerializeField, CanBeNull] private UISelectableAnimation _selectableAnimation;
+        [SerializeField, CanBeNull] private AUIHoverAnimation _hoverAnimation;
         
         
         public void Dispose()
         {
-            Selected = null;
-            Deselected = null;
+            Hover = null;
+            UnHover = null;
             Clicked = null;
         }
 
         public virtual void Select()
         {
-            if (_selectableAnimation != null)
+            if (_hoverAnimation != null)
             {
-                _selectableAnimation.Select();
+                _hoverAnimation.Select();
             }
             
-            IsSelected = true;
+            IsHovered = true;
         }
 
         public virtual void Deselect()
         {
-            if (_selectableAnimation != null)
+            if (_hoverAnimation != null)
             {
-                _selectableAnimation.Deselect();
+                _hoverAnimation.Deselect();
             }
             
-            IsSelected = false;
+            IsHovered = false;
         }
 
         public virtual void SetInteractable(bool isInteractable)
@@ -63,14 +63,14 @@ namespace Code.UI.Components.Selected
         
         public void OnPointerEnter(PointerEventData eventData)
         {
-            onEnter();
+            onHover();
 
             if (AutoSelect)
             {
                 Select();
             }
             
-            Selected?.Invoke();
+            Hover?.Invoke();
         }
 
         public void OnPointerDown(PointerEventData eventData)
@@ -81,17 +81,17 @@ namespace Code.UI.Components.Selected
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            onExit();
+            onUnHover();
          
             if (AutoSelect)
             {
                 Deselect();
             }
             
-            Deselected?.Invoke();
+            UnHover?.Invoke();
         }
 
-        protected virtual void onEnter()
+        protected virtual void onHover()
         {
         }
 
@@ -99,7 +99,7 @@ namespace Code.UI.Components.Selected
         {
         }
 
-        protected virtual void onExit()
+        protected virtual void onUnHover()
         {
         }
 

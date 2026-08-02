@@ -1,9 +1,8 @@
-using Code.UI.Components;
 using Essential;
 using Essential.Data;
 using UnityEngine;
 
-namespace Code.UI
+namespace Code.UI.Components
 {
     public class UIRadioButton : UIButton, IPoolEntity
     {

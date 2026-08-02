@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Code.Game.Characters.Armor;
 using Essential;
 using TriInspector;
@@ -40,6 +41,7 @@ namespace Code.Game.Characters
             new(EBodyPart.Shoes, new SpriteRenderer[2]),// 0 - left | 1 - right
         };
 
+        
         public void SetArmorPiece(ArmorPieceModel model)
         {
             ArmorPieceRender pieceRender = _render[(int)model.Part];
@@ -59,6 +61,12 @@ namespace Code.Game.Characters
             }
         }
 
+        public Sprite[] GetCurrentArmorSprites(EBodyPart bodyPart)
+        {
+            SpriteRenderer[] renderers = _render[(int)bodyPart].Renderers;
+            return (from r in renderers select r.sprite).ToArray();
+        }
+        
         [Button]
         public void SetArmorSet(ArmorSetModel armorSetModel)
         {

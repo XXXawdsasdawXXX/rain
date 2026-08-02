@@ -1,5 +1,6 @@
 using Code.UI.Components.Window;
 using Code.UI.Hud.Windows;
+using Code.UI.Hud.Windows.Heroes;
 using TriInspector;
 using UnityEditor;
 using UnityEngine;

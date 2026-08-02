@@ -1,11 +1,13 @@
 using Code.Game.Characters;
+using Code.Game.Characters.Armor;
 using Code.Game.Characters.Hero;
+using Code.UI.Components;
 using Code.UI.Components.Window;
 using Essential;
 using JetBrains.Annotations;
 using UnityEngine;
 
-namespace Code.UI.Hud.Windows
+namespace Code.UI.Hud.Windows.Heroes
 {
     public class HeroesListWindowView : AUIWindowView
     {
@@ -16,11 +18,16 @@ namespace Code.UI.Hud.Windows
     public class HeroesListWindowController : AUIWindowController<HeroesListWindowView>
     {
         private readonly IPlayerPartyProvider _playerParty;
+        private readonly ArmoryLibrary _armoryLibrary;
 
-        
-        public HeroesListWindowController(HeroesListWindowView view, IPlayerPartyProvider playerParty) : base(view)
+
+        public HeroesListWindowController(
+            HeroesListWindowView view, 
+            IPlayerPartyProvider playerParty,
+            ArmoryLibrary armoryLibrary) : base(view)
         {
             _playerParty = playerParty;
+            _armoryLibrary = armoryLibrary;
         }
 
         public override void Start()
@@ -57,6 +64,7 @@ namespace Code.UI.Hud.Windows
         private void _addHeroTab(CharacterView characterView)
         {
             HeroTabView tab = view.RadioGroupHeroes.AddRadioButton<HeroTabView>();
+            tab.Construct(_armoryLibrary);
            
             if (tab == null)
             {

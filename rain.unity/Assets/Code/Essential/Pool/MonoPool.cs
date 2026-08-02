@@ -17,8 +17,8 @@ namespace Essential
         [SerializeField] private T _prefab;
         [SerializeField] private List<T> _all = new();
         [SerializeField] private List<T> _enabled = new();
-
         
+
         public T GetNext()
         {
             T entity = GetDisabledEntity() ?? AddNewEntity();

@@ -4,7 +4,7 @@ using Code.UI.Components.Window;
 using JetBrains.Annotations;
 using UnityEngine;
 
-namespace Code.UI.Menu
+namespace Code.UI.Hud.Windows
 {
     public sealed class SettingsWindowView : AUIWindowView
     {
