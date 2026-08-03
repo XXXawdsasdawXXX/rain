@@ -1,3 +1,4 @@
+using Code.Game.Factories;
 using Code.Game.Save;
 using Code.Game.StateMachine;
 using Code.Game.StateMachine.States;
@@ -14,6 +15,7 @@ namespace Code.Test.UI
         [field: SerializeField] public UIButton ButtonCloseWindow { get; private set; }
         [field: SerializeField] public UIButton ButtonSave { get; private set; }
         [field: SerializeField] public UIButton ButtonMainMenu { get; private set; }
+        [field: SerializeField] public UIButton ButtonAddHero { get; private set; }
     }
 
     
@@ -22,12 +24,17 @@ namespace Code.Test.UI
     {
         private readonly GameSaveRepository _gameSave;
         private readonly GameStateMachine _gameStateMachine;
+        private readonly ICharacterFactory _characterFactory;
 
 
-        public QAWindowController(QAWindowView view, GameSaveRepository gameSave, GameStateMachine gameStateMachine) : base(view)
+        public QAWindowController(QAWindowView view, 
+            GameSaveRepository gameSave, 
+            GameStateMachine gameStateMachine,
+            ICharacterFactory characterFactory) : base(view)
         {
             _gameSave = gameSave;
             _gameStateMachine = gameStateMachine;
+            _characterFactory = characterFactory;
         }
 
         protected override void subscribe()
@@ -35,6 +42,7 @@ namespace Code.Test.UI
             view.ButtonOpenWindow.Clicked += view.Open;
             view.ButtonCloseWindow.Clicked += view.Close;
 
+            view.ButtonAddHero.Clicked += _addHero;
             view.ButtonSave.Clicked += _saveGame;
             view.ButtonMainMenu.Clicked += _loadMainMenu;
         }
@@ -44,8 +52,14 @@ namespace Code.Test.UI
             view.ButtonOpenWindow.Clicked -= view.Open;
             view.ButtonCloseWindow.Clicked -= view.Close;
             
+            view.ButtonAddHero.Clicked -= _addHero;
             view.ButtonSave.Clicked -= _saveGame;
             view.ButtonMainMenu.Clicked -= _loadMainMenu;
+        }
+
+        private void _addHero()
+        {
+            _characterFactory.SpawnHero(new CharacterModel($"{Random.Range(0, 10)},{Random.Range(0, 10)},{Random.Range(0, 10)}"));
         }
 
         private async void _saveGame()
