@@ -6,6 +6,7 @@ namespace Core.Input
         LeftClick,
         RightClick,
         Interaction,
-        Esc
+        Esc,
+        DoubleClick
     }
 }

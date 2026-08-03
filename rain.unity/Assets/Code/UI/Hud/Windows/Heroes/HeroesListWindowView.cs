@@ -94,7 +94,7 @@ namespace Code.UI.Hud.Windows.Heroes
                 Log.Error(this, $"[_onChangeSelectedHeroes] hero index >= heroes count");
             }
             
-            _playerParty.SetSelectedCharacter(_playerParty.Heroes[heroIndex]);
+            _playerParty.SetCurrentCharacter(_playerParty.Heroes[heroIndex]);
         }
     }
 }

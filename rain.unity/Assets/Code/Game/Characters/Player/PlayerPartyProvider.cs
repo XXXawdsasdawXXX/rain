@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Essential;
 using JetBrains.Annotations;
 
@@ -13,7 +12,8 @@ namespace Code.Game.Characters.Hero
         public event Action<CharacterView> CharacterSelected;
         public List<CharacterView> Heroes { get; } = new();
         public List<CharacterView> SelectedCharacters { get; } = new List<CharacterView>();
-        public CharacterView CurrentCharacter { get; }
+     
+        public CharacterView CurrentCharacter { get; private set; }
 
 
         public void AddHero(CharacterView characterView)
@@ -30,18 +30,24 @@ namespace Code.Game.Characters.Hero
 
             if (Heroes.Count == 1)
             {
-                SetSelectedCharacter(characterView);
+                SetCurrentCharacter(characterView);
             }
         }
 
-        public void SetSelectedCharacter(CharacterView selectCharacter)
+        public void SetCurrentCharacter(CharacterView selectCharacter)
         {
-            if (SelectedCharacters.Contains(selectCharacter))
+            if (CurrentCharacter != null)
             {
-                return;
+                CurrentCharacter.SetStateForSelectedView(false);
+
+                if (SelectedCharacters.Contains(CurrentCharacter))
+                {
+                    SelectedCharacters.Remove(CurrentCharacter);
+                }
             }
-         
-            SelectedCharacters.Clear();
+
+            CurrentCharacter = selectCharacter;
+            CurrentCharacter.SetStateForSelectedView(true);
             
             SelectedCharacters.Add(selectCharacter);
             

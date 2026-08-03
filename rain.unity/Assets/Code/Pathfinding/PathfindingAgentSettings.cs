@@ -6,9 +6,9 @@ namespace Code.Pathfinding
     [Serializable]
     public struct PathfindingAgentSettings
     {
-        public LayerMask ObstacleLayers { get; private set; }
-        public float CheckRadius { get; private set; }
-        public Collider2D IgnoreCollider { get; private set; }
+        [field: SerializeField] public LayerMask ObstacleLayers { get; private set; }
+        [field: SerializeField] public float CheckRadius { get; private set; }
+        [field: SerializeField] public Collider2D IgnoreCollider { get; private set; }
         
         public static PathfindingAgentSettings Default => new()
         {

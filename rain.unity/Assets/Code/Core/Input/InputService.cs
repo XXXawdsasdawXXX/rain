@@ -1,6 +1,5 @@
 ﻿using System;
 using Essential;
-using Essential.Data;
 using UnityEngine;
 using UnityEngine.Scripting;
 using VContainer.Unity;
@@ -15,14 +14,13 @@ namespace Core.Input
     }
 
     [Preserve]
-    public sealed class InputService : IInputService, ITickable, IDisposable
+    public sealed class InputService : IInputService, ITickable
     {
+        private const float DOUBLE_CLICK_TIME = 0.6f;
         public event Action<EInputAction> ActionStarted;
         public event Action<EInputAction> ActionEnded;
-        public Vector3 MouseWorldPosition { get; set; }
+        public Vector3 MouseWorldPosition { get; private set; }
         
-        private readonly ReactiveProperty<Vector2> _direction = new(Vector2.zero);
-
         private readonly Camera _camera;
         
         private readonly InputActionKey[] _inputActionKeys = 
@@ -49,6 +47,8 @@ namespace Core.Input
             }
         };
 
+        private float _lastClickTime;
+        
         
         public InputService(CameraView cameraView)
         {
@@ -57,22 +57,35 @@ namespace Core.Input
 
         public void Tick()
         {
-            _direction.Value = new Vector2(
-                UnityEngine.Input.GetAxisRaw("Horizontal"),
-                UnityEngine.Input.GetAxisRaw("Vertical"));
-
             _updateMousePosition();
 
             foreach (InputActionKey inputActionKey in _inputActionKeys)
             {
-                if (inputActionKey.Action is EInputAction.LeftClick && UIUtils.IsPointerOverUI())
+                if (inputActionKey.Action is EInputAction.LeftClick)
                 {
-                    continue;
+                    if (UIUtils.IsPointerOverUI())
+                    {
+                        continue;
+                    }
                 }
                 
                 if (_wasActionPressed(inputActionKey))
                 {
                     ActionStarted?.Invoke(inputActionKey.Action);
+
+                    if (inputActionKey.Action is EInputAction.LeftClick)
+                    {
+                        float time = Time.unscaledTime;
+
+                        if (time - _lastClickTime < DOUBLE_CLICK_TIME)
+                        {
+                            ActionStarted?.Invoke(EInputAction.DoubleClick);
+
+                            Log.Info(this, "invoke double click");
+                        }
+
+                        _lastClickTime = time;
+                    }
                 }
                 
                 if (_wasActionReleased(inputActionKey))
@@ -81,12 +94,7 @@ namespace Core.Input
                 }
             }
         }
-
-        public void Dispose()
-        {
-            _direction.Dispose();
-        }
-
+        
         private static bool _wasActionPressed(InputActionKey inputActionKey)
         {
             return inputActionKey.Key switch

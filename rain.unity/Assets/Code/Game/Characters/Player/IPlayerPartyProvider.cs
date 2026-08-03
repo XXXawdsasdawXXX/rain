@@ -12,7 +12,7 @@ namespace Code.Game.Characters.Hero
         CharacterView CurrentCharacter { get; }
         
         void AddHero(CharacterView characterView);
-        void SetSelectedCharacter(CharacterView selectCharacter);
+        void SetCurrentCharacter(CharacterView selectCharacter);
         void ClearSelectedCharacter();
     }
 }

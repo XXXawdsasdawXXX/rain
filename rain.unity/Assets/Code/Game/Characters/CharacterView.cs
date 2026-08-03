@@ -15,6 +15,7 @@ namespace Code.Game.Characters
         [field: SerializeField] public Animator Animator { get; private set; }
         [field: SerializeField] public ArmorRender ArmorRender { get; private set; }
         [field: SerializeField] public PathfindingAgentSettings AgentSettings { get; private set; }
+        [field: SerializeField] public GameObject SelectView { get; set; }
         
         public CharacterModel Model { get; private set; }
 
@@ -45,6 +46,11 @@ namespace Code.Game.Characters
         public void Dispose()
         {
             Model.ArmorChanged -= _updateArmorRender;
+        }
+
+        public void SetStateForSelectedView(bool isSelect)
+        {
+            SelectView.SetActive(isSelect);
         }
 
         private void _updateArmorRender(EBodyPart part, int index)

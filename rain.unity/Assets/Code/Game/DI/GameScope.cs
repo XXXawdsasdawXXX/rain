@@ -3,6 +3,7 @@ using Code.Game.Characters.Armor;
 using Code.Game.Characters.Hero;
 using Code.Game.Factories;
 using Code.Game.StateMachine;
+using Code.Game.World;
 using Code.Pathfinding;
 using TriInspector;
 using UnityEngine;
@@ -31,8 +32,12 @@ namespace Code.Game.DI
             builder.Register<PlayerPartyProvider>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<PlayerPartyMovement>(Lifetime.Singleton).AsImplementedInterfaces();
 
+            //world
+            builder.Register<CameraFollow>(Lifetime.Singleton).AsImplementedInterfaces();
+            
             //characters
             builder.Register<ICharacterFactory, CharacterFactory>(Lifetime.Singleton);
+            builder.Register<PlayerSelection>(Lifetime.Singleton);
             builder.RegisterInstance(_armoryLibrary).AsSelf();
             
             //entry point
