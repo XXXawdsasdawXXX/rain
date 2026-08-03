@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Essential
 {
@@ -11,6 +12,12 @@ namespace Essential
                 Input.mousePosition,
                 uiCamera
             );
+        }
+        
+        public static bool IsPointerOverUI()
+        {
+            return EventSystem.current != null &&
+                   EventSystem.current.IsPointerOverGameObject();
         }
     }
 }

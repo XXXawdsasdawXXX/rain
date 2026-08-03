@@ -1,4 +1,5 @@
 ﻿using System;
+using Essential;
 using Essential.Data;
 using UnityEngine;
 using UnityEngine.Scripting;
@@ -23,13 +24,7 @@ namespace Core.Input
         private readonly ReactiveProperty<Vector2> _direction = new(Vector2.zero);
 
         private readonly Camera _camera;
-
         
-        public InputService(CameraView cameraView)
-        {
-            _camera = cameraView.Camera;
-        }
-
         private readonly InputActionKey[] _inputActionKeys = 
         {
             new()
@@ -53,7 +48,45 @@ namespace Core.Input
                 Action = EInputAction.Esc
             }
         };
+
         
+        public InputService(CameraView cameraView)
+        {
+            _camera = cameraView.Camera;
+        }
+
+        public void Tick()
+        {
+            _direction.Value = new Vector2(
+                UnityEngine.Input.GetAxisRaw("Horizontal"),
+                UnityEngine.Input.GetAxisRaw("Vertical"));
+
+            _updateMousePosition();
+
+            foreach (InputActionKey inputActionKey in _inputActionKeys)
+            {
+                if (inputActionKey.Action is EInputAction.LeftClick && UIUtils.IsPointerOverUI())
+                {
+                    continue;
+                }
+                
+                if (_wasActionPressed(inputActionKey))
+                {
+                    ActionStarted?.Invoke(inputActionKey.Action);
+                }
+                
+                if (_wasActionReleased(inputActionKey))
+                {
+                    ActionEnded?.Invoke(inputActionKey.Action);
+                }
+            }
+        }
+
+        public void Dispose()
+        {
+            _direction.Dispose();
+        }
+
         private static bool _wasActionPressed(InputActionKey inputActionKey)
         {
             return inputActionKey.Key switch
@@ -74,28 +107,6 @@ namespace Core.Input
             };
         }
 
-        public void Tick()
-        {
-            _direction.Value = new Vector2(
-                UnityEngine.Input.GetAxisRaw("Horizontal"),
-                UnityEngine.Input.GetAxisRaw("Vertical"));
-
-            _updateMousePosition();
-
-            foreach (InputActionKey inputActionKey in _inputActionKeys)
-            {
-                if (_wasActionPressed(inputActionKey))
-                {
-                    ActionStarted?.Invoke(inputActionKey.Action);
-                }
-                
-                if (_wasActionReleased(inputActionKey))
-                {
-                    ActionEnded?.Invoke(inputActionKey.Action);
-                }
-            }
-        }
-
         private void _updateMousePosition()
         {
             Vector3 screenPos = UnityEngine.Input.mousePosition;
@@ -103,11 +114,6 @@ namespace Core.Input
             Vector3 worldPoint = _camera.ScreenToWorldPoint(screenPos);
             worldPoint.z = 0f;
             MouseWorldPosition = worldPoint;
-        }
-
-        public void Dispose()
-        {
-            _direction.Dispose();
         }
     }
 }
