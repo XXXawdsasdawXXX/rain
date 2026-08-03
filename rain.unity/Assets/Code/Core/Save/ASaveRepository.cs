@@ -1,5 +1,6 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Essential;
 using Essential.Extensions;
 
 namespace Core.Save
@@ -37,6 +38,8 @@ namespace Core.Save
         {
             string json = Data.AsJson();
             await _processor.WriteTextAsync(SavePathProvider.SettingsFile, json, cancellationToken);
+            
+            Log.Info(this, $"[SaveAsync] saved:\n{json}");
         }
 
         protected abstract T createDefault();

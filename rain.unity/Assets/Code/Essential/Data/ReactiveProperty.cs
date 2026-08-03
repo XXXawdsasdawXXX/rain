@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using TriInspector;
+using UnityEngine;
 
 namespace Essential.Data
 {
@@ -21,7 +23,7 @@ namespace Essential.Data
         
         private event Action<T> _changed;
         
-        private T _value;
+        [SerializeField, ReadOnly] private T _value;
 
         
         public ReactiveProperty(T value)

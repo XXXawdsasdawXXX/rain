@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Code.Game.Characters.Hero;
 using Code.Pathfinding;
 using Core.Input;
+using Essential;
 using JetBrains.Annotations;
 using UnityEngine;
 using VContainer.Unity;
@@ -77,6 +78,7 @@ namespace Code.Game.Characters
                 if (follower.HasActivePath && _followers[character].TryMoveToNextWorldPosition(out Vector3 nextPosition))
                 {
                     character.Body.position = nextPosition;
+                    character.Model.Position = new Position(nextPosition.x, nextPosition.y);
                 }
             }
         }

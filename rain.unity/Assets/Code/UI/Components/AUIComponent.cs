@@ -40,7 +40,7 @@ namespace Code.UI.Components
         {
             if (_hoverAnimation != null)
             {
-                _hoverAnimation.Select();
+                _hoverAnimation.InvokeHoverAnimation();
             }
             
             IsHovered = true;
@@ -50,7 +50,7 @@ namespace Code.UI.Components
         {
             if (_hoverAnimation != null)
             {
-                _hoverAnimation.Deselect();
+                _hoverAnimation.InvokeUnHoverAnimation();
             }
             
             IsHovered = false;

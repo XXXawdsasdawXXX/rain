@@ -16,13 +16,19 @@ namespace Code.Game.Factories
         private readonly IObjectResolver _resolver;
         private readonly AssetLibrary _assetLibrary;
         private readonly IPlayerPartyProvider _playerPartyProvider;
+        private readonly GameSaveRepository _gameSaveRepository;
 
 
-        public CharacterFactory(IObjectResolver resolver, AssetLibrary assetLibrary, IPlayerPartyProvider playerPartyProvider)
+        public CharacterFactory(
+            IObjectResolver resolver, 
+            AssetLibrary assetLibrary, 
+            IPlayerPartyProvider playerPartyProvider, 
+            GameSaveRepository gameSaveRepository)
         {
             _resolver = resolver;
             _assetLibrary = assetLibrary;
             _playerPartyProvider = playerPartyProvider;
+            _gameSaveRepository = gameSaveRepository;
         }
 
         public CharacterView SpawnHero(CharacterModel model)
@@ -39,6 +45,13 @@ namespace Code.Game.Factories
             heroInstance.SetModel(model);
             
             _playerPartyProvider.AddHero(heroInstance);
+
+            GameModel gameSave = _gameSaveRepository.GetCurrentGame();
+
+            if (!gameSave.Heroes.Exists(h => h.ID.Equals(model.ID)))
+            { 
+                gameSave.Heroes.Add(model);
+            }
             
             return heroInstance;
         }
@@ -56,6 +69,13 @@ namespace Code.Game.Factories
             
             npcInstance.SetModel(model);
             
+            GameModel gameSave = _gameSaveRepository.GetCurrentGame();
+
+            if (!gameSave.Npc.Exists(h => h.ID.Equals(model.ID)))
+            { 
+                gameSave.Npc.Add(model);
+            }
+
             return npcInstance;
         }
     }

@@ -191,7 +191,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -47.2, y: 0}
-  m_SizeDelta: {x: 44.1543, y: 41.6688}
+  m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5885423603622940756
 CanvasRenderer:
@@ -215,9 +215,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -655,17 +655,30 @@ MonoBehaviour:
   <AutoSelect>k__BackingField: 0
   <IsHovered>k__BackingField: 0
   _hasAnimation: 0
-  _hoverAnimation: {fileID: 0}
   _image: {fileID: 3778996897578406895}
   _defaultColor: {r: 1, g: 1, b: 1, a: 1}
   _disableColor: {r: 0.4, g: 0.4, b: 0.5, a: 1}
   <Index>k__BackingField: 0
+  <IsChecked>k__BackingField:
+    _value: 0
   _isAutonomous: 0
+  radioAnimations:
+  - rid: 4745735254604775426
   _textHeroName: {fileID: 1409152259107692625}
   _renderBackground: {fileID: 3778996897578406895}
   _imageArmorHead: {fileID: 3731205306040517298}
   _imageArmorMask: {fileID: 2633244623453237419}
   _imageArmorTorso: {fileID: 3623975126722388036}
+  references:
+    version: 2
+    RefIds:
+    - rid: 4745735254604775426
+      type: {class: UIRadioAnimation_SpritesColor, ns: Code.UI.Components.Animations, asm: UI}
+      data:
+        Models:
+        - Render: {fileID: 4129975582854893356}
+          CheckColor: {r: 0.38768244, g: 0.6792453, b: 0.43935305, a: 1}
+          UnCheckColor: {r: 0.4093438, g: 0.4339623, b: 0.3500356, a: 1}
 --- !u!114 &3778996897578406895 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3979419502397233054, guid: f1def756192d11744b7385b13e79cdec, type: 3}

@@ -6,8 +6,8 @@ namespace Code.UI.Components.Window
     {
         public bool IsOpened { get; protected set; } 
             
-        protected RectTransform rect;
-        protected GameObject body;
+        [SerializeField] protected RectTransform rect;
+        [SerializeField] protected GameObject body;
 
 
         public virtual void Open()

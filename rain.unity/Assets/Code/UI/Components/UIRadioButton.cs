@@ -1,3 +1,4 @@
+using Code.UI.Components.Animations;
 using Essential;
 using Essential.Data;
 using UnityEngine;
@@ -10,8 +11,10 @@ namespace Code.UI.Components
         [field: SerializeField] public ReactiveProperty<bool> IsChecked { get; private set; }
 
         [SerializeField] private bool _isAutonomous;
-        
 
+        [SerializeReference] protected AUIRadioAnimation[] radioAnimations;
+
+        
         private void OnEnable()
         {
             if (IsChecked.Value)
@@ -50,6 +53,11 @@ namespace Code.UI.Components
             {
                 return;
             }
+
+            foreach (AUIRadioAnimation animation in radioAnimations)
+            {
+                animation.InvokeCheckAnimation();
+            }
             
             IsChecked.Value = true;
         }
@@ -61,6 +69,11 @@ namespace Code.UI.Components
                 return;
             }
             
+            foreach (AUIRadioAnimation animation in radioAnimations)
+            {
+                animation.InvokeUnCheckAnimation();
+            }
+
             IsChecked.Value = false;
         }
 
