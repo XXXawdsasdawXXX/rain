@@ -10,7 +10,7 @@ namespace Code.Game.World
     public class CameraFollow : IStartable, IDisposable, ITickable, ILateTickable
     {
         private const float DELEY_DURATION = 0.15f;
-        private const float BLEND = 3.8f;
+        private const float BLEND = 4.8f;
 
         private readonly CameraView _cameraView;
         private readonly IInputService _input;

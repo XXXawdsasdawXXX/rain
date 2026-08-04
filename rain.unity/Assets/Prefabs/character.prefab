@@ -581,7 +581,7 @@ MonoBehaviour:
     <ObstacleLayers>k__BackingField:
       serializedVersion: 2
       m_Bits: 897
-    <CheckRadius>k__BackingField: 0.3
+    <CheckRadius>k__BackingField: 0.2
     <IgnoreCollider>k__BackingField: {fileID: 8518759391917154942}
   <SelectView>k__BackingField: {fileID: 2482651626519346361}
 --- !u!95 &3817094973670576068

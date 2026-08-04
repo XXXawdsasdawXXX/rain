@@ -55,7 +55,11 @@ namespace Code.Game.Characters
             if (currentCell != _lastCellPosition)
             {
                 Vector3 viewPosition = _pathfindingTilemapView.RoundWorldPosition(_input.MouseWorldPosition);
-                _pathfindingDrawer.UpdateSelectTile(viewPosition, _pathfindingService.IsWalkable(currentCell));
+                bool isWalkable = _pathfindingService.IsWalkable(
+                    viewPosition,
+                    _playerPartyProvider.CurrentCharacter.AgentSettings);
+                
+                _pathfindingDrawer.UpdateSelectTile(viewPosition, isWalkable);
                 _lastCellPosition = currentCell;
             }
         }

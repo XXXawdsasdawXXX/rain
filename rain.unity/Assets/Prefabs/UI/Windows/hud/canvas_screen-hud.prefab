@@ -55,6 +55,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6df46079e6094b9b9791a653518eacf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rect: {fileID: 3619011912412805383}
+  body: {fileID: 7861795809572587716}
   <RadioGroupHeroes>k__BackingField: {fileID: 5612335053512141959}
 --- !u!114 &7732141736475663340
 MonoBehaviour:
@@ -69,7 +71,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
+    m_Left: 20
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
@@ -298,7 +300,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 871403075429550789, guid: 51bb909c0f14c0cb5a702288359214d9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 50
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 871403075429550789, guid: 51bb909c0f14c0cb5a702288359214d9, type: 3}
       propertyPath: m_AnchoredPosition.y

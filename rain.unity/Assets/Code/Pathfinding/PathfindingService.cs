@@ -74,12 +74,11 @@ namespace Code.Pathfinding
             return path;
         }
 
-        public bool IsWalkable(Vector3 worldPosition)
+        public bool IsWalkable(Vector3 worldPosition, PathfindingAgentSettings agentSettings)
         {
-            return _isWalkable(_tilemap.WordToCell(worldPosition));
+            return _isWalkable(_tilemap.WordToCell(worldPosition), agentSettings);
         }
-
-
+        
         private PathfindingNode _runAStar(Vector3Int startCell)
         {
             _openNodes.Clear();
@@ -186,6 +185,16 @@ namespace Code.Pathfinding
             }
 
             return !PathfindingCollisionChecker.IsBlocked(_tilemap.CellToWorlds(cell), _agentSettings);
+        }
+        
+        private bool _isWalkable(Vector3Int cell, PathfindingAgentSettings pathfindingAgentSettings)
+        {
+            if (!_tilemap.GetCellData(cell).IsWalkable)
+            {
+                return false;
+            }
+
+            return !PathfindingCollisionChecker.IsBlocked(_tilemap.CellToWorlds(cell), pathfindingAgentSettings);
         }
 
         private PathfindingNode _pickLowestFNode()
