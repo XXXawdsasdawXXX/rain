@@ -73,7 +73,7 @@ namespace Essential
         
 #if UNITY_EDITOR
         [Button]
-        private void _findButtonsInChildren()
+        private void _findEntitiesInChildren()
         {
             _all = _root.GetComponentsInChildren<T>().ToList();
             _enabled = _all.Where(t => t.gameObject.activeInHierarchy).ToList();

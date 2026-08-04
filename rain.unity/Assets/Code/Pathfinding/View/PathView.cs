@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Code.Pathfinding
 {
-    public class PathView : Essential.Mono
+    public class PathView : Essential.Mono, IPathfindingDrawer
     {
         [SerializeField] private Transform _selectedTileBody;
         [SerializeField] private SpriteRenderer _selectTileRender;
@@ -12,21 +12,22 @@ namespace Code.Pathfinding
         [SerializeField] private MonoPool<PathfindingPointView> _pathPointsPool;
 
         
-        public void SetSelectTile(Vector3Int position)
-        {
-            _selectedTileBody.position = position;
-        }
-        
-        public void SetPath(List<Vector3Int> path, bool isWalkable)
+        public void DrawPath(List<Vector3> path, bool isWalkable)
         {
             _pathPointsPool.DisableAll();
-            _selectTileRender.color = isWalkable ? Color.white : Color.red;
 
-            foreach (Vector3Int vector3Int in path)
+            foreach (Vector3 vector3 in path)
             {
                 PathfindingPointView point = _pathPointsPool.GetNext();
-                point.transform.position = vector3Int;
+                point.transform.position = vector3;
+                point.SetColor(isWalkable ? Color.white : Color.red); 
             }
+        }
+
+        public void UpdateSelectTile(Vector3 position, bool isWalkable)
+        {
+            _selectedTileBody.position = position;
+            _selectTileRender.color = isWalkable ? Color.white : Color.red;
         }
     }
 }

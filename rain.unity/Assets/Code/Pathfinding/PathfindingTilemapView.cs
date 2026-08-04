@@ -48,6 +48,11 @@ namespace Code.Pathfinding
                 : _weightTiles.LockTiles;
         }
 
+        public Vector3 RoundWorldPosition(Vector3 world)
+        {
+            return CellToWorlds(WordToCell(world));
+        }
+        
         public bool HasBakedCell(Vector3Int cellPosition)
         {
             _ensureMapBaked();

@@ -10,9 +10,16 @@ using VContainer.Unity;
 
 namespace Code.Game.Characters
 {
+    public interface IPlayerPartyMovement
+    {
+        event Action<CharacterView, List<Vector3>> PathUpdated;
+    }
+    
     [UsedImplicitly]
-    public class PlayerPartyMovement : IStartable, IDisposable
+    public class PlayerPartyMovement : IPlayerPartyMovement, IStartable, IDisposable
     { 
+        public event Action<CharacterView, List<Vector3>> PathUpdated;
+
         private readonly IPathfindingService _pathfinding;
         private readonly IInputService _input;
         private readonly IPlayerPartyProvider _playerPartyProvider;
@@ -58,10 +65,10 @@ namespace Code.Game.Characters
                 return;
             }
 
-            foreach (CharacterView character in _playerPartyProvider.SelectedCharacters)
-            {
-                _followers[character].SetPath(character.Body.position, _input.MouseWorldPosition);
-            }
+            CharacterView character = _playerPartyProvider.CurrentCharacter;
+            IPathfindingFollower followers = _followers[character];
+            followers.SetPath(character.Body.position, _input.MouseWorldPosition);
+            PathUpdated?.Invoke(character, followers.Path);
         }
 
         private void _onInputActionEnded(EInputAction action)
@@ -81,7 +88,12 @@ namespace Code.Game.Characters
                     character.Model.Position = new Position(nextPosition.x, nextPosition.y);
                 }
             }
+
+            CharacterView currentCharacter = _playerPartyProvider.CurrentCharacter;
+            IPathfindingFollower followers = _followers[currentCharacter];
+            PathUpdated?.Invoke(currentCharacter, followers.Path);
         }
+
 
         private void _onCharacterAdded(CharacterView character)
         {
@@ -92,5 +104,6 @@ namespace Code.Game.Characters
             
             _followers.Add(character, new CharacterPathfindingFollower(_pathfinding, character.AgentSettings));
         }
+
     }
 }

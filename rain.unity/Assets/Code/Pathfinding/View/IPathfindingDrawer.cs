@@ -5,6 +5,7 @@ namespace Code.Pathfinding
 {
     public interface IPathfindingDrawer
     {
-        void DrawPath(Vector3Int target, List<Vector3Int> path, bool isWalkable);
+        void DrawPath(List<Vector3> path, bool isWalkable);
+        void UpdateSelectTile(Vector3 position, bool isWalkable);
     }
 }
