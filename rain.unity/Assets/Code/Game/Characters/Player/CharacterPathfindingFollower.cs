@@ -7,6 +7,7 @@ namespace Code.Pathfinding
     public class CharacterPathfindingFollower : IPathfindingFollower
     {
         private readonly IPathfindingService _pathfinding;
+        public int PointIndex => _pathIndex;
         public List<Vector3> Path { get; private set; } = new();
         public bool HasActivePath { get; private set; }
 

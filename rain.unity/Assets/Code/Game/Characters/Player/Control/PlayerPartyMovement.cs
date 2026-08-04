@@ -12,13 +12,13 @@ namespace Code.Game.Characters
 {
     public interface IPlayerPartyMovement
     {
-        event Action<CharacterView, List<Vector3>> PathUpdated;
+        event Action<CharacterView, List<Vector3>, int> PathUpdated;
     }
     
     [UsedImplicitly]
     public class PlayerPartyMovement : IPlayerPartyMovement, IStartable, IDisposable
     { 
-        public event Action<CharacterView, List<Vector3>> PathUpdated;
+        public event Action<CharacterView, List<Vector3>, int> PathUpdated;
 
         private readonly IPathfindingService _pathfinding;
         private readonly IInputService _input;
@@ -68,7 +68,7 @@ namespace Code.Game.Characters
             CharacterView character = _playerPartyProvider.CurrentCharacter;
             IPathfindingFollower followers = _followers[character];
             followers.SetPath(character.Body.position, _input.MouseWorldPosition);
-            PathUpdated?.Invoke(character, followers.Path);
+            PathUpdated?.Invoke(character, followers.Path, followers.PointIndex);
         }
 
         private void _onInputActionEnded(EInputAction action)
@@ -90,8 +90,8 @@ namespace Code.Game.Characters
             }
 
             CharacterView currentCharacter = _playerPartyProvider.CurrentCharacter;
-            IPathfindingFollower followers = _followers[currentCharacter];
-            PathUpdated?.Invoke(currentCharacter, followers.Path);
+            IPathfindingFollower currentFollower = _followers[currentCharacter];
+            PathUpdated?.Invoke(currentCharacter, currentFollower.Path, currentFollower.PointIndex);
         }
 
 

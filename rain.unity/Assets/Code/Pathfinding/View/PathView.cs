@@ -14,13 +14,19 @@ namespace Code.Pathfinding
         
         public void DrawPath(List<Vector3> path, bool isWalkable)
         {
+           
+        }
+
+        public void DrawPath(List<Vector3> path, int currentPointIndex)
+        {
             _pathPointsPool.DisableAll();
 
-            foreach (Vector3 vector3 in path)
+            for (int i = 0; i < path.Count; i++)
             {
+                Vector3 vector3 = path[i];
                 PathfindingPointView point = _pathPointsPool.GetNext();
                 point.transform.position = vector3;
-                point.SetColor(isWalkable ? Color.white : Color.red); 
+                point.SetColor(i >= currentPointIndex ? Color.blue : Color.green);
             }
         }
 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Code.Pathfinding;
 using Core.Input;
 using JetBrains.Annotations;
@@ -34,12 +35,12 @@ namespace Code.Game.Characters
         
         public void Start()
         {
-            
+            _playerPartyMovement.PathUpdated += _redrawPath;
         }
 
         public void Dispose()
         {
-          
+            _playerPartyMovement.PathUpdated -= _redrawPath;
         }
 
         public void Tick()
@@ -52,6 +53,11 @@ namespace Code.Game.Characters
                 _pathfindingDrawer.UpdateSelectTile(viewPosition, _pathfindingService.IsWalkable(currentCell));
                 _lastCellPosition = currentCell;;
             }
+        }
+
+        private void _redrawPath(CharacterView _, List<Vector3> path, int currentPointIndex)
+        {
+            _pathfindingDrawer.DrawPath(path, currentPointIndex);
         }
     }
 }

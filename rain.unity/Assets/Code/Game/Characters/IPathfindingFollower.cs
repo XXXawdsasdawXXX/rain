@@ -5,6 +5,7 @@ namespace Code.Pathfinding
 {
     public interface IPathfindingFollower
     {
+        int PointIndex { get; }
         List<Vector3> Path { get; }
         bool HasActivePath { get; }
         bool TryMoveToNextWorldPosition(out Vector3 nextPosition);
