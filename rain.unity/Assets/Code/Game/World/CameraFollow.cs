@@ -9,37 +9,15 @@ namespace Code.Game.World
     [UsedImplicitly]
     public class CameraFollow : IStartable, IDisposable, ITickable, ILateTickable
     {
-        
-        // на LeftClick down:
-        // candidate = true
-        // pressScreen = mouseScreen
-        //     pressTime = now
-        // anchorWorld = mouseWorld   // пока кандидат
-        //     каждый кадр:
-        // если candidate и не panning:
-        // если время > порог ИЛИ |mouseScreen - pressScreen| > порогПикселей:
-        // panning = true
-        // anchorWorld = mouseWorld   // зафиксировать захват
-        //     если panning:
-        // delta = anchorWorld - mouseWorld
-        //     desired = cameraPos + delta
-        // desired.z = cameraZ
-        //     на LeftClick up:
-        // candidate = false
-        // panning = false
-        // в LateTick:
-        // если panning:
-        // cameraPos = desired
-        private const float DELEY_DURATION = 0.3f;
-        private const float SPEED = 7.2f;
+        private const float DELEY_DURATION = 0.15f;
+        private const float BLEND = 3.8f;
 
         private readonly CameraView _cameraView;
         private readonly IInputService _input;
 
         private float _startPressTime;
         private Vector3 _startPosition;
-        private Vector3 _direction;
-
+        private Vector3 _target;
 
         private bool _isPressed;
 
@@ -52,6 +30,8 @@ namespace Code.Game.World
 
         public void Start()
         {
+            _target = _cameraView.transform.position;
+            
             _input.ActionStarted += _inputActionStarted;
             _input.ActionEnded += _inputActionEnded;
         }
@@ -66,6 +46,7 @@ namespace Code.Game.World
         {
             if (action == EInputAction.LeftClick)
             {
+                _startPressTime = Time.unscaledTime;
                 _startPosition = _input.MouseWorldPosition;
                 _isPressed = true;
             }
@@ -81,17 +62,16 @@ namespace Code.Game.World
 
         public void Tick()
         {
-            if (_isPressed)
+            if (_isPressed && Time.unscaledTime - _startPressTime > DELEY_DURATION)
             {
-                Vector3 target = (_startPosition - _input.MouseWorldPosition);
-                _direction = Vector3.Lerp(_cameraView.transform.position, target, SPEED * Time.deltaTime);
-                _direction.z = -10;
+                _target = _cameraView.transform.position + (_startPosition - _input.MouseWorldPosition);
+                _target.z = -10;
             }
         }
 
         public void LateTick()
         {
-            _cameraView.transform.position = _direction;
+            _cameraView.transform.position = Vector3.Lerp(_cameraView.transform.position, _target, BLEND * Time.deltaTime);
         }
     }
 }
