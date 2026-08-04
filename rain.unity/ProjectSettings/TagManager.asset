@@ -11,10 +11,10 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Wall
+  - Hero
+  - Npc
+  - Enemy
   - 
   - 
   - 
@@ -43,9 +43,6 @@ TagManager:
     locked: 0
   - name: World
     uniqueID: 2375278239
-    locked: 0
-  - name: Environment
-    uniqueID: 3115480497
     locked: 0
   - name: UI
     uniqueID: 2019056011

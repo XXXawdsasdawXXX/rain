@@ -11,6 +11,7 @@ namespace Core.Input
         public event Action<EInputAction> ActionStarted;
         public event Action<EInputAction> ActionEnded;
         public Vector3 MouseWorldPosition { get; }
+        Vector3 MousePosition { get; }
     }
 
     [Preserve]
@@ -20,7 +21,8 @@ namespace Core.Input
         public event Action<EInputAction> ActionStarted;
         public event Action<EInputAction> ActionEnded;
         public Vector3 MouseWorldPosition { get; private set; }
-        
+        public Vector3 MousePosition { get; private set; }
+
         private readonly Camera _camera;
         
         private readonly InputActionKey[] _inputActionKeys = 
@@ -117,7 +119,8 @@ namespace Core.Input
 
         private void _updateMousePosition()
         {
-            Vector3 screenPos = UnityEngine.Input.mousePosition;
+            MousePosition = UnityEngine.Input.mousePosition;
+            Vector3 screenPos = MousePosition;
             screenPos.z = Mathf.Abs(_camera.transform.position.z);
             Vector3 worldPoint = _camera.ScreenToWorldPoint(screenPos);
             worldPoint.z = 0f;
