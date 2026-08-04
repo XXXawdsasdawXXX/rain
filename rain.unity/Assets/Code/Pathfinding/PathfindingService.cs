@@ -74,6 +74,11 @@ namespace Code.Pathfinding
             return path;
         }
 
+        public bool IsWalkable(Vector3 worldPosition)
+        {
+            return _isWalkable(_tilemap.WordToCell(worldPosition));
+        }
+
 
         private PathfindingNode _runAStar(Vector3Int startCell)
         {

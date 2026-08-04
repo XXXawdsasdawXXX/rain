@@ -33,7 +33,7 @@ namespace Code.Game.DI
             builder.Register<PathfindingService>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<PlayerPartyProvider>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<PlayerPartyMovement>(Lifetime.Singleton).AsImplementedInterfaces();
-            builder.Register<PartyPathDrawer>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<PlayerPathDrawer>(Lifetime.Singleton).AsImplementedInterfaces();
 
             //world
             builder.Register<CameraFollow>(Lifetime.Singleton).AsImplementedInterfaces();

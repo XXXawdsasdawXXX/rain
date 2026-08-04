@@ -8,25 +8,28 @@ using VContainer.Unity;
 namespace Code.Game.Characters
 {
     [UsedImplicitly]
-    public class PartyPathDrawer : IStartable, IDisposable, ITickable
+    public class PlayerPathDrawer : IStartable, IDisposable, ITickable
     {
         private readonly IPathfindingDrawer _pathfindingDrawer;
         private readonly IPlayerPartyMovement _playerPartyMovement;
         private readonly IInputService _input;
         private readonly PathfindingTilemapView _pathfindingTilemapView;
+        private readonly IPathfindingService _pathfindingService;
 
-        private Vector3 _lastCellPosition;
+        private Vector3Int _lastCellPosition;
         
-        public PartyPathDrawer(
+        public PlayerPathDrawer(
             IPathfindingDrawer pathfindingDrawer, 
             IPlayerPartyMovement playerPartyMovement,
             IInputService input,
-            PathfindingTilemapView pathfindingTilemapView)
+            PathfindingTilemapView pathfindingTilemapView,
+            IPathfindingService pathfindingService)
         {
             _pathfindingDrawer = pathfindingDrawer;
             _playerPartyMovement = playerPartyMovement;
             _input = input;
             _pathfindingTilemapView = pathfindingTilemapView;
+            _pathfindingService = pathfindingService;
         }
         
         public void Start()
@@ -41,12 +44,13 @@ namespace Code.Game.Characters
 
         public void Tick()
         {
-            Vector3 currentCell = _pathfindingTilemapView.RoundWorldPosition(_input.MouseWorldPosition);
+            Vector3Int currentCell = _pathfindingTilemapView.WordToCell(_input.MouseWorldPosition);
 
             if (currentCell != _lastCellPosition)
             {
-                _pathfindingDrawer.UpdateSelectTile(currentCell,true);//TODO SET IS WALKABLE
-                _lastCellPosition = currentCell;
+                Vector3 viewPosition = _pathfindingTilemapView.RoundWorldPosition(_input.MouseWorldPosition);
+                _pathfindingDrawer.UpdateSelectTile(viewPosition, _pathfindingService.IsWalkable(currentCell));
+                _lastCellPosition = currentCell;;
             }
         }
     }
