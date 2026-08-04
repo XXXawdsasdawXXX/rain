@@ -13,6 +13,7 @@ namespace Code.Game.Characters
     public interface IPlayerPartyMovement
     {
         event Action<CharacterView, List<Vector3>, int> PathUpdated;
+        IPathfindingFollower GetFollower(CharacterView hero);
     }
     
     [UsedImplicitly]
@@ -21,12 +22,14 @@ namespace Code.Game.Characters
         public event Action<CharacterView, List<Vector3>, int> PathUpdated;
 
         private readonly IPathfindingService _pathfinding;
+
         private readonly IInputService _input;
+
         private readonly IPlayerPartyProvider _playerPartyProvider;
-        
+
         private readonly Dictionary<CharacterView, IPathfindingFollower> _followers = new();
 
-        
+
         public PlayerPartyMovement(
             IPlayerPartyProvider playerPartyProvider, 
             IPathfindingService pathfinding, 
@@ -48,14 +51,19 @@ namespace Code.Game.Characters
                 _followers.Add(characterView, new CharacterPathfindingFollower(_pathfinding, characterView.AgentSettings));
             }
         }
-        
+
         public void Dispose()
         {
             _input.ActionEnded -= _onInputActionEnded;
             
             _playerPartyProvider.CharacterAdded -= _onCharacterAdded;
         }
-        
+
+
+        public IPathfindingFollower GetFollower(CharacterView hero)
+        {
+            return _followers[hero];
+        }
 
         private void _onInputActionEnded(EInputAction action)
         {
