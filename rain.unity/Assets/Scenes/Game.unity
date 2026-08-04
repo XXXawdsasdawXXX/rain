@@ -8835,6 +8835,10 @@ MonoBehaviour:
     - {fileID: 330110741}
     _enabled:
     - {fileID: 330110741}
+  _newPathColor: {r: 0.43721077, g: 0.7075472, b: 0.4642444, a: 1}
+  _oldPathColor: {r: 0.5660378, g: 0.54649454, b: 0.39248845, a: 0.42745098}
+  _selectedTileUnWalcableColor: {r: 0.5566038, g: 0.08139017, b: 0.08139017, a: 1}
+  _selectedTileWalcableColor: {r: 0.9696225, g: 0.9811321, b: 0.9302243, a: 1}
 --- !u!1001 &3769483161984776342
 PrefabInstance:
   m_ObjectHideFlags: 0

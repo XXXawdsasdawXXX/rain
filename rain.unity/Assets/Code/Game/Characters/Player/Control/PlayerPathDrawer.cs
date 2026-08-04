@@ -51,7 +51,7 @@ namespace Code.Game.Characters
             {
                 Vector3 viewPosition = _pathfindingTilemapView.RoundWorldPosition(_input.MouseWorldPosition);
                 _pathfindingDrawer.UpdateSelectTile(viewPosition, _pathfindingService.IsWalkable(currentCell));
-                _lastCellPosition = currentCell;;
+                _lastCellPosition = currentCell;
             }
         }
 

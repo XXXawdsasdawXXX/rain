@@ -11,12 +11,13 @@ namespace Code.Pathfinding
         [Space]
         [SerializeField] private MonoPool<PathfindingPointView> _pathPointsPool;
 
-        
-        public void DrawPath(List<Vector3> path, bool isWalkable)
-        {
-           
-        }
+        [SerializeField] private Color _newPathColor;
+        [SerializeField] private Color _oldPathColor;
 
+        [SerializeField] private Color _selectedTileUnWalcableColor;
+        [SerializeField] private Color _selectedTileWalcableColor;
+        
+        
         public void DrawPath(List<Vector3> path, int currentPointIndex)
         {
             _pathPointsPool.DisableAll();
@@ -26,14 +27,14 @@ namespace Code.Pathfinding
                 Vector3 vector3 = path[i];
                 PathfindingPointView point = _pathPointsPool.GetNext();
                 point.transform.position = vector3;
-                point.SetColor(i >= currentPointIndex ? Color.blue : Color.green);
+                point.SetColor(i >= currentPointIndex ? _newPathColor : _oldPathColor);
             }
         }
 
         public void UpdateSelectTile(Vector3 position, bool isWalkable)
         {
             _selectedTileBody.position = position;
-            _selectTileRender.color = isWalkable ? Color.white : Color.red;
+            _selectTileRender.color = isWalkable ? _selectedTileWalcableColor : _selectedTileUnWalcableColor;
         }
     }
 }

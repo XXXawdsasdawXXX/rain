@@ -8,22 +8,25 @@ namespace Core.Input
 {
     public interface IInputService
     {
+        const float HOLDDELEY_DURATION = 0.15f;
+        const float DOUBLE_CLICK_TIME = 0.6f;
         public event Action<EInputAction> ActionStarted;
         public event Action<EInputAction> ActionEnded;
         public Vector3 MouseWorldPosition { get; }
-        Vector3 MousePosition { get; }
+        public float StartLeftClickTime { get; }
     }
 
     [Preserve]
     public sealed class InputService : IInputService, ITickable
     {
-        private const float DOUBLE_CLICK_TIME = 0.6f;
         public event Action<EInputAction> ActionStarted;
         public event Action<EInputAction> ActionEnded;
         public Vector3 MouseWorldPosition { get; private set; }
-        public Vector3 MousePosition { get; private set; }
+        public float StartLeftClickTime { get; private set; }
 
         private readonly Camera _camera;
+
+        private bool _isPressLeftClick;
         
         private readonly InputActionKey[] _inputActionKeys = 
         {
@@ -48,8 +51,7 @@ namespace Core.Input
                 Action = EInputAction.Esc
             }
         };
-
-        private float _lastClickTime;
+        
         
         
         public InputService(CameraView cameraView)
@@ -79,20 +81,26 @@ namespace Core.Input
                     {
                         float time = Time.unscaledTime;
 
-                        if (time - _lastClickTime < DOUBLE_CLICK_TIME)
+                        if (time - StartLeftClickTime < IInputService.DOUBLE_CLICK_TIME)
                         {
                             ActionStarted?.Invoke(EInputAction.DoubleClick);
 
                             Log.Info(this, "invoke double click");
                         }
 
-                        _lastClickTime = time;
+                        _isPressLeftClick = true;
+                        StartLeftClickTime = time;
                     }
                 }
                 
                 if (_wasActionReleased(inputActionKey))
                 {
                     ActionEnded?.Invoke(inputActionKey.Action);
+
+                    if (inputActionKey.Action is EInputAction.LeftClick)
+                    {
+                        _isPressLeftClick = false;
+                    }
                 }
             }
         }
@@ -119,8 +127,8 @@ namespace Core.Input
 
         private void _updateMousePosition()
         {
-            MousePosition = UnityEngine.Input.mousePosition;
-            Vector3 screenPos = MousePosition;
+            Vector3 mousePosition = UnityEngine.Input.mousePosition;
+            Vector3 screenPos = mousePosition;
             screenPos.z = Mathf.Abs(_camera.transform.position.z);
             Vector3 worldPoint = _camera.ScreenToWorldPoint(screenPos);
             worldPoint.z = 0f;

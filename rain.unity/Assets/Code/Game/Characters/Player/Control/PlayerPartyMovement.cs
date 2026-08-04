@@ -39,7 +39,6 @@ namespace Code.Game.Characters
 
         public void Start()
         {
-            _input.ActionStarted += _onInputActionStarted;
             _input.ActionEnded += _onInputActionEnded;
             
             _playerPartyProvider.CharacterAdded += _onCharacterAdded;
@@ -52,36 +51,34 @@ namespace Code.Game.Characters
         
         public void Dispose()
         {
-            _input.ActionStarted -= _onInputActionStarted;
             _input.ActionEnded -= _onInputActionEnded;
             
             _playerPartyProvider.CharacterAdded -= _onCharacterAdded;
         }
-
-        private void _onInputActionStarted(EInputAction action)
-        {
-            if (action != EInputAction.LeftClick)
-            {
-                return;
-            }
-
-            CharacterView character = _playerPartyProvider.CurrentCharacter;
-            IPathfindingFollower followers = _followers[character];
-            followers.SetPath(character.Body.position, _input.MouseWorldPosition);
-            PathUpdated?.Invoke(character, followers.Path, followers.PointIndex);
-        }
+        
 
         private void _onInputActionEnded(EInputAction action)
         {
-            if (action != EInputAction.RightClick)
+            if (action == EInputAction.LeftClick)
             {
-                return;
+                if (Time.unscaledTime - _input.StartLeftClickTime < IInputService.HOLDDELEY_DURATION)
+                {
+                    _setPath();
+                }
             }
+            
+            if (action == EInputAction.RightClick)
+            {
+                _move();
+            }
+        }
 
+        private void _move()
+        {
             foreach (CharacterView character in _playerPartyProvider.Heroes)
             {
                 IPathfindingFollower follower = _followers[character];
-             
+
                 if (follower.HasActivePath && _followers[character].TryMoveToNextWorldPosition(out Vector3 nextPosition))
                 {
                     character.Body.position = nextPosition;
@@ -94,6 +91,13 @@ namespace Code.Game.Characters
             PathUpdated?.Invoke(currentCharacter, currentFollower.Path, currentFollower.PointIndex);
         }
 
+        private void _setPath()
+        {
+            CharacterView character = _playerPartyProvider.CurrentCharacter;
+            IPathfindingFollower followers = _followers[character];
+            followers.SetPath(character.Body.position, _input.MouseWorldPosition);
+            PathUpdated?.Invoke(character, followers.Path, followers.PointIndex);
+        }
 
         private void _onCharacterAdded(CharacterView character)
         {
@@ -104,6 +108,5 @@ namespace Code.Game.Characters
             
             _followers.Add(character, new CharacterPathfindingFollower(_pathfinding, character.AgentSettings));
         }
-
     }
 }
