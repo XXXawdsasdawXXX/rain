@@ -26,6 +26,7 @@ namespace Code.Game.Save
         public string ID;
         public string Name;
         public int Health;
+        public int StepEnergy;
         public Position Position;
         public Dictionary<EBodyPart, int> Armor;
 
@@ -35,6 +36,7 @@ namespace Code.Game.Save
             ID = Guid.NewGuid().ToString(); 
             Name = name;
             Health = 100;
+            StepEnergy = 100;
             Position = new Position();
             Armor = new Dictionary<EBodyPart, int>();
 

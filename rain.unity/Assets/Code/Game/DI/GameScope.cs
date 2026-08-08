@@ -25,6 +25,9 @@ namespace Code.Game.DI
         
         protected override void Configure(IContainerBuilder builder)
         {
+            //game
+            builder.Register<GamePhaseService>(Lifetime.Singleton).AsImplementedInterfaces();
+
             //path
             builder.RegisterInstance(_weightTilesConfiguration).AsSelf();
             builder.RegisterInstance(_pathfindingTilemapView).AsSelf();
@@ -46,6 +49,5 @@ namespace Code.Game.DI
             //entry point
             builder.RegisterEntryPoint<GameWorldBootstrap>();
         }
-        
     }
 }

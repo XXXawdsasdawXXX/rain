@@ -23,6 +23,7 @@ namespace Code.UI.Hud
             builder.Register<HudNavigator>(Lifetime.Singleton).AsImplementedInterfaces();
             
             builder.Register<HeroesListWindowController>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<PauseWindowController>(Lifetime.Singleton).AsImplementedInterfaces();
         }
         
 #if UNITY_EDITOR

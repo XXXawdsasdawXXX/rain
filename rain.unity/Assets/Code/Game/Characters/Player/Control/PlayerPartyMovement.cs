@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Code.Game.Characters.Hero;
+using Code.Game.StateMachine;
 using Code.Pathfinding;
 using Core.Input;
 using Essential;
@@ -28,22 +29,26 @@ namespace Code.Game.Characters
         private readonly IPlayerPartyProvider _playerPartyProvider;
 
         private readonly Dictionary<CharacterView, IPathfindingFollower> _followers = new();
+        private readonly IGamePhaseService _gamePhaseService;
 
+        private bool _isMoved;
 
         public PlayerPartyMovement(
             IPlayerPartyProvider playerPartyProvider, 
             IPathfindingService pathfinding, 
-            IInputService input)
+            IInputService input, 
+            IGamePhaseService gamePhaseService)
         {
             _playerPartyProvider = playerPartyProvider;
             _pathfinding = pathfinding;
             _input = input;
+            _gamePhaseService = gamePhaseService;
         }
 
         public void Start()
         {
+            _gamePhaseService.PhaseChanged += _onGamePhaseChanged;
             _input.ActionEnded += _onInputActionEnded;
-            
             _playerPartyProvider.CharacterAdded += _onCharacterAdded;
 
             foreach (CharacterView characterView in _playerPartyProvider.Heroes)
@@ -54,8 +59,8 @@ namespace Code.Game.Characters
 
         public void Dispose()
         {
+            _gamePhaseService.PhaseChanged -= _onGamePhaseChanged;
             _input.ActionEnded -= _onInputActionEnded;
-            
             _playerPartyProvider.CharacterAdded -= _onCharacterAdded;
         }
 
@@ -65,19 +70,30 @@ namespace Code.Game.Characters
             return _followers[hero];
         }
 
-        private void _onInputActionEnded(EInputAction action)
+        private void _onGamePhaseChanged(EGamePhase gamePhase)
         {
-            if (action == EInputAction.LeftClick)
-            {
-                if (Time.unscaledTime - _input.StartLeftClickTime < IInputService.HOLDDELEY_DURATION)
-                {
-                    _setPath();
-                }
-            }
-            
-            if (action == EInputAction.RightClick)
+            if (gamePhase is EGamePhase.WorldTurn && !_isMoved)
             {
                 _move();
+                _isMoved = true;
+            }
+            else if(gamePhase is EGamePhase.PlayerTurn)
+            {
+                _isMoved = false;
+            }
+        }
+
+        private void _onInputActionEnded(EInputAction action)
+        {
+            if (_gamePhaseService.Phase is EGamePhase.PlayerTurn)
+            {
+                if (action == EInputAction.LeftClick)
+                {
+                    if (Time.unscaledTime - _input.StartLeftClickTime < IInputService.HOLDDELEY_DURATION)
+                    {
+                        _setPath();
+                    }
+                }
             }
         }
 
@@ -91,6 +107,7 @@ namespace Code.Game.Characters
                 {
                     character.Body.position = nextPosition;
                     character.Model.Position = new Position(nextPosition.x, nextPosition.y);
+                    character.Model.StepEnergy -= 1;
                 }
             }
 
