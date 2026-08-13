@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Essential;
 using UnityEngine;
@@ -6,15 +7,16 @@ namespace Code.Pathfinding
 {
     public class CharacterPathfindingFollower : IPathfindingFollower
     {
-        private readonly IPathfindingService _pathfinding;
+        public event Action Updated;
         public int PointIndex => _pathIndex;
         public List<Vector3> Path { get; private set; } = new();
         public bool HasActivePath { get; private set; }
 
-        private int _pathIndex;
-      
+        private readonly IPathfindingService _pathfinding;
         private readonly PathfindingAgentSettings _agentSettings;
+        
         private Vector3 _end;
+        private int _pathIndex;
 
 
         public CharacterPathfindingFollower(IPathfindingService pathfinding, PathfindingAgentSettings agentSettings)
@@ -30,8 +32,17 @@ namespace Code.Pathfinding
             
             _pathIndex = 1;
             HasActivePath = Path.Count > 1;
+            
+            Updated?.Invoke();
         }
-        
+
+        public void Clear()
+        {
+            Path.Clear();
+            _pathIndex = 0;
+            HasActivePath = false;
+        }
+
 
         public bool TryMoveToNextWorldPosition(out Vector3 nextPosition)
         {
@@ -62,8 +73,10 @@ namespace Code.Pathfinding
             
             HasActivePath = _pathIndex < Path.Count;
     
-            Log.Info(this, $"[MoveToNextWorldPosition] step to {nextPosition}");
+            Updated?.Invoke();
     
+            Log.Info(this, $"[MoveToNextWorldPosition] step to {nextPosition}");
+            
             return true;
         }
     }

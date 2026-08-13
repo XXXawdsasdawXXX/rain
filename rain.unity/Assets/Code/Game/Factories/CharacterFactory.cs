@@ -1,6 +1,8 @@
 using Code.Game.Characters;
 using Code.Game.Characters.Hero;
 using Code.Game.Save;
+using Code.Game.World.Turns;
+using Code.Pathfinding;
 using Core.AssetManagement.Libraries.Assets;
 using Essential.Extensions;
 using JetBrains.Annotations;
@@ -17,21 +19,27 @@ namespace Code.Game.Factories
         private readonly AssetLibrary _assetLibrary;
         private readonly IPlayerPartyProvider _playerPartyProvider;
         private readonly GameSaveRepository _gameSaveRepository;
+        private readonly IWorldActorRegistry _worldActorRegistry;
+        private readonly IPathfindingService _pathfindingService;
 
 
         public CharacterFactory(
             IObjectResolver resolver, 
             AssetLibrary assetLibrary, 
             IPlayerPartyProvider playerPartyProvider, 
-            GameSaveRepository gameSaveRepository)
+            GameSaveRepository gameSaveRepository,
+            IWorldActorRegistry worldActorRegistry, 
+            IPathfindingService pathfindingService)
         {
             _resolver = resolver;
             _assetLibrary = assetLibrary;
             _playerPartyProvider = playerPartyProvider;
             _gameSaveRepository = gameSaveRepository;
+            _worldActorRegistry = worldActorRegistry;
+            _pathfindingService = pathfindingService;
         }
 
-        public CharacterView SpawnHero(CharacterModel model)
+        public CharacterWorldActor SpawnHero(CharacterModel model)
         {
             CharacterView heroPrefab = _assetLibrary.SceneComponents
                 .Get(AssetsKey.CHARACTER)
@@ -43,8 +51,11 @@ namespace Code.Game.Factories
                 Quaternion.identity);
             
             heroInstance.SetModel(model);
+
+            IPathfindingFollower follower = new CharacterPathfindingFollower(_pathfindingService, heroInstance.AgentSettings); 
+            CharacterWorldActor actor = new(heroInstance, follower);
             
-            _playerPartyProvider.AddHero(heroInstance);
+            _playerPartyProvider.AddHero(actor);
 
             GameModel gameSave = _gameSaveRepository.GetCurrentGame();
 
@@ -53,10 +64,12 @@ namespace Code.Game.Factories
                 gameSave.Heroes.Add(model);
             }
             
-            return heroInstance;
+            _worldActorRegistry.Register(actor);
+            
+            return actor;
         }
 
-        public CharacterView SpawnNpc(CharacterModel model)
+        public CharacterWorldActor SpawnNpc(CharacterModel model)
         {
             CharacterView npcPrefab = _assetLibrary.SceneComponents
                 .Get(AssetsKey.CHARACTER)
@@ -75,8 +88,13 @@ namespace Code.Game.Factories
             { 
                 gameSave.Npc.Add(model);
             }
+            
+            IPathfindingFollower follower = new CharacterPathfindingFollower(_pathfindingService, npcInstance.AgentSettings); 
+            CharacterWorldActor actor = new(npcInstance, follower);
+            
+            _worldActorRegistry.Register(actor);
 
-            return npcInstance;
+            return actor;
         }
     }
 }

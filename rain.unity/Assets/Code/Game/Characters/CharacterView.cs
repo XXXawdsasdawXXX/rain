@@ -16,7 +16,6 @@ namespace Code.Game.Characters
         [field: SerializeField] public ArmorRender ArmorRender { get; private set; }
         [field: SerializeField] public PathfindingAgentSettings AgentSettings { get; private set; }
         [field: SerializeField] public GameObject SelectView { get; set; }
-        
         public CharacterModel Model { get; private set; }
 
         private ArmoryLibrary _armoryLibrary;
@@ -26,11 +25,6 @@ namespace Code.Game.Characters
         public void Construct(ArmoryLibrary library)
         {
             _armoryLibrary = library;
-        }
-
-        public void SetModel(CharacterModel model)
-        {
-            Model = model;
         }
 
         public void Start()
@@ -46,6 +40,11 @@ namespace Code.Game.Characters
         public void Dispose()
         {
             Model.ArmorChanged -= _updateArmorRender;
+        }
+
+        public void SetModel(CharacterModel model)
+        {
+            Model = model;
         }
 
         public void SetStateForSelectedView(bool isSelect)

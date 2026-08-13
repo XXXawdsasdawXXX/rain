@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Code.Game.Characters.Hero;
 using Code.Pathfinding;
 using Core.Input;
@@ -13,24 +12,23 @@ namespace Code.Game.Characters
     public class PlayerPathDrawer : IStartable, IDisposable, ITickable
     {
         private readonly IPathfindingDrawer _pathfindingDrawer;
-        private readonly IPlayerPartyMovement _playerPartyMovement;
         private readonly IInputService _input;
         private readonly PathfindingTilemapView _pathfindingTilemapView;
         private readonly IPathfindingService _pathfindingService;
-
-        private Vector3Int _lastCellPosition;
         private readonly IPlayerPartyProvider _playerPartyProvider;
 
+        private Vector3Int _lastCellPosition;
+        private IPathfindingFollower _currentFollower;   
+        
+        
         public PlayerPathDrawer(
             IPathfindingDrawer pathfindingDrawer, 
-            IPlayerPartyMovement playerPartyMovement,
             IInputService input,
             PathfindingTilemapView pathfindingTilemapView,
             IPathfindingService pathfindingService,
             IPlayerPartyProvider playerPartyProvider)
         {
             _pathfindingDrawer = pathfindingDrawer;
-            _playerPartyMovement = playerPartyMovement;
             _input = input;
             _pathfindingTilemapView = pathfindingTilemapView;
             _pathfindingService = pathfindingService;
@@ -39,13 +37,12 @@ namespace Code.Game.Characters
         
         public void Start()
         {
-            _playerPartyMovement.PathUpdated += _redrawPath;
-            _playerPartyProvider.CharacterSelected += _updatePathView;
+            _playerPartyProvider.HeroSelected += _onHeroSelected;
         }
 
         public void Dispose()
         {
-            _playerPartyMovement.PathUpdated -= _redrawPath;
+            _playerPartyProvider.HeroSelected += _onHeroSelected;
         }
 
         public void Tick()
@@ -57,22 +54,30 @@ namespace Code.Game.Characters
                 Vector3 viewPosition = _pathfindingTilemapView.RoundWorldPosition(_input.MouseWorldPosition);
                 bool isWalkable = _pathfindingService.IsWalkable(
                     viewPosition,
-                    _playerPartyProvider.CurrentCharacter.AgentSettings);
+                    _playerPartyProvider.CurrentCharacter.View.AgentSettings);
                 
                 _pathfindingDrawer.UpdateSelectTile(viewPosition, isWalkable);
                 _lastCellPosition = currentCell;
             }
         }
 
-        private void _updatePathView(CharacterView hero)
+        private void _onHeroSelected(CharacterWorldActor hero)
         {
-            IPathfindingFollower follower = _playerPartyMovement.GetFollower(hero);
-            _pathfindingDrawer.DrawPath(follower.Path, follower.PointIndex);    
+            if (_currentFollower != null)
+            {
+                _currentFollower.Updated -= _redrawPath;
+            }
+            
+            _currentFollower = hero.PathfindingFollower;
+            
+            _pathfindingDrawer.DrawPath(_currentFollower.Path, _currentFollower.PointIndex);
+
+            _currentFollower.Updated += _redrawPath;
         }
 
-        private void _redrawPath(CharacterView _, List<Vector3> path, int currentPointIndex)
+        private void _redrawPath()
         {
-            _pathfindingDrawer.DrawPath(path, currentPointIndex);
+            _pathfindingDrawer.DrawPath(_currentFollower.Path, _currentFollower.PointIndex);
         }
     }
 }

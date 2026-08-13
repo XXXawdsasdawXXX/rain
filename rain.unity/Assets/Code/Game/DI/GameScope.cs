@@ -4,6 +4,7 @@ using Code.Game.Characters.Hero;
 using Code.Game.Factories;
 using Code.Game.StateMachine;
 using Code.Game.World;
+using Code.Game.World.Turns;
 using Code.Pathfinding;
 using TriInspector;
 using UnityEngine;
@@ -27,6 +28,7 @@ namespace Code.Game.DI
         {
             //game
             builder.Register<GamePhaseService>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<WorldActorRegistry>(Lifetime.Singleton).AsImplementedInterfaces();
 
             //path
             builder.RegisterInstance(_weightTilesConfiguration).AsSelf();
@@ -35,7 +37,7 @@ namespace Code.Game.DI
             
             builder.Register<PathfindingService>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<PlayerPartyProvider>(Lifetime.Singleton).AsImplementedInterfaces();
-            builder.Register<PlayerPartyMovement>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<PlayerPathController>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<PlayerPathDrawer>(Lifetime.Singleton).AsImplementedInterfaces();
 
             //world

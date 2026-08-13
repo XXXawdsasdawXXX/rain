@@ -34,21 +34,18 @@ namespace Code.UI.Hud.Windows.Heroes
         {
             base.Start();
 
-            foreach (CharacterView partyCharacter in _playerParty.Heroes)
+            foreach (CharacterWorldActor partyCharacter in _playerParty.Heroes)
             {
                 _addHeroTab(partyCharacter);
             }
-
-            if (_playerParty.SelectedCharacters.Count > 0)
-            {
-                _selectHero(_playerParty.SelectedCharacters[0]);
-            }
+            
+            _selectHero(_playerParty.CurrentCharacter);
         }
 
         protected override void subscribe()
         {
             _playerParty.CharacterAdded += _addHeroTab;
-            _playerParty.CharacterSelected += _selectHero;
+            _playerParty.HeroSelected += _selectHero;
 
             view.RadioGroupHeroes.Checked += _onChangeSelectedHeroes;
         }
@@ -56,12 +53,12 @@ namespace Code.UI.Hud.Windows.Heroes
         protected override void unSubscribe()
         {
             _playerParty.CharacterAdded -= _addHeroTab;
-            _playerParty.CharacterSelected -= _selectHero;
+            _playerParty.HeroSelected -= _selectHero;
             
             view.RadioGroupHeroes.Checked -= _onChangeSelectedHeroes;
         }
 
-        private void _addHeroTab(CharacterView characterView)
+        private void _addHeroTab(CharacterWorldActor character)
         {
             HeroTabView tab = view.RadioGroupHeroes.AddRadioButton<HeroTabView>();
             tab.Construct(_armoryLibrary);
@@ -72,18 +69,18 @@ namespace Code.UI.Hud.Windows.Heroes
                 return;
             }
             
-            tab.SetCharacterModel(characterView.Model);
+            tab.SetCharacterModel(character.View.Model);
         }
 
         //where player party change selected heroes from world
-        private void _selectHero(CharacterView characterView)
+        private void _selectHero(CharacterWorldActor character)
         {
-            if (characterView == null)
+            if (character == null)
             {
                 return;
             }
 
-            view.RadioGroupHeroes.SetCheckedWithoutNotify(_playerParty.Heroes.IndexOf(characterView));
+            view.RadioGroupHeroes.SetCheckedWithoutNotify(_playerParty.Heroes.IndexOf(character));
         }
 
         //where change selected hero from ui

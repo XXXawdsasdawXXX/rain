@@ -2,11 +2,13 @@ using System;
 using Code.Game.Characters;
 using Code.Game.Characters.Hero;
 using Core.Input;
+using JetBrains.Annotations;
 using UnityEngine;
 using VContainer.Unity;
 
 namespace Code.Game.World
 {
+    [UsedImplicitly]
     public class PlayerSelection : IStartable, IDisposable
     {
         private readonly IInputService _input;
@@ -37,7 +39,10 @@ namespace Code.Game.World
 
                 if (collider2D.TryGetComponent(out CharacterView view))
                 {
-                    _playerPartyProvider.SetCurrentCharacter(view);
+                    if (_playerPartyProvider.TryGet(view.Model.ID, out CharacterWorldActor worldActor))
+                    {
+                        _playerPartyProvider.SetCurrentCharacter(worldActor);
+                    }
                 }
             }
         }

@@ -5,7 +5,7 @@ namespace Code.Game.Factories
 {
     public interface ICharacterFactory
     {
-        CharacterView SpawnHero(CharacterModel model);
-        CharacterView SpawnNpc(CharacterModel model);
+        CharacterWorldActor SpawnHero(CharacterModel model);
+        CharacterWorldActor SpawnNpc(CharacterModel model);
     }
 }
