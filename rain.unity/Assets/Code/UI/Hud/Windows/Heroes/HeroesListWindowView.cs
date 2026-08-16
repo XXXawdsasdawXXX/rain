@@ -60,16 +60,16 @@ namespace Code.UI.Hud.Windows.Heroes
 
         private void _addHeroTab(CharacterWorldActor character)
         {
-            HeroTabView tab = view.RadioGroupHeroes.AddRadioButton<HeroTabView>();
-            tab.Construct(_armoryLibrary);
+            HeroGroupTabView groupTab = view.RadioGroupHeroes.AddRadioButton<HeroGroupTabView>();
+            groupTab.Construct(_armoryLibrary);
            
-            if (tab == null)
+            if (groupTab == null)
             {
                 Log.Error(this, $"[_addHeroTab] can`t find component 'hero tab view'");
                 return;
             }
             
-            tab.SetCharacterModel(character.View.Model);
+            groupTab.SetCharacterModel(character.View.Model);
         }
 
         //where player party change selected heroes from world

@@ -21,6 +21,10 @@ namespace Code.UI.Components
        
         private readonly Queue<UIRadioButton> _checked = new();
 
+        private void Awake()
+        {
+            _pool.DisableAll();
+        }
 
         public void Start()
         {
@@ -40,20 +44,6 @@ namespace Code.UI.Components
             _unsubscribe();
         }
 
-        public UIRadioButton AddRadioButton()
-        {
-            UIRadioButton button = _pool.GetNext();
-            
-            int index = _pool.GetAllEnabled().Count() - 1;
-         
-            button.Clicked += () => 
-            {
-                _setChecked(index);
-            };
-
-            return button;
-        }
-        
         public T AddRadioButton<T>() where T : Essential.Mono
         {
             UIRadioButton button = _pool.GetNext();

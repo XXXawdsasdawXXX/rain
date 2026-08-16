@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Code.UI.Hud.Windows.Heroes
 {
-    public class HeroTabView : UIRadioButton
+    public class HeroGroupTabView : UIRadioButton
     {
         public CharacterModel Model { get; private set; }
         
