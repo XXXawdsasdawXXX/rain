@@ -24,6 +24,7 @@ namespace Code.UI.Hud
             
             builder.Register<HeroesListWindowController>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<PauseWindowController>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<EndStepButtonController>(Lifetime.Singleton).AsImplementedInterfaces();
         }
         
 #if UNITY_EDITOR

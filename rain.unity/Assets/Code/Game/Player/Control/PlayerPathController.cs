@@ -55,8 +55,7 @@ namespace Code.Game.Characters
         private void _setPathForCurrentHero()
         {
             CharacterWorldActor hero = _playerPartyProvider.CurrentCharacter; 
-            hero.SetOrder(new MoveToPointOrder(hero, _input.MouseWorldPosition));
-            Log.Info(this, "[_setPathForCurrentHero] set path");
+            hero.SetOrder(new MoveToPointOrder(hero, _input.MouseWorldPosition)); 
         }
     }
 }

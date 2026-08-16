@@ -1,5 +1,6 @@
 using System;
 using Code.Game.Characters.Hero;
+using Code.Game.StateMachine;
 using Code.Pathfinding;
 using Core.Input;
 using JetBrains.Annotations;
@@ -16,18 +17,21 @@ namespace Code.Game.Characters
         private readonly PathfindingTilemapView _pathfindingTilemapView;
         private readonly IPathfindingService _pathfindingService;
         private readonly IPlayerPartyProvider _playerPartyProvider;
+        private readonly IGamePhaseService _gamePhase;
 
         private Vector3Int _lastCellPosition;
-        private IPathfindingFollower _currentFollower;   
-        
-        
+        private IPathfindingFollower _currentFollower;
+
+
         public PlayerPathDrawer(
             IPathfindingDrawer pathfindingDrawer, 
             IInputService input,
             PathfindingTilemapView pathfindingTilemapView,
             IPathfindingService pathfindingService,
-            IPlayerPartyProvider playerPartyProvider)
+            IPlayerPartyProvider playerPartyProvider,
+            IGamePhaseService gamePhase)
         {
+            _gamePhase = gamePhase;
             _pathfindingDrawer = pathfindingDrawer;
             _input = input;
             _pathfindingTilemapView = pathfindingTilemapView;
@@ -47,6 +51,11 @@ namespace Code.Game.Characters
 
         public void Tick()
         {
+            if (_gamePhase.Phase is EGamePhase.Paused)
+            {
+                return;
+            }
+            
             Vector3Int currentCell = _pathfindingTilemapView.WordToCell(_input.MouseWorldPosition);
 
             if (currentCell != _lastCellPosition)
