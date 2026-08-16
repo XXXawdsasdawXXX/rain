@@ -347,16 +347,10 @@ MonoBehaviour:
   body: {fileID: 1429535122017847380}
   <TextHeroName>k__BackingField: {fileID: 2492587459717029935}
   <ArmorRender>k__BackingField:
-    _render:
-    - <Part>k__BackingField: 0
-      <Renderers>k__BackingField:
-      - {fileID: 1554315393209233621}
-    - <Part>k__BackingField: 1
-      <Renderers>k__BackingField:
-      - {fileID: 206819103016633036}
-    - <Part>k__BackingField: 2
-      <Renderers>k__BackingField:
-      - {fileID: 239765796432699450}
+    render:
+    - rid: 4745735555419734030
+    - rid: 4745735555419734031
+    - rid: 4745735555419734032
   <Stats>k__BackingField:
     _views:
     - <StatType>k__BackingField: 1
@@ -365,6 +359,27 @@ MonoBehaviour:
     - <StatType>k__BackingField: 2
       <TextRangeValue>k__BackingField: {fileID: 0}
       <ImageFill>k__BackingField: {fileID: 6193890067213445125}
+  references:
+    version: 2
+    RefIds:
+    - rid: 4745735555419734030
+      type: {class: UIArmorPieceView, ns: Code.UI.Components, asm: UI}
+      data:
+        <Part>k__BackingField: 0
+        <Renderers>k__BackingField:
+        - {fileID: 1554315393209233621}
+    - rid: 4745735555419734031
+      type: {class: UIArmorPieceView, ns: Code.UI.Components, asm: UI}
+      data:
+        <Part>k__BackingField: 1
+        <Renderers>k__BackingField:
+        - {fileID: 206819103016633036}
+    - rid: 4745735555419734032
+      type: {class: UIArmorPieceView, ns: Code.UI.Components, asm: UI}
+      data:
+        <Part>k__BackingField: 2
+        <Renderers>k__BackingField:
+        - {fileID: 239765796432699450}
 --- !u!1 &1546546341857032502
 GameObject:
   m_ObjectHideFlags: 0

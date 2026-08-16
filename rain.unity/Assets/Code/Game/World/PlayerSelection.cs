@@ -37,9 +37,9 @@ namespace Code.Game.World
             {
                 Collider2D collider2D = Physics2D.OverlapPoint(_input.MouseWorldPosition);
 
-                if (collider2D.TryGetComponent(out CharacterView view))
+                if (collider2D.TryGetComponent(out WorldCharacterRender view))
                 {
-                    if (_playerPartyProvider.TryGet(view.Model.ID, out CharacterWorldActor worldActor))
+                    if (_playerPartyProvider.TryGet(view.ID, out CharacterWorldActor worldActor))
                     {
                         _playerPartyProvider.SetCurrentCharacter(worldActor);
                     }

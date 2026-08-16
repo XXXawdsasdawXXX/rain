@@ -11,7 +11,7 @@ namespace Code.Game.World.Turns
     // Контекст минимальный: ссылка на CharacterView + IPathfindingFollower (для героев). Не раздувать.
     public interface IWorldActorRegistry
     {
-        void Register(IWorldActor actor);
+        void Register(IWorldTurnBeginListener actor);
     }
 
     [UsedImplicitly]
@@ -19,7 +19,7 @@ namespace Code.Game.World.Turns
     {
         private readonly IGamePhaseService _phaseService;
 
-        private readonly List<IWorldActor> _actors = new();
+        private readonly List<IWorldTurnBeginListener> _beginListener = new();
 
         private bool _isTriggered;
 
@@ -39,9 +39,9 @@ namespace Code.Game.World.Turns
             _phaseService.PhaseChanged -= _onPhaseChanged;
         }
 
-        public void Register(IWorldActor actor)
+        public void Register(IWorldTurnBeginListener actor)
         {
-            _actors.Add(actor);
+            _beginListener.Add(actor);
         }
 
         private void _onPhaseChanged(EGamePhase phase)
@@ -53,7 +53,7 @@ namespace Code.Game.World.Turns
                    return;
                 }
                 
-                foreach (IWorldActor actor in _actors)   
+                foreach (IWorldActor actor in _beginListener)   
                 {
                     actor.OnWorldTurnBegin();
                 }

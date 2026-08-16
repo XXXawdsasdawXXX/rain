@@ -63,7 +63,7 @@ namespace Code.Game.Characters
                 Vector3 viewPosition = _pathfindingTilemapView.RoundWorldPosition(_input.MouseWorldPosition);
                 bool isWalkable = _pathfindingService.IsWalkable(
                     viewPosition,
-                    _playerPartyProvider.CurrentCharacter.View.AgentSettings);
+                    _playerPartyProvider.CurrentCharacter.Render.AgentSettings);
                 
                 _pathfindingDrawer.UpdateSelectTile(viewPosition, isWalkable);
                 _lastCellPosition = currentCell;

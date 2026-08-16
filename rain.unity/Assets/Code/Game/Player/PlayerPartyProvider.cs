@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Essential;
 using JetBrains.Annotations;
+using VContainer.Unity;
 
 namespace Code.Game.Characters.Hero
 {
@@ -11,14 +12,14 @@ namespace Code.Game.Characters.Hero
     {
         public event Action<CharacterWorldActor> CharacterAdded;
         public event Action<CharacterWorldActor> HeroSelected;
-        
         public List<CharacterWorldActor> Heroes { get; } = new();
         public CharacterWorldActor CurrentCharacter { get; private set; }
+
         
-        
+
         public void AddHero(CharacterWorldActor character)
         {
-            if (Heroes.Exists(c => c.ID == character.ID))
+            if (Heroes.Exists(c => c.Model.ID == character.Model.ID))
             {
                 Log.Error(this, "Character already exist into collection");
                 return;
@@ -49,7 +50,7 @@ namespace Code.Game.Characters.Hero
 
         public bool TryGet(string heroID, out CharacterWorldActor actor)
         {
-            actor = Heroes.FirstOrDefault(h => h.ID == heroID);
+            actor = Heroes.FirstOrDefault(h => h.Model.ID == heroID);
             return actor != null;
         }
     }

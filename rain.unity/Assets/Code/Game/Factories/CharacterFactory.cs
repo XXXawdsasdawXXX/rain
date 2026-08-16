@@ -45,20 +45,17 @@ namespace Code.Game.Factories
 
         public CharacterWorldActor SpawnHero(CharacterModel model)
         {
-            CharacterView heroPrefab = _assetLibrary.SceneComponents
+            WorldCharacterRender heroPrefab = _assetLibrary.SceneComponents
                 .Get(AssetsKey.CHARACTER)
-                .GetComponent<CharacterView>();
+                .GetComponent<WorldCharacterRender>();
             
-            CharacterView heroInstance = _resolver.Instantiate(
+            WorldCharacterRender heroInstance = _resolver.Instantiate(
                 heroPrefab, 
                 model.Position.AsVector3(), 
                 Quaternion.identity);
             
-            heroInstance.SetModel(model);
-
             IPathfindingFollower follower = new CharacterPathfindingFollower(_pathfindingService, heroInstance.AgentSettings); 
-            CharacterWorldActor actor = new(heroInstance, follower, _armoryLibrary);
-            
+            CharacterWorldActor actor = new(model, heroInstance, follower, _armoryLibrary);
             _playerPartyProvider.AddHero(actor);
 
             GameModel gameSave = _gameSaveRepository.GetCurrentGame();
@@ -75,17 +72,15 @@ namespace Code.Game.Factories
 
         public CharacterWorldActor SpawnNpc(CharacterModel model)
         {
-            CharacterView npcPrefab = _assetLibrary.SceneComponents
+            WorldCharacterRender npcPrefab = _assetLibrary.SceneComponents
                 .Get(AssetsKey.CHARACTER)
-                .GetComponent<CharacterView>();
+                .GetComponent<WorldCharacterRender>();
             
-            CharacterView npcInstance = _resolver.Instantiate(
+            WorldCharacterRender npcInstance = _resolver.Instantiate(
                 npcPrefab, 
                 model.Position.AsVector3(), 
                 Quaternion.identity);
-            
-            npcInstance.SetModel(model);
-            
+
             GameModel gameSave = _gameSaveRepository.GetCurrentGame();
 
             if (!gameSave.Npc.Exists(h => h.ID.Equals(model.ID)))
@@ -94,7 +89,7 @@ namespace Code.Game.Factories
             }
             
             IPathfindingFollower follower = new CharacterPathfindingFollower(_pathfindingService, npcInstance.AgentSettings); 
-            CharacterWorldActor actor = new(npcInstance, follower, _armoryLibrary);
+            CharacterWorldActor actor = new(model, npcInstance, follower, _armoryLibrary);
             
             _worldActorRegistry.Register(actor);
 

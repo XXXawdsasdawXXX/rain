@@ -1,23 +1,22 @@
 ﻿using System;
 using Code.Game.Characters.Armor;
-using Code.Game.Save;
 using Code.Pathfinding;
+using TriInspector;
 using UnityEngine;
 using VContainer;
-using VContainer.Unity;
 
 namespace Code.Game.Characters
 {
-    public class CharacterView : Essential.Mono, IStartable, IDisposable
+    public class WorldCharacterRender : Essential.Mono, IDisposable
     {
         [field: SerializeField] public Transform Body { get; private set; }
         [field: SerializeField] public Collider2D Collider { get; private set; }
         [field: SerializeField] public Animator Animator { get; private set; }
-        [field: SerializeField] public ArmorRender ArmorRender { get; private set; }
+        [field: SerializeField] public WorldArmorRender WorldArmor { get; private set; }
         [field: SerializeField] public PathfindingAgentSettings AgentSettings { get; private set; }
         [field: SerializeField] public GameObject SelectView { get; set; }
-        public CharacterModel Model { get; private set; }
 
+        [field: SerializeField, ReadOnly] public string ID { get; private set; }
         private ArmoryLibrary _armoryLibrary;
 
         
@@ -25,37 +24,27 @@ namespace Code.Game.Characters
         public void Construct(ArmoryLibrary library)
         {
             _armoryLibrary = library;
+            WorldArmor.SetArmorLibrary(_armoryLibrary);
         }
-
-        public void Start()
-        {
-            Model.ArmorChanged += _updateArmorRender;
-
-            foreach ((EBodyPart part, int setIndex) in Model.Armor)
-            {
-                _updateArmorRender(part, setIndex);
-            }
-        }
-
+        
         public void Dispose()
         {
-            Model.ArmorChanged -= _updateArmorRender;
+            WorldArmor.DisposeHero();
         }
-
-        public void SetModel(CharacterModel model)
+        
+        public void SetActor(CharacterWorldActor actor)
         {
-            Model = model;
-        }
+            if (actor != null)
+            {
+                Dispose();
+            }
 
+            WorldArmor.SetHero(actor);
+        }
+        
         public void SetStateForSelectedView(bool isSelect)
         {
             SelectView.SetActive(isSelect);
-        }
-
-        private void _updateArmorRender(EBodyPart part, int index)
-        {
-            ArmorPieceModel armorPiece = _armoryLibrary.Armory.Get(index).Pieces[(int)part];
-            ArmorRender.SetArmorPiece(armorPiece);
         }
     }
 }

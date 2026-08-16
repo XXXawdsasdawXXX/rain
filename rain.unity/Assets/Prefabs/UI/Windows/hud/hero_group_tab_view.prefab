@@ -927,16 +927,10 @@ MonoBehaviour:
   - rid: 4745735254604775426
   _textHeroName: {fileID: 1409152259107692625}
   _armor:
-    _render:
-    - <Part>k__BackingField: 0
-      <Renderers>k__BackingField:
-      - {fileID: 2633244623453237419}
-    - <Part>k__BackingField: 1
-      <Renderers>k__BackingField:
-      - {fileID: 3731205306040517298}
-    - <Part>k__BackingField: 2
-      <Renderers>k__BackingField:
-      - {fileID: 3623975126722388036}
+    render:
+    - rid: 4745735555419734042
+    - rid: 4745735555419734043
+    - rid: 4745735555419734044
   _stats:
     _views:
     - <StatType>k__BackingField: 1
@@ -955,6 +949,24 @@ MonoBehaviour:
         - Render: {fileID: 4129975582854893356}
           CheckColor: {r: 0.38768244, g: 0.6792453, b: 0.43935305, a: 1}
           UnCheckColor: {r: 0.4093438, g: 0.4339623, b: 0.3500356, a: 1}
+    - rid: 4745735555419734042
+      type: {class: UIArmorPieceView, ns: Code.UI.Components, asm: UI}
+      data:
+        <Part>k__BackingField: 0
+        <Renderers>k__BackingField:
+        - {fileID: 2633244623453237419}
+    - rid: 4745735555419734043
+      type: {class: UIArmorPieceView, ns: Code.UI.Components, asm: UI}
+      data:
+        <Part>k__BackingField: 1
+        <Renderers>k__BackingField:
+        - {fileID: 3731205306040517298}
+    - rid: 4745735555419734044
+      type: {class: UIArmorPieceView, ns: Code.UI.Components, asm: UI}
+      data:
+        <Part>k__BackingField: 2
+        <Renderers>k__BackingField:
+        - {fileID: 6704278856838189725}
 --- !u!114 &3778996897578406895 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3979419502397233054, guid: f1def756192d11744b7385b13e79cdec, type: 3}

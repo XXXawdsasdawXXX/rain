@@ -17,7 +17,7 @@ namespace Code.Game.Characters.Player.Commands
         {
             if (_owner.PathfindingFollower.TryMoveToNextWorldPosition(out Vector3 nextPosition))
             {
-                _owner.View.Body.position = nextPosition;
+                _owner.Render.Body.position = nextPosition;
                 _owner.Model.Position = new Position(nextPosition.x, nextPosition.y);
             }
         }

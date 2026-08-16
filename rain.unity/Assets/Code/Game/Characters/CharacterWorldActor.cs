@@ -1,4 +1,3 @@
-using System.Linq;
 using Code.Game.Characters.Armor;
 using Code.Game.Characters.Player.Commands;
 using Code.Game.Save;
@@ -9,51 +8,57 @@ namespace Code.Game.Characters
 {
     public class CharacterWorldActor : IWorldActor
     {
-        private readonly ArmoryLibrary _armoryLibrary;
-        public string ID => View.Model != null ? View.Model.ID : string.Empty;
-        public CharacterModel Model => View.Model;
-        public CharacterView View { get; } 
+        public CharacterModel Model { get; }
+        public WorldCharacterRender Render { get; } 
         public IPathfindingFollower PathfindingFollower { get; }
-        public IActorCommand Command { get; private set; }
-        public IActorOrder Order { get; private set; }
+        
+        private readonly ArmoryLibrary _armoryLibrary;
+        
+        private IActorCommand _command;
+        private IActorOrder _order;
         
         
-        public CharacterWorldActor(CharacterView view, IPathfindingFollower pathfinding, ArmoryLibrary armoryLibrary)
+        public CharacterWorldActor(
+            CharacterModel model,
+            WorldCharacterRender render, 
+            IPathfindingFollower pathfinding, 
+            ArmoryLibrary armoryLibrary)
         {
+            Model = model;
             PathfindingFollower = pathfinding;
-            View = view;
+            Render = render;
+            Render.SetActor(this);
+            
             _armoryLibrary = armoryLibrary;
         }
         
         public void OnWorldTurnBegin()
         {
-            Command = Order?.BuildCommand() ?? new WaitCommand();
+            _command = _order?.BuildCommand() ?? new WaitCommand();
+            _command.Execute();
 
-            Command.Execute();
-
-            if (Order != null && Order.IsComplete())
+            if (_order != null && _order.IsComplete())
             {
-                Order.Cancel();
+                _order.Cancel();
             }
         }
 
         public void SetOrder(IActorOrder order)
         {
-            Order?.Cancel();
-            Order = order;
-            Order.OnAssigned();
+            _order?.Cancel();
+            _order = order;
+            _order.OnAssigned();
         }
 
         public void SetCommand(IActorCommand command)
         {
-            Command = command;
+            _command = command;
         }
 
         public void SetSelected(bool isSelected)
         {
-            View.SetStateForSelectedView(isSelected);
+            Render.SetStateForSelectedView(isSelected);
         }
-        
         
         public float GetMaxStatsValue(EStatType stat)
         {

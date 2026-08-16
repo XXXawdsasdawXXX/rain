@@ -1,9 +1,7 @@
 namespace Code.Game.World.Turns
 {
-    public interface IWorldActor
+    public interface IWorldActor : IWorldTurnBeginListener
     {
         void SetOrder(IActorOrder order);
-        void SetCommand(IActorCommand command);
-        void OnWorldTurnBegin();
     }
 }

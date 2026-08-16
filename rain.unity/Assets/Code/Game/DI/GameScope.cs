@@ -29,6 +29,12 @@ namespace Code.Game.DI
             //game
             builder.Register<GamePhaseService>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<WorldActorRegistry>(Lifetime.Singleton).AsImplementedInterfaces();
+            
+            //characters
+            builder.RegisterInstance(_armoryLibrary).AsSelf();
+            builder.Register<ICharacterFactory, CharacterFactory>(Lifetime.Singleton);
+            builder.Register<PlayerSelection>(Lifetime.Singleton);
+            builder.Register<PlayerPartyProvider>(Lifetime.Singleton).AsImplementedInterfaces();
 
             //path
             builder.RegisterInstance(_weightTilesConfiguration).AsSelf();
@@ -36,17 +42,11 @@ namespace Code.Game.DI
             builder.RegisterInstance(_pathView).AsImplementedInterfaces();
             
             builder.Register<PathfindingService>(Lifetime.Singleton).AsImplementedInterfaces();
-            builder.Register<PlayerPartyProvider>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<PlayerPathController>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<PlayerPathDrawer>(Lifetime.Singleton).AsImplementedInterfaces();
 
             //world
             builder.Register<CameraFollow>(Lifetime.Singleton).AsImplementedInterfaces();
-            
-            //characters
-            builder.Register<ICharacterFactory, CharacterFactory>(Lifetime.Singleton);
-            builder.Register<PlayerSelection>(Lifetime.Singleton);
-            builder.RegisterInstance(_armoryLibrary).AsSelf();
             
             //entry point
             builder.RegisterEntryPoint<GameWorldBootstrap>();
