@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using TriInspector;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace Essential.Data
     [Serializable]
     public class ReactiveProperty<T>
     {
+        [JsonIgnore]
         public T Value
         {
             get => _value;

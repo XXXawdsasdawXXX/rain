@@ -4,6 +4,7 @@
     {
         None,
         Health,
+        Noise,
         Damage,
         CriticalChance,
         CriticalDamage

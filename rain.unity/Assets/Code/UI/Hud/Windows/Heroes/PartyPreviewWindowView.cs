@@ -9,20 +9,19 @@ using UnityEngine;
 
 namespace Code.UI.Hud.Windows.Heroes
 {
-    public class HeroesListWindowView : AUIWindowView
+    public class PartyPreviewWindowView : AUIWindowView
     {
         [field: SerializeField] public UIRadioGroup RadioGroupHeroes { get; private set; }
     }
 
     [UsedImplicitly]
-    public class HeroesListWindowController : AUIWindowController<HeroesListWindowView>
+    public class PartyPreviewWindowController : AUIWindowController<PartyPreviewWindowView>
     {
         private readonly IPlayerPartyProvider _playerParty;
         private readonly ArmoryLibrary _armoryLibrary;
 
-
-        public HeroesListWindowController(
-            HeroesListWindowView view, 
+        public PartyPreviewWindowController(
+            PartyPreviewWindowView view, 
             IPlayerPartyProvider playerParty,
             ArmoryLibrary armoryLibrary) : base(view)
         {
@@ -60,8 +59,7 @@ namespace Code.UI.Hud.Windows.Heroes
 
         private void _addHeroTab(CharacterWorldActor character)
         {
-            HeroGroupTabView groupTab = view.RadioGroupHeroes.AddRadioButton<HeroGroupTabView>();
-            groupTab.Construct(_armoryLibrary);
+            HeroGroupTabView groupTab = view.RadioGroupHeroes.AddElement<HeroGroupTabView>();
            
             if (groupTab == null)
             {
@@ -69,7 +67,8 @@ namespace Code.UI.Hud.Windows.Heroes
                 return;
             }
             
-            groupTab.SetCharacterModel(character.View.Model);
+            groupTab.SetLibrary(_armoryLibrary);
+            groupTab.SetHero(character);
         }
 
         //where player party change selected heroes from world

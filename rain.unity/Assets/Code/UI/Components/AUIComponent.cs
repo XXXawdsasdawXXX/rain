@@ -104,7 +104,7 @@ namespace Code.UI.Components
         }
 
 #if UNITY_EDITOR
-        private void OnValidate()
+        protected virtual void OnValidate()
         {
             if (body == null)
             {

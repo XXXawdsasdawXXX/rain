@@ -1,4 +1,5 @@
 using Code.Game.Characters;
+using Code.Game.Characters.Armor;
 using Code.Game.Characters.Hero;
 using Code.Game.Save;
 using Code.Game.World.Turns;
@@ -17,6 +18,7 @@ namespace Code.Game.Factories
     {
         private readonly IObjectResolver _resolver;
         private readonly AssetLibrary _assetLibrary;
+        private readonly ArmoryLibrary _armoryLibrary;
         private readonly IPlayerPartyProvider _playerPartyProvider;
         private readonly GameSaveRepository _gameSaveRepository;
         private readonly IWorldActorRegistry _worldActorRegistry;
@@ -26,6 +28,7 @@ namespace Code.Game.Factories
         public CharacterFactory(
             IObjectResolver resolver, 
             AssetLibrary assetLibrary, 
+            ArmoryLibrary armoryLibrary,
             IPlayerPartyProvider playerPartyProvider, 
             GameSaveRepository gameSaveRepository,
             IWorldActorRegistry worldActorRegistry, 
@@ -33,6 +36,7 @@ namespace Code.Game.Factories
         {
             _resolver = resolver;
             _assetLibrary = assetLibrary;
+            _armoryLibrary = armoryLibrary;
             _playerPartyProvider = playerPartyProvider;
             _gameSaveRepository = gameSaveRepository;
             _worldActorRegistry = worldActorRegistry;
@@ -53,7 +57,7 @@ namespace Code.Game.Factories
             heroInstance.SetModel(model);
 
             IPathfindingFollower follower = new CharacterPathfindingFollower(_pathfindingService, heroInstance.AgentSettings); 
-            CharacterWorldActor actor = new(heroInstance, follower);
+            CharacterWorldActor actor = new(heroInstance, follower, _armoryLibrary);
             
             _playerPartyProvider.AddHero(actor);
 
@@ -90,7 +94,7 @@ namespace Code.Game.Factories
             }
             
             IPathfindingFollower follower = new CharacterPathfindingFollower(_pathfindingService, npcInstance.AgentSettings); 
-            CharacterWorldActor actor = new(npcInstance, follower);
+            CharacterWorldActor actor = new(npcInstance, follower, _armoryLibrary);
             
             _worldActorRegistry.Register(actor);
 

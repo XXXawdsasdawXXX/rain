@@ -754,6 +754,7 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects: []
   _views:
+  - {fileID: 1169230197}
   - {fileID: 8648966371961518523}
   - {fileID: 1044565550}
   - {fileID: 1210518798}
@@ -1413,6 +1414,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9187586396577523903, guid: b7c90de516bca078797cb0049b5b12a6, type: 3}
   m_PrefabInstance: {fileID: 1152971624}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1169230197 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8818655909588351872, guid: a0d378a865bee9a059003e0a3aa8d5ef, type: 3}
+  m_PrefabInstance: {fileID: 8648966371961518522}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e821aee6dfd45cbbff27192643a8b2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1210518798 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5468447580650978892, guid: a0d378a865bee9a059003e0a3aa8d5ef, type: 3}

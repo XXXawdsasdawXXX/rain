@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Code.Game.Characters.Armor;
 using Essential;
+using Essential.Data;
 
 namespace Code.Game.Save
 {
@@ -25,20 +26,30 @@ namespace Code.Game.Save
 
         public string ID;
         public string Name;
-        public int Health;
-        public int StepEnergy;
         public Position Position;
         public Dictionary<EBodyPart, int> Armor;
+        public Dictionary<EStatType, ReactiveProperty<float>> Stats;
+        public Dictionary<EStatType, float> DefaultMaxStats;
 
         
         public CharacterModel(string name)
         {
             ID = Guid.NewGuid().ToString(); 
             Name = name;
-            Health = 100;
-            StepEnergy = 100;
             Position = new Position();
             Armor = new Dictionary<EBodyPart, int>();
+            Stats = new Dictionary<EStatType, ReactiveProperty<float>>()
+            {
+                { EStatType.Health , new ReactiveProperty<float>(100)},
+                { EStatType.Noise , new ReactiveProperty<float>(0)},
+                { EStatType.Damage , new ReactiveProperty<float>(10)}
+            };
+            DefaultMaxStats = new Dictionary<EStatType, float>()
+            {
+                { EStatType.Health , 100},
+                { EStatType.Noise , 100},
+                
+            };
 
             EBodyPart[] bodyParts = Enum.GetValues(typeof(EBodyPart)).Cast<EBodyPart>().ToArray();
             

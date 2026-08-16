@@ -44,7 +44,7 @@ namespace Code.UI.Components
             _unsubscribe();
         }
 
-        public T AddRadioButton<T>() where T : Essential.Mono
+        public T AddElement<T>() where T : Essential.Mono
         {
             UIRadioButton button = _pool.GetNext();
             
