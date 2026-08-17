@@ -12,6 +12,7 @@ namespace Code.Game.World.Turns
     public interface IWorldActorRegistry
     {
         void Register(IWorldTurnBeginListener actor);
+        void UnRegister(IWorldTurnBeginListener actor);
     }
 
     [UsedImplicitly]
@@ -44,6 +45,11 @@ namespace Code.Game.World.Turns
             _beginListener.Add(actor);
         }
 
+        public void UnRegister(IWorldTurnBeginListener actor)
+        {
+            _beginListener.Remove(actor);
+        }
+
         private void _onPhaseChanged(EGamePhase phase)
         {
             if (phase is EGamePhase.WorldTurn)
@@ -53,9 +59,9 @@ namespace Code.Game.World.Turns
                    return;
                 }
                 
-                foreach (IWorldActor actor in _beginListener)   
+                foreach (IWorldTurnBeginListener beginListener in _beginListener)
                 {
-                    actor.OnWorldTurnBegin();
+                    beginListener.OnWorldTurnBegin();
                 }
 
                 _isTriggered = true;
