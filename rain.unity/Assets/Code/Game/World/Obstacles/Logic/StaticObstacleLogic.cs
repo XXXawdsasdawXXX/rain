@@ -22,7 +22,7 @@ namespace Code.Game.World
                 return;
             }
 
-            foreach (IAlive alive in owner.GetAlive())
+            foreach (IHealth alive in owner.GetAlive())
             {
                 alive.TakeDamage(_model.BaseDamage);
             }

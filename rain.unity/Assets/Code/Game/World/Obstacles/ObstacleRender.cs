@@ -8,6 +8,7 @@ using Essential.Extensions;
 using TriInspector;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
@@ -19,7 +20,9 @@ namespace Code.Game.World
         [Serializable]
         public class Model
         {
-            [field: SerializeField, MinMaxRangeFloat(0, 3)] public RangedFloat FrameDuration { get; private set;}
+            [field: SerializeField, MinMaxRangeFloat(0, 3)]
+            public RangedFloat FrameDuration { get; private set; }
+
             [field: SerializeField] public bool IsLoop { get; private set; }
             [field: SerializeField] public bool RandomizedFrame { get; private set; }
             [field: SerializeField] public Sprite[] Sprites { get; private set; }
@@ -31,18 +34,22 @@ namespace Code.Game.World
         [SerializeField] protected Model idleModel;
 
         [SerializeField] protected bool isHasReactions;
-        [ShowInInspector, ShowIf(nameof(isHasReactions))] protected Model[] reactionModels;
-        
+
+        [ShowInInspector, ShowIf(nameof(isHasReactions))]
+        protected Model[] reactionModels;
+
         [SerializeField] protected bool isCanBeDestroyed;
-        [ShowInInspector, ShowIf(nameof(isCanBeDestroyed))] protected Model destroyeModel;
-        
-        [Title("runtime")]
-        [ShowInInspector, ReadOnly] protected EObstacleState state;
-        
+
+        [ShowInInspector, ShowIf(nameof(isCanBeDestroyed))]
+        protected Model destroyeModel;
+
+        [Title("runtime")] [ShowInInspector, ReadOnly]
+        protected EObstacleState state;
+
         protected CancellationTokenSource _cts;
         private int _spriteIndex;
 
-        
+
         public void Dispose()
         {
             _cts?.Cancel();
@@ -51,7 +58,7 @@ namespace Code.Game.World
         }
 
         public virtual void PlayIdle()
-        { 
+        {
             playSpriteSequence(idleModel, EObstacleState.Idle);
         }
 
@@ -83,7 +90,7 @@ namespace Code.Game.World
         protected virtual async void playSpriteSequence(Model model, EObstacleState sequenceState)
         {
             Dispose();
-            
+
             state = sequenceState;
             _cts = new CancellationTokenSource();
             _spriteIndex = 0;
@@ -93,14 +100,14 @@ namespace Code.Game.World
                 foreach (SpriteRenderer spriteRenderer in renderers)
                 {
                     spriteRenderer.sprite = model.Sprites[
-                        model.RandomizedFrame 
-                        ? Random.Range(0,renderers.Count) 
-                        : _spriteIndex];
-                    
-                    TimeSpan randomizeDelay = TimeSpan.FromSeconds(Random.Range(0,0.3f));
-                    
+                        model.RandomizedFrame
+                            ? Random.Range(0, renderers.Count)
+                            : _spriteIndex];
+
+                    TimeSpan randomizeDelay = TimeSpan.FromSeconds(Random.Range(0, 0.3f));
+
                     await UniTask.Delay(
-                            randomizeDelay, 
+                            randomizeDelay,
                             cancellationToken: _cts.Token)
                         .SuppressCancellationThrow();
 
@@ -109,9 +116,9 @@ namespace Code.Game.World
                         break;
                     }
                 }
-                
+
                 _spriteIndex++;
-             
+
                 if (_spriteIndex >= model.Sprites.Length)
                 {
                     _spriteIndex = 0;
@@ -124,9 +131,9 @@ namespace Code.Game.World
                 }
 
                 TimeSpan duration = TimeSpan.FromSeconds(model.FrameDuration.GetRandomValue());
-              
+
                 await UniTask.Delay(
-                        duration, 
+                        duration,
                         cancellationToken: _cts.Token)
                     .SuppressCancellationThrow();
 
@@ -134,53 +141,74 @@ namespace Code.Game.World
                 {
                     break;
                 }
-            } 
-            while (state == sequenceState && !_cts.IsCancellationRequested);
+            } while (state == sequenceState && !_cts.IsCancellationRequested);
         }
 
- 
+
 #if UNITY_EDITOR
-        
-        
-        [Flags] private  enum ERenderType
+
+
+        [Flags]
+        private enum ERenderType
         {
             Tile,
             RandomizeSprite
         }
 
-        [Title("editor")] 
-        [SerializeField] private ERenderType _renderTypes;
-        
-   /*private bool _isTiled = _renderTypes. == ERenderType.Tile*/
+        [Title("editor")] [SerializeField] private ERenderType _renderTypes;
+
+
+        [Button]
+        private void _updateObstaclePosition(Tilemap tilemap)
+        {
+            Vector3Int cellPosition = tilemap.WorldToCell(root.position);
+            Vector3 worldPosition = tilemap.GetCellCenterWorld(cellPosition);
+
+            root.transform.position = worldPosition;
+
+            EditorUtility.SetDirty(root);
+        }
 
         [Button]
         private void _updateView()
         {
-            for (int i = renderers.Count - 1; i >= 1; i--)
-            {
-                SpriteRenderer renderer = renderers[i];
-                renderers.RemoveAt(i);
-                Object.DestroyImmediate(renderer);
-            }
-            
-            List<Vector2Int> enabledCells = new List<Vector2Int>();
+            _clearRenders();
+
+            List<Vector2Int> enabledCells = new();
             matrixTrigger.Cells.GetEnabledCells(enabledCells);
 
             for (int i = 0; i < enabledCells.Count; i++)
             {
                 Vector2Int cell = enabledCells[i];
                 SpriteRenderer renderer = i == 0 ? renderers[0] : Object.Instantiate(renderers[0], root);
-                renderer.transform.localPosition =  matrixTrigger.GetCellCenterWorld(cell.x, cell.y).AsVector3();
+                Vector3 position = matrixTrigger.GetCellCenterWorld(cell.x, cell.y).AsVector3();
+                renderer.transform.position = position;
 
                 if (renderers.Contains(renderer))
                 {
                     continue;
                 }
-                
+
                 renderers.Add(renderer);
             }
+
+            EditorUtility.SetDirty(root);
         }
 
+        [Button]
+        private void _clearRenders()
+        {
+            _findSpriteRenderersInChildren();
+
+            for (int i = renderers.Count - 1; i >= 1; i--)
+            {
+                SpriteRenderer renderer = renderers[i];
+                renderers.RemoveAt(i);
+                Object.DestroyImmediate(renderer.gameObject);
+            }
+
+            EditorUtility.SetDirty(root);
+        }
 
         [Button]
         private void _findSpriteRenderersInChildren()

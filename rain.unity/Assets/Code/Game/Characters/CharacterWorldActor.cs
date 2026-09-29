@@ -26,6 +26,7 @@ namespace Code.Game.Characters
         {
             Model = model;
             PathfindingFollower = pathfinding;
+         
             Render = render;
             Render.SetActor(this);
             

@@ -6,7 +6,6 @@ namespace Code.Game.World
     [Serializable]
     public abstract class AObstacleLogic
     {
-        public event Action<EObstacleState> StateChanged; 
         public EObstacleState State { get; }
         protected Obstacle owner;
 

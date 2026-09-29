@@ -1,4 +1,5 @@
 using System;
+using Essential;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -24,9 +25,13 @@ namespace Code.Game.World
                 return;
             }
 
-            if (Random.Range(0f, 100f) < _model.AttackChance)
+            float chance = Random.Range(0f, 100f); 
+            
+            Log.Info(this, $"step: chance = {chance} from {_model.AttackChance}.");
+            
+            if (chance < _model.AttackChance)
             {
-                foreach (IAlive alive in owner.GetAlive())
+                foreach (IHealth alive in owner.GetAlive())
                 {
                     alive.TakeDamage(_model.BaseDamage);
                 }

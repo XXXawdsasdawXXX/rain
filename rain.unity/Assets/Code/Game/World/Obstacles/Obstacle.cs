@@ -9,23 +9,26 @@ namespace Code.Game.World
     public class Obstacle : Essential.Mono, IWorldTurnBeginListener, IPoolEntity
     {
         [SerializeReference, GUIColor(0.8f, 0.7f, 0.9f, 0.8f)] private AObstacleLogic _logic;
-        [SerializeField, GUIColor(0.5f, 0.7f, 0.9f, 0.8f)] private ObstacleRender render;
+        [SerializeField, GUIColor(0.5f, 0.7f, 0.9f, 0.8f)] private ObstacleRender _render;
         [SerializeField] private MatrixTriggerZone _triggerZone;
 
-        private readonly List<IAlive> _aliveBuffer = new();
+        private readonly List<IHealth> _aliveBuffer = new();
 
+        
         public void Enable()
         {
-            render.PlayIdle();
+            _render.PlayIdle();
             _logic?.Bind(this);
         }
 
         public void OnWorldTurnBegin()
         {
+            Log.Info(this, $"[OnWorldTurnBegin]");
+
             _logic?.Step();
         }
 
-        public List<IAlive> GetAlive()
+        public List<IHealth> GetAlive()
         {
             _aliveBuffer.Clear();
 
@@ -34,13 +37,15 @@ namespace Code.Game.World
                 _triggerZone.OverlapAlive(_aliveBuffer);
             }
 
+            Log.Info(this, $"alive in obstacle zone = {_aliveBuffer.Count}");
+            
             return _aliveBuffer;
         }
 
         public void Disable()
         {
             _logic.Dispose();
-            render.Dispose();
+            _render.Dispose();
             _aliveBuffer.Clear();
         }
     }
