@@ -26,7 +26,7 @@ namespace Code.Game.StateMachine.States
 
         public override async UniTask Enter()
         {
-            await SceneManager.LoadSceneAsync(EScene.Menu.ToString());
+            await SceneManager.LoadSceneAsync(EScene.Menu.ToString()).ToUniTask();
             
             await _sceneCurtain.Hide();
         }

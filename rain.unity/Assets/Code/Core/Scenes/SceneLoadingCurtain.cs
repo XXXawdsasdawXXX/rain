@@ -14,21 +14,27 @@ namespace Core.Scenes
         private bool _isShowing;
 
         
-        public async UniTask Show()
+        public  UniTask Show()
         {
             if (_canvasGroup == null || _isShowing)
             {
-                return;
+                return UniTask.CompletedTask;
             }
 
             _isShowing = true;
-            _canvasGroup.alpha = 0;
+   
+            /*_canvasGroup.alpha = 0;
             gameObject.SetActive(true);
             
             _tween?.Kill();
             _tween = _canvasGroup.DOFade(1, ANIMATION_DURATION)
-                .SetLink(_canvasGroup.gameObject, LinkBehaviour.KillOnDisable);
-            await _tween.ToUniTask();
+                .SetLink(_canvasGroup.gameObject, LinkBehaviour.KillOnDisable);*/
+            
+            _canvasGroup.alpha = 1;
+            
+            return UniTask.CompletedTask;
+            
+            //await _tween.ToUniTask();
         }
 
         public void ShowWithOutAnimation()
@@ -40,22 +46,26 @@ namespace Core.Scenes
             _isShowing = true;
         }
 
-        public async UniTask Hide()
+        public UniTask Hide()
         {
             if (_canvasGroup == null || !_isShowing)
             {
-                return;
+                return UniTask.CompletedTask;
             }
 
             _isShowing = false;
-            _canvasGroup.alpha = 1;
-            
-            _tween?.Kill();
-            _tween = _canvasGroup.DOFade(0, ANIMATION_DURATION)
-                .SetLink(_canvasGroup.gameObject, LinkBehaviour.KillOnDisable);
-            await _tween.ToUniTask();
+            // _canvasGroup.alpha = 1;
+            //
+            // _tween?.Kill();
+            // _tween = _canvasGroup.DOFade(0, ANIMATION_DURATION)
+            //     .SetLink(_canvasGroup.gameObject, LinkBehaviour.KillOnDisable);
+            // await _tween.ToUniTask();
+
+            _canvasGroup.alpha = 0;
             
             gameObject.SetActive(false);
+            
+            return UniTask.CompletedTask;
         }
     }
 }

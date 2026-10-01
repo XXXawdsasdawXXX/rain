@@ -7,7 +7,7 @@ namespace Essential
     {
         public bool Equals(Mono other)
         {
-            return other != null && other.gameObject.GetHashCode().Equals(GetHashCode());
+            return other != null && other.gameObject.GetEntityId().Equals(GetEntityId());
         }
 
         public override bool Equals(object obj)
@@ -16,11 +16,6 @@ namespace Essential
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
             return Equals((Mono)obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return GetInstanceID();
         }
     }
 }

@@ -2,6 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!687078895 &4343727234628468602
 SpriteAtlas:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -21,7 +22,7 @@ SpriteAtlas:
       crunchedCompression: 0
       sRGB: 1
     platformSettings:
-    - serializedVersion: 3
+    - serializedVersion: 4
       m_BuildTarget: DefaultTexturePlatform
       m_MaxTextureSize: 4096
       m_ResizeAlgorithm: 0
@@ -68,30 +69,7 @@ SpriteAtlas:
     - e7dfc6286fcc44b45a4ef0b01493fa9d: 1552483365
     - 5cc7606d67435f5448f0727d24247f34: 21300000
   m_MasterAtlas: {fileID: 0}
-  m_PackedSprites:
-  - {fileID: 21300000, guid: 66b4d00254d493e43afdffd3129eed37, type: 3}
-  - {fileID: 21300000, guid: 129b0952939eeff47bc7302167e3ff0f, type: 3}
-  - {fileID: 21300000, guid: 78ace172e079a4741956d8590b6d8fea, type: 3}
-  - {fileID: 21300000, guid: 9af51df35ed7e0347a1797460d72b0aa, type: 3}
-  - {fileID: 21300000, guid: 193810577906f324d9350cac7edb9008, type: 3}
-  - {fileID: -115663448, guid: e7dfc6286fcc44b45a4ef0b01493fa9d, type: 3}
-  - {fileID: 1458437418, guid: e7dfc6286fcc44b45a4ef0b01493fa9d, type: 3}
-  - {fileID: -2141682693, guid: e7dfc6286fcc44b45a4ef0b01493fa9d, type: 3}
-  - {fileID: -131349134, guid: e7dfc6286fcc44b45a4ef0b01493fa9d, type: 3}
-  - {fileID: 1552483365, guid: e7dfc6286fcc44b45a4ef0b01493fa9d, type: 3}
-  - {fileID: 21300000, guid: 5cc7606d67435f5448f0727d24247f34, type: 3}
-  m_PackedSpriteNamesToIndex:
-  - Room
-  - KitchenTable
-  - Background_Windows
-  - PhotoOfFamily
-  - HomeShelf
-  - Door_2
-  - Door_3
-  - Door_0
-  - Door_1
-  - Door_4
-  - Sofa
   m_RenderDataMap: {}
   m_Tag: HomeSpriteAtlas
   m_IsVariant: 0
+  m_Guid: f48e5f07f0e7cf943a987ac2208b0a48

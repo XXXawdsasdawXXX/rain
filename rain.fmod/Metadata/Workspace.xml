@@ -2,10 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="Workspace" id="{eb1d2ff2-141e-4d70-9e04-f07f9452fecb}">
 		<property name="builtBanksOutputDirectory">
-			<value>../../r.a.i.n/Assets/Plugins/FMOD/Banks</value>
-		</property>
-		<property name="builtBanksSeparateAssets">
-			<value>true</value>
+			<value>../rain.unity/Assets/Plugins/FMOD/Banks</value>
 		</property>
 		<relationship name="masterEventFolder">
 			<destination>{6bf615d4-4b77-4d47-a14a-c9c49f6b1c4b}</destination>

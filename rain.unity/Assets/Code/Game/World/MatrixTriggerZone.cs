@@ -64,7 +64,7 @@ namespace Code.Game.World
                         continue;
                     }
 
-                    if (!_seen.Add(collider.GetInstanceID()))
+                    if (!_seen.Add(collider.GetEntityId().GetHashCode()))
                     {
                         continue;
                     }
