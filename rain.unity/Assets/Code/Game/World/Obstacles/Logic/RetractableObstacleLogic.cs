@@ -16,12 +16,13 @@ namespace Code.Game.World
         }
         
         [SerializeField] private Model _model;
-        
 
         public override void Step()
         {
             if (owner == null || owner.GetAlive().Count == 0)
             {
+                Log.Info(this, $"step: return if {owner == null} || {owner?.GetAlive()? .Count == 0} ");
+             
                 return;
             }
 
@@ -37,5 +38,6 @@ namespace Code.Game.World
                 }
             }
         }
+
     }
 }

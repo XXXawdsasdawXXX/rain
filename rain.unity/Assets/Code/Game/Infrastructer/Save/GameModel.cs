@@ -48,7 +48,6 @@ namespace Code.Game.Save
             {
                 { EStatType.Health , 100},
                 { EStatType.Noise , 100},
-                
             };
 
             EBodyPart[] bodyParts = Enum.GetValues(typeof(EBodyPart)).Cast<EBodyPart>().ToArray();

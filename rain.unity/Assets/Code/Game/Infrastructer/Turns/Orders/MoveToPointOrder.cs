@@ -18,7 +18,7 @@ namespace Code.Game.World.Turns.Orders
         
         public void OnAssigned()
         {
-            _owner.PathfindingFollower.SetPath(_owner.Render.Body.position, _destination);
+            _owner.PathfindingFollower.SetPath(_owner.View.Body.position, _destination);
         }
 
         public IActorCommand BuildCommand()

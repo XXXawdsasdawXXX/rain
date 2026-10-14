@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Code.Game.World.Turns;
 using Essential;
@@ -12,13 +13,16 @@ namespace Code.Game.World
         [SerializeField, GUIColor(0.5f, 0.7f, 0.9f, 0.8f)] private ObstacleRender _render;
         [SerializeField] private MatrixTriggerZone _triggerZone;
 
-        private readonly List<IHealth> _aliveBuffer = new();
+        private readonly List<IHealth> _livingBuffer = new();
 
-        
+        private void Awake()
+        {
+            _logic?.Bind(this);
+        }
+
         public void Enable()
         {
             _render.PlayIdle();
-            _logic?.Bind(this);
         }
 
         public void OnWorldTurnBegin()
@@ -30,23 +34,33 @@ namespace Code.Game.World
 
         public List<IHealth> GetAlive()
         {
-            _aliveBuffer.Clear();
+            _livingBuffer.Clear();
 
             if (_triggerZone != null)
             {
-                _triggerZone.OverlapAlive(_aliveBuffer);
+                var entities = new List<IWorldEntityView>();
+                
+                _triggerZone.OverlapAlive(entities);
+                
+                foreach (IWorldEntityView entityView in entities)
+                {
+                    if (entityView.TryGetHealth(out IHealth health))
+                    {
+                        _livingBuffer.Add(health);
+                    }
+                }
             }
 
-            Log.Info(this, $"alive in obstacle zone = {_aliveBuffer.Count}");
+            Log.Info(this, $"alive in obstacle zone = {_livingBuffer.Count}");
             
-            return _aliveBuffer;
+            return _livingBuffer;
         }
 
         public void Disable()
         {
             _logic.Dispose();
             _render.Dispose();
-            _aliveBuffer.Clear();
+            _livingBuffer.Clear();
         }
     }
 }

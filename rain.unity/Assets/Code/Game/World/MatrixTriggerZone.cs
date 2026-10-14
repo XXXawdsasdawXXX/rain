@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Essential.Data.BoolMatrix;
 using Essential.Extensions;
 using UnityEngine;
@@ -13,6 +15,7 @@ namespace Code.Game.World
     {
         public BoolMatrix Cells => _cells;
 
+        [SerializeField] private EEntityType[] _entityTypes;
         [SerializeField] private BoolMatrix _cells = new(4, 4);
         [SerializeField] private LayerMask _layerMask = ~0;
         [SerializeField] private bool _useTriggers = true;
@@ -34,13 +37,13 @@ namespace Code.Game.World
             return _overlap(results, collectAlive: false, aliveResults: null);
         }
 
-        public int OverlapAlive(List<IHealth> results)
+        public int OverlapAlive(List<IWorldEntityView> results)
         {
             results.Clear();
             return _overlap(null, collectAlive: true, aliveResults: results);
         }
 
-        private int _overlap(List<Collider2D> colliderResults, bool collectAlive, List<IHealth> aliveResults)
+        private int _overlap(ICollection<Collider2D> colliderResults, bool collectAlive, ICollection<IWorldEntityView> aliveResults)
         {
             colliderResults?.Clear();
             _ensureBuffer();
@@ -71,9 +74,9 @@ namespace Code.Game.World
 
                     if (collectAlive)
                     {
-                        if (collider.TryGetComponent(out IHealth alive))
+                        if (collider.TryGetComponent(out IWorldEntityView entity) && _entityTypes.Contains(entity.Type))
                         {
-                            aliveResults.Add(alive);
+                            aliveResults.Add(entity);
                             total++;
                         }
                     }

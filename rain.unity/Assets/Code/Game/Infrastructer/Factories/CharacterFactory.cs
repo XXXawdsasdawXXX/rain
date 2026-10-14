@@ -2,6 +2,7 @@ using Code.Game.Characters;
 using Code.Game.Characters.Armor;
 using Code.Game.Characters.Hero;
 using Code.Game.Save;
+using Code.Game.World;
 using Code.Game.World.Turns;
 using Code.Pathfinding;
 using Core.AssetManagement.Libraries.Assets;
@@ -45,11 +46,11 @@ namespace Code.Game.Factories
 
         public CharacterWorldActor SpawnHero(CharacterModel model)
         {
-            WorldCharacterRender heroPrefab = _assetLibrary.SceneComponents
+            CharacterWorldView heroPrefab = _assetLibrary.SceneComponents
                 .Get(AssetsKey.CHARACTER)
-                .GetComponent<WorldCharacterRender>();
+                .GetComponent<CharacterWorldView>();
             
-            WorldCharacterRender heroInstance = _resolver.Instantiate(
+            CharacterWorldView heroInstance = _resolver.Instantiate(
                 heroPrefab, 
                 model.Position.AsVector3(), 
                 Quaternion.identity);
@@ -65,18 +66,18 @@ namespace Code.Game.Factories
                 gameSave.Heroes.Add(model);
             }
             
-            _worldActorRegistry.Register(actor);
-            
+            _registerCharacter(heroInstance, EEntityType.Hero, actor);
+
             return actor;
         }
 
         public CharacterWorldActor SpawnNpc(CharacterModel model)
         {
-            WorldCharacterRender npcPrefab = _assetLibrary.SceneComponents
+            CharacterWorldView npcPrefab = _assetLibrary.SceneComponents
                 .Get(AssetsKey.CHARACTER)
-                .GetComponent<WorldCharacterRender>();
+                .GetComponent<CharacterWorldView>();
             
-            WorldCharacterRender npcInstance = _resolver.Instantiate(
+            CharacterWorldView npcInstance = _resolver.Instantiate(
                 npcPrefab, 
                 model.Position.AsVector3(), 
                 Quaternion.identity);
@@ -91,9 +92,20 @@ namespace Code.Game.Factories
             IPathfindingFollower follower = new CharacterPathfindingFollower(_pathfindingService, npcInstance.AgentSettings); 
             CharacterWorldActor actor = new(model, npcInstance, follower, _armoryLibrary);
             
-            _worldActorRegistry.Register(actor);
-
+           _registerCharacter(npcInstance, EEntityType.Npc, actor);
+            
             return actor;
+        }
+
+        private void _registerCharacter(
+            CharacterWorldView characterInstance, 
+            EEntityType entityType, 
+            CharacterWorldActor actor)
+        {
+            characterInstance.SetActor(actor);
+            characterInstance.SetEntityType(entityType);
+            
+            _worldActorRegistry.Register(actor);
         }
     }
 }
