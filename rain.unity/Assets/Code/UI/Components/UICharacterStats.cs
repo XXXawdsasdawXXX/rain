@@ -24,8 +24,11 @@ namespace Code.UI.Components
             public void InitializeStat(CharacterWorldActor worldActor, ReactiveProperty<float> property)
             {
                 DisposeStat();
-                
+
                 _worldActor = worldActor;
+                
+                _property = property;
+                _property.SubscribeProperty(_updateView);
                 
                 _updateView(property.Value);
             }
@@ -68,7 +71,6 @@ namespace Code.UI.Components
 
         private CharacterWorldActor _actor;
 
-        
         
         public void SetHero(CharacterWorldActor actor)
         {
