@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Essential;
 using JetBrains.Annotations;
-using VContainer.Unity;
 
 namespace Code.Game.Characters.Hero
 {

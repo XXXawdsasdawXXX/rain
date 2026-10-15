@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Code.Game.World.Turns;
 using Essential;
@@ -15,6 +14,7 @@ namespace Code.Game.World
 
         private readonly List<IHealth> _livingBuffer = new();
 
+        
         private void Awake()
         {
             _logic?.Bind(this);
@@ -27,8 +27,6 @@ namespace Code.Game.World
 
         public void OnWorldTurnBegin()
         {
-            Log.Info(this, $"[OnWorldTurnBegin]");
-
             _logic?.Step();
         }
 
@@ -51,8 +49,6 @@ namespace Code.Game.World
                 }
             }
 
-            Log.Info(this, $"alive in obstacle zone = {_livingBuffer.Count}");
-            
             return _livingBuffer;
         }
 

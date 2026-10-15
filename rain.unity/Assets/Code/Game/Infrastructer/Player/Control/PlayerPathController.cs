@@ -3,7 +3,6 @@ using Code.Game.Characters.Hero;
 using Code.Game.StateMachine;
 using Code.Game.World.Turns.Orders;
 using Core.Input;
-using Essential;
 using JetBrains.Annotations;
 using UnityEngine;
 using VContainer.Unity;
