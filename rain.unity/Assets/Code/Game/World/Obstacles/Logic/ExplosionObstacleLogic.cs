@@ -5,9 +5,9 @@ namespace Code.Game.World
     [Serializable]
     public class ExplosionObstacleLogic : AObstacleLogic
     {
-        public override void Step()
+        public override EObstacleState Step()
         {
-           
+            return EObstacleState.Idle;
         }
     }
 }

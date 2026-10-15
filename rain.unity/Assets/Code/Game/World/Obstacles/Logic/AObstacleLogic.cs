@@ -13,7 +13,7 @@ namespace Code.Game.World
             this.owner = owner;
         }
         
-        public abstract void Step();
+        public abstract EObstacleState Step();
         public virtual void Dispose(){}
     }
 }

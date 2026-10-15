@@ -17,11 +17,11 @@ namespace Code.Game.World
         [SerializeField] private Model _model;
 
         
-        public override void Step()
+        public override EObstacleState Step()
         {
             if (owner == null || owner.GetAlive().Count == 0)
             {
-                return;
+                return EObstacleState.Idle;
             }
 
             float chance = Random.Range(0f, 100f); 
@@ -32,7 +32,11 @@ namespace Code.Game.World
                 {
                     alive.TakeDamage(_model.BaseDamage);
                 }
+
+                return EObstacleState.Reaction;
             }
+            
+            return EObstacleState.Idle;
         }
     }
 }

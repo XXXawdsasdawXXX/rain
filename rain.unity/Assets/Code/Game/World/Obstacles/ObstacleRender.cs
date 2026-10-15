@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Essential;
 using Essential.Data.RangeFloat;
 using Essential.Extensions;
 using TriInspector;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
@@ -22,11 +24,16 @@ namespace Code.Game.World
         {
             [field: SerializeField, MinMaxRangeFloat(0, 3)]
             public RangedFloat FrameDuration { get; private set; }
+           
+            [field: SerializeField, MinMaxRangeFloat(0, 3)]
+            public RangedFloat TimeBetweenTiles { get; private set; }
 
             [field: SerializeField] public bool IsLoop { get; private set; }
             [field: SerializeField] public bool RandomizedFrame { get; private set; }
             [field: SerializeField] public Sprite[] Sprites { get; private set; }
         }
+
+        public EObstacleState State { get; private set; }
 
         [SerializeField] protected Transform root;
         [SerializeField] protected MatrixTriggerZone matrixTrigger;
@@ -35,47 +42,29 @@ namespace Code.Game.World
 
         [SerializeField] protected bool isHasReactions;
 
-        [ShowInInspector, ShowIf(nameof(isHasReactions))]
-        protected Model[] reactionModels;
+        [SerializeField, ShowIf(nameof(isHasReactions))]
+        protected Model reactionModel;
 
         [SerializeField] protected bool isCanBeDestroyed;
 
-        [ShowInInspector, ShowIf(nameof(isCanBeDestroyed))]
+        [SerializeField, ShowIf(nameof(isCanBeDestroyed))]
         protected Model destroyeModel;
 
-        [Title("runtime")] [ShowInInspector, ReadOnly]
-        protected EObstacleState state;
-
         protected CancellationTokenSource _cts;
+
         private int _spriteIndex;
 
-
-        public void Dispose()
-        {
-            _cts?.Cancel();
-            _cts?.Dispose();
-            _cts = null;
-        }
 
         public virtual void PlayIdle()
         {
             playSpriteSequence(idleModel, EObstacleState.Idle);
         }
-
-        public virtual void PlayRandomReaction()
+        
+        public virtual void PlayReaction()
         {
-            if (isHasReactions && reactionModels.Length > 0)
+            if (isHasReactions)
             {
-                int modelIndex = Random.Range(0, reactionModels.Length);
-                playSpriteSequence(reactionModels[modelIndex], EObstacleState.Reaction);
-            }
-        }
-
-        public virtual void PlayReaction(int reactionIndex)
-        {
-            if (isHasReactions && reactionModels.Length > reactionIndex)
-            {
-                playSpriteSequence(reactionModels[reactionIndex], EObstacleState.Reaction);
+                playSpriteSequence(reactionModel, EObstacleState.Reaction);
             }
         }
 
@@ -87,27 +76,34 @@ namespace Code.Game.World
             }
         }
 
+        public void Dispose()
+        {
+            _cts?.Cancel();
+            _cts?.Dispose();
+            _cts = null;
+        }
+
         protected virtual async void playSpriteSequence(Model model, EObstacleState sequenceState)
         {
             Dispose();
 
-            state = sequenceState;
+            State = sequenceState;
             _cts = new CancellationTokenSource();
             _spriteIndex = 0;
 
             do
             {
                 foreach (SpriteRenderer spriteRenderer in renderers)
-                {
+                { 
                     spriteRenderer.sprite = model.Sprites[
                         model.RandomizedFrame
-                            ? Random.Range(0, renderers.Count)
+                            ? Random.Range(0, model.Sprites.Length)
                             : _spriteIndex];
-
-                    TimeSpan randomizeDelay = TimeSpan.FromSeconds(Random.Range(0, 0.3f));
+                    
+                    TimeSpan timeBetweenTiles = TimeSpan.FromSeconds(model.TimeBetweenTiles.GetRandomValue());
 
                     await UniTask.Delay(
-                            randomizeDelay,
+                            timeBetweenTiles,
                             cancellationToken: _cts.Token)
                         .SuppressCancellationThrow();
 
@@ -130,10 +126,10 @@ namespace Code.Game.World
                     }
                 }
 
-                TimeSpan duration = TimeSpan.FromSeconds(model.FrameDuration.GetRandomValue());
+                TimeSpan frameDuration = TimeSpan.FromSeconds(model.FrameDuration.GetRandomValue());
 
                 await UniTask.Delay(
-                        duration,
+                        frameDuration,
                         cancellationToken: _cts.Token)
                     .SuppressCancellationThrow();
 
@@ -141,24 +137,13 @@ namespace Code.Game.World
                 {
                     break;
                 }
-            } while (state == sequenceState && !_cts.IsCancellationRequested);
+            } while (State == sequenceState && !_cts.IsCancellationRequested);
         }
 
 
 #if UNITY_EDITOR
-
-
-        [Flags]
-        private enum ERenderType
-        {
-            Tile,
-            RandomizeSprite
-        }
-
-        [Title("editor")] [SerializeField] private ERenderType _renderTypes;
-
-
-        [Button]
+        
+        [Button, GUIColor(0.9f, 0.6f, 0.5f, 1f)]
         private void _updateObstaclePosition(Tilemap tilemap)
         {
             Vector3Int cellPosition = tilemap.WorldToCell(root.position);
@@ -169,7 +154,7 @@ namespace Code.Game.World
             EditorUtility.SetDirty(root);
         }
 
-        [Button]
+        [Button, GUIColor(0.9f, 0.6f, 0.5f, 1f)]
         private void _updateView()
         {
             _clearRenders();
@@ -195,7 +180,7 @@ namespace Code.Game.World
             EditorUtility.SetDirty(root);
         }
 
-        [Button]
+        [Button, GUIColor(0.9f, 0.6f, 0.5f, 1f)]
         private void _clearRenders()
         {
             _findSpriteRenderersInChildren();
@@ -210,7 +195,8 @@ namespace Code.Game.World
             EditorUtility.SetDirty(root);
         }
 
-        [Button]
+        
+        [Button, GUIColor(0.9f, 0.6f, 0.5f, 1f)]
         private void _findSpriteRenderersInChildren()
         {
             renderers.Clear();

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Code.Game.World.Turns;
 using Essential;
@@ -14,6 +15,8 @@ namespace Code.Game.World
 
         private readonly List<IHealth> _livingBuffer = new();
 
+        [ShowInInspector, ReadOnly] private EObstacleState _currentState;
+        
         
         private void Awake()
         {
@@ -22,12 +25,32 @@ namespace Code.Game.World
 
         public void Enable()
         {
+            _currentState = EObstacleState.Idle;
             _render.PlayIdle();
         }
 
         public void OnWorldTurnBegin()
         {
-            _logic?.Step();
+            EObstacleState state = _logic?.Step() ?? EObstacleState.Idle;
+
+            if (state != _currentState)
+            {
+                switch (state)
+                {
+                    case EObstacleState.Idle:
+                    default:
+                        _render.PlayIdle();
+                        break;
+                    case EObstacleState.Reaction:
+                        _render.PlayReaction();
+                        break;
+                    case EObstacleState.Destroyed:
+                        _render.PlayDestroy();
+                        break;
+                }
+
+                _currentState = state;
+            }
         }
 
         public List<IHealth> GetAlive()

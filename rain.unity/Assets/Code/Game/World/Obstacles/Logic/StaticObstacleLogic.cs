@@ -15,17 +15,19 @@ namespace Code.Game.World
         [SerializeField] private Model _model;
         
         
-        public override void Step()
+        public override EObstacleState Step()
         {
             if (owner == null || owner.GetAlive().Count == 0)
             {
-                return;
+                return EObstacleState.Idle;
             }
 
             foreach (IHealth alive in owner.GetAlive())
             {
                 alive.TakeDamage(_model.BaseDamage);
             }
+            
+            return EObstacleState.Reaction;
         }
     }
 }

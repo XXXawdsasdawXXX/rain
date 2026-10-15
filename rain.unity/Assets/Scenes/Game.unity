@@ -2370,10 +2370,25 @@ MonoBehaviour:
         MaxValue: 0
       <IsLoop>k__BackingField: 0
       <RandomizedFrame>k__BackingField: 0
-      <Sprites>k__BackingField: []
-    isHasReactions: 0
+      <Sprites>k__BackingField:
+      - {fileID: -547487616, guid: 5cd37d75d69501ed7abd45373323bd1c, type: 3}
+    isHasReactions: 1
+    reactionModel:
+      <FrameDuration>k__BackingField:
+        MinValue: 0
+        MaxValue: 0
+      <IsLoop>k__BackingField: 0
+      <RandomizedFrame>k__BackingField: 0
+      <Sprites>k__BackingField:
+      - {fileID: -1625982601, guid: 5cd37d75d69501ed7abd45373323bd1c, type: 3}
     isCanBeDestroyed: 0
-    _renderTypes: 0
+    destroyeModel:
+      <FrameDuration>k__BackingField:
+        MinValue: 0
+        MaxValue: 0
+      <IsLoop>k__BackingField: 0
+      <RandomizedFrame>k__BackingField: 0
+      <Sprites>k__BackingField: []
   _triggerZone: {fileID: 1521855112}
   references:
     version: 2
