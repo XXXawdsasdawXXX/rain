@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Code.Game.StateMachine;
 using JetBrains.Annotations;
 using VContainer.Unity;
@@ -20,7 +21,12 @@ namespace Code.Game.World.Turns
     {
         private readonly IGamePhaseService _phaseService;
 
-        private readonly List<IWorldTurnBeginListener> _beginListener = new();
+        private List<IWorldTurnBeginListener>[] _beginListener =
+        {
+            new(), //characters
+            new(), //obstacles
+            new()  //other
+        };
 
         private bool _isTriggered;
 
@@ -42,12 +48,22 @@ namespace Code.Game.World.Turns
 
         public void Register(IWorldTurnBeginListener actor)
         {
-            _beginListener.Add(actor);
+            List<IWorldTurnBeginListener> bucket = _beginListener[(int)actor.Priority];
+            
+            if (!bucket.Contains(actor))
+            {
+                bucket.Add(actor);
+            }
         }
 
         public void UnRegister(IWorldTurnBeginListener actor)
         {
-            _beginListener.Remove(actor);
+            List<IWorldTurnBeginListener> bucket = _beginListener[(int)actor.Priority];
+            
+            if (bucket.Contains(actor))
+            {
+                bucket.Remove(actor);
+            }
         }
 
         private void _onPhaseChanged(EGamePhase phase)
@@ -58,10 +74,13 @@ namespace Code.Game.World.Turns
                 {
                    return;
                 }
-                
-                foreach (IWorldTurnBeginListener beginListener in _beginListener)
+
+                foreach (List<IWorldTurnBeginListener> bucket in _beginListener)
                 {
-                    beginListener.OnWorldTurnBegin();
+                    foreach (IWorldTurnBeginListener beginListener in bucket)
+                    {
+                        beginListener.OnWorldTurnBegin();
+                    }
                 }
 
                 _isTriggered = true;

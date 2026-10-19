@@ -11,6 +11,7 @@ namespace Code.Game.Characters
 {
     public class CharacterWorldActor : IWorldActor, IHealth
     {
+        public IWorldTurnBeginListener.ETurnPriority Priority => IWorldTurnBeginListener.ETurnPriority.Character;
         public CharacterModel Model { get; }
         public CharacterWorldView View { get; } 
         public IPathfindingFollower PathfindingFollower { get; }
@@ -35,7 +36,8 @@ namespace Code.Game.Characters
             
             _armoryLibrary = armoryLibrary;
         }
-        
+
+
         public void OnWorldTurnBegin()
         {
             _command = _order?.BuildCommand() ?? new WaitCommand();

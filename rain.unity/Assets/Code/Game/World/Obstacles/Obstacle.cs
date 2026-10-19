@@ -9,6 +9,8 @@ namespace Code.Game.World
 {
     public class Obstacle : Essential.Mono, IWorldTurnBeginListener, IPoolEntity
     {
+        public IWorldTurnBeginListener.ETurnPriority Priority => IWorldTurnBeginListener.ETurnPriority.Obstacle;
+
         [SerializeReference, GUIColor(0.8f, 0.7f, 0.9f, 0.8f)] private AObstacleLogic _logic;
         [SerializeField, GUIColor(0.5f, 0.7f, 0.9f, 0.8f)] private ObstacleRender _render;
         [SerializeField] private MatrixTriggerZone _triggerZone;
@@ -28,7 +30,7 @@ namespace Code.Game.World
             _currentState = EObstacleState.Idle;
             _render.PlayIdle();
         }
-
+        
         public void OnWorldTurnBegin()
         {
             EObstacleState state = _logic?.Step() ?? EObstacleState.Idle;

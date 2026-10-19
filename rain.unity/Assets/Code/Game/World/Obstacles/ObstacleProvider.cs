@@ -1,7 +1,6 @@
 using Code.Game.World.Turns;
 using UnityEngine;
 using VContainer;
-using VContainer.Unity;
 
 #if UNITY_EDITOR
 using TriInspector;
@@ -11,7 +10,7 @@ using UnityEditor;
 
 namespace Code.Game.World
 {
-    public class ObstacleProvider : Essential.Mono, IStartable
+    public class ObstacleProvider : Essential.Mono
     {
         [SerializeField] private Obstacle[] _obstacles;
         
@@ -24,13 +23,22 @@ namespace Code.Game.World
             _worldActorRegistry = worldActorRegistry;
         }
         
-        public void Start()
+        public void OnEnable()
         {
             foreach (Obstacle obstacle in _obstacles)
             {
                 _worldActorRegistry.Register(obstacle);
             }
         }
+        
+        public void OnDisable()
+        {
+            foreach (Obstacle obstacle in _obstacles)
+            {
+                _worldActorRegistry.UnRegister(obstacle);
+            }
+        }
+
 
 #if UNITY_EDITOR
         [Button]
