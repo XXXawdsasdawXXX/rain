@@ -1,0 +1,84 @@
+using System;
+using System.Collections.Generic;
+using Code.Game.World.Turns;
+using Essential;
+using Essential.Extensions;
+using UnityEngine;
+
+namespace Code.Pathfinding
+{
+    public class CharacterPathfindingFollower : IPathfindingFollower
+    {
+        public event Action Updated;
+        public int PointIndex => _pathIndex;
+        public List<Vector3> Path { get; private set; } = new();
+        public bool HasActivePath { get; private set; }
+
+        private readonly IPathfindingService _pathfinding;
+        private readonly IEntityRegistry _entityRegistry;
+
+        private Vector3 _end;
+        private int _pathIndex;
+
+
+        public CharacterPathfindingFollower(IPathfindingService pathfinding, IEntityRegistry entityRegistry)
+        {
+            _pathfinding = pathfinding;
+            _entityRegistry = entityRegistry;
+        }
+        
+        public void SetPath(Vector3 start, Vector3 end)
+        {
+            Path = new List<Vector3>(_pathfinding.FindPath(start, end));
+            _end = end;
+            
+            _pathIndex = 1;
+            HasActivePath = Path.Count > 1;
+            
+            Updated?.Invoke();
+        }
+
+        public void Clear()
+        {
+            Path.Clear();
+            _pathIndex = 0;
+            HasActivePath = false;
+        }
+
+        public bool TryMoveToNextWorldPosition(out Vector3 nextPosition)
+        {
+            if (!HasActivePath || _pathIndex >= Path.Count)
+            {
+                HasActivePath = false;
+                
+                nextPosition = Path.Count > 0 ? Path[^1] : Vector3.zero;
+          
+                return false;
+            }
+    
+            nextPosition = Path[_pathIndex];
+
+            if (!_pathfinding.IsWalkable(nextPosition) || !_entityRegistry.IsEmptyCell(nextPosition.AsCell()))
+            {
+                SetPath(Path[_pathIndex - 1], _end);
+
+                if (!HasActivePath)
+                {
+                    return false;
+                }
+                
+                nextPosition = Path[_pathIndex];
+            }
+            
+            _pathIndex++;
+            
+            HasActivePath = _pathIndex < Path.Count;
+    
+            Updated?.Invoke();
+    
+            Log.Info(this, $"[MoveToNextWorldPosition] step to {nextPosition}");
+            
+            return true;
+        }
+    }
+}

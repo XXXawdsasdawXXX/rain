@@ -1,0 +1,109 @@
+using Code.Game.Characters;
+using Code.Game.Characters.Armor;
+using Code.Game.Characters.Hero;
+using Code.Game.Save;
+using Code.Game.World;
+using Code.Game.World.Turns;
+using Code.Pathfinding;
+using Core.AssetManagement.Libraries.Assets;
+using JetBrains.Annotations;
+using UnityEngine;
+using VContainer;
+using VContainer.Unity;
+
+namespace Code.Game.Factories
+{
+    [UsedImplicitly]
+    public sealed class CharacterFactory : ICharacterFactory
+    {
+        private readonly IObjectResolver _resolver;
+        private readonly AssetLibrary _assetLibrary;
+        private readonly ArmoryLibrary _armoryLibrary;
+        private readonly IPlayerPartyProvider _playerPartyProvider;
+        private readonly GameSaveRepository _gameSaveRepository;
+        private readonly IRegister<IWorldTurnBeginListener> _worldActorRegistry;
+        private readonly IEntityRegistry _entityRegistry;
+        private readonly IPathfindingService _pathfindingService;
+
+
+        public CharacterFactory(
+            IObjectResolver resolver, 
+            AssetLibrary assetLibrary, 
+            ArmoryLibrary armoryLibrary,
+            IPlayerPartyProvider playerPartyProvider, 
+            GameSaveRepository gameSaveRepository,
+            IRegister<IWorldTurnBeginListener> worldActorRegistry, 
+            IEntityRegistry entityRegistry, 
+            IPathfindingService pathfindingService)
+        {
+            _resolver = resolver;
+            _assetLibrary = assetLibrary;
+            _armoryLibrary = armoryLibrary;
+            _playerPartyProvider = playerPartyProvider;
+            _gameSaveRepository = gameSaveRepository;
+            _worldActorRegistry = worldActorRegistry;
+            _entityRegistry = entityRegistry;
+            _pathfindingService = pathfindingService;
+        }
+
+        public CharacterActor SpawnHero(CharacterModel model)
+        {
+            CharacterWorldView heroPrefab = _assetLibrary.SceneComponents
+                .Get(AssetsKey.CHARACTER)
+                .GetComponent<CharacterWorldView>();
+
+            CharacterWorldView heroInstance = _resolver.Instantiate(heroPrefab);
+            heroInstance.SetCellPosition(model.Position.AsVector3().AsCell());
+            
+            IPathfindingFollower follower = new CharacterPathfindingFollower(_pathfindingService, _entityRegistry); 
+            CharacterActor actor = new(model, heroInstance, follower, _armoryLibrary);
+            _playerPartyProvider.AddHero(actor);
+
+            GameModel gameSave = _gameSaveRepository.GetCurrentGame();
+
+            if (!gameSave.Heroes.Exists(h => h.ID.Equals(model.ID)))
+            { 
+                gameSave.Heroes.Add(model);
+            }
+            
+            _registerCharacter(EEntityType.Hero, heroInstance, actor);
+
+            return actor;
+        }
+
+        public CharacterActor SpawnNpc(CharacterModel model)
+        {
+            CharacterWorldView npcPrefab = _assetLibrary.SceneComponents
+                .Get(AssetsKey.CHARACTER)
+                .GetComponent<CharacterWorldView>();
+            
+            CharacterWorldView npcInstance = _resolver.Instantiate(
+                npcPrefab, 
+                model.Position.AsVector3(), 
+                Quaternion.identity);
+
+            GameModel gameSave = _gameSaveRepository.GetCurrentGame();
+
+            if (!gameSave.Npc.Exists(h => h.ID.Equals(model.ID)))
+            { 
+                gameSave.Npc.Add(model);
+            }
+            
+            IPathfindingFollower follower = new CharacterPathfindingFollower(_pathfindingService, _entityRegistry); 
+            CharacterActor actor = new(model, npcInstance, follower, _armoryLibrary);
+            
+           _registerCharacter(EEntityType.Npc, npcInstance, actor);
+            
+            return actor;
+        }
+
+        private void _registerCharacter(EEntityType entityType, CharacterWorldView view, CharacterActor actor)
+        {
+            view.SetActor(actor);
+            view.SetEntityType(entityType);
+            
+            _entityRegistry.Register(view);
+            _worldActorRegistry.Register(actor);
+        }
+    }
+}
