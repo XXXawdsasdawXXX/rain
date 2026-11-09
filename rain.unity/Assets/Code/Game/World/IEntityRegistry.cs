@@ -65,7 +65,7 @@ namespace Code.Game.World.Turns
         {
             if (TryGetEntities(cellPosition, out List<IEntityView> list))
             {
-                return list.Exists(e => e.IsOccupyingCell);
+                return !list.Exists(e => e.IsOccupyingCell);
             }
 
             return true;
