@@ -25,7 +25,6 @@ namespace Code.Game.Factories
         private readonly IRegister<IWorldTurnBeginListener> _worldActorRegistry;
         private readonly IEntityRegistry _entityRegistry;
         private readonly IPathfindingService _pathfindingService;
-        private readonly ITilemapView _tilemapView;
 
 
         public CharacterFactory(
@@ -36,8 +35,7 @@ namespace Code.Game.Factories
             GameSaveRepository gameSaveRepository,
             IRegister<IWorldTurnBeginListener> worldActorRegistry, 
             IEntityRegistry entityRegistry, 
-            IPathfindingService pathfindingService,
-            ITilemapView tilemapView)
+            IPathfindingService pathfindingService)
         {
             _resolver = resolver;
             _assetLibrary = assetLibrary;
@@ -47,7 +45,6 @@ namespace Code.Game.Factories
             _worldActorRegistry = worldActorRegistry;
             _entityRegistry = entityRegistry;
             _pathfindingService = pathfindingService;
-            _tilemapView = tilemapView;
         }
 
         public CharacterActor Spawn(EEntityType type, CharacterModel model)
@@ -108,7 +105,7 @@ namespace Code.Game.Factories
             npcInstance.SetCellPosition(model.Position);
 
             IPathfindingFollower follower = new CharacterPathfindingFollower(_pathfindingService, _entityRegistry);
-            actor = new CharacterActor(model, npcInstance, follower, _tilemapView, _armoryLibrary);
+            actor = new CharacterActor(model, npcInstance, follower, _armoryLibrary);
             return npcInstance;
         }
 

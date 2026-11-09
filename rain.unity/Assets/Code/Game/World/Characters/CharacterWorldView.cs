@@ -9,6 +9,7 @@ namespace Code.Game.Characters
     public class CharacterWorldView : MonoBehaviour, IEntityView
     {
         public event Action<IEntityView, Vector3Int, Vector3Int> PositionChanged;
+        
         public string ID => _actor != null ? _actor.Model.ID : string.Empty;
         public Vector3Int CellPosition { get; private set; }
         [field: SerializeField] public Transform Body { get; private set; }

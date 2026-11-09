@@ -19,7 +19,6 @@ namespace Code.Game.Characters
         public CharacterWorldView View { get; } 
         public IPathfindingFollower PathfindingFollower { get; }
 
-        private readonly ITilemapView _tilemap;
         private readonly ArmoryLibrary _armoryLibrary;
         
         private IActorCommand _command;
@@ -29,15 +28,13 @@ namespace Code.Game.Characters
         public CharacterActor(
             CharacterModel model,
             CharacterWorldView view, 
-            IPathfindingFollower pathfinding, 
-            ITilemapView tilemap,
+            IPathfindingFollower pathfinding,
             ArmoryLibrary armoryLibrary)
         {
             Model = model;
             PathfindingFollower = pathfinding;
             View = view;
 
-            _tilemap = tilemap;
             _armoryLibrary = armoryLibrary;
         }
         
@@ -55,7 +52,7 @@ namespace Code.Game.Characters
         public void SetCellPosition(Vector3Int position)
         {
             Model.SetCellPosition(position);
-            View.Body.position = _tilemap.CellAsCenterWorld(position);
+            View.SetCellPosition(position);
         }
 
         public void SetOrder(IActorOrder order)
