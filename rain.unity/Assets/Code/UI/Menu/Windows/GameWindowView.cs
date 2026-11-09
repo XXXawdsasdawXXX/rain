@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Code.Game.Save;
 using Code.Game.StateMachine;
 using Code.Game.StateMachine.States;
+using Code.Game.World;
 using Code.UI.Components;
 using Code.UI.Components.Window;
 using JetBrains.Annotations;
@@ -101,7 +102,8 @@ namespace Code.UI.Menu
             {
                 foreach (GameModel gameModel in _gamesSave.Data.Games)
                 {
-                    options.Add($"{gameModel.Heroes[0].Name}");
+                    string name = gameModel.Characters[EEntityType.Hero][0]?.Name;
+                    options.Add(string.IsNullOrEmpty(name) ? "empty name" : name);
                 }
             }
             else

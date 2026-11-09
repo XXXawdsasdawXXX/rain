@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using Code.Game.Factories;
 using Code.Game.Save;
+using Code.Game.World;
 using JetBrains.Annotations;
 using VContainer.Unity;
 
@@ -21,27 +23,25 @@ namespace Code.Game.StateMachine
         
         public void Start()
         {
-            _createHero();
-            _createNpc();
-        }
-
-        private void _createHero()
-        {
-            List<CharacterModel> heroes = _gameSave.GetCurrentGame().Heroes;
-
-            foreach (CharacterModel characterModel in heroes)
+            if (_gameSave.TryGetCurrentGame(out GameModel game))
             {
-                _characterFactory.SpawnHero(characterModel);
+                _createCharacters(EEntityType.Hero, game);
+                _createCharacters(EEntityType.Npc, game);
             }
         }
 
-        private void _createNpc()
+        private void _createCharacters(EEntityType type, GameModel game)
         {
-            List<CharacterModel> npc = _gameSave.GetCurrentGame().Npc;
-
-            foreach (CharacterModel characterModel in npc)
+            if (!game.Characters.ContainsKey(type))
             {
-                _characterFactory.SpawnNpc(characterModel);
+                throw new Exception($"game model has not character collection for {EEntityType.Npc}");
+            }
+            
+            List<CharacterModel> characterModels = game.Characters[type];
+
+            foreach (CharacterModel characterModel in characterModels)
+            {
+                _characterFactory.Spawn(type, characterModel);
             }
         }
     }

@@ -18,7 +18,7 @@ namespace Code.Game.DI
         [Title("Path")]
         [SerializeField] private WeightTilesConfiguration _weightTilesConfiguration;
         [SerializeField] private PathfindingTilemapView _pathfindingTilemapView;
-        [SerializeField] private PathView _pathView;
+        [SerializeField] private PathDrawer _pathDrawer;
 
         [Title("Characters")] 
         [SerializeField] private ArmoryLibrary _armoryLibrary;
@@ -39,8 +39,8 @@ namespace Code.Game.DI
 
             //path
             builder.RegisterInstance(_weightTilesConfiguration).AsSelf();
-            builder.RegisterInstance(_pathfindingTilemapView).AsSelf();
-            builder.RegisterInstance(_pathView).AsImplementedInterfaces();
+            builder.RegisterInstance(_pathfindingTilemapView).AsImplementedInterfaces();
+            builder.RegisterInstance(_pathDrawer).AsImplementedInterfaces();
             
             builder.Register<PathfindingService>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<PlayerPathController>(Lifetime.Singleton).AsImplementedInterfaces();

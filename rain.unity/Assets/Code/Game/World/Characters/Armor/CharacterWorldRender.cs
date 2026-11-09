@@ -26,7 +26,7 @@ namespace Code.Game.Characters
             WorldArmor.DisposeHero();
         }
         
-        public void SetActor(CharacterWorldActor actor)
+        public void SetActor(CharacterActor actor)
         {
             if (actor != null)
             {

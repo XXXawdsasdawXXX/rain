@@ -1134,7 +1134,7 @@ MonoBehaviour:
   - {fileID: 1484170046}
   _weightTilesConfiguration: {fileID: 11400000, guid: 14a52feec3ca18941b01ec2411b4feab, type: 2}
   _pathfindingTilemapView: {fileID: 1580134836}
-  _pathView: {fileID: 2064400863}
+  _pathDrawer: {fileID: 2064400863}
   _armoryLibrary: {fileID: 11400000, guid: d5812ef9ca70e9f468402226e1850c0c, type: 2}
 --- !u!114 &764679762
 MonoBehaviour:
@@ -2368,6 +2368,9 @@ MonoBehaviour:
       <FrameDuration>k__BackingField:
         MinValue: 0
         MaxValue: 0
+      <TimeBetweenTiles>k__BackingField:
+        MinValue: 0
+        MaxValue: 0
       <IsLoop>k__BackingField: 0
       <RandomizedFrame>k__BackingField: 0
       <Sprites>k__BackingField:
@@ -2377,6 +2380,9 @@ MonoBehaviour:
       <FrameDuration>k__BackingField:
         MinValue: 0
         MaxValue: 0
+      <TimeBetweenTiles>k__BackingField:
+        MinValue: 0
+        MaxValue: 0
       <IsLoop>k__BackingField: 0
       <RandomizedFrame>k__BackingField: 0
       <Sprites>k__BackingField:
@@ -2384,6 +2390,9 @@ MonoBehaviour:
     isCanBeDestroyed: 0
     destroyeModel:
       <FrameDuration>k__BackingField:
+        MinValue: 0
+        MaxValue: 0
+      <TimeBetweenTiles>k__BackingField:
         MinValue: 0
         MaxValue: 0
       <IsLoop>k__BackingField: 0
@@ -9819,6 +9828,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectedTileBody: {fileID: 1669401497}
+  _tilemap: {fileID: 1580134835}
   _selectTileRender: {fileID: 1669401498}
   _pathPointsPool:
     _root: {fileID: 368138839}

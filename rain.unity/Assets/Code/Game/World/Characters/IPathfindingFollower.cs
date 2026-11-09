@@ -8,10 +8,11 @@ namespace Code.Pathfinding
     {
         event Action Updated;
         int PointIndex { get; }
-        List<Vector3> Path { get; }
+        List<Vector3Int> Path { get; }
         bool HasActivePath { get; }
-        bool TryMoveToNextWorldPosition(out Vector3 nextPosition);
-        void SetPath(Vector3 start, Vector3 end);
+        bool TryMoveToNextCell(out Vector3Int nextCell);
+        Vector3 GetWorldPosition(Vector3Int cell);
+        void SetPath(Vector3Int start, Vector3Int end);
         void Clear();
     }
 }

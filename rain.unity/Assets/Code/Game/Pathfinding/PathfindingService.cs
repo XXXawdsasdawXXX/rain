@@ -9,35 +9,43 @@ namespace Code.Pathfinding
     [UsedImplicitly]
     public sealed class PathfindingService : IPathfindingService
     {
+        public ITilemapView Tilemap => _tilemap;
+
         private readonly List<PathfindingNode> _openNodes = new();
         private readonly HashSet<Vector3Int> _closedCells = new();
         private readonly Dictionary<Vector3Int, PathfindingNode> _openLookup = new();
         private readonly List<Vector3Int> _neighborCells = new();
         private readonly List<Vector3Int> _path = new();
 
-        private readonly PathfindingTilemapView _tilemap;
+        private readonly ITilemapView _tilemap;
 
         private Vector3Int _endCellPosition;
 
 
-        public PathfindingService(PathfindingTilemapView tilemap)
+        public PathfindingService(ITilemapView tilemap)
         {
             _tilemap = tilemap;
         }
 
-        public IReadOnlyList<Vector3> FindPath(Vector3 startPosition, Vector3 endPosition)
+        public IReadOnlyList<Vector3Int> FindPath(Vector3 startPosition, Vector3 endPosition)
         {
-            List<Vector3> path = new();
+            Vector3Int start = _tilemap.WorldAsCell(startPosition);
+            Vector3Int end = _tilemap.WorldAsCell(endPosition);
+            return FindPath(start, end);
+        }
+
+        public IReadOnlyList<Vector3Int> FindPath(Vector3Int startPosition, Vector3Int endPosition)
+        {
+            List<Vector3Int> path = new();
             
             _path.Clear();
 
-            Vector3Int startCell = _tilemap.WordToCell(startPosition);
-            _endCellPosition = _tilemap.WordToCell(endPosition);
+            _endCellPosition = endPosition;
 
-            if (!_isWalkable(startCell))
+            if (!_isWalkable(startPosition))
             {
                 Log.Info(this,
-                    $"[FindPath] start cell {startCell} is not walkable (baked={_tilemap.HasBakedCell(startCell)})");
+                    $"[FindPath] start cell {startPosition} is not walkable (baked={_tilemap.HasBakedCell(startPosition)})");
                 return path;
             }
 
@@ -47,15 +55,15 @@ namespace Code.Pathfinding
                 return path;
             }
 
-            if (startCell == _endCellPosition)
+            if (startPosition == _endCellPosition)
             {
                 return path;
             }
 
-            PathfindingNode endNode = _runAStar(startCell);
+            PathfindingNode endNode = _runAStar(startPosition);
             if (endNode == null)
             {
-                Log.Info(this, $"[FindPath] no path from {startCell} to {_endCellPosition}");
+                Log.Info(this, $"[FindPath] no path from {startPosition} to {_endCellPosition}");
                 return path;
             }
 
@@ -64,17 +72,17 @@ namespace Code.Pathfinding
             for (int i = 0; i < _path.Count; i++)
             {
                 Vector3Int cell = _path[i];
-                path.Add(_tilemap.CellToWorlds(cell));
+                path.Add(cell);
             }
 
-            Log.Info(this, $"[FindPath] start={startCell}, end={_endCellPosition}, steps={_path.Count - 1}");
+            Log.Info(this, $"[FindPath] start={startPosition}, end={_endCellPosition}, steps={_path.Count - 1}");
             
             return path;
         }
 
-        public bool IsWalkable(Vector3 worldPosition)
+        public bool IsWalkable(Vector3Int cellPosition)
         {
-            return _isWalkable(_tilemap.WordToCell(worldPosition));
+            return _isWalkable(cellPosition);
         }
         
         private PathfindingNode _runAStar(Vector3Int startCell)
@@ -83,7 +91,7 @@ namespace Code.Pathfinding
             _closedCells.Clear();
             _openLookup.Clear();
 
-            var startNode = new PathfindingNode
+            PathfindingNode startNode = new()
             {
                 CellPosition = startCell,
                 GCost = 0,
@@ -144,7 +152,7 @@ namespace Code.Pathfinding
                     continue;
                 }
 
-                var neighborNode = new PathfindingNode
+                PathfindingNode neighborNode = new()
                 {
                     CellPosition = neighborCell,
                     GCost = newG,
@@ -214,15 +222,5 @@ namespace Code.Pathfinding
 
             return 10 * (dx + dy) + (14 - 2 * 10) * Mathf.Min(dx, dy);
         }
-    }
-
-    public class PathfindingNode
-    {
-        public Vector3Int CellPosition;
-        public int GCost;
-        public int HCost;
-        public int TileWeight;
-        public int FCost => GCost + HCost;
-        public PathfindingNode Parent;
     }
 }

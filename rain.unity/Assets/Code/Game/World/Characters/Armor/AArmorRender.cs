@@ -1,3 +1,4 @@
+using System;
 using Code.Game.Characters.Armor;
 using Essential;
 using TriInspector;
@@ -5,6 +6,7 @@ using UnityEngine;
 
 namespace Code.Game.Characters
 {
+    [Serializable]
     public abstract class AArmorPieceView<TRender> where TRender : Component
     {
         [field: SerializeField]
@@ -61,13 +63,14 @@ namespace Code.Game.Characters
         protected abstract Sprite GetSprite(TRender renderer);
     }
 
+    [Serializable]
     public abstract class AArmorRender<TRender, TPieceView>
         where TRender : Component
         where TPieceView : AArmorPieceView<TRender>, new()
     {
         [SerializeReference] protected TPieceView[] render;
 
-        protected CharacterWorldActor actor;
+        protected CharacterActor actor;
         protected ArmoryLibrary armoryLibrary;
 
         protected AArmorRender()
@@ -97,7 +100,7 @@ namespace Code.Game.Characters
             this.armoryLibrary = armoryLibrary;
         }
 
-        public void SetHero(CharacterWorldActor actor)
+        public void SetHero(CharacterActor actor)
         {
             DisposeHero();
 

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Code.Game.World.Turns;
 using Essential;
-using Essential.Extensions;
 using UnityEngine;
 
 namespace Code.Pathfinding
@@ -11,31 +10,38 @@ namespace Code.Pathfinding
     {
         public event Action Updated;
         public int PointIndex => _pathIndex;
-        public List<Vector3> Path { get; private set; } = new();
+        public List<Vector3Int> Path { get; private set; } = new();
         public bool HasActivePath { get; private set; }
 
         private readonly IPathfindingService _pathfinding;
         private readonly IEntityRegistry _entityRegistry;
 
-        private Vector3 _end;
+        private Vector3Int _end;
         private int _pathIndex;
 
 
-        public CharacterPathfindingFollower(IPathfindingService pathfinding, IEntityRegistry entityRegistry)
+        public CharacterPathfindingFollower(
+            IPathfindingService pathfinding, 
+            IEntityRegistry entityRegistry)
         {
             _pathfinding = pathfinding;
             _entityRegistry = entityRegistry;
         }
-        
-        public void SetPath(Vector3 start, Vector3 end)
+
+        public void SetPath(Vector3Int start, Vector3Int end)
         {
-            Path = new List<Vector3>(_pathfinding.FindPath(start, end));
+            Path = new List<Vector3Int>(_pathfinding.FindPath(start, end));
             _end = end;
             
             _pathIndex = 1;
             HasActivePath = Path.Count > 1;
             
             Updated?.Invoke();
+        }
+
+        public Vector3 GetWorldPosition(Vector3Int cell)
+        {
+            return _pathfinding.Tilemap.CellAsCenterWorld(cell);
         }
 
         public void Clear()
@@ -45,20 +51,20 @@ namespace Code.Pathfinding
             HasActivePath = false;
         }
 
-        public bool TryMoveToNextWorldPosition(out Vector3 nextPosition)
+        public bool TryMoveToNextCell(out Vector3Int nextPosition)
         {
             if (!HasActivePath || _pathIndex >= Path.Count)
             {
                 HasActivePath = false;
                 
-                nextPosition = Path.Count > 0 ? Path[^1] : Vector3.zero;
+                nextPosition = Path.Count > 0 ? Path[^1] : Vector3Int.zero;
           
                 return false;
             }
     
             nextPosition = Path[_pathIndex];
 
-            if (!_pathfinding.IsWalkable(nextPosition) || !_entityRegistry.IsEmptyCell(nextPosition.AsCell()))
+            if (!_pathfinding.IsWalkable(nextPosition) || !_entityRegistry.IsEmptyCell(nextPosition))
             {
                 SetPath(Path[_pathIndex - 1], _end);
 

@@ -14,7 +14,7 @@ namespace Code.Game.Characters
     {
         private readonly IPathfindingDrawer _pathfindingDrawer;
         private readonly IInputService _input;
-        private readonly PathfindingTilemapView _pathfindingTilemapView;
+        private readonly ITilemapView _tilemap;
         private readonly IPathfindingService _pathfindingService;
         private readonly IPlayerPartyProvider _playerPartyProvider;
         private readonly IGamePhaseService _gamePhase;
@@ -26,7 +26,7 @@ namespace Code.Game.Characters
         public PlayerPathDrawer(
             IPathfindingDrawer pathfindingDrawer, 
             IInputService input,
-            PathfindingTilemapView pathfindingTilemapView,
+            ITilemapView tilemap,
             IPathfindingService pathfindingService,
             IPlayerPartyProvider playerPartyProvider,
             IGamePhaseService gamePhase)
@@ -34,7 +34,7 @@ namespace Code.Game.Characters
             _gamePhase = gamePhase;
             _pathfindingDrawer = pathfindingDrawer;
             _input = input;
-            _pathfindingTilemapView = pathfindingTilemapView;
+            _tilemap = tilemap;
             _pathfindingService = pathfindingService;
             _playerPartyProvider = playerPartyProvider;
         }
@@ -56,15 +56,14 @@ namespace Code.Game.Characters
                 return;
             }
             
-            Vector3Int currentCell = _pathfindingTilemapView.WordToCell(_input.MouseWorldPosition);
+            Vector3Int currentCell = _tilemap.WorldAsCell(_input.MouseWorldPosition);
 
             if (currentCell != _lastCellPosition)
             {
-                Vector3 viewPosition = _pathfindingTilemapView.RoundWorldPosition(_input.MouseWorldPosition);
-                bool isWalkable = _pathfindingService.IsWalkable(
-                    viewPosition);
+                Vector3Int viewPosition = _tilemap.WorldAsCell(_input.MouseWorldPosition);
+                bool isWalkable = _pathfindingService.IsWalkable(viewPosition);
                 
-                _pathfindingDrawer.UpdateSelectTile(viewPosition, isWalkable);
+                _pathfindingDrawer.UpdateSelectTile(viewPosition, isWalkable); //todo stop here
                 _lastCellPosition = currentCell;
             }
         }

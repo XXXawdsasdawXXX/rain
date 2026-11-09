@@ -36,13 +36,13 @@ namespace Code.Game.World
             return _overlap(results, collectAlive: false, aliveResults: null);
         }
 
-        public int OverlapAlive(List<IWorldEntityView> results)
+        public int OverlapAlive(List<IEntityView> results)
         {
             results.Clear();
             return _overlap(null, collectAlive: true, aliveResults: results);
         }
 
-        private int _overlap(ICollection<Collider2D> colliderResults, bool collectAlive, ICollection<IWorldEntityView> aliveResults)
+        private int _overlap(ICollection<Collider2D> colliderResults, bool collectAlive, ICollection<IEntityView> aliveResults)
         {
             colliderResults?.Clear();
             _ensureBuffer();
@@ -73,7 +73,7 @@ namespace Code.Game.World
 
                     if (collectAlive)
                     {
-                        if (collider.TryGetComponent(out IWorldEntityView entity) && _entityTypes.Contains(entity.Type))
+                        if (collider.TryGetComponent(out IEntityView entity) && _entityTypes.Contains(entity.Type))
                         {
                             aliveResults.Add(entity);
                             total++;

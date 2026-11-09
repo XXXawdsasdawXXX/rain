@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Code.Game.Characters;
 using Code.Game.Characters.Armor;
 using Code.Game.Characters.Hero;
@@ -7,7 +9,6 @@ using Code.Game.World.Turns;
 using Code.Pathfinding;
 using Core.AssetManagement.Libraries.Assets;
 using JetBrains.Annotations;
-using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -24,6 +25,7 @@ namespace Code.Game.Factories
         private readonly IRegister<IWorldTurnBeginListener> _worldActorRegistry;
         private readonly IEntityRegistry _entityRegistry;
         private readonly IPathfindingService _pathfindingService;
+        private readonly ITilemapView _tilemapView;
 
 
         public CharacterFactory(
@@ -34,7 +36,8 @@ namespace Code.Game.Factories
             GameSaveRepository gameSaveRepository,
             IRegister<IWorldTurnBeginListener> worldActorRegistry, 
             IEntityRegistry entityRegistry, 
-            IPathfindingService pathfindingService)
+            IPathfindingService pathfindingService,
+            ITilemapView tilemapView)
         {
             _resolver = resolver;
             _assetLibrary = assetLibrary;
@@ -44,66 +47,89 @@ namespace Code.Game.Factories
             _worldActorRegistry = worldActorRegistry;
             _entityRegistry = entityRegistry;
             _pathfindingService = pathfindingService;
+            _tilemapView = tilemapView;
+        }
+
+        public CharacterActor Spawn(EEntityType type, CharacterModel model)
+        {
+            switch (type)
+            {
+                case EEntityType.None:
+                case EEntityType.Enemy:
+                case EEntityType.Obstacle:
+                default:
+                    throw new Exception($"factory can not spawn actor with type {type}");
+                
+                case EEntityType.Hero:
+                    return SpawnHero(model);
+                
+                case EEntityType.Npc:
+                    return SpawnNpc(model);
+            }
         }
 
         public CharacterActor SpawnHero(CharacterModel model)
         {
-            CharacterWorldView heroPrefab = _assetLibrary.SceneComponents
-                .Get(AssetsKey.CHARACTER)
-                .GetComponent<CharacterWorldView>();
-
-            CharacterWorldView heroInstance = _resolver.Instantiate(heroPrefab);
-            heroInstance.SetCellPosition(model.Position.AsVector3().AsCell());
-            
-            IPathfindingFollower follower = new CharacterPathfindingFollower(_pathfindingService, _entityRegistry); 
-            CharacterActor actor = new(model, heroInstance, follower, _armoryLibrary);
-            _playerPartyProvider.AddHero(actor);
-
-            GameModel gameSave = _gameSaveRepository.GetCurrentGame();
-
-            if (!gameSave.Heroes.Exists(h => h.ID.Equals(model.ID)))
-            { 
-                gameSave.Heroes.Add(model);
+            if (model == null)
+            {
+                throw new Exception("model for spawn hero is null");
             }
             
-            _registerCharacter(EEntityType.Hero, heroInstance, actor);
-
+            CharacterWorldView heroInstance = _create(model, out CharacterActor actor);
+            
+            _playerPartyProvider.AddHero(actor);
+            
+            _register(EEntityType.Hero, heroInstance, actor);
+            
             return actor;
         }
 
         public CharacterActor SpawnNpc(CharacterModel model)
         {
-            CharacterWorldView npcPrefab = _assetLibrary.SceneComponents
-                .Get(AssetsKey.CHARACTER)
-                .GetComponent<CharacterWorldView>();
-            
-            CharacterWorldView npcInstance = _resolver.Instantiate(
-                npcPrefab, 
-                model.Position.AsVector3(), 
-                Quaternion.identity);
-
-            GameModel gameSave = _gameSaveRepository.GetCurrentGame();
-
-            if (!gameSave.Npc.Exists(h => h.ID.Equals(model.ID)))
-            { 
-                gameSave.Npc.Add(model);
+            if (model == null)
+            {
+                throw new Exception("model for spawn npc is null");
             }
             
-            IPathfindingFollower follower = new CharacterPathfindingFollower(_pathfindingService, _entityRegistry); 
-            CharacterActor actor = new(model, npcInstance, follower, _armoryLibrary);
-            
-           _registerCharacter(EEntityType.Npc, npcInstance, actor);
+            CharacterWorldView npcInstance = _create(model, out CharacterActor actor);
+
+            _register(EEntityType.Npc, npcInstance, actor);
             
             return actor;
         }
 
-        private void _registerCharacter(EEntityType entityType, CharacterWorldView view, CharacterActor actor)
+        private CharacterWorldView _create(CharacterModel model, out CharacterActor actor)
+        {
+            CharacterWorldView npcPrefab = _assetLibrary.SceneComponents
+                .Get(AssetsKey.CHARACTER)
+                .GetComponent<CharacterWorldView>();
+
+            CharacterWorldView npcInstance = _resolver.Instantiate(npcPrefab);
+            npcInstance.SetCellPosition(model.Position);
+
+            IPathfindingFollower follower = new CharacterPathfindingFollower(_pathfindingService, _entityRegistry);
+            actor = new CharacterActor(model, npcInstance, follower, _tilemapView, _armoryLibrary);
+            return npcInstance;
+        }
+
+        private void _register(EEntityType entityType, CharacterWorldView view, CharacterActor actor)
         {
             view.SetActor(actor);
             view.SetEntityType(entityType);
             
             _entityRegistry.Register(view);
             _worldActorRegistry.Register(actor);
+            
+            if (_gameSaveRepository.TryGetCurrentGame(out GameModel gameModel))
+            {
+                if (gameModel.Characters.TryGetValue(entityType, out List<CharacterModel> collection))
+                {
+                    if (!collection.Exists(h => h.ID.Equals(actor.Model.ID)))
+                    { 
+                        collection.Add(actor.Model);
+                    }
+                }
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using Essential;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -19,6 +20,7 @@ namespace Code.Game.World
         
         public override EObstacleState Step()
         {
+            Log.Info($"alive in obstacle {owner.GetAlive().Count}");
             if (owner == null || owner.GetAlive().Count == 0)
             {
                 return EObstacleState.Idle;

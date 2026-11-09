@@ -1,8 +1,8 @@
 using System;
 using Code.Game.World;
 using Code.Pathfinding;
-using Essential.Extensions;
 using UnityEngine;
+using VContainer;
 
 namespace Code.Game.Characters
 {
@@ -14,17 +14,24 @@ namespace Code.Game.Characters
         [field: SerializeField] public Transform Body { get; private set; }
 
         [field: SerializeField] public Rigidbody2D Rigidbody { get; private set; }
-        [field: SerializeField] public PathfindingAgentSettings AgentSettings { get; private set; }
+        [field: SerializeField] public bool IsOccupyingCell { get; set; }
         [field: SerializeField] public CharacterWorldRender Render { get; private set; }
         [field: SerializeField] public EEntityType Type { get; private set; }
 
         private CharacterActor _actor;
+        private ITilemapView _tilemap;
 
 
+        [Inject]
+        public void Construct(ITilemapView tilemap)
+        {
+            _tilemap = tilemap;
+        }
+        
         public void SetCellPosition(Vector3Int cellPosition)
         {
             Vector3Int lastPosition = CellPosition;
-            Body.position = cellPosition.AsWorld();
+            Body.position = _tilemap.CellAsCenterWorld(cellPosition);
             CellPosition = cellPosition;
             PositionChanged?.Invoke(this, lastPosition, cellPosition);
         }

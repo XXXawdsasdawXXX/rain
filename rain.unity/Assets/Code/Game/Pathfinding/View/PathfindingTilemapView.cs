@@ -9,7 +9,7 @@ using VContainer.Unity;
 
 namespace Code.Pathfinding
 {
-    public class PathfindingTilemapView : Essential.Mono, IStartable
+    public class PathfindingTilemapView : Essential.Mono, IStartable, ITilemapView
     {
         [SerializeField] private Tilemap _tilemapBase;
 
@@ -17,7 +17,7 @@ namespace Code.Pathfinding
         private bool _isDrawGizmo;
         
         [SerializeField, Group("gizmo"), GUIColor(0.75f, 0.75f, 0.3f, 0.9f)]
-        private Color _gizmoColor = new Color(1, 1, 1, 0.5f);
+        private Color _gizmoColor = new(1, 1, 1, 0.5f);
 
         [SerializeField, Group("gizmo"), GUIColor(0.75f, 0.75f, 0.3f, 0.9f)]
         private Font _font;
@@ -39,34 +39,29 @@ namespace Code.Pathfinding
         {
             _bakeMapTiles();
         }
+        
+        public Vector3Int WorldAsCell(Vector3 worldPosition)
+        {
+            return _tilemapBase.WorldToCell(worldPosition); 
+        }
 
-        public TileData GetCellData(Vector3Int cellPosition)
+        public Vector3 CellAsCenterWorld(Vector3Int cellPosition)
+        {
+            return _tilemapBase.GetCellCenterWorld(cellPosition);
+        }
+        
+        public TileData GetCellData(Vector3Int cell)
         {
             _ensureMapBaked();
-            return _mapTiles.TryGetValue(cellPosition, out TileData data)
+            return _mapTiles.TryGetValue(cell, out TileData data)
                 ? data
                 : _weightTiles.LockTiles;
         }
-
-        public Vector3 RoundWorldPosition(Vector3 world)
-        {
-            return CellToWorlds(WordToCell(world));
-        }
         
-        public bool HasBakedCell(Vector3Int cellPosition)
+        public bool HasBakedCell(Vector3Int cell)
         {
             _ensureMapBaked();
-            return _mapTiles.ContainsKey(cellPosition);
-        }
-
-        public Vector3Int WordToCell(Vector3 worldPosition)
-        {
-            return _tilemapBase.WorldToCell(worldPosition);
-        }
-
-        public Vector3 CellToWorlds(Vector3Int cellPosition)
-        {
-            return _tilemapBase.GetCellCenterWorld(cellPosition);
+            return _mapTiles.ContainsKey(cell);
         }
 
         public int GetTileWeight(Vector3Int cellPosition)
@@ -93,7 +88,7 @@ namespace Code.Pathfinding
             {
                 for (int y = bounds.yMin; y < bounds.yMax; y++)
                 {
-                    Vector3Int cell = new Vector3Int(x, y, bounds.z);
+                    Vector3Int cell = new(x, y, bounds.z);
 
                     if (!_tilemapBase.HasTile(cell))
                     {
@@ -158,7 +153,7 @@ namespace Code.Pathfinding
                 for (int y = bounds.yMin; y < bounds.yMax; y++)
                 {
                     Vector3Int cell = new(x, y, bounds.z);
-                    Handles.Label(CellToWorlds(cell), cell.ToString(), labelStyle);
+                    Handles.Label(CellAsCenterWorld(cell), cell.ToString(), labelStyle);
                 }
             }
         }

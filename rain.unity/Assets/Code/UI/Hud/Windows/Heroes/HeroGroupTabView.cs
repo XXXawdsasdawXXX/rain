@@ -11,7 +11,7 @@ namespace Code.UI.Hud.Windows.Heroes
         [SerializeField] private UIArmorRender _armor;
         [SerializeField] private UICharacterStats _stats;
 
-        private CharacterWorldActor _actor;
+        private CharacterActor _actor;
 
         
         public void SetLibrary(ArmoryLibrary armoryLibrary)
@@ -19,7 +19,7 @@ namespace Code.UI.Hud.Windows.Heroes
             _armor.SetArmorLibrary(armoryLibrary);
         }
         
-        public void SetHero(CharacterWorldActor actor)
+        public void SetHero(CharacterActor actor)
         {
             _disposeHero();
             

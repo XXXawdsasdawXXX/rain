@@ -6,18 +6,20 @@ using Code.Game.World.Turns;
 using Code.Pathfinding;
 using Essential.Data;
 using Unity.Mathematics;
+using UnityEngine;
 
 namespace Code.Game.Characters
 {
     public class CharacterActor : IWorldActor, IHealth
     {
         public IWorldTurnBeginListener.ETurnPriority Priority => IWorldTurnBeginListener.ETurnPriority.Character;
-        public CharacterModel Model { get; }
-        public CharacterView View { get; } 
-        public IPathfindingFollower PathfindingFollower { get; }
         public ReactiveProperty<float> Health => Model.Stats[EStatType.Health];
         public ReactiveProperty<bool> IsDead { get; } = new(false);
-        
+        public CharacterModel Model { get; }
+        public CharacterWorldView View { get; } 
+        public IPathfindingFollower PathfindingFollower { get; }
+
+        private readonly ITilemapView _tilemap;
         private readonly ArmoryLibrary _armoryLibrary;
         
         private IActorCommand _command;
@@ -26,18 +28,19 @@ namespace Code.Game.Characters
         
         public CharacterActor(
             CharacterModel model,
-            CharacterView view, 
+            CharacterWorldView view, 
             IPathfindingFollower pathfinding, 
+            ITilemapView tilemap,
             ArmoryLibrary armoryLibrary)
         {
             Model = model;
             PathfindingFollower = pathfinding;
             View = view;
-            
+
+            _tilemap = tilemap;
             _armoryLibrary = armoryLibrary;
         }
-
-
+        
         public void OnWorldTurnBegin()
         {
             _command = _order?.BuildCommand() ?? new WaitCommand();
@@ -47,6 +50,12 @@ namespace Code.Game.Characters
             {
                 _order.Cancel();
             }
+        }
+
+        public void SetCellPosition(Vector3Int position)
+        {
+            Model.SetCellPosition(position);
+            View.Body.position = _tilemap.CellAsCenterWorld(position);
         }
 
         public void SetOrder(IActorOrder order)

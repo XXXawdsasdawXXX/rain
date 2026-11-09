@@ -14,7 +14,7 @@ namespace Code.Game.World
         [SerializeField] private Transform _root;
         [SerializeField] private Sprite[] _wallSprites;
         [SerializeField] private BoxCollider2D _heroesTrigger;
-        [SerializeField] private Vector2 _pieceSize = new Vector2(128, 258);
+        [SerializeField] private Vector2 _pieceSize = new(128, 258);
         [SerializeField] private List<SpriteRenderer> _renderers;
         [SerializeField] private float _hideAlpha = 0.4f;
         [SerializeField] private float _xRenderOffset;

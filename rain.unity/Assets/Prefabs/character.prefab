@@ -603,15 +603,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game::Code.Game.Characters.CharacterWorldView
   <Body>k__BackingField: {fileID: 5588287757438198222}
-  <AgentSettings>k__BackingField:
-    <ObstacleLayers>k__BackingField:
-      serializedVersion: 2
-      m_Bits: 897
-    <CheckRadius>k__BackingField: 0.2
-    <IgnoreCollider>k__BackingField: {fileID: 8518759391917154942}
+  <Rigidbody>k__BackingField: {fileID: 337018498551924372}
+  <IsOccupyingCell>k__BackingField: 0
   <Render>k__BackingField: {fileID: 371985114003227768}
   <Type>k__BackingField: 0
-  <ID>k__BackingField: 
 --- !u!114 &371985114003227768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -654,7 +649,7 @@ MonoBehaviour:
         <Renderers>k__BackingField:
         - {fileID: 5089687733765912595}
         - {fileID: 928053571994268184}
-        - {fileID: 7430526419904876120}
+        - {fileID: 5288900795624790109}
     - rid: 4745735555419734120
       type: {class: WorldArmorPieceView, ns: Code.Game.Characters, asm: Game}
       data:
@@ -1037,7 +1032,7 @@ PrefabInstance:
     - target: {fileID: 2092405550493882779, guid: ea58265484ab0dc4cb85d6910e4d87a3, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -236705789, guid: 7edab33412531574ebc2153b7d587234, type: 3}
+      objectReference: {fileID: 441614864, guid: 7edab33412531574ebc2153b7d587234, type: 3}
     - target: {fileID: 2092405550493882779, guid: ea58265484ab0dc4cb85d6910e4d87a3, type: 3}
       propertyPath: m_SortingLayer
       value: 0
@@ -1226,6 +1221,11 @@ Transform:
 --- !u!4 &4846878738712147992 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7552582706839291426, guid: ea58265484ab0dc4cb85d6910e4d87a3, type: 3}
+  m_PrefabInstance: {fileID: 6083312527918318022}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &5288900795624790109 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2092405550493882779, guid: ea58265484ab0dc4cb85d6910e4d87a3, type: 3}
   m_PrefabInstance: {fileID: 6083312527918318022}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &5649314994782318693 stripped

@@ -16,10 +16,9 @@ namespace Code.Game.Characters.Player.Commands
 
         public void Execute()
         {
-            if (_owner.PathfindingFollower.TryMoveToNextWorldPosition(out Vector3 nextPosition))
+            if (_owner.PathfindingFollower.TryMoveToNextCell(out Vector3Int nextPosition))
             {
-                _owner.View.Body.position = nextPosition;
-                _owner.Model.Position = nextPosition.AsPosition();
+                _owner.SetCellPosition(nextPosition);
             }
         }
     }
@@ -28,7 +27,6 @@ namespace Code.Game.Characters.Player.Commands
     {
         private readonly CharacterActor _owner;
         private readonly CharacterActor _target;
-
         
         public AttackTargetCommand(CharacterActor owner, CharacterActor target)
         {

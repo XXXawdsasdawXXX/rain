@@ -5,7 +5,9 @@ namespace Code.Pathfinding
 {
     public interface IPathfindingService
     {
-        IReadOnlyList<Vector3> FindPath(Vector3 startPosition, Vector3 endPosition);
-        bool IsWalkable(Vector3 worldPosition);
+        ITilemapView Tilemap { get; }
+        IReadOnlyList<Vector3Int> FindPath(Vector3Int startPosition, Vector3Int endPosition);
+        IReadOnlyList<Vector3Int> FindPath(Vector3 startPosition, Vector3 endPosition);
+        bool IsWalkable(Vector3Int worldPosition);
     }
 }

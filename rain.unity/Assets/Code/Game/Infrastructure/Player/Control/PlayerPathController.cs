@@ -2,6 +2,7 @@
 using Code.Game.Characters.Hero;
 using Code.Game.StateMachine;
 using Code.Game.World.Turns.Orders;
+using Code.Pathfinding;
 using Core.Input;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -15,16 +16,19 @@ namespace Code.Game.Characters
         private readonly IPlayerPartyProvider _playerPartyProvider;
         private readonly IGamePhaseService _gamePhaseService;
         private readonly IInputService _input;
+        private readonly ITilemapView _tilemap;
 
-        
+
         public PlayerPathController(
             IPlayerPartyProvider playerPartyProvider, 
             IInputService input, 
-            IGamePhaseService gamePhaseService)
+            IGamePhaseService gamePhaseService, 
+            ITilemapView tilemap)
         {
             _playerPartyProvider = playerPartyProvider;
             _input = input;
             _gamePhaseService = gamePhaseService;
+            _tilemap = tilemap;
         }
 
         public void Start()
@@ -53,8 +57,9 @@ namespace Code.Game.Characters
         
         private void _setPathForCurrentHero()
         {
-            CharacterActor hero = _playerPartyProvider.CurrentCharacter; 
-            hero.SetOrder(new MoveToPointOrder(hero, _input.MouseWorldPosition)); 
+            CharacterActor hero = _playerPartyProvider.CurrentCharacter;
+            Vector3Int cellPosition = _tilemap.WorldAsCell(_input.MouseWorldPosition);
+            hero.SetOrder(new MoveToPointOrder(hero, cellPosition)); 
         }
     }
 }

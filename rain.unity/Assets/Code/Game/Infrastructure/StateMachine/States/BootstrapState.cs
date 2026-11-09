@@ -3,6 +3,7 @@ using System.Threading;
 using Code.Game.Save;
 using Core.Scenes;
 using Cysharp.Threading.Tasks;
+using Essential;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -38,7 +39,11 @@ namespace Code.Game.StateMachine.States
 
             await _settingsSave.LoadOrDefaultAsync(_cts.Token);
 
+            Log.Info(this, "settings loaded..");
+            
             await _gameSave.LoadOrDefaultAsync(_cts.Token);
+            
+            Log.Info(this, "game loaded..");
             
             _cts?.Cancel();
             

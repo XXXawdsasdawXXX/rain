@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1003196874, guid: 5f5217e02f73bad4fbd3ce9a85cef1ed, type: 3}
+  m_Sprite: {fileID: -1007036530, guid: 5f5217e02f73bad4fbd3ce9a85cef1ed, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -686,7 +686,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -951046174601823084, guid: ea58265484ab0dc4cb85d6910e4d87a3, type: 3}
+  m_Sprite: {fileID: -455553609, guid: d83c20a88bcc4ad43a12b932f121c15d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -863,6 +863,10 @@ PrefabInstance:
     - target: {fileID: 8793902034843026515, guid: f1def756192d11744b7385b13e79cdec, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8793902034843026515, guid: f1def756192d11744b7385b13e79cdec, type: 3}
+      propertyPath: m_ActiveFontFeatures.Array.size
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1584863519962549245, guid: f1def756192d11744b7385b13e79cdec, type: 3}

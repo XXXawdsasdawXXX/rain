@@ -4,18 +4,19 @@ using UnityEngine;
 
 namespace Code.Game.World.Turns
 {
-    public interface IEntityRegistry : IRegister<IWorldEntityView>
+    public interface IEntityRegistry : IRegister<IEntityView>
     {
-        bool TryGetEntities(Vector3Int cellPosition, out List<IWorldEntityView> list);
+        bool TryGetEntities(Vector3Int cellPosition, out List<IEntityView> list);
+        bool IsEmptyCell(Vector3Int cellPosition);
     }  
     
     public class EntityRegistry : IEntityRegistry
     {
-        private readonly Dictionary<Vector3Int, List<IWorldEntityView>> _entities = new();
+        private readonly Dictionary<Vector3Int, List<IEntityView>> _entities = new();
 
-        public void Register(IWorldEntityView entity)
+        public void Register(IEntityView entity)
         {
-            if (_entities.TryGetValue(entity.CellPosition, out List<IWorldEntityView> list))
+            if (_entities.TryGetValue(entity.CellPosition, out List<IEntityView> list))
             {
                 if (list.Contains(entity))
                 {
@@ -26,7 +27,7 @@ namespace Code.Game.World.Turns
             }
             else
             {
-                _entities.Add(entity.CellPosition, new List<IWorldEntityView>()
+                _entities.Add(entity.CellPosition, new List<IEntityView>()
                 {
                     entity
                 });
@@ -35,9 +36,9 @@ namespace Code.Game.World.Turns
             entity.PositionChanged += _onEntityPositionChanged;
         }
 
-        public void UnRegister(IWorldEntityView entity)
+        public void UnRegister(IEntityView entity)
         {
-            if (_entities.TryGetValue(entity.CellPosition, out List<IWorldEntityView> list))
+            if (_entities.TryGetValue(entity.CellPosition, out List<IEntityView> list))
             {
                 if (list.Contains(entity))
                 {
@@ -55,14 +56,24 @@ namespace Code.Game.World.Turns
             }
         }
 
-        public bool TryGetEntities(Vector3Int cellPosition, out List<IWorldEntityView> list)
+        public bool TryGetEntities(Vector3Int cellPosition, out List<IEntityView> list)
         {
             return _entities.TryGetValue(cellPosition, out list);
         }
 
-        private void _onEntityPositionChanged(IWorldEntityView entity, Vector3Int from, Vector3Int to)
+        public bool IsEmptyCell(Vector3Int cellPosition)
         {
-            if (_entities.TryGetValue(from, out List<IWorldEntityView> list))
+            if (TryGetEntities(cellPosition, out List<IEntityView> list))
+            {
+                return list.Exists(e => e.IsOccupyingCell);
+            }
+
+            return true;
+        }
+        
+        private void _onEntityPositionChanged(IEntityView entity, Vector3Int from, Vector3Int to)
+        {
+            if (_entities.TryGetValue(from, out List<IEntityView> list))
             {
                 if (list.Contains(entity))
                 {
@@ -75,7 +86,7 @@ namespace Code.Game.World.Turns
                 }
             }
 
-            _entities.Add(to, new List<IWorldEntityView>() { entity });
+            _entities.Add(to, new List<IEntityView>() { entity });
         }
     }
 }

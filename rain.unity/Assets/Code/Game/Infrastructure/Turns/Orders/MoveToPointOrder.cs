@@ -7,10 +7,10 @@ namespace Code.Game.World.Turns.Orders
     public class MoveToPointOrder : IActorOrder
     {
         private readonly CharacterActor _owner;
-        private readonly Vector3 _destination;
+        private readonly Vector3Int _destination;
 
 
-        public MoveToPointOrder(CharacterActor owner, Vector3 destination)
+        public MoveToPointOrder(CharacterActor owner, Vector3Int destination)
         {
             _owner = owner;
             _destination = destination;
@@ -18,7 +18,7 @@ namespace Code.Game.World.Turns.Orders
         
         public void OnAssigned()
         {
-            _owner.PathfindingFollower.SetPath(_owner.View.Body.position, _destination);
+            _owner.PathfindingFollower.SetPath(_owner.Model.Position, _destination);
         }
 
         public IActorCommand BuildCommand()

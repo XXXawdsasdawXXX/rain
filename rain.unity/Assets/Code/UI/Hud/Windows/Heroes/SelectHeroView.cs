@@ -47,7 +47,7 @@ namespace Code.UI.Hud.Windows
             view.Stats.DisposeHero();
         }
 
-        private void _onSelectHero(CharacterWorldActor hero)
+        private void _onSelectHero(CharacterActor hero)
         {
             view.TextHeroName.SetText(hero.Model.Name);
             view.ArmorRender.SetHero(hero);

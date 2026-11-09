@@ -39,7 +39,7 @@ namespace Code.Game.World
 
                 if (collider2D.TryGetComponent(out CharacterWorldView view))
                 {
-                    if (_playerPartyProvider.TryGet(view.ID, out CharacterWorldActor worldActor))
+                    if (_playerPartyProvider.TryGet(view.ID, out CharacterActor worldActor))
                     {
                         _playerPartyProvider.SetCurrentCharacter(worldActor);
                     }

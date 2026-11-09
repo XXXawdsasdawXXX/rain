@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Code.Game.World.Turns;
 using Essential;
 using UnityEngine;
@@ -10,20 +11,20 @@ namespace Code.Game.World
     {
         [SerializeField] private MonoPool<Obstacle> _pool;
       
-        private IWorldActorRegistry _actorRegistry;
+        private IRegister<IWorldTurnBeginListener> _actorRegistry;
         
         
         [Inject]
-        private void Construct(IWorldActorRegistry actorRegistry)
+        private void Construct(IRegister<IWorldTurnBeginListener> actorRegistry)
         {
             _actorRegistry = actorRegistry;
         }
 
         public void Start()
         {
-            var currentObstacle = _pool.GetAllEnabled();
+            List<Obstacle> currentObstacle = _pool.GetAllEnabled();
 
-            foreach (var obstacle in currentObstacle)
+            foreach (Obstacle obstacle in currentObstacle)
             {
                 _actorRegistry.Register(obstacle);
             }

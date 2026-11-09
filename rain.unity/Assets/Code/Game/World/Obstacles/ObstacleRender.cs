@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Code.Pathfinding;
 using Cysharp.Threading.Tasks;
 using Essential;
 using Essential.Data.RangeFloat;
@@ -155,7 +156,7 @@ namespace Code.Game.World
         }
 
         [Button, GUIColor(0.9f, 0.6f, 0.5f, 1f)]
-        private void _updateView()
+        private void _updateView(ITilemapView tilemapView)
         {
             _clearRenders();
 
@@ -166,7 +167,7 @@ namespace Code.Game.World
             {
                 Vector2Int cell = enabledCells[i];
                 SpriteRenderer renderer = i == 0 ? renderers[0] : Object.Instantiate(renderers[0], root);
-                Vector3 position = matrixTrigger.GetCellCenterWorld(cell.x, cell.y).AsVector3();
+                Vector3 position =  matrixTrigger.GetCellCenterWorld(cell.x, cell.y);
                 renderer.transform.position = position;
 
                 if (renderers.Contains(renderer))

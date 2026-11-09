@@ -33,7 +33,7 @@ namespace Code.UI.Hud.Windows.Heroes
         {
             base.Start();
 
-            foreach (CharacterWorldActor partyCharacter in _playerParty.Heroes)
+            foreach (CharacterActor partyCharacter in _playerParty.Heroes)
             {
                 _addHeroTab(partyCharacter);
             }
@@ -57,7 +57,7 @@ namespace Code.UI.Hud.Windows.Heroes
             view.RadioGroupHeroes.Checked -= _onChangeSelectedHeroes;
         }
 
-        private void _addHeroTab(CharacterWorldActor character)
+        private void _addHeroTab(CharacterActor character)
         {
             HeroGroupTabView groupTab = view.RadioGroupHeroes.AddElement<HeroGroupTabView>();
            
@@ -72,7 +72,7 @@ namespace Code.UI.Hud.Windows.Heroes
         }
 
         //where player party change selected heroes from world
-        private void _selectHero(CharacterWorldActor character)
+        private void _selectHero(CharacterActor character)
         {
             if (character == null)
             {

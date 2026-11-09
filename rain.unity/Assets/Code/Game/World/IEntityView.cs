@@ -11,6 +11,7 @@ namespace Code.Game.World
         public EEntityType Type { get; }
         public Transform Body { get; }
         Vector3Int CellPosition { get; }
+        bool IsOccupyingCell { get; }
 
         public void SetCellPosition(Vector3Int cellPosition);
 

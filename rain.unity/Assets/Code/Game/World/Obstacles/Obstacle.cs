@@ -61,11 +61,13 @@ namespace Code.Game.World
 
             if (_triggerZone != null)
             {
-                var entities = new List<IWorldEntityView>();
+                List<IEntityView> entities = new();
                 
                 _triggerZone.OverlapAlive(entities);
                 
-                foreach (IWorldEntityView entityView in entities)
+                Log.Info(this, $"overlap alive count -> {entities.Count}");
+                
+                foreach (IEntityView entityView in entities)
                 {
                     if (entityView.TryGetHealth(out IHealth health))
                     {

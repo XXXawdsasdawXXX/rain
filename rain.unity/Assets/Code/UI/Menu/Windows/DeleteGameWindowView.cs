@@ -1,4 +1,6 @@
-﻿using Code.Game.Save;
+﻿using System;
+using Code.Game.Save;
+using Code.Game.World;
 using Code.UI.Components;
 using Code.UI.Components.Window;
 using JetBrains.Annotations;
@@ -13,14 +15,16 @@ namespace Code.UI.Menu
             public string ContextHeroName;
         }
 
-        [field: SerializeField] public Model CurrenModel { get; private set; }
         [field: SerializeField] public UIText Text_Description { get; private set; }
         [field: SerializeField] public UIButton Button_Delete { get; private set; }
         
+        private Model _current;
+        
+        
         public void SetNewModel(Model model)
         {
-            CurrenModel = model;
-            Text_Description.SetLocalizationArguments(CurrenModel.ContextHeroName);
+            _current = model;
+            Text_Description.SetLocalizationArguments(_current.ContextHeroName);
         }
     }
 
@@ -66,9 +70,11 @@ namespace Code.UI.Menu
         {
             if (_gameSave.TryGetLastGame(out GameModel game))
             {
+                string name =game.Characters[EEntityType.Hero][0]?.Name;
+                
                 view.SetNewModel(new DeleteGameWindowView.Model
                 {
-                    ContextHeroName = game.Heroes[0].Name
+                    ContextHeroName = string.IsNullOrEmpty(name) ? "empty name" : name
                 });
             }
         }

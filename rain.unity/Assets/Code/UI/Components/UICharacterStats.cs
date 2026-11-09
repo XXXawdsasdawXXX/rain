@@ -17,15 +17,15 @@ namespace Code.UI.Components
             [field: SerializeField] public UIText TextRangeValue { get; private set; }
             [field: SerializeField] public UIImage ImageFill { get; private set; }
 
-            private CharacterWorldActor _worldActor;
+            private CharacterActor _actor;
             private ReactiveProperty<float> _property;
             
             
-            public void InitializeStat(CharacterWorldActor worldActor, ReactiveProperty<float> property)
+            public void InitializeStat(CharacterActor actor, ReactiveProperty<float> property)
             {
                 DisposeStat();
 
-                _worldActor = worldActor;
+                _actor = actor;
                 
                 _property = property;
                 _property.SubscribeProperty(_updateView);
@@ -41,15 +41,15 @@ namespace Code.UI.Components
                     _property = null;
                 }
 
-                if (_worldActor != null)
+                if (_actor != null)
                 {
-                    _worldActor = null;
+                    _actor = null;
                 }
             }
             
             private void _updateView(float value)
             {
-                float maxValue = _worldActor.GetMaxStatsValue(StatType);
+                float maxValue = _actor.GetMaxStatsValue(StatType);
             
                 if (ImageFill != null)
                 {
@@ -69,10 +69,10 @@ namespace Code.UI.Components
 
         private List<StatView> _followers = new();
 
-        private CharacterWorldActor _actor;
+        private CharacterActor _actor;
 
         
-        public void SetHero(CharacterWorldActor actor)
+        public void SetHero(CharacterActor actor)
         {
             DisposeHero();
             

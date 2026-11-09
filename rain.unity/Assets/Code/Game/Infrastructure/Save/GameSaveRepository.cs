@@ -43,21 +43,18 @@ namespace Code.Game.Save
             return game != null;
         }
 
-        public GameModel GetCurrentGame()
+        public bool TryGetCurrentGame(out GameModel model)
         {
-            return Data.Games[Data.LastGameIndex];
+            model = Data.Games != null && Data.Games.Count > Data.LastGameIndex 
+                ? Data.Games[Data.LastGameIndex] 
+                : null;
+
+            return model != null;
         }
         
         public void AddNewGame(CharacterModel characterModel, WorldModel worldModel)
         {
-            GameModel newGame = new()
-            {
-                ID = Guid.NewGuid().ToString(),
-                Heroes = new List<CharacterModel> { characterModel },
-                Npc = new List<CharacterModel>(),
-                World = worldModel,
-                GameTime = TimeSpan.Zero,
-            };
+            GameModel newGame = new(worldModel, characterModel);
 
             Data.Games.Add(newGame);
             Data.LastGameIndex = Data.Games.Count - 1;

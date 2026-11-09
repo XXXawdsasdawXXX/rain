@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Essential;
@@ -20,17 +21,24 @@ namespace Core.Save
 
         public async UniTask<T> LoadOrDefaultAsync(CancellationToken cancellationToken = default)
         {
-            string json = await _processor.ReadTextAsync(SavePathProvider.SettingsFile, cancellationToken);
+            try
+            {
+                string json = await _processor.ReadTextAsync(SavePathProvider.SettingsFile, cancellationToken);
 
-            if (string.IsNullOrWhiteSpace(json))
+                if (string.IsNullOrWhiteSpace(json))
+                {
+                    Data = createDefault();
+                }
+                else
+                {
+                    Data = json.AsData<T>() ?? createDefault();
+                }
+            }
+            catch (Exception)
             {
                 Data = createDefault();
             }
-            else
-            {
-                Data = json.AsData<T>() ?? createDefault();
-            }
-            
+
             return Data;
         }
 

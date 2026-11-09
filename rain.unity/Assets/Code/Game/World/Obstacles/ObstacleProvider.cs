@@ -14,17 +14,22 @@ namespace Code.Game.World
     {
         [SerializeField] private Obstacle[] _obstacles;
         
-        private IWorldActorRegistry _worldActorRegistry;
+        private IRegister<IWorldTurnBeginListener> _worldActorRegistry;
 
 
         [Inject]
-        public void Construct(IWorldActorRegistry worldActorRegistry)
+        public void Construct(IRegister<IWorldTurnBeginListener> worldActorRegistry)
         {
             _worldActorRegistry = worldActorRegistry;
         }
         
         public void OnEnable()
         {
+            if (_worldActorRegistry == null)
+            {
+                return;
+            }
+            
             foreach (Obstacle obstacle in _obstacles)
             {
                 _worldActorRegistry.Register(obstacle);
@@ -33,6 +38,11 @@ namespace Code.Game.World
         
         public void OnDisable()
         {
+            if (_worldActorRegistry == null)
+            {
+                return;
+            }
+            
             foreach (Obstacle obstacle in _obstacles)
             {
                 _worldActorRegistry.UnRegister(obstacle);
