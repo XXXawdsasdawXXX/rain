@@ -162,7 +162,7 @@ namespace Code.Game.World
             _cells.GetEnabledCells(_enabledCells);
             Vector3 size = new(VectorExtension.CELL_SIZE, VectorExtension.CELL_SIZE, 0f);
 
-            Gizmos.color = ColorExtension.OBSTACLE_GIZMO_COLOR;
+            Gizmos.color = Colors.GIZMO_OBSTACLE_COLOR;
             for (int i = 0; i < _enabledCells.Count; i++)
             {
                 Vector2Int cell = _enabledCells[i];

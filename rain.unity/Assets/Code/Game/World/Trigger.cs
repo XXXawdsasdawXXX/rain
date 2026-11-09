@@ -43,7 +43,7 @@ namespace Code.Game.World
 #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
-            Gizmos.color = ColorExtension.OBSTACLE_GIZMO_COLOR;
+            Gizmos.color = Colors.GIZMO_OBSTACLE_COLOR;
 
             if (_collider != null)
             {

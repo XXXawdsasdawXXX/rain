@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using Code.Pathfinding;
 using Cysharp.Threading.Tasks;
 using Essential;
 using Essential.Data.RangeFloat;
@@ -144,7 +143,7 @@ namespace Code.Game.World
 
 #if UNITY_EDITOR
         
-        [Button, GUIColor(0.9f, 0.6f, 0.5f, 1f)]
+        [Button]
         private void _updateObstaclePosition(Tilemap tilemap)
         {
             Vector3Int cellPosition = tilemap.WorldToCell(root.position);
@@ -155,8 +154,8 @@ namespace Code.Game.World
             EditorUtility.SetDirty(root);
         }
 
-        [Button, GUIColor(0.9f, 0.6f, 0.5f, 1f)]
-        private void _updateView(ITilemapView tilemapView)
+        [Button]
+        private void _updateView()
         {
             _clearRenders();
 
@@ -181,7 +180,7 @@ namespace Code.Game.World
             EditorUtility.SetDirty(root);
         }
 
-        [Button, GUIColor(0.9f, 0.6f, 0.5f, 1f)]
+        [Button]
         private void _clearRenders()
         {
             _findSpriteRenderersInChildren();
@@ -197,7 +196,7 @@ namespace Code.Game.World
         }
 
         
-        [Button, GUIColor(0.9f, 0.6f, 0.5f, 1f)]
+        [Button]
         private void _findSpriteRenderersInChildren()
         {
             renderers.Clear();

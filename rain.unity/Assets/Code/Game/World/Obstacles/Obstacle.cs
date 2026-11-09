@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Code.Game.World.Turns;
 using Essential;
@@ -11,8 +10,8 @@ namespace Code.Game.World
     {
         public IWorldTurnBeginListener.ETurnPriority Priority => IWorldTurnBeginListener.ETurnPriority.Obstacle;
 
-        [SerializeReference, GUIColor(0.8f, 0.7f, 0.9f, 0.8f)] private AObstacleLogic _logic;
-        [SerializeField, GUIColor(0.5f, 0.7f, 0.9f, 0.8f)] private ObstacleRender _render;
+        [SerializeReference, GUIColor(0.8f, 0.7f, 0.9f, 0.9f)] private AObstacleLogic _logic;
+        [SerializeField, GUIColor(0.5f, 0.7f, 0.9f, 0.9f)] private ObstacleRender _render;
         [SerializeField] private MatrixTriggerZone _triggerZone;
 
         private readonly List<IHealth> _livingBuffer = new();
