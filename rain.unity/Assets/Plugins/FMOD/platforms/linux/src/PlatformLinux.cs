@@ -106,17 +106,5 @@ namespace FMODUnity
             new CodecChannelCount { format = CodecType.FADPCM, channels = 0 },
             new CodecChannelCount { format = CodecType.Vorbis, channels = 32 },
         };
-
-        // Missing from FMOD 2.03.14; PlatformPlayInEditor calls this under UNITY_EDITOR_LINUX.
-        // Larger stacks avoid overflow with FMOD logging + Unity stack traces on Linux.
-        internal static FMOD.THREAD_STACK_SIZE staticGetStackSize()
-        {
-            return (FMOD.THREAD_STACK_SIZE)(1024 * 1024);
-        }
-
-        internal override FMOD.THREAD_STACK_SIZE GetStackSize()
-        {
-            return staticGetStackSize();
-        }
     }
 }

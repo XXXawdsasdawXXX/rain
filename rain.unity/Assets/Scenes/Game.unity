@@ -9827,8 +9827,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63011da1d4ba4754a13afedbce3bb379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tilemap: {fileID: 1580134836}
   _selectedTileBody: {fileID: 1669401497}
-  _tilemap: {fileID: 1580134835}
   _selectTileRender: {fileID: 1669401498}
   _pathPointsPool:
     _root: {fileID: 368138839}

@@ -1,5 +1,4 @@
-﻿using System;
-using Code.Game.Save;
+﻿using Code.Game.Save;
 using Code.Game.World;
 using Code.UI.Components;
 using Code.UI.Components.Window;
