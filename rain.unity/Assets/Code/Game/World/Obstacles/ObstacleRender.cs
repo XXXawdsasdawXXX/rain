@@ -2,17 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Code.Pathfinding;
 using Cysharp.Threading.Tasks;
-using Essential;
 using Essential.Data.RangeFloat;
-using Essential.Extensions;
-using TriInspector;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.Tilemaps;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
+
+#if UNITY_EDITOR
+using TriInspector;
+using UnityEditor;
+#endif
 
 namespace Code.Game.World
 {
@@ -143,11 +143,29 @@ namespace Code.Game.World
 
 #if UNITY_EDITOR
         
-        [Button]
-        private void _updateObstaclePosition(Tilemap tilemap)
+        [SerializeField] protected TilemapView e_tilemapView;
+
+        private void _tryFindTileMap()
         {
-            Vector3Int cellPosition = tilemap.WorldToCell(root.position);
-            Vector3 worldPosition = tilemap.GetCellCenterWorld(cellPosition);
+            if (e_tilemapView == null)
+            {
+                e_tilemapView = Object.FindAnyObjectByType<TilemapView>();
+                EditorUtility.SetDirty(matrixTrigger);
+            }
+        }
+        
+        [Button]
+        private void _updateObstaclePosition()
+        {
+            _tryFindTileMap();
+
+            if (e_tilemapView == null)
+            {
+                throw new Exception("tilemap is null");
+            }
+            
+            Vector3Int cellPosition = e_tilemapView.WorldAsCell(root.position);
+            Vector3 worldPosition = e_tilemapView.CellAsCenterWorld(cellPosition);
 
             root.transform.position = worldPosition;
 
@@ -157,16 +175,22 @@ namespace Code.Game.World
         [Button]
         private void _updateView()
         {
+            _tryFindTileMap();
+
+            if (e_tilemapView == null)
+            {
+                throw new Exception("tilemap is null");
+            }
+            
             _clearRenders();
 
-            List<Vector2Int> enabledCells = new();
-            matrixTrigger.Cells.GetEnabledCells(enabledCells);
-
+            IReadOnlyList<Vector3Int> enabledCells = matrixTrigger.GetCells();
+            
             for (int i = 0; i < enabledCells.Count; i++)
             {
-                Vector2Int cell = enabledCells[i];
+                Vector3Int cell = enabledCells[i];
                 SpriteRenderer renderer = i == 0 ? renderers[0] : Object.Instantiate(renderers[0], root);
-                Vector3 position =  matrixTrigger.GetCellCenterWorld(cell.x, cell.y);
+                Vector3 position =  e_tilemapView.CellAsCenterWorld(cell);
                 renderer.transform.position = position;
 
                 if (renderers.Contains(renderer))
@@ -194,7 +218,6 @@ namespace Code.Game.World
 
             EditorUtility.SetDirty(root);
         }
-
         
         [Button]
         private void _findSpriteRenderersInChildren()

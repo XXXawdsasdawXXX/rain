@@ -1,5 +1,6 @@
 ﻿using System;
 using Essential;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Scripting;
 using VContainer.Unity;
@@ -16,7 +17,7 @@ namespace Core.Input
         public float StartLeftClickTime { get; }
     }
 
-    [Preserve]
+    [Preserve, UsedImplicitly]
     public sealed class InputService : IInputService, ITickable
     {
         public event Action<EInputAction> ActionStarted;
@@ -26,7 +27,6 @@ namespace Core.Input
 
         private readonly Camera _camera;
 
-        private bool _isPressLeftClick;
         
         private readonly InputActionKey[] _inputActionKeys = 
         {
@@ -88,7 +88,6 @@ namespace Core.Input
                             Log.Info(this, "invoke double click");
                         }
 
-                        _isPressLeftClick = true;
                         StartLeftClickTime = time;
                     }
                 }
@@ -96,11 +95,6 @@ namespace Core.Input
                 if (_wasActionReleased(inputActionKey))
                 {
                     ActionEnded?.Invoke(inputActionKey.Action);
-
-                    if (inputActionKey.Action is EInputAction.LeftClick)
-                    {
-                        _isPressLeftClick = false;
-                    }
                 }
             }
         }

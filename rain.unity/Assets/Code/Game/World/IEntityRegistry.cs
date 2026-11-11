@@ -1,5 +1,5 @@
+using System;
 using System.Collections.Generic;
-using Essential;
 using UnityEngine;
 
 namespace Code.Game.World.Turns
@@ -20,10 +20,10 @@ namespace Code.Game.World.Turns
             {
                 if (list.Contains(entity))
                 {
-                    Log.Error(this, $"[Register] collection already contains entity by coordinate {entity.CellPosition}");
-            
-                    return;
+                    throw new Exception($"[Register] collection already contains entity by coordinate {entity.CellPosition}");
                 }
+
+                list.Add(entity);
             }
             else
             {
@@ -47,12 +47,12 @@ namespace Code.Game.World.Turns
                 }
                 else
                 {
-                    Log.Error(this, $"[UnRegister] collection has not entity({entity.ID}) in {entity.CellPosition}");
+                    throw new Exception($"[UnRegister] collection has not entity({entity.ID}) in {entity.CellPosition}");
                 }
             }
             else
             {
-                Log.Error(this, $"[UnRegister] collection has not any entities in {entity.CellPosition}");
+                throw new Exception($"[UnRegister] collection has not any entities in {entity.CellPosition}");
             }
         }
 
@@ -79,13 +79,20 @@ namespace Code.Game.World.Turns
                 {
                     list.Remove(entity);
                 }
-                else
-                {
-                    Log.Error(this, $"[_onEntityPositionChanged] collection has not entities in {from}");
-                    return;
-                }
             }
 
+            if (_entities.TryGetValue(to, out List<IEntityView> toList))
+            {
+                if (toList.Contains(entity))
+                {
+                    throw new Exception($"[_onEntityPositionChanged] collection already has entities in {from}");
+                }
+
+                toList.Add(entity);
+             
+                return;
+            }
+            
             _entities.Add(to, new List<IEntityView>() { entity });
         }
     }

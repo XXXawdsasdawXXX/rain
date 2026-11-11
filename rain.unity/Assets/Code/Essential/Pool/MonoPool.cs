@@ -11,7 +11,7 @@ using UnityEditor;
 namespace Essential
 {
     [Serializable]
-    public class MonoPool<T> where T: Mono, IPoolEntity
+    public class MonoPool<T> where T: MonoBehaviour, IPoolEntity
     {
         [SerializeField] private Transform _root;
         [SerializeField] private T _prefab;

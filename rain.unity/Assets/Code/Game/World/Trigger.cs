@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Code.Game.World
 {
-    public class Trigger : Essential.Mono
+    public class Trigger : Essential.WorldMono
     {
         public event Action<Collider2D, bool> Changed; 
         public List<Collider2D> Inside { get; } = new();  

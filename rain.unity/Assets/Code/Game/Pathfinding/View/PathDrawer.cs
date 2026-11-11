@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Code.Pathfinding
 {
-    public class PathDrawer : Essential.Mono, IPathfindingDrawer
+    public class PathDrawer : WorldMono, IPathfindingDrawer
     {
-        [SerializeField] private PathfindingTilemapView _tilemap;
+        [SerializeField] private TilemapView _tilemap;
         [SerializeField] private Transform _selectedTileBody;
         [SerializeField] private SpriteRenderer _selectTileRender;
         [Space]

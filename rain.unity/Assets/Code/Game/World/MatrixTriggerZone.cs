@@ -1,178 +1,81 @@
 using System.Collections.Generic;
-using System.Linq;
+using Code.Pathfinding;
+using Essential;
 using Essential.Data.BoolMatrix;
 using Essential.Extensions;
 using UnityEngine;
 
 namespace Code.Game.World
 {
-    /// <summary>
-    /// Physics2D sampling only in enabled BoolMatrix cells.
-    /// Matrix is centered on this transform; each cell is CELL_SIZE world units.
-    /// </summary>
-    public class MatrixTriggerZone : Essential.Mono
+    public sealed class MatrixTriggerZone : WorldMono
     {
-        public BoolMatrix Cells => _cells;
+        [SerializeField] private BoolMatrix _matrix = new(4, 4);
+        [SerializeField] private Vector3Int _originCellPosition;
+        
 
-        [SerializeField] private EEntityType[] _entityTypes;
-        [SerializeField] private BoolMatrix _cells = new(4, 4);
-        [SerializeField] private LayerMask _layerMask = ~0;
-        [SerializeField] private bool _useTriggers = true;
-        [SerializeField, Min(1)] private int _bufferSize = 32;
-
-        private readonly List<Vector2Int> _enabledCells = new();
-        private readonly HashSet<int> _seen = new();
-        private Collider2D[] _buffer;
-        private ContactFilter2D _filter;
-
-        private void Awake()
+        public IReadOnlyList<Vector3Int> GetCells()
         {
-            _buffer = new Collider2D[_bufferSize];
-            _rebuildFilter();
-        }
+            List<Vector3Int> cells = new();
+            List<Vector2Int> matrix = new();
+          
+            _matrix.GetEnableIndexes(matrix);
 
-        public int OverlapColliders(List<Collider2D> results)
-        {
-            return _overlap(results, collectAlive: false, aliveResults: null);
-        }
-
-        public int OverlapAlive(List<IEntityView> results)
-        {
-            results.Clear();
-            return _overlap(null, collectAlive: true, aliveResults: results);
-        }
-
-        private int _overlap(ICollection<Collider2D> colliderResults, bool collectAlive, ICollection<IEntityView> aliveResults)
-        {
-            colliderResults?.Clear();
-            _ensureBuffer();
-            _seen.Clear();
-            _cells.GetEnabledCells(_enabledCells);
-
-            Vector2 cellSize = new(VectorExtension.CELL_SIZE, VectorExtension.CELL_SIZE);
-            int total = 0;
-
-            for (int i = 0; i < _enabledCells.Count; i++)
+            foreach (Vector2Int index in matrix)
             {
-                Vector2Int cell = _enabledCells[i];
-                Vector2 center = GetCellCenterWorld(cell.x, cell.y);
-                int count = Physics2D.OverlapBox(center, cellSize, 0f, _filter, _buffer);
-
-                for (int hit = 0; hit < count; hit++)
-                {
-                    Collider2D collider = _buffer[hit];
-                    if (collider == null)
-                    {
-                        continue;
-                    }
-
-                    if (!_seen.Add(collider.GetEntityId().GetHashCode()))
-                    {
-                        continue;
-                    }
-
-                    if (collectAlive)
-                    {
-                        if (collider.TryGetComponent(out IEntityView entity) && _entityTypes.Contains(entity.Type))
-                        {
-                            aliveResults.Add(entity);
-                            total++;
-                        }
-                    }
-                    else
-                    {
-                        colliderResults.Add(collider);
-                        total++;
-                    }
-                }
+                cells.Add(_getCell(index.x, index.y));
             }
 
-            return total;
+            return cells;
         }
 
-        public Vector2 GetCellCenterWorld(int x, int y)
+        private Vector3Int _getCell(int indexX, int indexY)
         {
-            Vector2 origin = _getLocalOrigin();
-            Vector3 local = new(
-                origin.x + (x + 0.5f) * VectorExtension.CELL_SIZE,
-                origin.y + (y + 0.5f) * VectorExtension.CELL_SIZE,
-                0f);
-
-            return transform.TransformPoint(local);
-        }
-
-        /// <summary>Local bottom-left of the whole matrix (centered on transform).</summary>
-        private Vector2 _getLocalOrigin()
-        {
-            return VectorExtension.GetCenteredMatrixOrigin(_cells.Width, _cells.Height);
-        }
-
-        private Bounds _getWorldBounds()
-        {
-            Vector2 origin = _getLocalOrigin();
-            Vector3 minLocal = new(origin.x, origin.y, 0f);
-            Vector3 maxLocal = new(
-                origin.x + _cells.Width * VectorExtension.CELL_SIZE,
-                origin.y + _cells.Height * VectorExtension.CELL_SIZE,
-                0f);
-
-            Bounds bounds = new(transform.TransformPoint(minLocal), Vector3.zero);
-            bounds.Encapsulate(transform.TransformPoint(maxLocal));
-            return bounds;
-        }
-
-        private void _ensureBuffer()
-        {
-            if (_buffer == null || _buffer.Length != _bufferSize)
-            {
-                _buffer = new Collider2D[_bufferSize];
-            }
-
-            _rebuildFilter();
-        }
-
-        private void _rebuildFilter()
-        {
-            _filter = new ContactFilter2D
-            {
-                useTriggers = _useTriggers
-            };
-            _filter.SetLayerMask(_layerMask);
-            _filter.useLayerMask = true;
+            return _originCellPosition + new Vector3Int(indexX, indexY);
         }
 
 #if UNITY_EDITOR
-        private void OnValidate()
-        {
-            if (_bufferSize < 1)
-            {
-                _bufferSize = 1;
-            }
 
-            _rebuildFilter();
+        [SerializeField] private TilemapView e_tilemapView;
+        
+     
+        protected override void onSpanToTilemap(TilemapView tilemap)
+        {
+            e_tilemapView = tilemap;
+            
+            Vector3Int localCellPosition = tilemap.WorldAsCell(transform.position); 
+            
+            _originCellPosition = localCellPosition + _matrix.GetCenteredMatrixOriginCell();
         }
 
         private void OnDrawGizmos()
         {
-            if (_cells == null)
+            if (_matrix == null || e_tilemapView == null)
             {
                 return;
             }
 
-            _cells.GetEnabledCells(_enabledCells);
-            Vector3 size = new(VectorExtension.CELL_SIZE, VectorExtension.CELL_SIZE, 0f);
-
+            //cells
+            IReadOnlyList<Vector3Int> cells = GetCells();
+            Vector3 cellSize = new(ITilemapView.CELL_SIZE, ITilemapView.CELL_SIZE, 0f);
             Gizmos.color = Colors.GIZMO_OBSTACLE_COLOR;
-            for (int i = 0; i < _enabledCells.Count; i++)
+            for (int i = 0; i < cells.Count; i++)
             {
-                Vector2Int cell = _enabledCells[i];
-                Gizmos.DrawCube(GetCellCenterWorld(cell.x, cell.y), size);
+                Vector3Int cell = cells[i];
+                Gizmos.DrawCube(e_tilemapView.CellAsCenterWorld(cell), cellSize);
             }
 
-            Bounds bounds = _getWorldBounds();
+            //bounds
+            Vector3Int minCell = _originCellPosition;
+            Vector3Int maxCellExclusive = _originCellPosition + new Vector3Int(_matrix.Width, _matrix.Height, 0);
+            Vector3 min = e_tilemapView.CellAsWorld(minCell);
+            Vector3 max = e_tilemapView.CellAsWorld(maxCellExclusive);
+            Vector3 center = (min + max) * 0.5f;
+            Vector3 size = max - min;
+            size.z = 0f;
             Gizmos.color = new Color(1f, 1f, 1f, 0.25f);
-            Gizmos.DrawWireCube(bounds.center, bounds.size);
+            Gizmos.DrawWireCube(center, size);
         }
+        
 #endif
     }
 }

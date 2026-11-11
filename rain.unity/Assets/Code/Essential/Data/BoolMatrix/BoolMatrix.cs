@@ -34,6 +34,28 @@ namespace Essential.Data.BoolMatrix
         {
             Resize(width, height);
         }
+        
+        public Vector3Int GetCenteredMatrixOriginCell()
+        {
+            return new Vector3Int(-_width / 2, -_height / 2, 0);
+        }
+
+        public void GetEnableIndexes(List<Vector2Int> results)
+        {
+            results.Clear();
+            EnsureArray();
+
+            for (int y = 0; y < Height; y++)
+            {
+                for (int x = 0; x < Width; x++)
+                {
+                    if (_values[ToIndex(x, y)])
+                    {
+                        results.Add(new Vector2Int(x, y));
+                    }
+                }
+            }
+        }
 
         public bool Get(int x, int y)
         {
@@ -97,23 +119,6 @@ namespace Essential.Data.BoolMatrix
             for (int i = 0; i < _values.Length; i++)
             {
                 _values[i] = value;
-            }
-        }
-
-        public void GetEnabledCells(List<Vector2Int> results)
-        {
-            results.Clear();
-            EnsureArray();
-
-            for (int y = 0; y < Height; y++)
-            {
-                for (int x = 0; x < Width; x++)
-                {
-                    if (_values[ToIndex(x, y)])
-                    {
-                        results.Add(new Vector2Int(x, y));
-                    }
-                }
             }
         }
 

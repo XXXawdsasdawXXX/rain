@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Code.Pathfinding
 {
-    public class PathfindingPointView : Essential.Mono, IPoolEntity
+    public class PathfindingPointView : WorldMono, IPoolEntity
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
 

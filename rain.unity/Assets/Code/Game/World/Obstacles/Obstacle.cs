@@ -3,21 +3,35 @@ using Code.Game.World.Turns;
 using Essential;
 using TriInspector;
 using UnityEngine;
+using VContainer;
 
 namespace Code.Game.World
 {
-    public class Obstacle : Essential.Mono, IWorldTurnBeginListener, IPoolEntity
+    public class Obstacle : WorldMono, IWorldTurnBeginListener, IPoolEntity
     {
-        public IWorldTurnBeginListener.ETurnPriority Priority => IWorldTurnBeginListener.ETurnPriority.Obstacle;
+        public IWorldTurnBeginListener.ETurnPriority Priority =>
+            IWorldTurnBeginListener.ETurnPriority.Obstacle;
 
-        [SerializeReference, GUIColor(0.8f, 0.7f, 0.9f, 0.9f)] private AObstacleLogic _logic;
-        [SerializeField, GUIColor(0.5f, 0.7f, 0.9f, 0.9f)] private ObstacleRender _render;
+        [SerializeReference, GUIColor(0.8f, 0.7f, 0.9f, 0.9f)]
+        private AObstacleLogic _logic;
+        
+        [SerializeField, GUIColor(0.5f, 0.7f, 0.9f, 0.9f)] 
+        private ObstacleRender _render;
+        
         [SerializeField] private MatrixTriggerZone _triggerZone;
-
-        private readonly List<IHealth> _livingBuffer = new();
-
+        
         [ShowInInspector, ReadOnly] private EObstacleState _currentState;
         
+        private readonly List<IHealth> _livingBuffer = new();
+        
+        private IEntityRegistry _entityRegistry;
+
+        
+        [Inject]
+        public void Construct(IEntityRegistry entityRegistry)
+        {
+            _entityRegistry = entityRegistry;
+        }
         
         private void Awake()
         {
@@ -60,21 +74,24 @@ namespace Code.Game.World
 
             if (_triggerZone != null)
             {
-                List<IEntityView> entities = new();
-                
-                _triggerZone.OverlapAlive(entities);
-                
-                Log.Info(this, $"overlap alive count -> {entities.Count}");
-                
-                foreach (IEntityView entityView in entities)
+                IReadOnlyList<Vector3Int> cells = _triggerZone.GetCells();
+
+                foreach (Vector3Int cellPosition in cells)
                 {
-                    if (entityView.TryGetHealth(out IHealth health))
+                    if (_entityRegistry.TryGetEntities(cellPosition, out List<IEntityView> entities))
                     {
-                        _livingBuffer.Add(health);
+                        foreach (IEntityView entity in entities)
+                        {
+                            if (entity.TryGetHealth(out IHealth health))
+                            {
+                                _livingBuffer.Add(health);
+                            }
+                        }
+
                     }
                 }
             }
-
+            
             return _livingBuffer;
         }
 

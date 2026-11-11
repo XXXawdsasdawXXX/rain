@@ -7,7 +7,7 @@ using VContainer.Unity;
 
 namespace Code.Game.World
 {
-    public class ObstaclePool : Essential.Mono, IStartable
+    public class ObstaclePool : WorldMono, IStartable
     {
         [SerializeField] private MonoPool<Obstacle> _pool;
       

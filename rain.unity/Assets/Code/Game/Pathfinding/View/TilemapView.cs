@@ -9,7 +9,7 @@ using VContainer.Unity;
 
 namespace Code.Pathfinding
 {
-    public class PathfindingTilemapView : Essential.Mono, IStartable, ITilemapView
+    public class TilemapView : WorldMono, IStartable, ITilemapView
     {
         [SerializeField] private Tilemap _tilemapBase;
 
@@ -48,6 +48,11 @@ namespace Code.Pathfinding
         public Vector3 CellAsCenterWorld(Vector3Int cellPosition)
         {
             return _tilemapBase.GetCellCenterWorld(cellPosition);
+        }
+
+        public Vector3 CellAsWorld(Vector3Int cellPosition)
+        {
+            return _tilemapBase.CellToWorld(cellPosition);
         }
         
         public TileData GetCellData(Vector3Int cell)

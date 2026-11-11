@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 namespace Code.UI.Components
 {
-    public abstract class AUIComponent : Essential.Mono, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
+    public abstract class AUIComponent : Essential.WorldMono, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
     {
         public event Action Hover;
         public event Action UnHover;

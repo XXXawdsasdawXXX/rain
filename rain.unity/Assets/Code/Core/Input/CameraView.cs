@@ -2,7 +2,7 @@
 
 namespace Core.Input
 {
-    public class CameraView : Essential.Mono
+    public class CameraView : MonoBehaviour
     {
         [field: SerializeField] public Camera Camera { get; private set; }
     }

@@ -5,7 +5,7 @@ using VContainer;
 
 namespace Code.Game.Characters
 {
-    public class CharacterWorldRender : Essential.Mono, IDisposable
+    public class CharacterWorldRender : Essential.WorldMono, IDisposable
     {
         [field: SerializeField] public GameObject SelectView { get; set; }
         [field: SerializeField] public WorldArmorRender WorldArmor { get; private set; }

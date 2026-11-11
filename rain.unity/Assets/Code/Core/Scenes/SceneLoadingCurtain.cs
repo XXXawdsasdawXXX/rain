@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Core.Scenes
 {
-    public class SceneLoadingCurtain : Essential.Mono, ISceneCurtain
+    public class SceneLoadingCurtain : MonoBehaviour, ISceneCurtain
     {
         private const float ANIMATION_DURATION = 1;
         

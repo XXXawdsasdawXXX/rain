@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Code.UI.Components
 {
-    public class UIRadioGroup : Essential.Mono
+    public class UIRadioGroup : Essential.WorldMono
     {
         public event Action<int> Checked;
 
@@ -44,7 +44,7 @@ namespace Code.UI.Components
             _unsubscribe();
         }
 
-        public T AddElement<T>() where T : Essential.Mono
+        public T AddElement<T>() where T : Essential.WorldMono
         {
             UIRadioButton button = _pool.GetNext();
             

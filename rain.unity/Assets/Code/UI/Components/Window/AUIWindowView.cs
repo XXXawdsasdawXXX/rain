@@ -2,7 +2,7 @@
 
 namespace Code.UI.Components.Window
 {
-    public abstract class AUIWindowView : Essential.Mono
+    public abstract class AUIWindowView : Essential.WorldMono
     {
         public bool IsOpened { get; protected set; } 
             

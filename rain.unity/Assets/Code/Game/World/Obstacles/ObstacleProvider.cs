@@ -10,7 +10,7 @@ using UnityEditor;
 
 namespace Code.Game.World
 {
-    public class ObstacleProvider : Essential.Mono
+    public class ObstacleProvider : Essential.WorldMono
     {
         [SerializeField] private Obstacle[] _obstacles;
         
