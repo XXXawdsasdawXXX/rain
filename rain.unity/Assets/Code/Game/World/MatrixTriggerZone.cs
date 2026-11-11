@@ -37,7 +37,7 @@ namespace Code.Game.World
 
         [SerializeField] private TilemapView e_tilemapView;
         
-     
+        
         protected override void onSpanToTilemap(TilemapView tilemap)
         {
             e_tilemapView = tilemap;

@@ -101,12 +101,13 @@ namespace Code.Game.Factories
                 .Get(AssetsKey.CHARACTER)
                 .GetComponent<CharacterWorldView>();
 
-            CharacterWorldView npcInstance = _resolver.Instantiate(npcPrefab);
-            npcInstance.SetCellPosition(model.Position);
+            CharacterWorldView view = _resolver.Instantiate(npcPrefab);
 
             IPathfindingFollower follower = new CharacterPathfindingFollower(_pathfindingService, _entityRegistry);
-            actor = new CharacterActor(model, npcInstance, follower, _armoryLibrary);
-            return npcInstance;
+            actor = new CharacterActor(model, view, follower, _armoryLibrary);
+            actor.SetCellPosition(model.Position);
+        
+            return view;
         }
 
         private void _register(EEntityType entityType, CharacterWorldView view, CharacterActor actor)

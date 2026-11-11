@@ -1042,7 +1042,7 @@ MonoBehaviour:
   - {fileID: 1484170046}
   - {fileID: 1521855106}
   _weightTilesConfiguration: {fileID: 11400000, guid: 14a52feec3ca18941b01ec2411b4feab, type: 2}
-  tilemapView: {fileID: 0}
+  tilemapView: {fileID: 1580134836}
   _pathDrawer: {fileID: 2064400863}
   _armoryLibrary: {fileID: 11400000, guid: d5812ef9ca70e9f468402226e1850c0c, type: 2}
 --- !u!114 &764679762
@@ -2144,7 +2144,6 @@ MonoBehaviour:
     _width: 5
     _height: 5
     _values: 01000000010000000000000100000000000000000100000001y
-  _localCellPosition: {x: -3, y: 1, z: 0}
   _originCellPosition: {x: -5, y: -1, z: 0}
   e_tilemapView: {fileID: 1580134836}
 --- !u!1 &1577160703
