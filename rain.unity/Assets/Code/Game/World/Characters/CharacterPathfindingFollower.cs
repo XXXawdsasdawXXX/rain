@@ -74,6 +74,12 @@ namespace Code.Pathfinding
                 }
                 
                 nextPosition = Path[_pathIndex];
+                
+                if (!_pathfinding.IsWalkable(nextPosition) || !_entityRegistry.IsEmptyCell(nextPosition))
+                {
+                    Clear();
+                    return false;
+                }
             }
             
             _pathIndex++;
