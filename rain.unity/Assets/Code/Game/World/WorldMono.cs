@@ -47,12 +47,12 @@ namespace Essential
 
             transform.position = centerWorld;
             
-            onSpanToTilemap(tilemap);
+            onSpanToTilemap(tilemap, cellPosition);
             
             EditorUtility.SetDirty(this);
         }
 
-        protected virtual void onSpanToTilemap(TilemapView tilemap)
+        protected virtual void onSpanToTilemap(TilemapView tilemap,Vector3Int cell)
         {
             
         }

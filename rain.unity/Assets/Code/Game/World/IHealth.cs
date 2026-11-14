@@ -8,5 +8,4 @@ namespace Code.Game.World
         ReactiveProperty<bool> IsDead { get; }
         void TakeDamage(float value);
     }
-    
 }

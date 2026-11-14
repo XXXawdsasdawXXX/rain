@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Code.Game.World.Turns;
 using Essential;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -20,11 +21,13 @@ namespace Code.Pathfinding
         private readonly ITilemapView _tilemap;
 
         private Vector3Int _endCellPosition;
+        private readonly IEntityRegistry _entityRegistry;
 
 
-        public PathfindingService(ITilemapView tilemap)
+        public PathfindingService(ITilemapView tilemap, IEntityRegistry entityRegistry)
         {
             _tilemap = tilemap;
+            _entityRegistry = entityRegistry;
         }
 
         public IReadOnlyList<Vector3Int> FindPath(Vector3 startPosition, Vector3 endPosition)
@@ -189,8 +192,8 @@ namespace Code.Pathfinding
             {
                 return false;
             }
-
-            return true;
+            
+            return _entityRegistry.IsEmptyCell(cell);
         }
 
         private PathfindingNode _pickLowestFNode()

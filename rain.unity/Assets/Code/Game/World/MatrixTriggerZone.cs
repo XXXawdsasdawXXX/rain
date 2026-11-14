@@ -36,9 +36,9 @@ namespace Code.Game.World
 #if UNITY_EDITOR
 
         [SerializeField] private TilemapView e_tilemapView;
-        
-        
-        protected override void onSpanToTilemap(TilemapView tilemap)
+
+
+        protected override void onSpanToTilemap(TilemapView tilemap, Vector3Int cell)
         {
             e_tilemapView = tilemap;
             

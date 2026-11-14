@@ -6,6 +6,7 @@ namespace Code.Game.World
         Hero,
         Npc,
         Enemy,
-        Obstacle
+        Obstacle,
+        Environment
     }
 }

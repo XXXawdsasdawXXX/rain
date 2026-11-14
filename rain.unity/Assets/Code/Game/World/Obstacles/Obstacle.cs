@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Code.Game.World.Turns;
 using Essential;
@@ -17,7 +18,8 @@ namespace Code.Game.World
         
         [SerializeField, GUIColor(0.5f, 0.7f, 0.9f, 0.9f)] 
         private ObstacleRender _render;
-        
+
+        [SerializeField] private bool _isSpawnable;
         [SerializeField] private MatrixTriggerZone _triggerZone;
         
         [ShowInInspector, ReadOnly] private EObstacleState _currentState;
@@ -25,12 +27,14 @@ namespace Code.Game.World
         private readonly List<IHealth> _livingBuffer = new();
         
         private IEntityRegistry _entityRegistry;
+        private IRegister<IWorldTurnBeginListener> _worldActorRegistry;
 
-        
+
         [Inject]
-        public void Construct(IEntityRegistry entityRegistry)
+        public void Construct(IEntityRegistry entityRegistry, IRegister<IWorldTurnBeginListener> worldActorRegistry)
         {
             _entityRegistry = entityRegistry;
+            _worldActorRegistry = worldActorRegistry;
         }
         
         private void Awake()
@@ -38,9 +42,30 @@ namespace Code.Game.World
             _logic?.Bind(this);
         }
 
+        private void OnEnable()
+        {
+            if (_isSpawnable)
+            {
+                return;
+            }
+            
+            Enable();
+        }
+
+        private void OnDisable()
+        {
+            if (_isSpawnable)
+            {
+                return;
+            }
+            
+            Disable();
+        }
+
         public void Enable()
         {
             _currentState = EObstacleState.Idle;
+            _worldActorRegistry.Register(this);
             _render.PlayIdle();
         }
         
@@ -97,6 +122,8 @@ namespace Code.Game.World
 
         public void Disable()
         {
+            _worldActorRegistry.UnRegister(this);
+
             _logic.Dispose();
             _render.Dispose();
             _livingBuffer.Clear();

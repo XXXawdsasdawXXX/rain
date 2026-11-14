@@ -1,12 +1,13 @@
 using System;
 using Code.Game.World;
 using Code.Pathfinding;
+using Essential;
 using UnityEngine;
 using VContainer;
 
 namespace Code.Game.Characters
 {
-    public class CharacterWorldView : MonoBehaviour, IEntityView
+    public class CharacterWorldView : WorldMono, IEntityView
     {
         public event Action<IEntityView, Vector3Int, Vector3Int> PositionChanged;
         
