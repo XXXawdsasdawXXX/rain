@@ -107,7 +107,7 @@ namespace Code.Game.World
                             cancellationToken: _cts.Token)
                         .SuppressCancellationThrow();
 
-                    if (_cts.IsCancellationRequested)
+                    if (_cts == null || _cts.IsCancellationRequested)
                     {
                         break;
                     }

@@ -57,7 +57,7 @@ namespace Code.Pathfinding
         
         public TileData GetCellData(Vector3Int cell)
         {
-            _ensureMapBaked();
+            _bakeMapTiles();
             return _mapTiles.TryGetValue(cell, out TileData data)
                 ? data
                 : _weightTiles.LockTiles;
@@ -65,7 +65,7 @@ namespace Code.Pathfinding
         
         public bool HasBakedCell(Vector3Int cell)
         {
-            _ensureMapBaked();
+            _bakeMapTiles();
             return _mapTiles.ContainsKey(cell);
         }
 
@@ -73,19 +73,14 @@ namespace Code.Pathfinding
         {
             return GetCellData(cellPosition).Weight;
         }
-
-        private void _ensureMapBaked()
+        
+        private void _bakeMapTiles()
         {
             if (_mapTiles != null)
             {
                 return;
             }
 
-            _bakeMapTiles();
-        }
-
-        private void _bakeMapTiles()
-        {
             _mapTiles = new Dictionary<Vector3Int, TileData>();
             BoundsInt bounds = _tilemapBase.cellBounds;
 

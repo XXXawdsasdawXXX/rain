@@ -660,6 +660,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1580134836}
     - target: {fileID: 3349903168233120424, guid: ff7bcecf23f3cf82c85e8a3104f503da, type: 3}
+      propertyPath: _tilemapView
+      value: 
+      objectReference: {fileID: 1580134836}
+    - target: {fileID: 3349903168233120424, guid: ff7bcecf23f3cf82c85e8a3104f503da, type: 3}
       propertyPath: e_tilemapView
       value: 
       objectReference: {fileID: 1580134836}
@@ -2568,7 +2572,7 @@ MonoBehaviour:
     _height: 3
     _values: 010001000100000101000001000001y
   _originCellPosition: {x: -5, y: 0, z: 0}
-  tilemapView: {fileID: 0}
+  _tilemapView: {fileID: 0}
 --- !u!1 &1577160703 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1535273632628164338, guid: ff7bcecf23f3cf82c85e8a3104f503da, type: 3}
@@ -9919,6 +9923,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1580134836}
     - target: {fileID: 8599637681867363319, guid: e29808bd879723902b9e0b5f2f7cadc2, type: 3}
+      propertyPath: _tilemapView
+      value: 
+      objectReference: {fileID: 1580134836}
+    - target: {fileID: 8599637681867363319, guid: e29808bd879723902b9e0b5f2f7cadc2, type: 3}
       propertyPath: e_tilemapView
       value: 
       objectReference: {fileID: 1580134836}
@@ -10046,6 +10054,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3349903168233120424, guid: ff7bcecf23f3cf82c85e8a3104f503da, type: 3}
       propertyPath: tilemapView
+      value: 
+      objectReference: {fileID: 1580134836}
+    - target: {fileID: 3349903168233120424, guid: ff7bcecf23f3cf82c85e8a3104f503da, type: 3}
+      propertyPath: _tilemapView
       value: 
       objectReference: {fileID: 1580134836}
     - target: {fileID: 3349903168233120424, guid: ff7bcecf23f3cf82c85e8a3104f503da, type: 3}

@@ -52,14 +52,6 @@ namespace Code.Game.World.Turns
                         list.Remove(entity);
                         entity.PositionChanged -= _onEntityPositionChanged;
                     }
-                    else
-                    {
-                        throw new Exception($"[UnRegister] collection has not entity({entity.ID}) in {entity.CellPosition}");
-                    }
-                }
-                else
-                {
-                    throw new Exception($"[UnRegister] collection has not any entities in {entity.CellPosition}");
                 }
             }
         }

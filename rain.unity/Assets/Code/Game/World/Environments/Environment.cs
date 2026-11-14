@@ -73,11 +73,11 @@ namespace Code.Game.World
             return Health != null && Health.IsAlive && Health.MaxHealth > 0;
         }
 
-        protected override void onSpanToTilemap(TilemapView tilemap, Vector3Int cell)
+        protected override void e_onSpanToTilemap(TilemapView tilemap, Vector3Int cell)
         {
             CellPosition = cell;
             
-            base.onSpanToTilemap(tilemap, cell);
+            base.e_onSpanToTilemap(tilemap, cell);
         }
     }
 }

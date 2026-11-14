@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 #if UNITY_EDITOR
 using Code.Pathfinding;
@@ -33,7 +32,7 @@ namespace Essential
 #if UNITY_EDITOR
         
         [Button]
-        private void _snapToTilemap()
+        public void e_snapToTilemap()
         {
             TilemapView tilemap = FindAnyObjectByType<TilemapView>();
 
@@ -47,12 +46,12 @@ namespace Essential
 
             transform.position = centerWorld;
             
-            onSpanToTilemap(tilemap, cellPosition);
-            
+            e_onSpanToTilemap(tilemap, cellPosition);
+
             EditorUtility.SetDirty(this);
         }
 
-        protected virtual void onSpanToTilemap(TilemapView tilemap,Vector3Int cell)
+        protected virtual void e_onSpanToTilemap(TilemapView tilemap,Vector3Int cell)
         {
             
         }

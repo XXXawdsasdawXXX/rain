@@ -49,6 +49,11 @@ namespace Code.UI.Hud.Windows
 
         private void _onSelectHero(CharacterActor hero)
         {
+            if (hero == null)
+            {
+                return;
+            }
+            
             view.TextHeroName.SetText(hero.Model.Name);
             view.ArmorRender.SetHero(hero);
             view.Stats.SetHero(hero);
