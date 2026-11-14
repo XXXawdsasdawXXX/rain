@@ -16,43 +16,51 @@ namespace Code.Game.World.Turns
 
         public void Register(IEntityView entity)
         {
-            if (_entities.TryGetValue(entity.CellPosition, out List<IEntityView> list))
+            IReadOnlyList<Vector3Int> occupiedCells = entity.GetOccupiedCells();
+            foreach (Vector3Int cell in occupiedCells)
             {
-                if (list.Contains(entity))
+                if (_entities.TryGetValue(cell, out List<IEntityView> list))
                 {
-                    throw new Exception($"[Register] collection already contains entity by coordinate {entity.CellPosition}");
-                }
+                    if (list.Contains(entity))
+                    {
+                        throw new Exception($"[Register] collection already contains entity by coordinate {entity.CellPosition}");
+                    }
 
-                list.Add(entity);
-            }
-            else
-            {
-                _entities.Add(entity.CellPosition, new List<IEntityView>()
+                    list.Add(entity);
+                }
+                else
                 {
-                    entity
-                });
+                    _entities.Add(cell, new List<IEntityView>()
+                    {
+                        entity
+                    });
+                }
+                
+                entity.PositionChanged += _onEntityPositionChanged;
             }
-            
-            entity.PositionChanged += _onEntityPositionChanged;
         }
 
         public void UnRegister(IEntityView entity)
         {
-            if (_entities.TryGetValue(entity.CellPosition, out List<IEntityView> list))
+            IReadOnlyList<Vector3Int> occupiedCells = entity.GetOccupiedCells();
+            foreach (Vector3Int cell in occupiedCells)
             {
-                if (list.Contains(entity))
+                if (_entities.TryGetValue(cell, out List<IEntityView> list))
                 {
-                    list.Remove(entity);
-                    entity.PositionChanged -= _onEntityPositionChanged;
+                    if (list.Contains(entity))
+                    {
+                        list.Remove(entity);
+                        entity.PositionChanged -= _onEntityPositionChanged;
+                    }
+                    else
+                    {
+                        throw new Exception($"[UnRegister] collection has not entity({entity.ID}) in {entity.CellPosition}");
+                    }
                 }
                 else
                 {
-                    throw new Exception($"[UnRegister] collection has not entity({entity.ID}) in {entity.CellPosition}");
+                    throw new Exception($"[UnRegister] collection has not any entities in {entity.CellPosition}");
                 }
-            }
-            else
-            {
-                throw new Exception($"[UnRegister] collection has not any entities in {entity.CellPosition}");
             }
         }
 

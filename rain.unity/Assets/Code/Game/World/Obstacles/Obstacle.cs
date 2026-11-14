@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Code.Game.World.Turns;
 using Essential;
@@ -20,7 +19,7 @@ namespace Code.Game.World
         private ObstacleRender _render;
 
         [SerializeField] private bool _isSpawnable;
-        [SerializeField] private MatrixTriggerZone _triggerZone;
+        [SerializeField] private MatrixZone _triggerZone;
         
         [ShowInInspector, ReadOnly] private EObstacleState _currentState;
         
@@ -65,8 +64,12 @@ namespace Code.Game.World
         public void Enable()
         {
             _currentState = EObstacleState.Idle;
-            _worldActorRegistry.Register(this);
             _render.PlayIdle();
+            
+            if (_worldActorRegistry != null)
+            {
+                _worldActorRegistry.Register(this);
+            }
         }
         
         public void OnWorldTurnBegin()
@@ -122,7 +125,10 @@ namespace Code.Game.World
 
         public void Disable()
         {
-            _worldActorRegistry.UnRegister(this);
+            if (_worldActorRegistry != null)
+            {
+                _worldActorRegistry.UnRegister(this);
+            }
 
             _logic.Dispose();
             _render.Dispose();

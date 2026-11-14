@@ -36,7 +36,7 @@ namespace Code.Game.World
         public EObstacleState State { get; private set; }
 
         [SerializeField] protected Transform root;
-        [SerializeField] protected MatrixTriggerZone matrixTrigger;
+        [SerializeField] protected MatrixZone matrixTrigger;
         [SerializeField] protected List<SpriteRenderer> renderers;
         [SerializeField] protected Model idleModel;
 

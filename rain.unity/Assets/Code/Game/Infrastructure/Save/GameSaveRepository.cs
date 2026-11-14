@@ -45,7 +45,7 @@ namespace Code.Game.Save
 
         public bool TryGetCurrentGame(out GameModel model)
         {
-            model = Data.Games != null && Data.Games.Count > Data.LastGameIndex 
+            model = Data != null && Data.Games != null && Data.Games.Count > Data.LastGameIndex 
                 ? Data.Games[Data.LastGameIndex] 
                 : null;
 

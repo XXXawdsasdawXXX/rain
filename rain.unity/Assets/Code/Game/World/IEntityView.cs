@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Code.Game.World
@@ -14,7 +15,7 @@ namespace Code.Game.World
         bool IsOccupyingCell { get; }
 
         public void SetCellPosition(Vector3Int cellPosition);
-
+        public IReadOnlyList<Vector3Int> GetOccupiedCells();
         public bool TryGetHealth(out IHealth health);
     }
 }

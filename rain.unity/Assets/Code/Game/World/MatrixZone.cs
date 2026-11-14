@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Code.Game.World
 {
-    public sealed class MatrixTriggerZone : WorldMono
+    public sealed class MatrixZone : WorldMono
     {
         [SerializeField] private BoolMatrix _matrix = new(4, 4);
         [SerializeField] private Vector3Int _originCellPosition;
@@ -33,14 +33,28 @@ namespace Code.Game.World
             return _originCellPosition + new Vector3Int(indexX, indexY);
         }
 
+        public void UpdateOriginCell()
+        {
+            if (tilemapView == null)
+            {
+                Debug.LogError("tilemap view is null");
+                
+                return;
+            }
+            
+            Vector3Int localCellPosition = tilemapView.WorldAsCell(transform.position); 
+            
+            _originCellPosition = localCellPosition + _matrix.GetCenteredMatrixOriginCell();
+        }
+
 #if UNITY_EDITOR
 
-        [SerializeField] private TilemapView e_tilemapView;
+        [SerializeField] private TilemapView tilemapView;
 
 
         protected override void onSpanToTilemap(TilemapView tilemap, Vector3Int cell)
         {
-            e_tilemapView = tilemap;
+            tilemapView = tilemap;
             
             Vector3Int localCellPosition = tilemap.WorldAsCell(transform.position); 
             
@@ -49,7 +63,7 @@ namespace Code.Game.World
 
         private void OnDrawGizmos()
         {
-            if (_matrix == null || e_tilemapView == null)
+            if (_matrix == null || tilemapView == null)
             {
                 return;
             }
@@ -61,14 +75,14 @@ namespace Code.Game.World
             for (int i = 0; i < cells.Count; i++)
             {
                 Vector3Int cell = cells[i];
-                Gizmos.DrawCube(e_tilemapView.CellAsCenterWorld(cell), cellSize);
+                Gizmos.DrawCube(tilemapView.CellAsCenterWorld(cell), cellSize);
             }
 
             //bounds
             Vector3Int minCell = _originCellPosition;
             Vector3Int maxCellExclusive = _originCellPosition + new Vector3Int(_matrix.Width, _matrix.Height, 0);
-            Vector3 min = e_tilemapView.CellAsWorld(minCell);
-            Vector3 max = e_tilemapView.CellAsWorld(maxCellExclusive);
+            Vector3 min = tilemapView.CellAsWorld(minCell);
+            Vector3 max = tilemapView.CellAsWorld(maxCellExclusive);
             Vector3 center = (min + max) * 0.5f;
             Vector3 size = max - min;
             size.z = 0f;

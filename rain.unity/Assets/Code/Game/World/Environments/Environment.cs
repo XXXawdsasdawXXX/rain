@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Code.Game.World.Turns;
 using Code.Pathfinding;
 using Essential;
@@ -17,6 +18,8 @@ namespace Code.Game.World
         [field: SerializeField] public Vector3Int CellPosition { get; private set; }
         [field: SerializeField] public bool IsOccupyingCell { get; private set;}
         [field: SerializeField] public EnvironmentHealth Health { get; private set; }
+        [SerializeField] private MatrixZone _occupation;
+
         
         private ITilemapView _tilemapView;
         private IEntityRegistry _entityRegistry;
@@ -28,14 +31,29 @@ namespace Code.Game.World
             _tilemapView = tilemapView;
             _entityRegistry = entityRegistry;
         }
-        
+
+        public IReadOnlyList<Vector3Int> GetOccupiedCells()
+        {
+           return _occupation.GetCells();
+        }
+
         private void OnEnable()
         {
+            if (_entityRegistry == null)
+            {
+                return;
+            }
+            
             _entityRegistry.Register(this);
         }
 
         private void OnDisable()
         {
+            if (_entityRegistry == null)
+            {
+                return;
+            }
+
             _entityRegistry.UnRegister(this);
         }
 
@@ -44,6 +62,7 @@ namespace Code.Game.World
             Vector3Int previousPosition = CellPosition;
             CellPosition = cellPosition;
             Body.position = _tilemapView.CellAsCenterWorld(CellPosition);
+            _occupation.UpdateOriginCell();
             PositionChanged?.Invoke(this, previousPosition, CellPosition);
         }
 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Code.Game.World;
 using Code.Pathfinding;
 using Essential;
@@ -36,6 +37,11 @@ namespace Code.Game.Characters
             Body.position = _tilemap.CellAsCenterWorld(cellPosition);
             CellPosition = cellPosition;
             PositionChanged?.Invoke(this, lastPosition, cellPosition);
+        }
+
+        public IReadOnlyList<Vector3Int> GetOccupiedCells()
+        {
+            return new[] { CellPosition };
         }
 
         public bool TryGetHealth(out IHealth health)
