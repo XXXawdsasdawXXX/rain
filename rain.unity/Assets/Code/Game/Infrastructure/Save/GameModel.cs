@@ -72,14 +72,16 @@ namespace Code.Game.Save
             {
                 { EStatType.Health , new ReactiveProperty<float>(100)},
                 { EStatType.Noise , new ReactiveProperty<float>(0)},
-                { EStatType.Damage , new ReactiveProperty<float>(10)}
+                { EStatType.Damage , new ReactiveProperty<float>(10)},
+                { EStatType.Energy , new ReactiveProperty<float>(100)}
             };
             DefaultMaxStats = new Dictionary<EStatType, float>()
             {
                 { EStatType.Health , 100},
                 { EStatType.Noise , 100},
+                { EStatType.Energy , 100}
             };
-            Abilities = new List<int>();
+            Abilities = new List<int>(){0};
 
             EBodyPart[] bodyParts = Enum.GetValues(typeof(EBodyPart)).Cast<EBodyPart>().ToArray();
             

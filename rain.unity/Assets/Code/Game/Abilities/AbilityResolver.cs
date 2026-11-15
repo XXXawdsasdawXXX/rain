@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using Code.Game.World.Characters;
+using Essential.Data;
 using Essential.Data.BoolMatrix;
 using UnityEngine;
 
 namespace Code.Game.World.Abilities
 {
-    public class AbilityZoneResolver
+    public class AbilityResolver
     {
         public static IReadOnlyList<Vector3Int> GetCells(BoolMatrix zone, Vector3Int origin)
         {
@@ -21,5 +23,20 @@ namespace Code.Game.World.Abilities
 
             return worldCells;
         }
+
+        public static bool CanUse(CharacterActor owner, AbilityModel ability)
+        {
+            if (owner.Model.Stats.TryGetValue(EStatType.Energy, out ReactiveProperty<float> ownerEnergy))
+            {
+                if (ownerEnergy.Value >= ability.EnergyPrice)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
+    
+    
 }

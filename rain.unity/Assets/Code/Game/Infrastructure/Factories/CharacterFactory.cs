@@ -106,6 +106,8 @@ namespace Code.Game.Factories
             IPathfindingFollower follower = new CharacterPathfindingFollower(_pathfindingService, _entityRegistry);
             actor = new CharacterActor(model, view, follower, _armoryLibrary);
             actor.SetCellPosition(model.Position);
+            
+            
         
             return view;
         }

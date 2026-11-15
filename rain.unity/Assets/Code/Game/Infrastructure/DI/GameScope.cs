@@ -41,7 +41,7 @@ namespace Code.Game.DI
             builder.Register<ICharacterFactory, CharacterFactory>(Lifetime.Singleton);
             builder.Register<PlayerSelection>(Lifetime.Singleton);
             builder.Register<PlayerPartyProvider>(Lifetime.Singleton).AsImplementedInterfaces();
-            builder.Register<AbilityTargetingController>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<AbilityTargetingController>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
             //path
             builder.RegisterInstance(_weightTilesConfiguration).AsSelf();

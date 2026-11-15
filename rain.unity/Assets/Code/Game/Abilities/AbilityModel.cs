@@ -34,6 +34,7 @@ namespace Code.Game.World.Abilities
         [field: SerializeField] public ETargetingMode TargetMode { get; private set; }
         [field: SerializeField] public string Name { get; private set; }
         [field: SerializeField] public Sprite Icon { get; private set; }
+        [field: SerializeField] public float EnergyPrice { get; private set; }
         [field: SerializeField] public Stat[] Stats { get; private set; }
         [field: SerializeField] public BoolMatrix Zone { get; private set; }
 

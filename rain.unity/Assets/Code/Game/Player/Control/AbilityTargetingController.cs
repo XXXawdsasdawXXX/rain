@@ -58,6 +58,8 @@ namespace Code.Game.Characters
             _ability = ability;
             
             _input.MouseCellPosition.SubscribeProperty(_onMouseCellChanged);
+            
+            _refreshPreview();
         }
 
         public void Cancel()
@@ -89,17 +91,21 @@ namespace Code.Game.Characters
         
         private void _onMouseCellChanged(Vector3Int mouseCell)
         {
+            _refreshPreview();
+        }
+
+        private void _refreshPreview()
+        {
             _tilemap.Clear();
             
             bool atCursor = _ability.TargetMode is ETargetingMode.AtCursor;
             
             CharacterActor hero = _playerPartyProvider.CurrentCharacter;
 
-            Vector3Int origin = atCursor ? mouseCell : hero.Model.Position;
+            Vector3Int origin = atCursor ? _input.MouseCellPosition.Value : hero.Model.Position;
 
-            IReadOnlyList<Vector3Int> cells = AbilityZoneResolver.GetCells(_ability.Zone, origin);
+            IReadOnlyList<Vector3Int> cells = AbilityResolver.GetCells(_ability.Zone, origin);
 
-            
             _tilemap.DrawZone(cells);
         }
     }
