@@ -1,18 +1,18 @@
 using System;
 using System.Collections.Generic;
-using Code.Game.Characters;
-using Code.Game.Characters.Hero;
-using Code.Game.Save;
+using Code.Game.Infrastructure.Save;
+using Code.Game.Infrastructure.Turns;
+using Code.Game.Pathfinding;
+using Code.Game.Player;
 using Code.Game.World;
 using Code.Game.World.Characters;
 using Code.Game.World.Turns;
-using Code.Pathfinding;
 using Core.AssetManagement.Libraries.Assets;
 using JetBrains.Annotations;
 using VContainer;
 using VContainer.Unity;
 
-namespace Code.Game.Factories
+namespace Code.Game.Infrastructure.Factories
 {
     [UsedImplicitly]
     public sealed class CharacterFactory : ICharacterFactory

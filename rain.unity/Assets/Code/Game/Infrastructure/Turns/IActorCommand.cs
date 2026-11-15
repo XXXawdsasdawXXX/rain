@@ -1,4 +1,4 @@
-namespace Code.Game.World.Turns
+namespace Code.Game.Infrastructure.Turns
 {
     public interface IActorCommand
     {

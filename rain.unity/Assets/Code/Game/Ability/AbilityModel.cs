@@ -1,14 +1,9 @@
-using System;
-using System.Collections.Generic;
 using Code.Game.World.Characters;
 using Essential.Data.BoolMatrix;
+using UnityEditor;
 using UnityEngine;
 
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
-
-namespace Code.Game.World.Abilities
+namespace Code.Game.Ability
 {
     public enum EAbilityType
     {

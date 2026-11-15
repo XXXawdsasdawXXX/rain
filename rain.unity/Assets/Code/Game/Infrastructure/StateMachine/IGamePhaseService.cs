@@ -1,11 +1,9 @@
 using System;
-using Code.Game.Characters;
-using Core.Input;
 using JetBrains.Annotations;
 using UnityEngine;
 using VContainer.Unity;
 
-namespace Code.Game.StateMachine
+namespace Code.Game.Infrastructure.StateMachine
 {
     public enum EGamePhase
     {

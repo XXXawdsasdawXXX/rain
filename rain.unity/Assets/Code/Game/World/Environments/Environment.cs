@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Code.Pathfinding;
+using Code.Game.Pathfinding.View;
 using Essential;
 using UnityEngine;
 using VContainer;

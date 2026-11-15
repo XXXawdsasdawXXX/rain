@@ -1,7 +1,7 @@
 ﻿using System;
 using Core.Save;
 
-namespace Code.Game.Save
+namespace Code.Game.Infrastructure.Save
 {
     public sealed class SettingsSaveRepository : ASaveRepository<SettingsSaveRepository.Model>
     {

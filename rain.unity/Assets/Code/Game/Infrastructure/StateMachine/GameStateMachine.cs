@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Code.Game.Save;
-using Code.Game.StateMachine.States;
+using Code.Game.Infrastructure.Save;
+using Code.Game.Infrastructure.StateMachine.States;
 using Core.Scenes;
 using Cysharp.Threading.Tasks;
 using JetBrains.Annotations;
 using VContainer.Unity;
 
-namespace Code.Game.StateMachine
+namespace Code.Game.Infrastructure.StateMachine
 {
     [UsedImplicitly]
     public sealed class GameStateMachine : StateMachine<AState>, IStartable, IDisposable

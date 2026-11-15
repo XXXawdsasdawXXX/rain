@@ -3,7 +3,7 @@ using Core.Scenes;
 using Cysharp.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
-namespace Code.Game.StateMachine.States
+namespace Code.Game.Infrastructure.StateMachine.States
 {
     public sealed class GameState : AState
     {

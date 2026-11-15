@@ -8,7 +8,7 @@ using UnityEngine.Tilemaps;
 using VContainer;
 using VContainer.Unity;
 
-namespace Code.Pathfinding
+namespace Code.Game.Pathfinding.View
 {
     public class TilemapView : WorldMono, IStartable, ITilemapView
     {

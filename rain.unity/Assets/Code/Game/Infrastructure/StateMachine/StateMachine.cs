@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Essential;
 
-namespace Code.Game.StateMachine
+namespace Code.Game.Infrastructure.StateMachine
 {
     public abstract class StateMachine<TState>   where TState : AState
     {

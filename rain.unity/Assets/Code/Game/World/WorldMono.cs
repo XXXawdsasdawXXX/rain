@@ -1,9 +1,9 @@
 ﻿using System;
+using Code.Game.Pathfinding.View;
 using TriInspector;
 using UnityEditor;
 using UnityEngine;
 #if UNITY_EDITOR
-using Code.Pathfinding;
 #endif
 
 namespace Code.Game.World

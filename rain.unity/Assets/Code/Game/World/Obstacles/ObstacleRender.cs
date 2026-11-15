@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using Code.Pathfinding;
+using Code.Game.Pathfinding.View;
 using Cysharp.Threading.Tasks;
 using Essential.Data.RangeFloat;
 using TriInspector;

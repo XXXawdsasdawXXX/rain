@@ -4,7 +4,7 @@ using System.Linq;
 using Core.Save;
 using JetBrains.Annotations;
 
-namespace Code.Game.Save
+namespace Code.Game.Infrastructure.Save
 {
     [UsedImplicitly]
     public sealed class GameSaveRepository : ASaveRepository<GameSaveRepository.Model>

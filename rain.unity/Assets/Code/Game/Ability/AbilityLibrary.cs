@@ -1,13 +1,10 @@
 using System;
 using Core.AssetManagement.Libraries;
-using UnityEngine;
-
-#if UNITY_EDITOR
 using TriInspector;
 using UnityEditor;
-#endif
+using UnityEngine;
 
-namespace Code.Game.World.Abilities
+namespace Code.Game.Ability
 {
     [CreateAssetMenu(fileName = "Library_Ability", menuName = "Game/Library/Ability")]
     public class AbilityLibrary : ScriptableObject

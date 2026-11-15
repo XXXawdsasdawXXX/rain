@@ -5,10 +5,9 @@ using Code.Game.World;
 using Code.Game.World.Characters;
 using Essential;
 using Essential.Data;
-using Newtonsoft.Json;
 using UnityEngine;
 
-namespace Code.Game.Save
+namespace Code.Game.Infrastructure.Save
 {
     [Serializable]
     public class GameModel

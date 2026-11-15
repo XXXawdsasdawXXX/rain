@@ -5,7 +5,7 @@ using Code.Game.World.Characters;
 using Essential;
 using JetBrains.Annotations;
 
-namespace Code.Game.Characters.Hero
+namespace Code.Game.Player
 {
     [UsedImplicitly]
     public class PlayerPartyProvider : IPlayerPartyProvider

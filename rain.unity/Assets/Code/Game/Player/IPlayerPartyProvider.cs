@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Code.Game.World.Characters;
 
-namespace Code.Game.Characters.Hero
+namespace Code.Game.Player
 {
     public interface IPlayerPartyProvider
     {

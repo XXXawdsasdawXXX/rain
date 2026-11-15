@@ -3,7 +3,7 @@ using Code.Game.World;
 using Essential;
 using UnityEngine;
 
-namespace Code.Pathfinding
+namespace Code.Game.Pathfinding.View
 {
     public class TileDrawer : WorldMono, ITileDrawer
     {

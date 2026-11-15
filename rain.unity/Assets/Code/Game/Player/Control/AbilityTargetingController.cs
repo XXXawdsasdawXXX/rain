@@ -1,20 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Code.Game.Characters.Hero;
-using Code.Game.StateMachine;
+using Code.Game.Ability;
+using Code.Game.Ability.Effect;
+using Code.Game.Infrastructure.StateMachine;
+using Code.Game.Pathfinding.View;
 using Code.Game.World;
-using Code.Game.World.Abilities;
 using Code.Game.World.Characters;
-using Code.Pathfinding;
 using Core.Input;
-using Essential;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using VContainer.Unity;
-using Random = UnityEngine.Random;
 
-namespace Code.Game.Characters
+namespace Code.Game.Player.Control
 {
     public interface IAbilityTargeting
     {
@@ -22,19 +19,21 @@ namespace Code.Game.Characters
         void BeginTargeting(AbilityModel ability);
 
     }
+    
+    public struct AbilityOutcome
+    {
+        public CharacterActor Owner;
+        public IReadOnlyList<IHealth> Targets;
+        public AbilityModel Ability;
+
+        public override string ToString()
+        {
+            return $"{Owner.Model.Name} use {Ability.Name}. targets count = {Targets.Count}";
+        }
+    }
     public class AbilityTargetingController: IAbilityTargeting, IStartable, IDisposable
     {
-        public struct ActionOutcome
-        {
-            public CharacterActor Owner;
-            public IReadOnlyList<IHealth> Targets;
-            public AbilityModel Ability;
-
-            public override string ToString()
-            {
-                return $"{Owner.Model.Name} use {Ability.Name}. targets count = {Targets.Count}";
-            }
-        }
+   
         
         private readonly IPlayerPartyProvider _playerPartyProvider;
         private readonly IGamePhaseService _gamePhaseService;
@@ -94,7 +93,7 @@ namespace Code.Game.Characters
             _tilemap.Clear();
             _tilemap.DrawLastPath();
         }
-
+        
         private void _confirm()
         {
             if (_ability == null)
@@ -103,66 +102,27 @@ namespace Code.Game.Characters
             }
 
             IReadOnlyList<Vector3Int> zone = AbilityResolver.GetCells(
-                _ability.Zone, 
+                _ability.Zone,
                 _getAbilityOriginCell(_ability, _playerPartyProvider.CurrentCharacter));
-            
-            ActionOutcome outcome = new()
+
+            AbilityOutcome outcome = new()
             {
                 Owner = _playerPartyProvider.CurrentCharacter,
                 Targets = _findTargets(zone),
                 Ability = _ability
             };
 
-            switch (_ability.Type)
+
+            IAbilityEffect effect = _ability.Type switch
             {
-                case EAbilityType.None:
-                case EAbilityType.Heal:
-                case EAbilityType.Harvest:
-                case EAbilityType.ApplyEffect:
-                default:
-                    break;
-                case EAbilityType.Damage:
-                    //var damage = _ability.Stats
+                EAbilityType.Damage => new DamageAbilityEffect(),
+                _ => null
+            };
 
-                    float damage = 0;
-                    foreach (Stat stat in _ability.Stats)
-                    {
-                        switch (stat.Type)
-                        {
-                            case EStatType.None:
-                            case EStatType.Health:
-                            case EStatType.Noise:
-                            case EStatType.Energy:
-                            default:
-                                break;
-                            case EStatType.Damage:
-                                damage += stat.Value;
-                                break;
-                            
-                            case EStatType.CriticalChance:
-                                if (Random.Range(0, 100) < stat.Value)
-                                {
-                                    damage *= 1.2f;
-                                }
+            effect?.Apply(outcome);
 
-                                break;
-                        }
-                    }
-
-                    if (damage < 0)
-                    {
-                        return;
-                    }
-                    foreach (IHealth target in outcome.Targets)
-                    {
-                        target.TakeDamage(damage);
-                    }
-                    break;
-            }
-        
-            
             Debug.Log(outcome.ToString());
-            
+
             _cancel();
         }
 

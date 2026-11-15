@@ -1,14 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Code.Game.Characters;
-using Code.Game.StateMachine;
-using Cysharp.Threading.Tasks;
-using Essential;
+using Code.Game.Infrastructure.StateMachine;
+using Code.Game.World.Turns;
 using JetBrains.Annotations;
 using VContainer.Unity;
 
-namespace Code.Game.World.Turns
+namespace Code.Game.Infrastructure.Turns
 {
     [UsedImplicitly]
     public class WorldActorRegistry : IRegister<IWorldTurnBeginListener>, IStartable, IDisposable

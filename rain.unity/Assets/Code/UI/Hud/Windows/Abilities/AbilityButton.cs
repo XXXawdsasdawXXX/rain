@@ -1,4 +1,4 @@
-using Code.Game.World.Abilities;
+using Code.Game.Ability;
 using Code.UI.Components;
 using UnityEngine;
 using UnityEngine.UI;

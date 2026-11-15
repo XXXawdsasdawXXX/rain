@@ -1,4 +1,5 @@
 using System;
+using Code.Game.Player.Control;
 using Core.Input;
 using JetBrains.Annotations;
 using UnityEngine;

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Code.Pathfinding
+namespace Code.Game.Pathfinding
 {
     public static class PathfindingTools
     {

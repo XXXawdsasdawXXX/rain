@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Code.Game.Pathfinding.View;
 using Code.Game.World;
-using Code.Game.World.Turns;
 using Essential;
 using JetBrains.Annotations;
 using UnityEngine;
 
-namespace Code.Pathfinding
+namespace Code.Game.Pathfinding
 {
     [UsedImplicitly]
     public sealed class PathfindingService : IPathfindingService

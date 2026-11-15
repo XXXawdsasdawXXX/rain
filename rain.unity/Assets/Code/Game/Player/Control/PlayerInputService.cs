@@ -1,11 +1,12 @@
 ﻿using System;
-using Code.Pathfinding;
+using Code.Game.Pathfinding.View;
+using Core.Input;
 using Essential;
 using Essential.Data;
 using UnityEngine;
 using VContainer.Unity;
 
-namespace Core.Input
+namespace Code.Game.Player.Control
 {
     public interface IPlayerInputService
     {

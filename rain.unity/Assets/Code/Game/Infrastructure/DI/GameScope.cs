@@ -1,19 +1,19 @@
-﻿using Code.Game.Characters;
-using Code.Game.Characters.Hero;
-using Code.Game.Factories;
-using Code.Game.StateMachine;
+﻿using Code.Game.Ability;
+using Code.Game.Infrastructure.Factories;
+using Code.Game.Infrastructure.StateMachine;
+using Code.Game.Infrastructure.Turns;
+using Code.Game.Pathfinding;
+using Code.Game.Pathfinding.View;
+using Code.Game.Player;
+using Code.Game.Player.Control;
 using Code.Game.World;
-using Code.Game.World.Abilities;
 using Code.Game.World.Characters;
-using Code.Game.World.Turns;
-using Code.Pathfinding;
-using Core.Input;
 using TriInspector;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Code.Game.DI
+namespace Code.Game.Infrastructure.DI
 {
     public class GameScope : LifetimeScope
     {

@@ -1,5 +1,5 @@
-using Code.Game.Characters;
-using Code.Game.StateMachine;
+using Code.Game.Infrastructure.StateMachine;
+using Code.Game.Player.Control;
 using Code.UI.Components;
 using Code.UI.Components.Window;
 using Core.Input;

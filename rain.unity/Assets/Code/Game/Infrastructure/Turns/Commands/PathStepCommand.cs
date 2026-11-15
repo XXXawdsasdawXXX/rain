@@ -1,9 +1,8 @@
 using Code.Game.World.Characters;
-using Code.Game.World.Turns;
 using Essential;
 using UnityEngine;
 
-namespace Code.Game.Characters.Player.Commands
+namespace Code.Game.Infrastructure.Turns.Commands
 {
     public class PathStepCommand : IActorCommand
     {

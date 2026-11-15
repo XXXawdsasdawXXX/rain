@@ -1,4 +1,4 @@
-using Code.Game.Characters.Hero;
+using Code.Game.Player;
 using Code.Game.World.Characters;
 using Code.UI.Components;
 using Code.UI.Components.Window;

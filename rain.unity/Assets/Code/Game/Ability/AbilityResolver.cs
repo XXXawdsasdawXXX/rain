@@ -4,9 +4,9 @@ using Essential.Data;
 using Essential.Data.BoolMatrix;
 using UnityEngine;
 
-namespace Code.Game.World.Abilities
+namespace Code.Game.Ability
 {
-    public class AbilityResolver
+    public static class AbilityResolver
     {
         public static IReadOnlyList<Vector3Int> GetCells(BoolMatrix zone, Vector3Int origin)
         {
@@ -37,6 +37,36 @@ namespace Code.Game.World.Abilities
             }
 
             return false;
+        }
+
+        public static float GetDamage(this AbilityModel model)
+        {
+            float damage = 0;
+            
+            foreach (Stat stat in model.Stats)
+            {
+                switch (stat.Type)
+                {
+                    case EStatType.None:
+                    case EStatType.Health:
+                    case EStatType.Noise:
+                    case EStatType.Energy:
+                    default:
+                        break;
+                    case EStatType.Damage:
+                        damage += stat.Value;
+                        break;
+                            
+                    case EStatType.CriticalChance:
+                        if (Random.Range(0, 100) < stat.Value)
+                        {
+                            damage *= 1.2f;
+                        }
+                        break;
+                }
+            }
+
+            return damage;
         }
     }
     

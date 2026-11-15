@@ -1,14 +1,13 @@
 using System;
-using Code.Game.Characters.Hero;
-using Code.Game.StateMachine;
+using Code.Game.Infrastructure.StateMachine;
+using Code.Game.Pathfinding;
+using Code.Game.Pathfinding.View;
 using Code.Game.World.Characters;
-using Code.Pathfinding;
-using Core.Input;
 using JetBrains.Annotations;
 using UnityEngine;
 using VContainer.Unity;
 
-namespace Code.Game.Characters
+namespace Code.Game.Player.Control
 {
     [UsedImplicitly]
     public class PlayerPathDrawer : IStartable, IDisposable, ITickable

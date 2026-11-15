@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
-using Code.Game.Factories;
-using Code.Game.Save;
+using Code.Game.Infrastructure.Factories;
+using Code.Game.Infrastructure.Save;
 using Code.Game.World;
 using JetBrains.Annotations;
 using VContainer.Unity;
 
-namespace Code.Game.StateMachine
+namespace Code.Game.Infrastructure.StateMachine
 {
     [UsedImplicitly]
     public sealed class GameWorldBootstrap : IStartable

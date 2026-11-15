@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Code.Game.World.Abilities;
+using Code.Game.Ability;
 using Code.Game.World.Characters;
 using Code.UI.Components.Window;
 using Essential;

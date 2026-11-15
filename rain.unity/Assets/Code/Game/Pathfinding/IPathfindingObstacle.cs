@@ -1,4 +1,4 @@
-namespace Code.Pathfinding
+namespace Code.Game.Pathfinding
 {
     public interface IPathfindingObstacle
     {

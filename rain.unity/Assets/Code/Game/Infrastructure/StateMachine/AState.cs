@@ -1,7 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 
-namespace Code.Game.StateMachine
+namespace Code.Game.Infrastructure.StateMachine
 {
     public abstract class AState
     {

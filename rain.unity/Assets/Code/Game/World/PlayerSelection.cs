@@ -1,6 +1,6 @@
 using System;
-using Code.Game.Characters;
-using Code.Game.Characters.Hero;
+using Code.Game.Player;
+using Code.Game.Player.Control;
 using Code.Game.World.Characters;
 using Core.Input;
 using JetBrains.Annotations;

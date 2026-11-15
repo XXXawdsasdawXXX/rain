@@ -1,6 +1,4 @@
-    using Code.Game.World.Turns;
-
-namespace Code.Game.Characters.Player.Commands
+    namespace Code.Game.Infrastructure.Turns.Commands
 {
     public class WaitCommand : IActorCommand
     {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Code.Game.Characters;
-using Code.Game.Characters.Hero;
-using Code.Game.World.Abilities;
+using Code.Game.Ability;
+using Code.Game.Player;
+using Code.Game.Player.Control;
 using Code.Game.World.Characters;
 using Code.UI.Components;
 using Code.UI.Components.Window;

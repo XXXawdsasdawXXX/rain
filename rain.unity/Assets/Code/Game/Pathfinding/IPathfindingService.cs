@@ -1,7 +1,8 @@
 using System.Collections.Generic;
+using Code.Game.Pathfinding.View;
 using UnityEngine;
 
-namespace Code.Pathfinding
+namespace Code.Game.Pathfinding
 {
     public interface IPathfindingService
     {

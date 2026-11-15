@@ -1,7 +1,7 @@
-using Code.Game.Factories;
-using Code.Game.Save;
-using Code.Game.StateMachine;
-using Code.Game.StateMachine.States;
+using Code.Game.Infrastructure.Factories;
+using Code.Game.Infrastructure.Save;
+using Code.Game.Infrastructure.StateMachine;
+using Code.Game.Infrastructure.StateMachine.States;
 using Code.UI.Components;
 using Code.UI.Components.Window;
 using JetBrains.Annotations;

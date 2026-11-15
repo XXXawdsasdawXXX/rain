@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine.Tilemaps;
 
-namespace Code.Pathfinding
+namespace Code.Game.Pathfinding
 {
     [Serializable]
     public class TileData

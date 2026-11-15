@@ -1,5 +1,5 @@
-﻿using Code.Game.Save;
-using Code.Game.StateMachine;
+﻿using Code.Game.Infrastructure.Save;
+using Code.Game.Infrastructure.StateMachine;
 using Core.AssetManagement.Libraries.Assets;
 using Core.Audio.AudioSystem;
 using Core.Input;
@@ -9,7 +9,7 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Code.Game.DI
+namespace Code.Game.Infrastructure.DI
 {
     public class ProjectScope : LifetimeScope
     {

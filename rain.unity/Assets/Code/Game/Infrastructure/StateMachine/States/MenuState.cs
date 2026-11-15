@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading;
-using Code.Game.Save;
+using Code.Game.Infrastructure.Save;
 using Core.Scenes;
 using Cysharp.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
-namespace Code.Game.StateMachine.States
+namespace Code.Game.Infrastructure.StateMachine.States
 {
     public class MenuState : AState
     {

@@ -2,7 +2,7 @@
 using TriInspector;
 using UnityEngine;
 
-namespace Code.Pathfinding
+namespace Code.Game.Pathfinding
 {
     [CreateAssetMenu(fileName = "FILENAME", menuName = "Game/Configuration/TilesWeight")]
     public class WeightTilesConfiguration : ScriptableObject
