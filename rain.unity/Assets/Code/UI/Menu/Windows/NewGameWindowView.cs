@@ -35,8 +35,13 @@ namespace Code.UI.Menu
         private void _onClickedCreate()
         {
             view.Close();
+
+            CharacterModel characterModel = new(view.InputFiled_HeroName.Value);
             
-            _gameSave.AddNewGame(new CharacterModel(view.InputFiled_HeroName.Value), new WorldModel());
+            characterModel.Abilities.Add(0);
+            characterModel.Abilities.Add(1);
+            
+            _gameSave.AddNewGame(characterModel, new WorldModel());
         }
     }
 }

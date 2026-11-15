@@ -6,6 +6,7 @@ using Code.Game.World.Characters;
 using Code.UI.Components;
 using Code.UI.Components.Window;
 using Code.UI.Hud.Windows.Abilities;
+using Essential;
 using UnityEngine;
 
 namespace Code.UI.Hud.Windows
@@ -23,7 +24,7 @@ namespace Code.UI.Hud.Windows
     {
         private readonly AbilityLibrary _abilityLibrary;
         private readonly IPlayerPartyProvider _partyProvider;
-        private readonly AbilityTargetingController _abilityTargetingController;
+        private readonly IAbilityTargeting _abilityTargetingController;
 
 
         public SelectHeroViewController(
@@ -31,7 +32,7 @@ namespace Code.UI.Hud.Windows
             ArmoryLibrary armoryLibrary,
             AbilityLibrary abilityLibrary,
             IPlayerPartyProvider partyProvider,
-            AbilityTargetingController abilityTargetingController) : base(view)
+            IAbilityTargeting abilityTargetingController) : base(view)
         {
             this.view.ArmorRender.SetArmorLibrary(armoryLibrary);
             _abilityLibrary = abilityLibrary;
@@ -79,6 +80,8 @@ namespace Code.UI.Hud.Windows
 
             List<AbilityModel> abilityModels = new();
 
+            Log.Info(this, $"[_on select hero] abilities count = {hero.Model.Abilities.Count}");
+            
             foreach (int abilityIndex in hero.Model.Abilities)
             {
                 abilityModels.Add(_abilityLibrary.Library.Get(abilityIndex));

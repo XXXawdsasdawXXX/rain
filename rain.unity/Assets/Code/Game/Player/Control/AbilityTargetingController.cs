@@ -12,7 +12,13 @@ using VContainer.Unity;
 
 namespace Code.Game.Characters
 {
-    public class AbilityTargetingController: IStartable, IDisposable
+    public interface IAbilityTargeting
+    {
+        bool IsTargeting { get; }
+        void BeginTargeting(AbilityModel ability);
+
+    }
+    public class AbilityTargetingController: IAbilityTargeting, IStartable, IDisposable
     {
         private readonly IPlayerPartyProvider _playerPartyProvider;
         private readonly IGamePhaseService _gamePhaseService;
@@ -37,8 +43,7 @@ namespace Code.Game.Characters
         }
 
         public void Start()
-        { 
-            Log.Info(this, "start");
+        {
             _input.ActionEnded += _onInputActionEnded;
         }
 
@@ -46,14 +51,10 @@ namespace Code.Game.Characters
         {
             _input.ActionEnded -= _onInputActionEnded;
         }
-
-        /// <summary>
-        /// for button
-        /// </summary>
-        /// <param name="ability"></param>
+        
         public void BeginTargeting(AbilityModel ability)
         {
-            Cancel();
+            _cancel();
             
             _ability = ability;
             
@@ -62,7 +63,7 @@ namespace Code.Game.Characters
             _refreshPreview();
         }
 
-        public void Cancel()
+        private void _cancel()
         {
             if (_ability == null)
             {
@@ -70,26 +71,55 @@ namespace Code.Game.Characters
             }
             
             _input.MouseCellPosition.UnsubscribeProperty(_onMouseCellChanged);
-            _tilemap.Clear();
             _ability = null;
+            _tilemap.Clear();
+            _tilemap.DrawLastPath();
         }
-        
+
+        private void _confirm()
+        {
+            _cancel();
+        }
         
         private void _onInputActionEnded(EInputAction action)
         {
-            /*if (_gamePhaseService.Phase is EGamePhase.PlayerTurn)
+            if (_gamePhaseService.Phase is not EGamePhase.PlayerTurn)
             {
-                if (action == EInputAction.LeftClick)
-                {
-                    if (Time.unscaledTime - _input.StartLeftClickTime < IPlayerInputService.HOLDDELEY_DURATION)
+                return;
+            }
+
+            switch (action)
+            {
+                case EInputAction.None:
+                case EInputAction.Interaction:
+                case EInputAction.DoubleClick:
+                case EInputAction.Scroll:
+                case EInputAction.LeftClick:
+                default:
+                    break;
+                
+                case EInputAction.HoldLeftClick:
+                    _confirm();
+                    break;
+                
+                case EInputAction.Esc:
+                        _cancel();
+                        break;
+                
+                case EInputAction.RightClick:
+                    if (IsTargeting)
                     {
-                        _setPathForCurrentHero();
+                        _cancel();
                     }
-                }
-            }*/
+                    else
+                    {
+                        _gamePhaseService.RequestEndPlayerTurn();
+                    }
+                    break;
+            }
         }
         
-        private void _onMouseCellChanged(Vector3Int mouseCell)
+        private void _onMouseCellChanged(Vector3Int _)
         {
             _refreshPreview();
         }
@@ -97,6 +127,11 @@ namespace Code.Game.Characters
         private void _refreshPreview()
         {
             _tilemap.Clear();
+
+            if (_ability == null)
+            {
+                return;
+            }
             
             bool atCursor = _ability.TargetMode is ETargetingMode.AtCursor;
             

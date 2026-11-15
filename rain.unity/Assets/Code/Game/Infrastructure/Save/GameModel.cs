@@ -5,6 +5,7 @@ using Code.Game.World;
 using Code.Game.World.Characters;
 using Essential;
 using Essential.Data;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace Code.Game.Save
@@ -81,8 +82,8 @@ namespace Code.Game.Save
                 { EStatType.Noise , 100},
                 { EStatType.Energy , 100}
             };
-            Abilities = new List<int>(){0};
-
+            Abilities = new List<int>();
+            
             EBodyPart[] bodyParts = Enum.GetValues(typeof(EBodyPart)).Cast<EBodyPart>().ToArray();
             
             foreach (EBodyPart t in bodyParts)

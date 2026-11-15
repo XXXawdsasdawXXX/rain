@@ -7,6 +7,7 @@ namespace Code.Pathfinding
     {
         void DrawZone(IReadOnlyList<Vector3Int> zone);
         void DrawPath(IReadOnlyList<Vector3Int> path, int currentPointIndex);
+        void DrawLastPath();
         void UpdateSelectTile(Vector3Int position, bool isWalkable);
         void Clear();
     }

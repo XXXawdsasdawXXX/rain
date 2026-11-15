@@ -1,3 +1,4 @@
+using Code.Game.Characters;
 using Code.Game.StateMachine;
 using Code.UI.Components;
 using Code.UI.Components.Window;
@@ -16,34 +17,36 @@ namespace Code.UI.Hud.Windows
     {
         private readonly IPlayerInputService _input;
         private readonly IGamePhaseService _gamePhase;
+        private readonly IAbilityTargeting _abilityTargeting;
 
 
         public PauseWindowController(
             PauseWindowView view, 
             IPlayerInputService input, 
-            IGamePhaseService gamePhase) : base(view)
+            IGamePhaseService gamePhase, IAbilityTargeting abilityTargeting) : base(view)
         {
             _input = input;
             _gamePhase = gamePhase;
+            _abilityTargeting = abilityTargeting;
         }
 
         protected override void subscribe()
         {
-            _input.ActionEnded += _onInputActionEnded;
+            _input.ActionStarted += _onInputActionStarted;
 
             view.ButtonOpen.Clicked += _open;
             view.ButtonClose.Clicked += _close;
         }
 
         protected override void unSubscribe()
-        {
-            _input.ActionEnded -= _onInputActionEnded;
+        { 
+            _input.ActionStarted -= _onInputActionStarted;
             
             view.ButtonOpen.Clicked -= _open;
             view.ButtonClose.Clicked -= _close;
         }
 
-        private void _onInputActionEnded(EInputAction action)
+        private void _onInputActionStarted(EInputAction action)
         {
             if (action is EInputAction.Esc)
             {
@@ -53,6 +56,11 @@ namespace Code.UI.Hud.Windows
                 }
                 else if(_gamePhase.Phase is not EGamePhase.Paused)
                 {
+                    if (_abilityTargeting.IsTargeting)
+                    {
+                        return;
+                    }
+                    
                     _open();
                 }
             }

@@ -27,6 +27,7 @@ namespace Code.UI.Hud.Windows.Abilities
                 return;
             }
             
+            Debug.Log($"set abilities models {abilityModels.Count}");
             foreach (AbilityModel model in abilityModels)
             {
                 AbilityButton button = _pool.GetNext();

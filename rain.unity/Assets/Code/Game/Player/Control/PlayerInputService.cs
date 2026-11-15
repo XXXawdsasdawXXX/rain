@@ -96,10 +96,20 @@ namespace Core.Input
 
                         StartLeftClickTime = time;
                     }
+                    
+                    return;
                 }
                 
                 if (_wasActionReleased(inputActionKey))
                 {
+                    if (inputActionKey.Action == EInputAction.LeftClick)
+                    {
+                        if (Time.unscaledTime - StartLeftClickTime > IPlayerInputService.HOLDDELEY_DURATION)
+                        {
+                            ActionEnded?.Invoke(EInputAction.HoldLeftClick);
+                        }
+                    }
+                    
                     ActionEnded?.Invoke(inputActionKey.Action);
                 }
             }

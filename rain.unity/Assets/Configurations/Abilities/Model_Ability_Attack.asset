@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Game::Code.Game.World.Abilities.AbilityModel
   <Index>k__BackingField: 0
   <Type>k__BackingField: 1
-  <TargetMode>k__BackingField: 2
+  <TargetMode>k__BackingField: 1
   <Name>k__BackingField: Attack
-  <Icon>k__BackingField: {fileID: 4373467509135005624, guid: bb67514bb4bf29548989502369182e91, type: 3}
+  <Icon>k__BackingField: {fileID: -3039633787015709530, guid: bb67514bb4bf29548989502369182e91, type: 3}
+  <EnergyPrice>k__BackingField: 10
   <Stats>k__BackingField:
   - <Type>k__BackingField: 3
     <Value>k__BackingField: 5

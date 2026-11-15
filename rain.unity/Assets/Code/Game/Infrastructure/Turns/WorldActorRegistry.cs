@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Code.Game.Characters;
 using Code.Game.StateMachine;
 using Cysharp.Threading.Tasks;
 using Essential;
@@ -14,7 +15,7 @@ namespace Code.Game.World.Turns
     {
         private readonly IGamePhaseService _phaseService;
 
-        private List<IWorldTurnBeginListener>[] _beginListener =
+        private readonly List<IWorldTurnBeginListener>[] _beginListener =
         {
             new(), //characters
             new(), //obstacles

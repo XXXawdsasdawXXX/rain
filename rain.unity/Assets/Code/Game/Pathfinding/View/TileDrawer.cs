@@ -20,7 +20,10 @@ namespace Code.Pathfinding
         [SerializeField] private Color _selectedTileUnWalcableColor;
         [SerializeField] private Color _selectedTileWalcableColor;
 
+        private IReadOnlyList<Vector3Int> _path;
+        private int _pointIndex;
 
+        
         public void Clear()
         {
             _pathPointsPool.DisableAll();
@@ -37,19 +40,32 @@ namespace Code.Pathfinding
                 tile.transform.position = _tilemap.CellAsCenterWorld(cell);
             }
         }
+        
+        public void DrawLastPath()
+        {
+            if (_path != null && _path.Count > 0)
+            {
+                DrawPath(_path, _pointIndex);
+            }
+        }
 
         public void DrawPath(IReadOnlyList<Vector3Int> path, int currentPointIndex)
         {
             Clear();
+
+            _path = path;
+            _pointIndex = currentPointIndex;
             
-            for (int i = 0; i < path.Count; i++)
+            for (int i = 0; i < _path.Count; i++)
             {
                 Vector3Int vector3 = path[i];
                 TileCellView tile = _pathPointsPool.GetNext();
                 tile.transform.position = _tilemap.CellAsCenterWorld(vector3);
-                tile.SetColor(i >= currentPointIndex ? _newPathColor : _oldPathColor);
+                tile.SetColor(i >= _pointIndex ? _newPathColor : _oldPathColor);
             }
         }
+
+      
 
         public void UpdateSelectTile(Vector3Int position, bool isWalkable)
         {

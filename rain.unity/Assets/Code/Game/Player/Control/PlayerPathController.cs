@@ -5,7 +5,6 @@ using Code.Game.World.Characters;
 using Code.Game.World.Turns.Orders;
 using Code.Pathfinding;
 using Core.Input;
-using JetBrains.Annotations;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -17,18 +16,21 @@ namespace Code.Game.Characters
         private readonly IGamePhaseService _gamePhaseService;
         private readonly IPlayerInputService _input;
         private readonly ITilemapView _tilemap;
+        private readonly IAbilityTargeting _abilityTargeting;
 
 
         public PlayerPathController(
             IPlayerPartyProvider playerPartyProvider, 
             IPlayerInputService input, 
             IGamePhaseService gamePhaseService, 
-            ITilemapView tilemap)
+            ITilemapView tilemap,
+            IAbilityTargeting abilityTargeting)
         {
             _playerPartyProvider = playerPartyProvider;
             _input = input;
             _gamePhaseService = gamePhaseService;
             _tilemap = tilemap;
+            _abilityTargeting = abilityTargeting;
         }
 
         public void Start()
@@ -43,6 +45,11 @@ namespace Code.Game.Characters
 
         private void _onInputActionEnded(EInputAction action)
         {
+            if (_abilityTargeting.IsTargeting)
+            {
+                return;
+            }
+            
             if (_gamePhaseService.Phase is EGamePhase.PlayerTurn)
             {
                 if (action == EInputAction.LeftClick)

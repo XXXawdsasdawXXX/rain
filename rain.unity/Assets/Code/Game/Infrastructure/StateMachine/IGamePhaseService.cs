@@ -1,4 +1,5 @@
 using System;
+using Code.Game.Characters;
 using Core.Input;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -30,27 +31,18 @@ namespace Code.Game.StateMachine
         public event Action<EGamePhase> PhaseChanged;
         public EGamePhase Phase { get; private set; }
         
-        private readonly IPlayerInputService _input;
-        
+
         private EGamePhase _previousPhase;
         private float _worldPhaseElapsed;
         
-
-        public GamePhaseService(IPlayerInputService input)
-        {
-            _input = input;
-        }
         
         public void Start()
         {
             Phase = EGamePhase.PlayerTurn;
-            _input.ActionStarted += _onInputActionEnded;
         }
 
         public void Dispose()
         {
-            _input.ActionStarted -= _onInputActionEnded;
-            
             PhaseChanged = null;
         }
 
@@ -89,14 +81,6 @@ namespace Code.Game.StateMachine
                 _worldPhaseElapsed = 0;
                 Phase = EGamePhase.WorldTurn;
                 PhaseChanged?.Invoke(Phase);
-            }
-        }
-
-        private void _onInputActionEnded(EInputAction action)
-        {
-            if (action is EInputAction.RightClick)
-            {
-                RequestEndPlayerTurn();
             }
         }
     }

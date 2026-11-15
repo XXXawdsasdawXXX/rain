@@ -8,6 +8,7 @@ namespace Core.Input
         Interaction,
         Esc,
         DoubleClick,
+        HoldLeftClick,
         Scroll
     }
 }
