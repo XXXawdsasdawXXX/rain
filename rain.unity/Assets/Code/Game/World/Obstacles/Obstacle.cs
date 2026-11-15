@@ -5,7 +5,7 @@ using TriInspector;
 using UnityEngine;
 using VContainer;
 
-namespace Code.Game.World
+namespace Code.Game.World.Obstacles
 {
     public class Obstacle : WorldMono, IWorldTurnBeginListener, IPoolEntity
     {
@@ -125,14 +125,11 @@ namespace Code.Game.World
 
         public void Disable()
         {
-            if (_worldActorRegistry != null)
-            {
-                _worldActorRegistry.UnRegister(this);
-            }
+            _worldActorRegistry?.UnRegister(this);
 
-            _logic.Dispose();
-            _render.Dispose();
-            _livingBuffer.Clear();
+            _logic?.Dispose();
+            _render?.Dispose();
+            _livingBuffer?.Clear();
         }
     }
 }

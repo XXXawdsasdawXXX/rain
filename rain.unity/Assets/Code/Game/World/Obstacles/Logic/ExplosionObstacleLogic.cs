@@ -1,6 +1,6 @@
 using System;
 
-namespace Code.Game.World
+namespace Code.Game.World.Obstacles
 {
     [Serializable]
     public class ExplosionObstacleLogic : AObstacleLogic

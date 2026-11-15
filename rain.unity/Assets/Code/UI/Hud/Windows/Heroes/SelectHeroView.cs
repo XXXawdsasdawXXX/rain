@@ -1,9 +1,7 @@
-using Code.Game.Characters;
-using Code.Game.Characters.Armor;
 using Code.Game.Characters.Hero;
+using Code.Game.World.Characters;
 using Code.UI.Components;
 using Code.UI.Components.Window;
-using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Code.UI.Hud.Windows
@@ -13,15 +11,18 @@ namespace Code.UI.Hud.Windows
         [field: SerializeField] public UIText TextHeroName { get; private set; }
         [field: SerializeField] public UIArmorRender ArmorRender { get; private set; } 
         [field: SerializeField] public UICharacterStats Stats { get; private set; }       
+        
     }
 
-    [UsedImplicitly]
     public class SelectHeroViewController : AUIWindowController<SelectHeroView>
     {
         private readonly IPlayerPartyProvider _partyProvider;
-
-
-        public SelectHeroViewController(SelectHeroView view, ArmoryLibrary armoryLibrary, IPlayerPartyProvider partyProvider) : base(view)
+        
+        
+        public SelectHeroViewController(
+            SelectHeroView view, 
+            ArmoryLibrary armoryLibrary,
+            IPlayerPartyProvider partyProvider) : base(view)
         {
             this.view.ArmorRender.SetArmorLibrary(armoryLibrary);
             _partyProvider = partyProvider;

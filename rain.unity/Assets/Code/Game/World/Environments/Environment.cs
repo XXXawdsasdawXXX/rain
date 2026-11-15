@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Code.Game.World.Turns;
 using Code.Pathfinding;
-using Essential;
 using UnityEngine;
 using VContainer;
 
-namespace Code.Game.World
+namespace Code.Game.World.Environments
 {
     public class Environment : WorldMono, IEntityView
     {

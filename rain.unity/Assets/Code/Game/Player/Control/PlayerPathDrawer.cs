@@ -1,6 +1,7 @@
 using System;
 using Code.Game.Characters.Hero;
 using Code.Game.StateMachine;
+using Code.Game.World.Characters;
 using Code.Pathfinding;
 using Core.Input;
 using JetBrains.Annotations;
@@ -12,8 +13,8 @@ namespace Code.Game.Characters
     [UsedImplicitly]
     public class PlayerPathDrawer : IStartable, IDisposable, ITickable
     {
-        private readonly IPathfindingDrawer _pathfindingDrawer;
-        private readonly IInputService _input;
+        private readonly ITileDrawer _tileDrawer;
+        private readonly IPlayerInputService _input;
         private readonly ITilemapView _tilemap;
         private readonly IPathfindingService _pathfindingService;
         private readonly IPlayerPartyProvider _playerPartyProvider;
@@ -24,15 +25,15 @@ namespace Code.Game.Characters
 
 
         public PlayerPathDrawer(
-            IPathfindingDrawer pathfindingDrawer, 
-            IInputService input,
+            ITileDrawer tileDrawer, 
+            IPlayerInputService input,
             ITilemapView tilemap,
             IPathfindingService pathfindingService,
             IPlayerPartyProvider playerPartyProvider,
             IGamePhaseService gamePhase)
         {
             _gamePhase = gamePhase;
-            _pathfindingDrawer = pathfindingDrawer;
+            _tileDrawer = tileDrawer;
             _input = input;
             _tilemap = tilemap;
             _pathfindingService = pathfindingService;
@@ -63,7 +64,7 @@ namespace Code.Game.Characters
                 Vector3Int viewPosition = _tilemap.WorldAsCell(_input.MouseWorldPosition);
                 bool isWalkable = _pathfindingService.IsWalkable(viewPosition);
                 
-                _pathfindingDrawer.UpdateSelectTile(viewPosition, isWalkable); //todo stop here
+                _tileDrawer.UpdateSelectTile(viewPosition, isWalkable); //todo stop here
                 _lastCellPosition = currentCell;
             }
         }
@@ -77,14 +78,14 @@ namespace Code.Game.Characters
             
             _currentFollower = hero.PathfindingFollower;
             
-            _pathfindingDrawer.DrawPath(_currentFollower.Path, _currentFollower.PointIndex);
+            _tileDrawer.DrawPath(_currentFollower.Path, _currentFollower.PointIndex);
 
             _currentFollower.Updated += _redrawPath;
         }
 
         private void _redrawPath()
         {
-            _pathfindingDrawer.DrawPath(_currentFollower.Path, _currentFollower.PointIndex);
+            _tileDrawer.DrawPath(_currentFollower.Path, _currentFollower.PointIndex);
         }
     }
 }

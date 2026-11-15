@@ -1,4 +1,4 @@
-﻿namespace Code.Game.Characters.Armor
+﻿namespace Code.Game.World.Characters
 {
     public enum EStatType
     {
@@ -7,6 +7,7 @@
         Noise,
         Damage,
         CriticalChance,
-        CriticalDamage
+        CriticalDamage,
+        Energy
     }
 }

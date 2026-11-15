@@ -1,6 +1,6 @@
 using System;
 using Code.Game.Characters;
-using Code.Game.Characters.Armor;
+using Code.Game.World.Characters;
 using UnityEngine;
 using UnityEngine.UI;
 

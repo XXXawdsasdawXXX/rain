@@ -1,9 +1,10 @@
+using Code.Game.World;
 using Essential;
 using UnityEngine;
 
 namespace Code.Pathfinding
 {
-    public class PathfindingPointView : WorldMono, IPoolEntity
+    public class TileCellView : WorldMono, IPoolEntity
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
 

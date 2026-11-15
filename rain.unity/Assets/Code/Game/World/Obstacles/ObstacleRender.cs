@@ -5,16 +5,13 @@ using System.Threading;
 using Code.Pathfinding;
 using Cysharp.Threading.Tasks;
 using Essential.Data.RangeFloat;
+using TriInspector;
+using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
-#if UNITY_EDITOR
-using TriInspector;
-using UnityEditor;
-#endif
-
-namespace Code.Game.World
+namespace Code.Game.World.Obstacles
 {
     [Serializable]
     public class ObstacleRender

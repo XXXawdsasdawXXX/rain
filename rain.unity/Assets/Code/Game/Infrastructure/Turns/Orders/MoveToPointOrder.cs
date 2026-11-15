@@ -1,5 +1,6 @@
 using Code.Game.Characters;
 using Code.Game.Characters.Player.Commands;
+using Code.Game.World.Characters;
 using UnityEngine;
 
 namespace Code.Game.World.Turns.Orders

@@ -1,32 +1,44 @@
 ﻿using System;
+using Code.Pathfinding;
 using Essential;
-using JetBrains.Annotations;
+using Essential.Data;
 using UnityEngine;
-using UnityEngine.Scripting;
 using VContainer.Unity;
 
 namespace Core.Input
 {
-    public interface IInputService
+    public interface IPlayerInputService
     {
         const float HOLDDELEY_DURATION = 0.15f;
         const float DOUBLE_CLICK_TIME = 0.6f;
+        
         public event Action<EInputAction> ActionStarted;
         public event Action<EInputAction> ActionEnded;
+        
         public Vector3 MouseWorldPosition { get; }
+        public ReactiveProperty<Vector3Int> MouseCellPosition { get; }
         public float StartLeftClickTime { get; }
     }
 
-    [Preserve, UsedImplicitly]
-    public sealed class InputService : IInputService, ITickable
+    public sealed class PlayerInputService : IPlayerInputService, ITickable
     {
         public event Action<EInputAction> ActionStarted;
         public event Action<EInputAction> ActionEnded;
+        
         public Vector3 MouseWorldPosition { get; private set; }
+        public ReactiveProperty<Vector3Int> MouseCellPosition { get; } = new(Vector3Int.zero);
         public float StartLeftClickTime { get; private set; }
 
+        private readonly ITilemapView _tilemapView;
         private readonly Camera _camera;
 
+        
+        public PlayerInputService(ITilemapView tilemapView, CameraView camera)
+        {
+            _camera = camera.Camera;
+            _tilemapView = tilemapView;
+        }
+        
         
         private readonly InputActionKey[] _inputActionKeys = 
         {
@@ -53,12 +65,6 @@ namespace Core.Input
         };
         
         
-        
-        public InputService(CameraView cameraView)
-        {
-            _camera = cameraView.Camera;
-        }
-
         public void Tick()
         {
             _updateMousePosition();
@@ -81,7 +87,7 @@ namespace Core.Input
                     {
                         float time = Time.unscaledTime;
 
-                        if (time - StartLeftClickTime < IInputService.DOUBLE_CLICK_TIME)
+                        if (time - StartLeftClickTime < IPlayerInputService.DOUBLE_CLICK_TIME)
                         {
                             ActionStarted?.Invoke(EInputAction.DoubleClick);
 
@@ -121,12 +127,14 @@ namespace Core.Input
 
         private void _updateMousePosition()
         {
-            Vector3 mousePosition = UnityEngine.Input.mousePosition;
-            Vector3 screenPos = mousePosition;
+            Vector3 screenPos = UnityEngine.Input.mousePosition;
             screenPos.z = Mathf.Abs(_camera.transform.position.z);
+            
             Vector3 worldPoint = _camera.ScreenToWorldPoint(screenPos);
             worldPoint.z = 0f;
             MouseWorldPosition = worldPoint;
+
+            MouseCellPosition.Value = _tilemapView.WorldAsCell(MouseWorldPosition);
         }
     }
 }

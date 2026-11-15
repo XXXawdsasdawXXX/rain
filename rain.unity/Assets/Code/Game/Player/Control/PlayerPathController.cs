@@ -1,6 +1,7 @@
 ﻿using System;
 using Code.Game.Characters.Hero;
 using Code.Game.StateMachine;
+using Code.Game.World.Characters;
 using Code.Game.World.Turns.Orders;
 using Code.Pathfinding;
 using Core.Input;
@@ -10,18 +11,17 @@ using VContainer.Unity;
 
 namespace Code.Game.Characters
 {
-    [UsedImplicitly]
     public class PlayerPathController : IStartable, IDisposable
     {
         private readonly IPlayerPartyProvider _playerPartyProvider;
         private readonly IGamePhaseService _gamePhaseService;
-        private readonly IInputService _input;
+        private readonly IPlayerInputService _input;
         private readonly ITilemapView _tilemap;
 
 
         public PlayerPathController(
             IPlayerPartyProvider playerPartyProvider, 
-            IInputService input, 
+            IPlayerInputService input, 
             IGamePhaseService gamePhaseService, 
             ITilemapView tilemap)
         {
@@ -47,7 +47,7 @@ namespace Code.Game.Characters
             {
                 if (action == EInputAction.LeftClick)
                 {
-                    if (Time.unscaledTime - _input.StartLeftClickTime < IInputService.HOLDDELEY_DURATION)
+                    if (Time.unscaledTime - _input.StartLeftClickTime < IPlayerInputService.HOLDDELEY_DURATION)
                     {
                         _setPathForCurrentHero();
                     }

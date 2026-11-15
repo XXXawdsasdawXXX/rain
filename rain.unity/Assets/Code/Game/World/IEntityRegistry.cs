@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
+using Code.Game.World.Turns;
 using UnityEngine;
 
-namespace Code.Game.World.Turns
+namespace Code.Game.World
 {
     public interface IEntityRegistry : IRegister<IEntityView>
     {

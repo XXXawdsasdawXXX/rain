@@ -14,13 +14,13 @@ namespace Code.UI.Hud.Windows
 
     public class PauseWindowController : AUIWindowController<PauseWindowView>
     {
-        private readonly IInputService _input;
+        private readonly IPlayerInputService _input;
         private readonly IGamePhaseService _gamePhase;
 
 
         public PauseWindowController(
             PauseWindowView view, 
-            IInputService input, 
+            IPlayerInputService input, 
             IGamePhaseService gamePhase) : base(view)
         {
             _input = input;

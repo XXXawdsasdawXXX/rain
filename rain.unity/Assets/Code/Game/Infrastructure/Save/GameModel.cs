@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Code.Game.Characters.Armor;
 using Code.Game.World;
+using Code.Game.World.Characters;
 using Essential;
 using Essential.Data;
 using UnityEngine;
@@ -52,14 +52,14 @@ namespace Code.Game.Save
     [Serializable]
     public class CharacterModel
     {
-        public event Action<EBodyPart, int> ArmorChanged; 
-
+        public event Action<EBodyPart, int> ArmorChanged;
         public string ID { get; private set; }
         public string Name { get; private set; }
         public Vector3Int Position { get; private set; }
         public Dictionary<EBodyPart, int> Armor { get; private set; }
         public Dictionary<EStatType, ReactiveProperty<float>> Stats { get; private set; }
         public Dictionary<EStatType, float> DefaultMaxStats { get; private set; }
+        public List<int> Abilities { get; private set; }
 
         
         public CharacterModel(string name)
@@ -79,6 +79,7 @@ namespace Code.Game.Save
                 { EStatType.Health , 100},
                 { EStatType.Noise , 100},
             };
+            Abilities = new List<int>();
 
             EBodyPart[] bodyParts = Enum.GetValues(typeof(EBodyPart)).Cast<EBodyPart>().ToArray();
             

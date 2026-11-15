@@ -1,14 +1,11 @@
-using Code.Game.Characters.Armor;
 using Code.Game.Characters.Player.Commands;
 using Code.Game.Save;
-using Code.Game.World;
 using Code.Game.World.Turns;
-using Code.Pathfinding;
 using Essential.Data;
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace Code.Game.Characters
+namespace Code.Game.World.Characters
 {
     public class CharacterActor : IWorldActor, IHealth
     {

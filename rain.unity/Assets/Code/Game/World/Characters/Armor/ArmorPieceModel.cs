@@ -2,7 +2,7 @@
 using TriInspector;
 using UnityEngine;
 
-namespace Code.Game.Characters.Armor
+namespace Code.Game.World.Characters
 {
     [Serializable]
     public class ArmorPieceModel

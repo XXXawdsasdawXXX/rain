@@ -797,6 +797,37 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1535273632628164338, guid: ff7bcecf23f3cf82c85e8a3104f503da, type: 3}
   m_PrefabInstance: {fileID: 371547989}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &400181949
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 400181950}
+  m_Layer: 0
+  m_Name: zone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400181950
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400181949}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2064400862}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &417561406
 GameObject:
   m_ObjectHideFlags: 0
@@ -1309,7 +1340,7 @@ MonoBehaviour:
   - {fileID: 2137579805}
   _weightTilesConfiguration: {fileID: 11400000, guid: 14a52feec3ca18941b01ec2411b4feab, type: 2}
   tilemapView: {fileID: 1580134836}
-  _pathDrawer: {fileID: 2064400863}
+  tileDrawer: {fileID: 2064400863}
   _armoryLibrary: {fileID: 11400000, guid: d5812ef9ca70e9f468402226e1850c0c, type: 2}
   _abilityLibrary: {fileID: 11400000, guid: a64ab47607eea57cdb2484b8876fd1f1, type: 2}
 --- !u!114 &764679762
@@ -9597,7 +9628,7 @@ GameObject:
   - component: {fileID: 1669401497}
   - component: {fileID: 1669401498}
   m_Layer: 0
-  m_Name: tile-select (1)
+  m_Name: 'tile-select '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10271,7 +10302,7 @@ GameObject:
   - component: {fileID: 2064400862}
   - component: {fileID: 2064400863}
   m_Layer: 0
-  m_Name: tile-select
+  m_Name: TileDrawer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10292,6 +10323,7 @@ Transform:
   m_Children:
   - {fileID: 1669401497}
   - {fileID: 368138839}
+  - {fileID: 400181950}
   m_Father: {fileID: 1216302805}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2064400863
@@ -10316,6 +10348,11 @@ MonoBehaviour:
     - {fileID: 330110741}
     _enabled:
     - {fileID: 330110741}
+  _zonePointsPool:
+    _root: {fileID: 400181950}
+    _prefab: {fileID: 5904315106833927156, guid: 4a41e378695008770a173c27610b9cf2, type: 3}
+    _all: []
+    _enabled: []
   _newPathColor: {r: 0.43721077, g: 0.7075472, b: 0.4642444, a: 1}
   _oldPathColor: {r: 0.5660378, g: 0.54649454, b: 0.39248845, a: 0.42745098}
   _selectedTileUnWalcableColor: {r: 0.5566038, g: 0.08139017, b: 0.08139017, a: 1}

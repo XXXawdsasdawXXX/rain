@@ -1,13 +1,12 @@
 ﻿using System;
-using UnityEngine;
-
-#if UNITY_EDITOR
-using Code.Pathfinding;
 using TriInspector;
 using UnityEditor;
+using UnityEngine;
+#if UNITY_EDITOR
+using Code.Pathfinding;
 #endif
 
-namespace Essential
+namespace Code.Game.World
 {
     public abstract class WorldMono : MonoBehaviour, IEquatable<WorldMono>
     {

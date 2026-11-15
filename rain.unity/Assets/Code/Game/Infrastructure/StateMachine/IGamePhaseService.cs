@@ -30,13 +30,13 @@ namespace Code.Game.StateMachine
         public event Action<EGamePhase> PhaseChanged;
         public EGamePhase Phase { get; private set; }
         
-        private readonly IInputService _input;
+        private readonly IPlayerInputService _input;
         
         private EGamePhase _previousPhase;
         private float _worldPhaseElapsed;
         
 
-        public GamePhaseService(IInputService input)
+        public GamePhaseService(IPlayerInputService input)
         {
             _input = input;
         }

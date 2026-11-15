@@ -9,7 +9,7 @@ using UnityEditor;
 
 namespace Code.Game.World
 {
-    public class Wall : Essential.WorldMono
+    public class Wall : WorldMono
     {
         [SerializeField] private Transform _root;
         [SerializeField] private Sprite[] _wallSprites;

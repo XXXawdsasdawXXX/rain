@@ -1,4 +1,5 @@
 ﻿using System;
+using Code.Game.World;
 using JetBrains.Annotations;
 using TriInspector;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine.EventSystems;
 
 namespace Code.UI.Components
 {
-    public abstract class AUIComponent : Essential.WorldMono, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
+    public abstract class AUIComponent : WorldMono, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
     {
         public event Action Hover;
         public event Action UnHover;

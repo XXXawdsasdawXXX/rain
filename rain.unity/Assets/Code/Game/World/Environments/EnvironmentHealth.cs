@@ -2,7 +2,7 @@ using System;
 using Essential.Data;
 using UnityEngine;
 
-namespace Code.Game.World
+namespace Code.Game.World.Environments
 {
     [Serializable]
     public sealed class EnvironmentHealth : IHealth

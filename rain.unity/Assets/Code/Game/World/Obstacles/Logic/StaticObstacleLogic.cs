@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Code.Game.World
+namespace Code.Game.World.Obstacles
 {
     [Serializable]
     public class StaticObstacleLogic : AObstacleLogic

@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Code.Game.World;
 using Code.Pathfinding;
-using Essential;
 using UnityEngine;
 using VContainer;
 
-namespace Code.Game.Characters
+namespace Code.Game.World.Characters
 {
     public class CharacterWorldView : WorldMono, IEntityView
     {

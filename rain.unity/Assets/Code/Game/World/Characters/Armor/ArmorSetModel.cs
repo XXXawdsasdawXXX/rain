@@ -3,7 +3,7 @@ using TriInspector;
 using UnityEditor;
 using UnityEngine;
 
-namespace Code.Game.Characters.Armor
+namespace Code.Game.World.Characters
 {
     [CreateAssetMenu(fileName = "Model_ArmorSet", menuName = "Game/Model/ArmorSet")]
     public class ArmorSetModel : ScriptableObject

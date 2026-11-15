@@ -20,17 +20,7 @@ namespace Code.Game.World
 
         public IReadOnlyList<Vector3Int> GetCells()
         {
-            List<Vector3Int> cells = new();
-            List<Vector2Int> matrix = new();
-          
-            _matrix.GetEnableIndexes(matrix);
-
-            foreach (Vector2Int index in matrix)
-            {
-                cells.Add(_getCell(index.x, index.y));
-            }
-
-            return cells;
+            return _matrix.GetCells(_originCellPosition);
         }
 
         public void UpdateOriginCell()
@@ -45,11 +35,6 @@ namespace Code.Game.World
             Vector3Int localCellPosition = _tilemapView.WorldAsCell(transform.position); 
             
             _originCellPosition = localCellPosition + _matrix.GetCenteredMatrixOriginCell();
-        }
-
-        private Vector3Int _getCell(int indexX, int indexY)
-        {
-            return _originCellPosition + new Vector3Int(indexX, indexY);
         }
 
 #if UNITY_EDITOR

@@ -35,6 +35,22 @@ namespace Essential.Data.BoolMatrix
             Resize(width, height);
         }
         
+        public IReadOnlyList<Vector3Int> GetCells(Vector3Int originCell)
+        {
+            List<Vector3Int> cells = new();
+            List<Vector2Int> matrix = new();
+          
+            GetEnableIndexes(matrix);
+
+            foreach (Vector2Int index in matrix)
+            {
+                cells.Add( originCell + new Vector3Int(index.x, index.y));
+            }
+
+            return cells;
+        }
+
+        
         public Vector3Int GetCenteredMatrixOriginCell()
         {
             return new Vector3Int(-_width / 2, -_height / 2, 0);

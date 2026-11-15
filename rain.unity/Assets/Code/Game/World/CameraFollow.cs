@@ -13,7 +13,7 @@ namespace Code.Game.World
         private const float BLEND = 4.8f;
 
         private readonly CameraView _cameraView;
-        private readonly IInputService _input;
+        private readonly IPlayerInputService _input;
 
         private float _startPressTime;
         private Vector3 _startPosition;
@@ -22,7 +22,7 @@ namespace Code.Game.World
         private bool _isPressed;
 
 
-        public CameraFollow(CameraView cameraView, IInputService input)
+        public CameraFollow(CameraView cameraView, IPlayerInputService input)
         {
             _cameraView = cameraView;
             _input = input;

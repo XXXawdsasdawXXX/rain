@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Code.Game.World.Characters;
 using Essential;
 using JetBrains.Annotations;
 

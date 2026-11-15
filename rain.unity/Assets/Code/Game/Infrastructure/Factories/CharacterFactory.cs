@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using Code.Game.Characters;
-using Code.Game.Characters.Armor;
 using Code.Game.Characters.Hero;
 using Code.Game.Save;
 using Code.Game.World;
+using Code.Game.World.Characters;
 using Code.Game.World.Turns;
 using Code.Pathfinding;
 using Core.AssetManagement.Libraries.Assets;

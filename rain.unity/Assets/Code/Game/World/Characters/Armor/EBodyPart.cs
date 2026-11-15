@@ -1,4 +1,4 @@
-﻿namespace Code.Game.Characters.Armor
+﻿namespace Code.Game.World.Characters
 {
     public enum EBodyPart
     {

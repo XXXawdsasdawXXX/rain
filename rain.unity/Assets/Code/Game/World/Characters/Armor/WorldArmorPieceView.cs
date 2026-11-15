@@ -1,8 +1,7 @@
 using System;
-using Code.Game.Characters.Armor;
 using UnityEngine;
 
-namespace Code.Game.Characters
+namespace Code.Game.World.Characters
 {
     [Serializable]
     public class WorldArmorPieceView : AArmorPieceView<SpriteRenderer>

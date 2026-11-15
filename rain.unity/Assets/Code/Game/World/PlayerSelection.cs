@@ -1,6 +1,7 @@
 using System;
 using Code.Game.Characters;
 using Code.Game.Characters.Hero;
+using Code.Game.World.Characters;
 using Core.Input;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -11,11 +12,11 @@ namespace Code.Game.World
     [UsedImplicitly]
     public class PlayerSelection : IStartable, IDisposable
     {
-        private readonly IInputService _input;
+        private readonly IPlayerInputService _input;
         private readonly IPlayerPartyProvider _playerPartyProvider;
 
 
-        public PlayerSelection(IInputService input, IPlayerPartyProvider playerPartyProvider)
+        public PlayerSelection(IPlayerInputService input, IPlayerPartyProvider playerPartyProvider)
         {
             _input = input;
             _playerPartyProvider = playerPartyProvider;

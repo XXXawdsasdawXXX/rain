@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Code.Pathfinding
+namespace Code.Game.World.Characters
 {
     public interface IPathfindingFollower
     {

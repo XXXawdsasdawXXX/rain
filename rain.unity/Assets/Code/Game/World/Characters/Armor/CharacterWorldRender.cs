@@ -1,11 +1,10 @@
 ﻿using System;
-using Code.Game.Characters.Armor;
 using UnityEngine;
 using VContainer;
 
-namespace Code.Game.Characters
+namespace Code.Game.World.Characters
 {
-    public class CharacterWorldRender : Essential.WorldMono, IDisposable
+    public class CharacterWorldRender : WorldMono, IDisposable
     {
         [field: SerializeField] public GameObject SelectView { get; set; }
         [field: SerializeField] public WorldArmorRender WorldArmor { get; private set; }

@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Code.Game.World.Turns;
+using Code.Pathfinding;
 using Essential;
 using UnityEngine;
 
-namespace Code.Pathfinding
+namespace Code.Game.World.Characters
 {
     public class CharacterPathfindingFollower : IPathfindingFollower
     {

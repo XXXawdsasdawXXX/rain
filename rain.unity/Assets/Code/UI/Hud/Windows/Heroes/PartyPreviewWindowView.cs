@@ -1,6 +1,5 @@
-using Code.Game.Characters;
-using Code.Game.Characters.Armor;
 using Code.Game.Characters.Hero;
+using Code.Game.World.Characters;
 using Code.UI.Components;
 using Code.UI.Components.Window;
 using Essential;

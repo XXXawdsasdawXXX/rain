@@ -3,7 +3,7 @@ using Essential;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Code.Game.World
+namespace Code.Game.World.Obstacles
 {
     [Serializable]
     public class RetractableObstacleLogic : AObstacleLogic

@@ -2,7 +2,7 @@
 using Core.AssetManagement.Libraries;
 using UnityEngine;
 
-namespace Code.Game.Characters.Armor
+namespace Code.Game.World.Characters
 {
     [CreateAssetMenu(fileName = "Library_Armory", menuName = "Game/Library/Armory")]
     public class ArmoryLibrary : ScriptableObject

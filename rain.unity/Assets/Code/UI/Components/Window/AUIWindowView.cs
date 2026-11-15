@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using Code.Game.World;
+using UnityEngine;
 
 namespace Code.UI.Components.Window
 {
-    public abstract class AUIWindowView : Essential.WorldMono
+    public abstract class AUIWindowView : WorldMono
     {
         public bool IsOpened { get; protected set; } 
             

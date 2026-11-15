@@ -31,7 +31,6 @@ namespace Code.Game.DI
             builder.RegisterInstance(_assetLibrary).AsSelf();
             
             //services
-            builder.Register<InputService>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<AudioService>(Lifetime.Singleton).AsImplementedInterfaces();
             
             //entry point

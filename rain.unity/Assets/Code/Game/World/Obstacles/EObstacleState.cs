@@ -1,4 +1,4 @@
-namespace Code.Game.World
+namespace Code.Game.World.Obstacles
 {
     public enum EObstacleState
     {

@@ -11,6 +11,7 @@ namespace Core.AssetManagement.Libraries
 
         private Dictionary<TKey, TType> _hash = new();
         
+        
         public TType Get(TKey key)
         {
             if (_hash.ContainsKey(key))
@@ -30,6 +31,11 @@ namespace Core.AssetManagement.Libraries
             throw new Exception($"Library {GetType().Name} has not {typeof(TType).Name} with name {key}");
         }
 
+        public TType[] GetAll()
+        {
+            return _assets;
+        }
+        
         protected abstract bool ThisIs(TType value, TKey key);
     }
 }

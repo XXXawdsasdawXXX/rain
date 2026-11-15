@@ -1,10 +1,9 @@
 using System;
-using Code.Game.Characters.Armor;
 using Essential;
 using TriInspector;
 using UnityEngine;
 
-namespace Code.Game.Characters
+namespace Code.Game.World.Characters
 {
     [Serializable]
     public abstract class AArmorPieceView<TRender> where TRender : Component

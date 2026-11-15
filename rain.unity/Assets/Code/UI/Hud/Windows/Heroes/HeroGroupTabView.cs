@@ -1,5 +1,5 @@
 using Code.Game.Characters;
-using Code.Game.Characters.Armor;
+using Code.Game.World.Characters;
 using Code.UI.Components;
 using UnityEngine;
 
