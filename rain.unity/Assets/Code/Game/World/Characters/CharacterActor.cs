@@ -107,5 +107,15 @@ namespace Code.Game.World.Characters
                 IsDead.Value = true;
             }
         }
+
+        public void Heal(float heal)
+        {
+            if (IsDead.Value)
+            {
+                return;
+            }
+            
+            Current.Value = math.min( Current.Value + heal, Model.DefaultMaxStats[EStatType.Health]);
+        }
     }
 }

@@ -47,26 +47,37 @@ namespace Code.Game.Ability
             {
                 switch (stat.Type)
                 {
-                    case EStatType.None:
-                    case EStatType.Health:
-                    case EStatType.Noise:
-                    case EStatType.Energy:
-                    default:
-                        break;
                     case EStatType.Damage:
                         damage += stat.Value;
-                        break;
+                        continue;
                             
                     case EStatType.CriticalChance:
                         if (Random.Range(0, 100) < stat.Value)
                         {
                             damage *= 1.2f;
                         }
-                        break;
+                        continue;
                 }
             }
 
             return damage;
+        }
+
+        public static float GetHeal(this AbilityModel model)
+        {
+            float heal = 0;
+            
+            foreach (Stat stat in model.Stats)
+            {
+                switch (stat.Type)
+                {
+                    case EStatType.Health:
+                        heal += stat.Value;
+                        break;
+                }
+            }
+
+            return heal;
         }
     }
     

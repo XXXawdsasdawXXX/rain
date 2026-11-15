@@ -7,5 +7,6 @@ namespace Code.Game.World
         ReactiveProperty<float> Current { get; }
         ReactiveProperty<bool> IsDead { get; }
         void TakeDamage(float value);
+        void Heal(float heal);
     }
 }

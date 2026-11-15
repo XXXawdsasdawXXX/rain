@@ -40,6 +40,7 @@ namespace Code.UI.Menu
             
             characterModel.Abilities.Add(0);
             characterModel.Abilities.Add(1);
+            characterModel.Abilities.Add(2);
             
             _gameSave.AddNewGame(characterModel, new WorldModel());
         }

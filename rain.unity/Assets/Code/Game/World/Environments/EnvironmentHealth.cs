@@ -42,5 +42,16 @@ namespace Code.Game.World.Environments
            
             Log.Info(this, $"current health = {Current.Value}/{MaxHealth}");
         }
+
+        public void Heal(float heal)
+        {
+            if (IsDead.Value || !IsAlive)
+            {
+                return;
+            }
+            Current.Value = Mathf.Max(MaxHealth, Current.Value + heal);
+
+            
+        }
     }
 }

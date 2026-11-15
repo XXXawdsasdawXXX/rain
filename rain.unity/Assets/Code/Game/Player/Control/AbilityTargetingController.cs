@@ -111,11 +111,11 @@ namespace Code.Game.Player.Control
                 Targets = _findTargets(zone),
                 Ability = _ability
             };
-
-
+            
             IAbilityEffect effect = _ability.Type switch
             {
                 EAbilityType.Damage => new DamageAbilityEffect(),
+                EAbilityType.Heal => new HealAbilityEffect(),
                 _ => null
             };
 
