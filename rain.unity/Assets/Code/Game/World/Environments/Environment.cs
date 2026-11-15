@@ -18,8 +18,9 @@ namespace Code.Game.World.Environments
         [field: SerializeField] public Vector3Int CellPosition { get; private set; }
         [field: SerializeField] public bool IsOccupyingCell { get; private set;}
         [field: SerializeField] public EnvironmentHealth Health { get; private set; }
-        [SerializeField] private MatrixZone _occupation;
 
+        [SerializeField] private SpriteRenderer _renderer;
+        [SerializeField] private MatrixZone _occupation;
         
         private ITilemapView _tilemapView;
         private IEntityRegistry _entityRegistry;
@@ -32,8 +33,7 @@ namespace Code.Game.World.Environments
             _entityRegistry = entityRegistry;
             Log.Info(this, "[construct]");
         }
-
-  
+        
         public IReadOnlyList<Vector3Int> GetOccupiedCells()
         {
            return _occupation.GetCells();
@@ -50,8 +50,9 @@ namespace Code.Game.World.Environments
             _entityRegistry.Register(this);
             
             Health.ResetHealth();
+            Health.IsDead.SubscribeProperty(_onDieChanged);
         }
-
+        
         private void OnDisable()
         {
             Log.Info(this, $"[on disable] {_entityRegistry != null}");
@@ -62,6 +63,7 @@ namespace Code.Game.World.Environments
             }
 
             _entityRegistry.UnRegister(this);
+            Health.IsDead.UnsubscribeProperty(_onDieChanged);
         }
 
         public void SetCellPosition(Vector3Int cellPosition)
@@ -79,13 +81,20 @@ namespace Code.Game.World.Environments
 
             return Health != null && Health.IsAlive && Health.MaxHealth > 0;
         }
+        
+        private void _onDieChanged(bool died)
+        {
+            _renderer.color = died ? Color.gray : Color.white;
+        }
 
+#if UNITY_EDITOR
         protected override void e_onSpanToTilemap(TilemapView tilemap, Vector3Int cell)
         {
             CellPosition = cell;
             
             base.e_onSpanToTilemap(tilemap, cell);
         }
+#endif
 
     }
 }

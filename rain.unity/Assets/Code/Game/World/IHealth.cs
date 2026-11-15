@@ -4,7 +4,7 @@ namespace Code.Game.World
 {
     public interface IHealth
     {
-        ReactiveProperty<float> Health { get; }
+        ReactiveProperty<float> Current { get; }
         ReactiveProperty<bool> IsDead { get; }
         void TakeDamage(float value);
     }

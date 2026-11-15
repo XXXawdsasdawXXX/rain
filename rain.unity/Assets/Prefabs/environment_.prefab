@@ -147,6 +147,7 @@ MonoBehaviour:
   <Health>k__BackingField:
     <IsAlive>k__BackingField: 1
     <MaxHealth>k__BackingField: 1
+  _renderer: {fileID: 5531285171849245181}
   _occupation: {fileID: 8599637681867363319}
 --- !u!114 &8599637681867363319
 MonoBehaviour:

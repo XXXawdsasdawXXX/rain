@@ -10,7 +10,7 @@ namespace Code.Game.World.Characters
     public class CharacterActor : IWorldActor, IHealth
     {
         public IWorldTurnBeginListener.ETurnPriority Priority => IWorldTurnBeginListener.ETurnPriority.Character;
-        public ReactiveProperty<float> Health => Model.Stats[EStatType.Health];
+        public ReactiveProperty<float> Current => Model.Stats[EStatType.Health];
         public ReactiveProperty<bool> IsDead { get; } = new(false);
         public CharacterModel Model { get; }
         public CharacterWorldView View { get; } 
@@ -99,9 +99,9 @@ namespace Code.Game.World.Characters
                 return;
             }
             
-            Health.Value = math.max(0, Health.Value - value);
+            Current.Value = math.max(0, Current.Value - value);
 
-            if (Health.Value == 0)
+            if (Current.Value == 0)
             {
                 IsDead.Value = true;
             }

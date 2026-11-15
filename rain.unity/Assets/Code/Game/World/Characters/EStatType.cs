@@ -7,7 +7,6 @@
         Noise,
         Damage,
         CriticalChance,
-        CriticalDamage,
         Energy
     }
 }
