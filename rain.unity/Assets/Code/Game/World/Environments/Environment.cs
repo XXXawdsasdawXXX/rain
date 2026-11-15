@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Code.Pathfinding;
+using Essential;
 using UnityEngine;
 using VContainer;
 
@@ -9,6 +10,7 @@ namespace Code.Game.World.Environments
     public class Environment : WorldMono, IEntityView
     {
         public event Action<IEntityView, Vector3Int, Vector3Int> PositionChanged;
+        
         [field: SerializeField] public string ID { get; private set;}
       
         [field: SerializeField] public EEntityType Type { get; private set;}
@@ -28,8 +30,10 @@ namespace Code.Game.World.Environments
         {
             _tilemapView = tilemapView;
             _entityRegistry = entityRegistry;
+            Log.Info(this, "[construct]");
         }
 
+  
         public IReadOnlyList<Vector3Int> GetOccupiedCells()
         {
            return _occupation.GetCells();
@@ -37,16 +41,21 @@ namespace Code.Game.World.Environments
 
         private void OnEnable()
         {
+            Log.Info(this, $"[on enable] {_entityRegistry != null}");
             if (_entityRegistry == null)
             {
                 return;
             }
             
             _entityRegistry.Register(this);
+            
+            Health.ResetHealth();
         }
 
         private void OnDisable()
         {
+            Log.Info(this, $"[on disable] {_entityRegistry != null}");
+
             if (_entityRegistry == null)
             {
                 return;
@@ -77,5 +86,6 @@ namespace Code.Game.World.Environments
             
             base.e_onSpanToTilemap(tilemap, cell);
         }
+
     }
 }
