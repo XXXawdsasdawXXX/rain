@@ -866,7 +866,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:
-    TypeName: 
+    TypeName: Code.Game.Infrastructure.DI.GameScope
   autoRun: 1
   autoInjectGameObjects:
   - {fileID: 1365076028}
@@ -1364,7 +1364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:
-    TypeName: 
+    TypeName: Code.Game.Infrastructure.DI.GameScope
   autoRun: 1
   autoInjectGameObjects: []
   _views:
@@ -2730,7 +2730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _logic:
-    rid: -2
+    rid: 5382842085843664967
   _render:
     root: {fileID: 1521855107}
     matrixTrigger: {fileID: 1521855112}
@@ -2782,8 +2782,12 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+    - rid: 5382842085843664967
+      type: {class: RetractableObstacleLogic, ns: Code.Game.World.Obstacles, asm: Game}
+      data:
+        _model:
+          <BaseDamage>k__BackingField: 10
+          <AttackChance>k__BackingField: 83.1
 --- !u!114 &1521855112
 MonoBehaviour:
   m_ObjectHideFlags: 0

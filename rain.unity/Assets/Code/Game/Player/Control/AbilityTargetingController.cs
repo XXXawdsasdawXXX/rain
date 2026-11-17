@@ -101,6 +101,13 @@ namespace Code.Game.Player.Control
                 return;
             }
 
+            if (!AbilityResolver.CanUse(_playerPartyProvider.CurrentCharacter, _ability))
+            {
+                _cancel();
+                
+                return;
+            }
+            
             IReadOnlyList<Vector3Int> zone = AbilityResolver.GetCells(
                 _ability.Zone,
                 _getAbilityOriginCell(_ability, _playerPartyProvider.CurrentCharacter));
@@ -120,6 +127,8 @@ namespace Code.Game.Player.Control
             };
 
             effect?.Apply(outcome);
+            
+            AbilityResolver.SpendEnergy(outcome);
 
             Debug.Log(outcome.ToString());
 
@@ -155,14 +164,6 @@ namespace Code.Game.Player.Control
 
             switch (action)
             {
-                case EInputAction.None:
-                case EInputAction.Interaction:
-                case EInputAction.DoubleClick:
-                case EInputAction.Scroll:
-                case EInputAction.LeftClick:
-                default:
-                    break;
-                
                 case EInputAction.HoldLeftClick:
                     _confirm();
                     break;
@@ -183,6 +184,7 @@ namespace Code.Game.Player.Control
                     break;
             }
         }
+        
         
         private void _onMouseCellChanged(Vector3Int _)
         {

@@ -31,7 +31,6 @@ namespace Code.Game.World.Environments
         {
             _tilemapView = tilemapView;
             _entityRegistry = entityRegistry;
-            Log.Info(this, "[construct]");
         }
         
         public IReadOnlyList<Vector3Int> GetOccupiedCells()
@@ -41,7 +40,6 @@ namespace Code.Game.World.Environments
 
         private void OnEnable()
         {
-            Log.Info(this, $"[on enable] {_entityRegistry != null}");
             if (_entityRegistry == null)
             {
                 return;
@@ -55,8 +53,6 @@ namespace Code.Game.World.Environments
         
         private void OnDisable()
         {
-            Log.Info(this, $"[on disable] {_entityRegistry != null}");
-
             if (_entityRegistry == null)
             {
                 return;

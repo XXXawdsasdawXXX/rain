@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Code.Game.Player.Control;
 using Code.Game.World.Characters;
 using Essential.Data;
 using Essential.Data.BoolMatrix;
@@ -78,6 +79,16 @@ namespace Code.Game.Ability
             }
 
             return heal;
+        }
+
+        public static void SpendEnergy(AbilityOutcome abilityOutcome)
+        {
+            if (abilityOutcome.Owner.Model.Stats.ContainsKey(EStatType.Energy))
+            {
+                ReactiveProperty<float> stat = abilityOutcome.Owner.Model.Stats[EStatType.Energy];
+             
+                stat.Value = Mathf.Max(0, stat.Value - abilityOutcome.Ability.EnergyPrice);
+            }
         }
     }
     
